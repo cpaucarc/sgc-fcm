@@ -24,9 +24,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'persona_id',
+        'oficina_id'
     ];
 
     /**
@@ -58,4 +59,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function persona()
+    {
+        return $this->hasOne(Persona::class, 'id', 'persona_id');
+//        return $this->hasOne(Persona::class, 'persona_id', 'id');
+    }
+
 }

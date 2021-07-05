@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
+Route::get('registro', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
