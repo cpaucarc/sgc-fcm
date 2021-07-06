@@ -10,5 +10,5 @@ class Oficina extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['nombre'];
+    public $fillable = ['nivel_oficina_id', 'entidad_id', 'escuela_id', 'facultad_id'];
 }

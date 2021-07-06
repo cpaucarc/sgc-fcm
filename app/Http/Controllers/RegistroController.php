@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NivelOficina;
 use App\Models\Oficina;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,10 @@ class RegistroController extends Controller
 {
     public function index()
     {
-        $oficinas = Oficina::orderBy('nombre')->get();
+//        $oficinas = Oficina::orderBy('nombre')->get();
+        $niveles = NivelOficina::get();
+
         return view('auth.registro')
-            ->with(compact('oficinas'));
+            ->with(compact('niveles'));
     }
 }

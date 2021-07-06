@@ -16,55 +16,47 @@ class ClienteSeeder extends Seeder
         $clientes = [
             [
                 'codigo' => 'C1',
-                'oficina_id' => 1,
-            ],
-            [
-                'codigo' => 'C1',
-                'oficina_id' => 2,
+                'entidad_id' => 1,
             ],
             [
                 'codigo' => 'C2',
-                'oficina_id' => 3,
-            ],
-            [
-                'codigo' => 'C2',
-                'oficina_id' => 4,
+                'entidad_id' => 2,
             ],
             [
                 'codigo' => 'C3',
-                'oficina_id' => 6,
+                'entidad_id' => 4
             ],
             [
                 'codigo' => 'C4',
-                'oficina_id' => 11,
+                'entidad_id' => 9,
             ],
             [
                 'codigo' => 'C5',
-                'oficina_id' => 12,
+                'entidad_id' => 10,
             ],
             [
                 'codigo' => 'C6',
-                'oficina_id' => 13,
+                'entidad_id' => 11,
             ],
             [
                 'codigo' => 'C7',
-                'oficina_id' => 5,
+                'entidad_id' => 3,
             ],
             [
                 'codigo' => 'C8',
-                'oficina_id' => 14,
+                'entidad_id' => 12,
             ],
             [
                 'codigo' => 'C9',
-                'oficina_id' => 15,
+                'entidad_id' => 13,
             ],
             [
                 'codigo' => 'C10',
-                'oficina_id' => 8,
+                'entidad_id' => 6,
             ],
             [
                 'codigo' => 'C11',
-                'oficina_id' => 7,
+                'entidad_id' => 5,
             ],
         ];
 

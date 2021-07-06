@@ -13,54 +13,103 @@ class OficinaSeeder extends Seeder
      */
     public function run()
     {
-        $oficinas = [
+        $oficinas_nivel_general = [
             [
-                'nombre' => 'Dirección de Escuela de Enfermeria',
+                'nivel_oficina_id' => 1,
+                'entidad_id' => 3,
             ],
             [
-                'nombre' => 'Dirección de Escuela de Obstetricia',
+                'nivel_oficina_id' => 1,
+                'entidad_id' => 6,
             ],
             [
-                'nombre' => 'Director de Departamento de Enfermeria',
+                'nivel_oficina_id' => 1,
+                'entidad_id' => 7,
             ],
             [
-                'nombre' => 'Director de Departamento de Obstetricia',
+                'nivel_oficina_id' => 1,
+                'entidad_id' => 10,
             ],
             [
-                'nombre' => 'Oficina General de Estudios',
+                'nivel_oficina_id' => 1,
+                'entidad_id' => 11,
+            ],
+        ];
+        $oficinas_nivel_facultad = [
+            [
+                'nivel_oficina_id' => 2,
+                'entidad_id' => 5,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Docente',
+                'nivel_oficina_id' => 2,
+                'entidad_id' => 8,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Decanatura',
+                'nivel_oficina_id' => 2,
+                'entidad_id' => 12,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Directora de Unidad de Calidad',
+                'nivel_oficina_id' => 2,
+                'entidad_id' => 13,
+                'facultad_id' => 1,
+            ],
+        ];
+        $oficinas_nivel_escuela = [
+            [
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 1,
+                'escuela_id' => 1,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Biblioteca',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 1,
+                'escuela_id' => 2,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Comite de Tutoria',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 2,
+                'escuela_id' => 1,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Estudiante',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 2,
+                'escuela_id' => 2,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Vicerrectorado Académico',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 4,
+                'escuela_id' => 1,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Vicerrectorado de Investigación',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 4,
+                'escuela_id' => 2,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Director de Unidad de RS',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 9,
+                'escuela_id' => 1,
+                'facultad_id' => 1,
             ],
             [
-                'nombre' => 'Director de Unidad de Investigación',
+                'nivel_oficina_id' => 3,
+                'entidad_id' => 9,
+                'escuela_id' => 2,
+                'facultad_id' => 1,
             ],
         ];
 
-        \App\Models\Oficina::insert($oficinas);
+        \App\Models\Oficina::insert($oficinas_nivel_general);
+        \App\Models\Oficina::insert($oficinas_nivel_facultad);
+        \App\Models\Oficina::insert($oficinas_nivel_escuela);
     }
 }

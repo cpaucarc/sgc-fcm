@@ -16,43 +16,35 @@ class ProveedorSeeder extends Seeder
         $proveedores = [
             [
                 'codigo' => 'P1',
-                'oficina_id' => 1,
-            ],
-            [
-                'codigo' => 'P1',
-                'oficina_id' => 2,
+                'entidad_id' => 1,
             ],
             [
                 'codigo' => 'P2',
-                'oficina_id' => 3,
-            ],
-            [
-                'codigo' => 'P2',
-                'oficina_id' => 4,
+                'entidad_id' => 2,
             ],
             [
                 'codigo' => 'P3',
-                'oficina_id' => 5,
+                'entidad_id' => 3,
             ],
             [
                 'codigo' => 'P4',
-                'oficina_id' => 6,
+                'entidad_id' => 4,
             ],
             [
                 'codigo' => 'P5',
-                'oficina_id' => 7,
+                'entidad_id' => 5,
             ],
             [
                 'codigo' => 'P6',
-                'oficina_id' => 8,
+                'entidad_id' => 6,
             ],
             [
                 'codigo' => 'P7',
-                'oficina_id' => 9,
+                'entidad_id' => 7,
             ],
             [
                 'codigo' => 'P8',
-                'oficina_id' => 10,
+                'entidad_id' => 8,
             ],
         ];
 

@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class NivelOficina extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'entidad_id'];
+    public $fillable = ['nombre'];
 }
