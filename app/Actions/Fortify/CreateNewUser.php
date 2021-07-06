@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Persona;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -15,21 +16,31 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
+     * @param array $input
      * @return \App\Models\User
      */
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string', 'max:8', 'min:8'],
+            'nombres' => ['required', 'string', 'max:255'],
+            'apellidos' => ['required', 'string', 'max:255'],
+            'oficina' => ['required', 'gt:0'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
+        $persona = Persona::create([
+            'dni' => $input['dni'],
+            'nombres' => $input['nombres'],
+            'apellidos' => $input['apellidos'],
+        ]);
+
         return User::create([
-            'name' => $input['name'],
             'email' => $input['email'],
+            'persona_id' => $persona->id,
+            'oficina_id' => $input['oficina'],
             'password' => Hash::make($input['password']),
         ]);
     }
