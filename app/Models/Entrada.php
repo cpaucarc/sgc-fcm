@@ -11,4 +11,9 @@ class Entrada extends Model
 
     public $timestamps = false;
     public $fillable = ['codigo', 'descripcion'];
+
+    public function proveedor()
+    {
+
+    }
 }

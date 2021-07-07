@@ -1,12 +1,14 @@
 <div class="mt-8 mb-4">
 
     <div class="my-6">
-        <x-simple-progress percent="{{ $completos / $incompletos * 100 }}">
-            Actividades completadas
+        <x-simple-progress percent="{{ $porcentaje }}">
+            Actividades completadas:
+            <span class="font-bold">{{ $completos }}</span> de
+            <span class="font-bold">{{ $incompletos }}</span>
         </x-simple-progress>
     </div>
 
-    @if($actividades->count())
+    @if($porcentaje < 100)
         <x-table>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50 rounded-lg">
@@ -49,7 +51,7 @@
                             @endif
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="{{ $actividad->id }}"
+                            <a href="{{route('actividad.mis-actividades', $actividad->id)}}"
                                class="bg-transparent px-2 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
                                 Revisar
                             </a>
@@ -60,7 +62,6 @@
             </table>
         </x-table>
     @else
-
         <div class="mt-6 w-full flex justify-center">
             <div class="w-6/12">
                 <img src="{{ asset('images/completed.svg') }}" alt="Actividades Completados" class="opacity-75">

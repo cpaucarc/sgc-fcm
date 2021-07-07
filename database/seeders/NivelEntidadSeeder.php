@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class NivelOficinaSeeder extends Seeder
+class NivelEntidadSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,6 +25,6 @@ class NivelOficinaSeeder extends Seeder
             ],
         ];
 
-        \App\Models\NivelOficina::insert($niveles);
+        \App\Models\NivelEntidad::insert($niveles);
     }
 }

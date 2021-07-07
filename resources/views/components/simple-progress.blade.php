@@ -1,7 +1,7 @@
 <div class="relative pt-1">
     <div class="flex mb-2 items-center justify-between">
         <div>
-      <span class="text-xs font-semibold inline-block py-1 px-3 uppercase rounded-full text-gray-600 bg-gray-100">
+      <span class="text-sm font-semibold inline-block py-1 px-3 rounded-full text-gray-600 bg-gray-100">
         {{ $slot }}
       </span>
         </div>

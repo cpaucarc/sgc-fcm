@@ -12,4 +12,9 @@ class Entidad extends Model
     public $table = "entidades";
     public $timestamps = false;
     public $fillable = ['nombre'];
+
+    public function responsable()
+    {
+        return $this->belongsTo(Responsable::class, 'id', 'entidad_id');
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
-Route::get('registro', [\App\Http\Controllers\RegistroController::class, 'index'])->name('registro');
+Route::get('registro', [RegistroController::class, 'index'])->name('registro');
+
+Route::get('mis-actividades/{id}', [ActividadController::class, 'show'])->name('actividad.mis-actividades');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

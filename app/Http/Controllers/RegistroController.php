@@ -10,10 +10,6 @@ class RegistroController extends Controller
 {
     public function index()
     {
-//        $oficinas = Oficina::orderBy('nombre')->get();
-        $niveles = NivelOficina::get();
-
-        return view('auth.registro')
-            ->with(compact('niveles'));
+        return view('auth.registro');
     }
 }

@@ -16,6 +16,9 @@ class CreateEntidadesTable extends Migration
         Schema::create('entidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedBigInteger('nivel_entidad_id');
+
+            $table->foreign('nivel_entidad_id')->references('id')->on('nivel_entidades');
         });
     }
 

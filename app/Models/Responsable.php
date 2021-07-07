@@ -11,4 +11,10 @@ class Responsable extends Model
 
     public $timestamps = false;
     public $fillable = ['codigo', 'entidad_id'];
+
+
+    public function entidad()
+    {
+        return $this->belongsTo(Entidad::class);
+    }
 }

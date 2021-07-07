@@ -12,4 +12,14 @@ class EntradaProveedor extends Model
     public $table = "entrada_proveedores";
     public $timestamps = false;
     public $fillable = ['proveedor_id', 'actividad_id', 'entrada_id'];
+
+    public function proveedor()
+    {
+        return $this->belongsTo(Proveedor::class);
+    }
+
+    public function entrada()
+    {
+        return $this->belongsTo(Entrada::class);
+    }
 }
