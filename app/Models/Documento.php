@@ -5,15 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entrada extends Model
+class Documento extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'descripcion'];
-
-    public function proveedor()
-    {
-
-    }
+    public $fillable = ['nombre', 'enlace_interno', 'enlace_externo'];
 }

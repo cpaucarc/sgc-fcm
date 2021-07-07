@@ -10,5 +10,11 @@ class Responsable extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'oficina_id'];
+    public $fillable = ['codigo', 'entidad_id'];
+
+
+    public function entidad()
+    {
+        return $this->belongsTo(Entidad::class);
+    }
 }

@@ -10,5 +10,5 @@ class Cliente extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'oficina_id'];
+    public $fillable = ['codigo', 'entidad_id'];
 }

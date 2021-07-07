@@ -20,11 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->unsignedBigInteger('persona_id');
-            $table->foreign('persona_id')->references('id')->on('personas');
             $table->unsignedBigInteger('oficina_id');
-            $table->foreign('oficina_id')->references('id')->on('oficinas');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+
+            $table->foreign('persona_id')->references('id')->on('personas');
+            $table->foreign('oficina_id')->references('id')->on('oficinas');
         });
     }
 
