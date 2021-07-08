@@ -9,7 +9,7 @@ class ActividadController extends Controller
 {
     public function index()
     {
-        //vista principal de actividades
+        return view('actividad.index');
     }
 
     public function create()
