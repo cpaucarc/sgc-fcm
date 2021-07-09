@@ -1,54 +1,86 @@
 <x-app-layout>
 
-    {{ $actividad }}
+    <div class="flex justify-between mb-6">
+        <h1 class="text-3xl text-blue-500 font-bold">
+            {{ $actividad->nombre }}
+        </h1>
+
+        @if($actividad->estado == 0)
+            <x-jet-secondary-button>
+                Marcar como completado
+            </x-jet-secondary-button>
+        @else
+            <x-jet-button>
+                <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M5 13l4 4L19 7"/>
+                </svg>
+                Completado
+            </x-jet-button>
+        @endif
+    </div>
 
     <div class="grid grid-cols-5 gap-6">
-        <div class="col-span-5 lg:col-span-2">
+        <div class="col-span-5 lg:col-span-2 space-y-4">
             <x-card>
                 <div class="space-y-2">
                     <h1 class="text-xl font-bold text-gray-600">Entradas</h1>
-                    @foreach( $actividad->entradas as $ep)
-                        <div class="border border-gray-200 rounded-lg py-1 px-3 shadow-sm">
-                            <h2 class="text-gray-800 truncate">
-                                {{ $ep->entrada->descripcion }}
-                            </h2>
-                            <p class="text-gray-500 truncate text-sm">
-                                {{ $ep->proveedor->entidad->nombre }}
-                            </p>
-                        </div>
-                    @endforeach
+                    @if($actividad->entradas->count())
+                        @foreach( $actividad->entradas as $ep)
+                            <div class="ml-2 py-2 flex items-center">
+                                <div class="truncate flex-1 mr-2">
+                                    <h2 class="text-gray-800">
+                                        {{ $ep->entrada->codigo }} - {{ $ep->entrada->descripcion }}
+                                    </h2>
+                                    <p class="text-gray-500 text-sm">
+                                        <span class="text-gray-400">Proveedor: </span>
+                                        {{ $ep->proveedor->entidad->nombre }}
+                                    </p>
+                                </div>
+                                <button
+                                    class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-rose-50 hover:text-rose-700">
+                                    <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                              d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                                    </svg>
+                                    Documentos
+                                </button>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>
+                            No hay entradas
+                        </p>
+                    @endif
                 </div>
 
-
-                <div class="mt-6">
+            </x-card>
+            <x-card>
+                <div class="space-y-2">
                     <h1 class="text-xl font-bold text-gray-600">Salidas</h1>
+                    @if($actividad->salidas->count())
+                        @foreach( $actividad->salidas as $sld)
+                            <div class="ml-2 py-2 flex items-center">
+                                <h2 class="flex-1 text-gray-800 truncate mr-2">
+                                    {{ $sld->salida->codigo }} - {{ $sld->salida->descripcion }}
+                                </h2>
+                                @livewire( 'actividad.mostrar-clientes',
+                                ['salida' => $sld->salida], key($sld->salida->id)
+                                )
+                            </div>
+                        @endforeach
+                    @else
+                        <p>
+                            No hay entradas
+                        </p>
+                    @endif
                 </div>
             </x-card>
-
         </div>
         <div class="col-span-5 lg:col-span-3">
             <x-card>
-                <div class="flex justify-between">
-                    <h1 class="text-2xl text-blue-500 font-bold">
-                        {{ $actividad->nombre }}
-                    </h1>
-
-                    @if($actividad->estado == 1)
-                        <x-jet-secondary-button>
-                            Marcar como completado
-                        </x-jet-secondary-button>
-                    @else
-                        <x-jet-button>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M5 13l4 4L19 7"/>
-                            </svg>
-                            Completado
-                        </x-jet-button>
-                    @endif
-
-
+                <div class="bg-rose-50 rounded-lg p-6">
+                    {{ $actividad->salidas }}
                 </div>
             </x-card>
         </div>

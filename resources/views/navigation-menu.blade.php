@@ -164,8 +164,9 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('index') }}" :active="request()->routeIs('index')">
-                {{ __('Index') }}
+            <x-jet-responsive-nav-link href="{{ route('actividad.actividades') }}"
+                                       :active="request()->routeIs('actividad.*')">
+                {{ __('Actividades') }}
             </x-jet-responsive-nav-link>
         </div>
 

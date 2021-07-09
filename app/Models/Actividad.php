@@ -13,14 +13,14 @@ class Actividad extends Model
     public $timestamps = false;
     public $fillable = ['nombre', 'estado', 'tipo_actividad_id', 'proceso_id'];
 
-    public function proveedores()
+    public function entradas()
     {
         return $this->hasMany(EntradaProveedor::class, 'actividad_id', 'id');
     }
 
-    public function entradas()
+    public function salidas()
     {
-        return $this->hasMany(EntradaProveedor::class, 'actividad_id', 'id');
+        return $this->hasMany(ClienteSalida::class, 'actividad_id', 'id')->distinct()->select('salida_id');
     }
 
 }

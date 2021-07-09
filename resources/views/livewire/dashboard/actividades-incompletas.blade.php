@@ -1,4 +1,4 @@
-<div class="mt-8 mb-4">
+<div class="mt-8 mb-4 overflow-hidden">
 
     <div class="my-6">
         <x-simple-progress percent="{{ $porcentaje }}">
@@ -10,26 +10,25 @@
 
     @if($porcentaje < 100)
         <x-table>
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50 rounded-lg">
+            <x-slot name="head">
                 <tr>
                     <th scope="col"
-                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="pl-4 pr-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Actividad
                     </th>
                     <th scope="col"
                         class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Estado
                     </th>
-                    <th scope="col" class="relative px-4 py-3">
+                    <th scope="col" class="relative pr-4 pl-2 py-3">
                         <span class="sr-only">Completar</span>
                     </th>
                 </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+            </x-slot>
+            <x-slot name="body">
                 @foreach($actividades as $actividad)
                     <tr>
-                        <td class="px-4 py-4 text-sm whitespace-nowrap">
+                        <td class="pl-4 pr-2 py-4 text-sm whitespace-nowrap">
                             <div class="text-gray-800">
                                 {{ $actividad->actividad }}
                             </div>
@@ -50,16 +49,20 @@
                         </span>
                             @endif
                         </td>
-                        <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <td class="pr-4 pl-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <a href="{{route('actividad.mis-actividades', $actividad->id)}}"
-                               class="bg-transparent px-2 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
+                               class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
+                                <svg class="h-5 w-5 mr-1 block lg:hidden" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                </svg>
                                 Revisar
                             </a>
                         </td>
                     </tr>
                 @endforeach
-                </tbody>
-            </table>
+            </x-slot>
         </x-table>
     @else
         <div class="mt-6 w-full flex justify-center">

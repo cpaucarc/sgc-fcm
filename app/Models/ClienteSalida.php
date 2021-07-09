@@ -11,4 +11,16 @@ class ClienteSalida extends Model
 
     public $timestamps = false;
     public $fillable = ['cliente_id', 'salida_id', 'actividad_id'];
+
+    public function cliente()
+    {
+//        return $this->belongsTo(Cliente::class);
+        return $this->hasOne(Cliente::class, 'id', 'cliente_id');
+    }
+
+    public function salida()
+    {
+        return $this->belongsTo(Salida::class);
+    }
+
 }

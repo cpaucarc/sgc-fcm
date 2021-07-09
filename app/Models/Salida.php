@@ -11,4 +11,9 @@ class Salida extends Model
 
     public $timestamps = false;
     public $fillable = ['codigo', 'descripcion'];
+
+    public function clientes()
+    {
+        return $this->hasMany(ClienteSalida::class);
+    }
 }

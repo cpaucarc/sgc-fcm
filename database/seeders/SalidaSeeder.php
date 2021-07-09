@@ -15,43 +15,43 @@ class SalidaSeeder extends Seeder
     {
         $salidas = [
             [
-                'codigo' => 'E1',
+                'codigo' => 'S1',
                 'descripcion' => 'Plan de trabajo de E-A aprobado',
             ],
             [
-                'codigo' => 'E2',
+                'codigo' => 'S2',
                 'descripcion' => 'Silabo de la asignatura aprobado',
             ],
             [
-                'codigo' => 'E3',
+                'codigo' => 'S3',
                 'descripcion' => 'Silabo publicado',
             ],
             [
-                'codigo' => 'E4',
+                'codigo' => 'S4',
                 'descripcion' => 'Requerimiento de recursos',
             ],
             [
-                'codigo' => 'E5',
+                'codigo' => 'S5',
                 'descripcion' => 'Plan de prácticas de la asignatura',
             ],
             [
-                'codigo' => 'E6',
+                'codigo' => 'S6',
                 'descripcion' => 'Registro de entrega del sílabo a los estudiantes',
             ],
             [
-                'codigo' => 'E7',
+                'codigo' => 'S7',
                 'descripcion' => 'Registro de entrega de material de clases',
             ],
             [
-                'codigo' => 'E8',
+                'codigo' => 'S8',
                 'descripcion' => 'Registro de formato de avance silábico',
             ],
             [
-                'codigo' => 'E9',
+                'codigo' => 'S9',
                 'descripcion' => 'Plan de responsabilidad social',
             ],
             [
-                'codigo' => 'E10',
+                'codigo' => 'S10',
                 'descripcion' => 'Lista de grupos de práctica',
             ],
             [
@@ -63,35 +63,35 @@ class SalidaSeeder extends Seeder
                 'descripcion' => 'Registro de notas',
             ],
             [
-                'codigo' => 'E13',
+                'codigo' => 'S13',
                 'descripcion' => 'Informe de evaluación docente',
             ],
             [
-                'codigo' => 'E14',
+                'codigo' => 'S14',
                 'descripcion' => 'Pre actas firmadas',
             ],
             [
-                'codigo' => 'E15',
+                'codigo' => 'S15',
                 'descripcion' => 'Actas firmadas',
             ],
             [
-                'codigo' => 'E16',
+                'codigo' => 'S16',
                 'descripcion' => 'Informe de situación académica del estudiante',
             ],
             [
-                'codigo' => 'E17',
+                'codigo' => 'S17',
                 'descripcion' => 'Informe de evaluación de E-A',
             ],
             [
-                'codigo' => 'E18',
+                'codigo' => 'S18',
                 'descripcion' => 'Resultado de los indicadores',
             ],
             [
-                'codigo' => 'E19',
+                'codigo' => 'S19',
                 'descripcion' => 'Acciones y/o Plan de mejora',
             ],
             [
-                'codigo' => 'E20',
+                'codigo' => 'S20',
                 'descripcion' => 'Registro y envío de comunicaciones',
             ],
         ];

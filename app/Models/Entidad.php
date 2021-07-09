@@ -17,4 +17,9 @@ class Entidad extends Model
     {
         return $this->belongsTo(Responsable::class, 'id', 'entidad_id');
     }
+
+    public function nivel()
+    {
+        return $this->hasOne(NivelEntidad::class, 'id', 'nivel_entidad_id');
+    }
 }
