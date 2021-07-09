@@ -40,7 +40,7 @@
 {{--@endif--}}
 
 <!-- Page Content -->
-    <main class="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <main class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         {{ $slot }}
     </main>
 </div>
