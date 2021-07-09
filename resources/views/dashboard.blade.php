@@ -48,8 +48,8 @@
 
     {{-- Menu principal --}}
     {{-- Bienvenida y fecha actual --}}
-    <div class="container mx-auto my-4 grid">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center">
+    <div class="container mx-auto mb-4 grid">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
             {{-- Bienvenida --}}
             <div class="col-span-3">
                 <p class="text-gray-800">Bienvenido a la gestión de calidad de Ciencias Medicas </p>
@@ -60,14 +60,29 @@
                 </div>
             </div>
             {{-- Fecha actual --}}
-            <div class="flex items-center">
-                <div class="m-auto rounded-lg border-2 border-blue-500 w-2/4 text-center">
-                    <p class="text-lg text-blue-500">Jueves</p>
-                    <p class="text-5xl font-bold text-blue-500">28</p>
-                    <p class="text-lg text-blue-500">Julio</p>
-                    <p class="text-lg text-blue-50 bg-blue-500">2021</p>
+            <div class="flex justify-center lg:justify-end">
+                <div class="grid grid-cols-4 w-56">
+                    <div class="col-span-3 border-2 border-gray-300">
+                        <div class="grid grid-cols-3 py-1 text-center">
+                            <p class="col-span-3 text-sm text-gray-500">Son las</p>
+                            <p id="hour" class="bg-blue-500 text-white mx-2 py-1"></p>
+                            <p id="minute" class="bg-blue-500 text-white mx-2 py-1"></p>
+                            <p id="second" class="bg-blue-500 text-white mx-2 py-1"></p>
+                            <p class="text-sm text-gray-500">h</p>
+                            <p class="text-sm text-gray-500">m</p>
+                            <p class="text-sm text-gray-500">s</p>
+                        </div>
+                    </div>
+                    <div class="border-2 border-gray-300 border-l-0  text-center">
+                        <p id="weekday" class="text-sm text-gray-500"></p>
+                        <p id="day" class="text-4xl font-bold text-blue-500"></p>
+                        <p id="month" class="text-sm text-gray-500"></p>
+                    </div>
+                    <div
+                        class="col-span-4 border-2 border-gray-300 border-t-0 bg-blue-500 text-white text-center font-semibold text-xl py-1">
+                        <p id="year"></p>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -411,5 +426,76 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        (function() {
+            var updatetime = function() {
+                // Obtenemos la fecha actual, incluyendo las horas, minutos, segundos, dia de la semana, dia del mes, mes y año;
+                var date = new Date(),
+                    hour = date.getHours(),
+                    minute = date.getMinutes(),
+                    second = date.getSeconds(),
+                    weekday = date.getDay(),
+                    day = date.getDate(),
+                    month = date.getMonth(),
+                    year = date.getFullYear();
+
+                // Accedemos a los elementos del DOM para agregar mas adelante sus correspondientes valores
+                var dhour = document.getElementById('hour'),
+                    dminute = document.getElementById('minute'),
+                    dsecond = document.getElementById('second'),
+                    dweekday = document.getElementById('weekday'),
+                    dday = document.getElementById('day'),
+                    dmonth = document.getElementById('month'),
+                    dyear = document.getElementById('year');
+
+
+                // Obtenemos el dia se la semana y lo mostramos
+                var week = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+                dweekday.textContent = week[weekday];
+
+                // Obtenemos el dia del mes
+                dday.textContent = day;
+
+                // Obtenemos el Mes y año y lo mostramos
+                var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+                    'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'
+                ]
+                dmonth.textContent = months[month];
+                dyear.textContent = year;
+
+                // Cambiamos las hora de 24 a 12 horas y establecemos si es AM o PM
+
+                if (hour >= 12) {
+                    hour = hour - 12;
+                }
+
+                // Detectamos cuando sean las 0 AM y transformamos a 12 AM
+                if (hour == 0) {
+                    hour = 12;
+                }
+
+                // Si queremos mostrar un cero antes de las horas ejecutamos este condicional
+                // if (horas < 10){horas = '0' + horas;}
+                dhour.textContent = hour;
+
+                // Minutos y Segundos
+                if (minute < 10) {
+                    minute = "0" + minute;
+                }
+                if (second < 10) {
+                    second = "0" + second;
+                }
+
+                dminute.textContent = minute;
+                dsecond.textContent = second;
+            };
+
+            updatetime();
+            var interval = setInterval(updatetime, 1000);
+        }())
+    </script>
 
 </x-app-layout>
