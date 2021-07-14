@@ -27,7 +27,7 @@
                     <h1 class="text-xl font-bold text-gray-600">Entradas</h1>
                     @if($actividad->entradas->count())
                         @foreach( $actividad->entradas as $ep)
-                            <div class="ml-2 py-2 flex items-center">
+                            <div class="ml-2 py-2 flex items-start">
                                 <div class="truncate flex-1 mr-2">
                                     <h2 class="text-gray-800">
                                         {{ $ep->entrada->codigo }} - {{ $ep->entrada->descripcion }}
@@ -79,7 +79,46 @@
         </div>
         <div class="col-span-5 lg:col-span-3">
             <x-card>
+
+                <div class="bg-white p-6">
+                    <x-jet-label for="salida">
+                        Proceso
+                    </x-jet-label>
+                    <select name="salida" id="salida"
+                            class="mt-1 p-2 border-gray-300 focus:border-blue-300 focus:ring-3 focus:ring-blue-200 rounded shadow-sm w-full">
+                        <option value="0">Selecciona p</option>
+                    </select>
+                    <br>
+                    <br>
+                    <select name="salida" id="salida"
+                            class="input-form w-full">
+                        <option value="0">Seleccione</option>
+                    </select>
+                    <br>
+                    <br>
+                    <input name="salida" id="salida" class="input-form w-full" value="Hola">
+                    <br>
+                    <br>
+                    <input name="salida" id="salida" value="Hola q onda"
+                           {{--                           class="mt-1 p-2 border border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 rounded shadow-sm w-full">--}}
+                           class="p-2 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
+                    <br>
+                    <br>
+                    <input name="salida" id="salida" value="Hola coom estas"
+                           {{--                           class="mt-1 p-2 border border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 rounded shadow-sm w-full">--}}
+                           class="border-gray-300 focus:border-blue-300 focus:ring-3 focus:ring-blue-200 shadow-sm rounded">
+                    <br>
+                    <br>
+                    <x-jet-input></x-jet-input>
+                    <br>
+                    <br>
+                    <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email"
+                                 :value="old('email')" required/>
+                </div>
+
                 <div class="bg-rose-50 rounded-lg p-6">
+
+
                     {{ $actividad->salidas }}
                 </div>
             </x-card>
