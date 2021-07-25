@@ -10,7 +10,7 @@ class Salida extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'descripcion'];
+    public $fillable = ['codigo', 'nombre', 'descripcion', 'actividad_id'];
 
     public function clientes()
     {

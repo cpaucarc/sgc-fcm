@@ -17,11 +17,9 @@ class CreateClienteSalidasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('salida_id');
-            $table->unsignedBigInteger('actividad_id');
 
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('salida_id')->references('id')->on('salidas');
-            $table->foreign('actividad_id')->references('id')->on('actividades');
         });
     }
 

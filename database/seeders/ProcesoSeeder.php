@@ -16,24 +16,31 @@ class ProcesoSeeder extends Seeder
         $procesos = [
             [
                 'nombre' => 'Enseñanza y Aprendizaje',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Tutoria y Consejeria',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Gestion de la Escuela',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Matricula',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Titulo Profesional',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Docente',
+                'facultad_id' => 1
             ],
             [
                 'nombre' => 'Biblioteca',
+                'facultad_id' => 1
             ],
         ];
 

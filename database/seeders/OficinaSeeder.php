@@ -13,79 +13,31 @@ class OficinaSeeder extends Seeder
      */
     public function run()
     {
+        /* nivel_oficina_id:
+            1	Nivel General
+            2	Nivel de Facultad
+            3	Nivel de Escuela
+        */
+
         $oficinas_nivel_general = [
             [
-                'entidad_id' => 3,
-            ],
-            [
-                'entidad_id' => 6,
-            ],
-            [
-                'entidad_id' => 7,
-            ],
-            [
-                'entidad_id' => 10,
-            ],
-            [
-                'entidad_id' => 11,
+                'nivel_oficina_id' => 1,
             ],
         ];
         $oficinas_nivel_facultad = [
             [
-                'entidad_id' => 5,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 8,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 12,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 13,
+                'nivel_oficina_id' => 2,
                 'facultad_id' => 1,
             ],
         ];
         $oficinas_nivel_escuela = [
             [
-                'entidad_id' => 1,
+                'nivel_oficina_id' => 3,
                 'escuela_id' => 1,
                 'facultad_id' => 1,
             ],
             [
-                'entidad_id' => 1,
-                'escuela_id' => 2,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 2,
-                'escuela_id' => 1,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 2,
-                'escuela_id' => 2,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 4,
-                'escuela_id' => 1,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 4,
-                'escuela_id' => 2,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 9,
-                'escuela_id' => 1,
-                'facultad_id' => 1,
-            ],
-            [
-                'entidad_id' => 9,
+                'nivel_oficina_id' => 3,
                 'escuela_id' => 2,
                 'facultad_id' => 1,
             ],

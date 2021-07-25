@@ -10,5 +10,5 @@ class Proceso extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['nombre'];
+    public $fillable = ['nombre', 'facultad_id'];
 }

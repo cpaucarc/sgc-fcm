@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gray-100 border-b border-gray-200">
+<nav x-data="{ open: false }" class="bg-white shadow-sm">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -6,11 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        {{--                        <x-jet-application-mark class="block h-9 w-auto"/>--}}
                         <img src="{{ asset('images/unasam_escudo.svg') }}" class="h-8 w-8" alt="Unasam">
-                        {{--                        <span class="text-xl text-white font-bold bg-rose-600 rounded px-4 py-2">--}}
-                        {{--                            SGC--}}
-                        {{--                        </span>--}}
                     </a>
                 </div>
 
@@ -19,10 +15,14 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+
+                    {{--                    @if(Auth::user()->oficina->entidad->responsable)--}}
                     <x-jet-nav-link href="{{ route('actividad.actividades') }}"
                                     :active="request()->routeIs('actividad.*')">
                         {{ __('Actividades') }}
                     </x-jet-nav-link>
+                    {{--                    @endif--}}
+
                 </div>
             </div>
 

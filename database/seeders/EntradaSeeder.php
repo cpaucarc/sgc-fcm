@@ -16,95 +16,118 @@ class EntradaSeeder extends Seeder
         $entradas = [
             [
                 'codigo' => 'E1',
-                'descripcion' => 'Informe de evaluación E-A del semestre anterior',
+                'nombre' => 'Informe de evaluación E-A del semestre anterior',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E2',
-                'descripcion' => 'POI asignado',
+                'nombre' => 'POI asignado',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E3',
-                'descripcion' => 'Plan Estratégico Escuela',
+                'nombre' => 'Plan Estratégico Escuela',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E4',
-                'descripcion' => 'Reglamento de la Programación, Ejecución y Control de las Actividades Académicas',
+                'nombre' => 'Reglamento de la Programación, Ejecución y Control de las Actividades Académicas',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E5',
-                'descripcion' => 'Modelo educativo',
+                'nombre' => 'Modelo educativo',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E6',
-                'descripcion' => 'Guía de elaboración de silabo',
+                'nombre' => 'Guía de elaboración de silabo',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E7',
-                'descripcion' => 'Lista de Libros de consulta (Bibliografía)',
+                'nombre' => 'Lista de Libros de consulta (Bibliografía)',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E8',
-                'descripcion' => 'Plan de trabajo de E-A aprobado',
+                'nombre' => 'Plan de trabajo de E-A aprobado',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E9',
-                'descripcion' => 'Guía de investigación formativa',
+                'nombre' => 'Guía de investigación formativa',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E10',
-                'descripcion' => 'Esquema de sesión de aprendizaje',
+                'nombre' => 'Esquema de sesión de aprendizaje',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E11',
-                'descripcion' => 'Formato de entrega de silabo',
+                'nombre' => 'Formato de entrega de silabo',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E12',
-                'descripcion' => 'Formato de avance de silabo',
+                'nombre' => 'Formato de avance de silabo',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E13',
-                'descripcion' => 'Formato de asistencia de estudiantes',
+                'nombre' => 'Formato de asistencia de estudiantes',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E14',
-                'descripcion' => 'Procedimiento Tutoría',
+                'nombre' => 'Procedimiento Tutoría',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E15',
-                'descripcion' => 'Procedimiento de Supervisión al desempeño docente',
+                'nombre' => 'Procedimiento de Supervisión al desempeño docente',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E16',
-                'descripcion' => 'Formato de registro de notas',
+                'nombre' => 'Formato de registro de notas',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E17',
-                'descripcion' => 'Procedimiento medir',
+                'nombre' => 'Procedimiento medir',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E18',
-                'descripcion' => 'Procedimiento analizar',
+                'nombre' => 'Procedimiento analizar',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E19',
-                'descripcion' => 'Lista de indicadores de E-A',
+                'nombre' => 'Lista de indicadores de E-A',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E20',
                 'descripcion' => 'Procedimiento mejorar',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E21',
-                'descripcion' => 'Formato de Plan de mejora',
+                'nombre' => 'Formato de Plan de mejora',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E22',
-                'descripcion' => 'Informe de evaluación de E-A',
+                'nombre' => 'Informe de evaluación de E-A',
+                'proceso_id' => 1
             ],
             [
                 'codigo' => 'E23',
-                'descripcion' => 'Procedimiento Comunicar a interesados',
+                'nombre' => 'Procedimiento Comunicar a interesados',
+                'proceso_id' => 1
             ],
         ];
 

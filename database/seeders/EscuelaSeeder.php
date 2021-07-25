@@ -16,12 +16,10 @@ class EscuelaSeeder extends Seeder
         $escuelas = [
             [
                 'nombre' => 'Enfermeria',
-                'abrev' => 'ENF',
                 'facultad_id' => 1,
             ],
             [
                 'nombre' => 'Obstetricia',
-                'abrev' => 'OBS',
                 'facultad_id' => 1,
             ],
         ];

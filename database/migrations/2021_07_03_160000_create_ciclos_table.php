@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntidadesTable extends Migration
+class CreateCiclosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateEntidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('entidades', function (Blueprint $table) {
+        Schema::create('ciclos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->unsignedBigInteger('nivel_entidad_id');
-
-            $table->foreign('nivel_entidad_id')->references('id')->on('nivel_entidades');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateEntidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entidades');
+        Schema::dropIfExists('ciclos');
     }
 }

@@ -26,8 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'persona_id',
-        'oficina_id'
+        'persona_id'
     ];
 
     /**
@@ -65,8 +64,124 @@ class User extends Authenticatable
         return $this->hasOne(Persona::class, 'id', 'persona_id');
     }
 
-    public function oficina(){
-        return $this->hasOne(Oficina::class, 'id', 'oficina_id');
+    public function roles()
+    {
+        return $this->hasMany(Rol::class, 'user_id', 'id');
     }
 
+    public function responsables_id()
+    {
+        $resp = array();
+        foreach ($this->roles() as $role) {
+            array_push($resp, $role->entidad->responsable->id);
+        }
+        return $resp;
+
+    }
+
+
+    /* Determinar si pertence a una oficina */
+    public function esDireccionEscuela()
+    {
+        if ($this->roles->where('entidad_id', 1)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDepartamentoAcademico()
+    {
+        if ($this->roles->where('entidad_id', 2)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esOGE()
+    {
+        if ($this->roles->where('entidad_id', 3)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDocente()
+    {
+        if ($this->roles->where('entidad_id', 4)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDecanatura()
+    {
+        if ($this->roles->where('entidad_id', 5)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDireccionUnidadCalidad()
+    {
+        if ($this->roles->where('entidad_id', 6)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esBiblioteca()
+    {
+        if ($this->roles->where('entidad_id', 7)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esComiteTutoria()
+    {
+        if ($this->roles->where('entidad_id', 8)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esEstudiante()
+    {
+        if ($this->roles->where('entidad_id', 9)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esVicerrectoradoAcademico()
+    {
+        if ($this->roles->where('entidad_id', 10)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esVicerrectoradoInvestigacion()
+    {
+        if ($this->roles->where('entidad_id', 11)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDireccionUnidadRRSS()
+    {
+        if ($this->roles->where('entidad_id', 12)->count()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function esDireccionUnidadInvestigacion()
+    {
+        if ($this->roles->where('entidad_id', 13)->count()) {
+            return true;
+        }
+        return false;
+    }
 }
