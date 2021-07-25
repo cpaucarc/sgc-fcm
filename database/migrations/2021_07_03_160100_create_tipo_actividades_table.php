@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNivelEntidadesTable extends Migration
+class CreateTipoActividadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateNivelEntidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('nivel_entidades', function (Blueprint $table) {
+        Schema::create('tipo_actividades', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre', 25);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateNivelEntidadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nivel_entidades');
+        Schema::dropIfExists('tipo_actividades');
     }
 }

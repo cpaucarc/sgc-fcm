@@ -10,10 +10,6 @@ class Entrada extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'descripcion'];
+    public $fillable = ['codigo', 'nombre', 'descripcion', 'proceso_id'];
 
-    public function proveedor()
-    {
-
-    }
 }

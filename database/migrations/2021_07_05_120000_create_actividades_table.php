@@ -16,7 +16,6 @@ class CreateActividadesTable extends Migration
         Schema::create('actividades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->boolean('estado')->default(0);
             $table->unsignedBigInteger('tipo_actividad_id');
             $table->unsignedBigInteger('proceso_id');
 

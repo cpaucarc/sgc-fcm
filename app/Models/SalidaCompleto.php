@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NivelEntidad extends Model
+class SalidaCompleto extends Model
 {
     use HasFactory;
 
-    public $table = "nivel_entidades";
     public $timestamps = false;
-    public $fillable = ['nombre'];
+    public $fillable = ['fecha_operacion', 'cliente_salida_id', 'ciclo_id', 'documento_id'];
 }

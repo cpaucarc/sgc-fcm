@@ -16,83 +16,103 @@ class SalidaSeeder extends Seeder
         $salidas = [
             [
                 'codigo' => 'S1',
-                'descripcion' => 'Plan de trabajo de E-A aprobado',
+                'nombre' => 'Plan de trabajo de E-A aprobado',
+                'actividad_id' => 1
             ],
             [
                 'codigo' => 'S2',
-                'descripcion' => 'Silabo de la asignatura aprobado',
+                'nombre' => 'Silabo de la asignatura aprobado',
+                'actividad_id' => 2
             ],
             [
                 'codigo' => 'S3',
-                'descripcion' => 'Silabo publicado',
+                'nombre' => 'Silabo publicado',
+                'actividad_id' => 2
             ],
             [
                 'codigo' => 'S4',
-                'descripcion' => 'Requerimiento de recursos',
+                'nombre' => 'Requerimiento de recursos',
+                'actividad_id' => 3
             ],
             [
                 'codigo' => 'S5',
-                'descripcion' => 'Plan de prácticas de la asignatura',
+                'nombre' => 'Plan de prácticas de la asignatura',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'S6',
-                'descripcion' => 'Registro de entrega del sílabo a los estudiantes',
+                'nombre' => 'Registro de entrega del sílabo a los estudiantes',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'S7',
-                'descripcion' => 'Registro de entrega de material de clases',
+                'nombre' => 'Registro de entrega de material de clases',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'S8',
-                'descripcion' => 'Registro de formato de avance silábico',
+                'nombre' => 'Registro de formato de avance silábico',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'S9',
-                'descripcion' => 'Plan de responsabilidad social',
+                'nombre' => 'Plan de responsabilidad social',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'S10',
-                'descripcion' => 'Lista de grupos de práctica',
+                'nombre' => 'Lista de grupos de práctica',
+                'actividad_id' => 4
             ],
             [
                 'codigo' => 'E11',
-                'descripcion' => 'Informe de Tutoría',
+                'nombre' => 'Informe de Tutoría',
+                'actividad_id' => 5
             ],
             [
                 'codigo' => 'E12',
-                'descripcion' => 'Registro de notas',
+                'nombre' => 'Registro de notas',
+                'actividad_id' => 6
             ],
             [
                 'codigo' => 'S13',
-                'descripcion' => 'Informe de evaluación docente',
+                'nombre' => 'Informe de evaluación docente',
+                'actividad_id' => 7
             ],
             [
                 'codigo' => 'S14',
-                'descripcion' => 'Pre actas firmadas',
+                'nombre' => 'Pre actas firmadas',
+                'actividad_id' => 8
             ],
             [
                 'codigo' => 'S15',
-                'descripcion' => 'Actas firmadas',
+                'nombre' => 'Actas firmadas',
+                'actividad_id' => 8
             ],
             [
                 'codigo' => 'S16',
-                'descripcion' => 'Informe de situación académica del estudiante',
+                'nombre' => 'Informe de situación académica del estudiante',
+                'actividad_id' => 8
             ],
             [
                 'codigo' => 'S17',
-                'descripcion' => 'Informe de evaluación de E-A',
+                'nombre' => 'Informe de evaluación de E-A',
+                'actividad_id' => 9
             ],
             [
                 'codigo' => 'S18',
-                'descripcion' => 'Resultado de los indicadores',
+                'nombre' => 'Resultado de los indicadores',
+                'actividad_id' => 9
             ],
             [
                 'codigo' => 'S19',
-                'descripcion' => 'Acciones y/o Plan de mejora',
+                'nombre' => 'Acciones y/o Plan de mejora',
+                'actividad_id' => 10
             ],
             [
                 'codigo' => 'S20',
-                'descripcion' => 'Registro y envío de comunicaciones',
+                'nombre' => 'Registro y envío de comunicaciones',
+                'actividad_id' => 11
             ],
         ];
 

@@ -10,9 +10,10 @@ class MostrarClientes extends Component
     public $open = false;
     public $salida = false;
 
-    public function mount(Salida $salida)
+    public function abrirModal(Salida $salida)
     {
         $this->salida = $salida;
+        $this->open = true;
     }
 
     public function render()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSalidasTable extends Migration
+class CreateNivelOficinasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSalidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('salidas', function (Blueprint $table) {
+        Schema::create('nivel_oficinas', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 4);
-            $table->string('descripcion');
+            $table->string('nombre', 50);
         });
     }
 
@@ -27,6 +26,6 @@ class CreateSalidasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salidas');
+        Schema::dropIfExists('nivel_oficinas');
     }
 }

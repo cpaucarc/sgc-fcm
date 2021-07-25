@@ -15,11 +15,11 @@ class CreateOficinasTable extends Migration
     {
         Schema::create('oficinas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('entidad_id');
-            $table->unsignedBigInteger('escuela_id')->nullable();
+            $table->unsignedBigInteger('nivel_oficina_id');
             $table->unsignedBigInteger('facultad_id')->nullable();
+            $table->unsignedBigInteger('escuela_id')->nullable();
 
-            $table->foreign('entidad_id')->references('id')->on('entidades');
+            $table->foreign('nivel_oficina_id')->references('id')->on('nivel_oficinas');
             $table->foreign('escuela_id')->references('id')->on('escuelas');
             $table->foreign('facultad_id')->references('id')->on('facultades');
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntradasTable extends Migration
+class CreateProcesosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateEntradasTable extends Migration
      */
     public function up()
     {
-        Schema::create('entradas', function (Blueprint $table) {
+        Schema::create('procesos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 4);
-            $table->string('descripcion');
+            $table->string('nombre');
+            $table->unsignedBigInteger('facultad_id');
+
+            $table->foreign('facultad_id')->references('id')->on('facultades');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateEntradasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entradas');
+        Schema::dropIfExists('procesos');
     }
 }

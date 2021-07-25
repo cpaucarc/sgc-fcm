@@ -40,8 +40,8 @@
                 </p>
             @endslot
 
-             @livewire('dashboard.actividades-incompletas') 
-            
+             @livewire('dashboard.actividades-incompletas')
+
 
         </x-card>
     </div> --}}
@@ -52,7 +52,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
             {{-- Bienvenida --}}
             <div class="col-span-3">
-                <p class="text-gray-800">Bienvenido a la gestión de calidad de Ciencias Medicas </p>
+                <h1 class="text-gray-800 text-3xl">
+                    Bienvenido al Sistema de Gestión de Calidad de Ciencias Medicas
+                </h1>
                 <div class="rounded-lg p-4 border-2 border-gray-400">
                     <p class="text-gray-400" id="userName">
                         Rosales Valladares Jhosmel
@@ -62,30 +64,31 @@
             {{-- Fecha actual --}}
             <div class="flex justify-center lg:justify-end">
                 <div class="grid grid-cols-4 w-56">
-                    <div class="col-span-3 border-2 border-gray-300">
+                    <div class="col-span-3 border-2 rounded border-gray-300">
                         <div class="grid grid-cols-3 py-1 text-center">
                             <p class="col-span-3 text-sm text-gray-500">Son las</p>
-                            <p id="hour" class="bg-blue-500 text-white mx-2 py-1"></p>
-                            <p id="minute" class="bg-blue-500 text-white mx-2 py-1"></p>
-                            <p id="second" class="bg-blue-500 text-white mx-2 py-1"></p>
+                            <p id="hour" class="bg-blue-500 rounded text-white mx-2 py-1"></p>
+                            <p id="minute" class="bg-blue-500 rounded text-white mx-2 py-1"></p>
+                            <p id="second" class="bg-blue-500 rounded text-white mx-2 py-1"></p>
                             <p class="text-sm text-gray-500">h</p>
                             <p class="text-sm text-gray-500">m</p>
                             <p class="text-sm text-gray-500">s</p>
                         </div>
                     </div>
-                    <div class="border-2 border-gray-300 border-l-0  text-center">
+                    <div class="border-2 rounded border-gray-300 border-l-0 text-center">
                         <p id="weekday" class="text-sm text-gray-500"></p>
                         <p id="day" class="text-4xl font-bold text-blue-500"></p>
                         <p id="month" class="text-sm text-gray-500"></p>
                     </div>
                     <div
-                        class="col-span-4 border-2 border-gray-300 border-t-0 bg-blue-500 text-white text-center font-semibold text-xl py-1">
+                        class="col-span-4 border-2 rounded border-gray-300 border-t-0 bg-blue-500 text-white text-center font-semibold text-xl py-1">
                         <p id="year"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     {{-- Conteo de datos del db --}}
     <div class="container mx-auto my-4 grid">
@@ -429,8 +432,8 @@
 
 
     <script>
-        (function() {
-            var updatetime = function() {
+        (function () {
+            var updatetime = function () {
                 // Obtenemos la fecha actual, incluyendo las horas, minutos, segundos, dia de la semana, dia del mes, mes y año;
                 var date = new Date(),
                     hour = date.getHours(),

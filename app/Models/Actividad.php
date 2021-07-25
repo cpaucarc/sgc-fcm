@@ -11,7 +11,7 @@ class Actividad extends Model
 
     public $table = "actividades";
     public $timestamps = false;
-    public $fillable = ['nombre', 'estado', 'tipo_actividad_id', 'proceso_id'];
+    public $fillable = ['nombre', 'tipo_actividad_id', 'proceso_id'];
 
     public function entradas()
     {
@@ -20,7 +20,17 @@ class Actividad extends Model
 
     public function salidas()
     {
-        return $this->hasMany(ClienteSalida::class, 'actividad_id', 'id')->distinct()->select('salida_id');
+        return $this->hasMany(Salida::class, 'actividad_id', 'id');
+    }
+
+    public function tipoActividad()
+    {
+        return $this->belongsTo(TipoActividad::class, 'tipo_actividad_id', 'id');
+    }
+
+    public function proceso()
+    {
+        return $this->belongsTo(Proceso::class, 'proceso_id', 'id');
     }
 
 }

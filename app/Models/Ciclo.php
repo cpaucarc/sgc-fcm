@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActividadResponsable extends Model
+class Ciclo extends Model
 {
     use HasFactory;
-
-    public $table = "actividad_responsables";
+    public $fillable = ['nombre', 'fecha_inicio', 'fecha_fin'];
     public $timestamps = false;
-    public $fillable = ['responsable_id', 'actividad_id'];
-
 }

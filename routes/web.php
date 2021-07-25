@@ -22,7 +22,8 @@ Route::get('/', function () {
 Route::get('registro', [RegistroController::class, 'index'])->name('registro');
 
 Route::get('actividades', [ActividadController::class, 'index'])->name('actividad.actividades');
-Route::get('mis-actividades/{id}', [ActividadController::class, 'show'])->name('actividad.mis-actividades');
+
+Route::get('mis-actividades/{id}/{ciclo}', [ActividadController::class, 'show'])->name('actividad.mis-actividades');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
