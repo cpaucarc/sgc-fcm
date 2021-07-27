@@ -18,11 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call(CicloSeeder::class);
         $this->call(FacultadSeeder::class);
         $this->call(NivelOficinaSeeder::class);
+        $this->call(PersonaSeeder::class);
         $this->call(TipoActividadSeeder::class);
 
         $this->call(EntidadSeeder::class);
         $this->call(EscuelaSeeder::class);
         $this->call(ProcesoSeeder::class);
+        $this->call(UserSeeder::class);
 
         $this->call(ActividadSeeder::class);
         $this->call(ClienteSeeder::class);
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadResponsableSeeder::class);
         $this->call(ClienteSalidaSeeder::class);
         $this->call(EntradaProveedorSeeder::class);
+        $this->call(RolSeeder::class);
 
     }
 }

@@ -10,5 +10,14 @@ class SalidaCompleto extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['fecha_operacion', 'cliente_salida_id', 'ciclo_id', 'documento_id'];
+    public $fillable = ['fecha_operacion', 'salida_id', 'ciclo_id', 'documento_id'];
+
+    protected $dates = [
+        'fecha_operacion',
+    ];
+
+    public function documento()
+    {
+        return $this->hasOne(Documento::class, 'id', 'documento_id');
+    }
 }

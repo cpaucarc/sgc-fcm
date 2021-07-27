@@ -22,4 +22,10 @@ class EntradaProveedor extends Model
     {
         return $this->belongsTo(Entrada::class);
     }
+
+    public function documentos()
+    {
+        return $this->hasMany(EntradaCompleto::class);
+    }
+
 }
