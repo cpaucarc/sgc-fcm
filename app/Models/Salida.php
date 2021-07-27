@@ -16,4 +16,9 @@ class Salida extends Model
     {
         return $this->hasMany(ClienteSalida::class);
     }
+
+    public function documentos()
+    {
+        return $this->hasMany(SalidaCompleto::class);
+    }
 }

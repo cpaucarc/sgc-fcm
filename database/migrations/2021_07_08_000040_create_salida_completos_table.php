@@ -16,11 +16,11 @@ class CreateSalidaCompletosTable extends Migration
         Schema::create('salida_completos', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_operacion')->useCurrent();
-            $table->unsignedBigInteger('cliente_salida_id');
+            $table->unsignedBigInteger('salida_id');
             $table->unsignedBigInteger('ciclo_id');
             $table->unsignedBigInteger('documento_id')->nullable();
 
-            $table->foreign('cliente_salida_id')->references('id')->on('cliente_salidas');
+            $table->foreign('salida_id')->references('id')->on('salidas');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');
             $table->foreign('documento_id')->references('id')->on('documentos');
         });

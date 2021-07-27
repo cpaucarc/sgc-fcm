@@ -11,4 +11,13 @@ class EntradaCompleto extends Model
 
     public $timestamps = false;
     public $fillable = ['fecha_operacion', 'entrada_proveedor_id', 'ciclo_id', 'documento_id'];
+
+    protected $dates = [
+        'fecha_operacion',
+    ];
+
+    public function documento()
+    {
+        return $this->hasOne(Documento::class, 'id', 'documento_id');
+    }
 }

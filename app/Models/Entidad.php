@@ -17,4 +17,9 @@ class Entidad extends Model
     {
         return $this->belongsTo(Responsable::class, 'id', 'entidad_id');
     }
+
+    public function proveedor()
+    {
+        return $this->belongsTo(Proveedor::class, 'id', 'entidad_id');
+    }
 }

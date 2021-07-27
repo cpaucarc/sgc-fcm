@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace App\Http\Livewire\Actividad;
 
 use App\Models\ActividadResponsable;
 use App\Models\Ciclo;
@@ -32,10 +32,9 @@ class ActividadesIncompletas extends Component
         $incompletos = ($actividades->where('status', 0))->count();
         $porcentaje = $incompletos === 0 ? 0 : ($completos / $incompletos * 100);
 
-
         $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
 
-        return view('livewire.dashboard.actividades-incompletas')
+        return view('livewire.actividad.actividades-incompletas')
             ->with(compact('actividades', 'completos', 'incompletos', 'porcentaje', 'entidades'));
     }
 }

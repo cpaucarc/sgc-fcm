@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,11 @@ Route::get('mis-actividades/{id}/{ciclo}', [ActividadController::class, 'show'])
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('storage/{file}', function ($file) {
+    return Storage::response($file);
+})->name('documentos');
+
+Route::get('storage/{file}', function ($file) {
+    return Storage::response($file);
+})->name('documentos');
