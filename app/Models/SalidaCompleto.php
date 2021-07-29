@@ -20,4 +20,9 @@ class SalidaCompleto extends Model
     {
         return $this->hasOne(Documento::class, 'id', 'documento_id');
     }
+
+    public function salida()
+    {
+        return $this->belongsTo(Salida::class);
+    }
 }

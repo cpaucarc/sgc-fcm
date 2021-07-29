@@ -26,6 +26,7 @@ class MostrarActividad extends Component
     public $estado = false;
     public $completado;
     public $ciclo;
+    public $randomID;
     public $archivo;
 
     protected $rules = [
@@ -36,6 +37,10 @@ class MostrarActividad extends Component
     {
         $this->actividad = $actividad;
         $this->ciclo = $ciclo;
+        if ($this->actividad->estadoActual) {
+            $this->estado = true;
+        }
+        $this->randomID = rand();
     }
 
     public function abrirModal(Salida $salida)
@@ -52,17 +57,16 @@ class MostrarActividad extends Component
 
     public function completarActividad()
     {
-//      fecha_operacion datetime
-//      actividad_responsable_id bigint(20) UN
-//      ciclo_id bigint(20) UN
-//      documento_id
-
-        ActividadCompleto::where('ciclo_id');
-
-
-        $this->estado = !$this->estado;
-        $this->actividad->estado = $this->estado;
-        $this->actividad->save();
+        if ($this->estado) {
+            $this->actividad->estadoActual->delete();
+            $this->estado = false;
+        } else {
+            ActividadCompleto::create([
+                'actividad_id' => $this->actividad->id,
+                'ciclo_id' => $this->ciclo->id
+            ]);
+            $this->estado = true;
+        }
     }
 
     public function enviarDocumentoSalida()
@@ -82,6 +86,19 @@ class MostrarActividad extends Component
                 $nombreArchivo = "Archivo adjunto";
             }
 
+            $existe = Storage::disk('public')->exists('salidas/' . $nombreArchivo);
+            $num = 0;
+            if ($existe) {
+                $aux = $nombreArchivo;
+                while ($existe) {
+                    $num++;
+                    $aux = $num . '_' . $aux;
+                    $existe = Storage::disk('public')->exists('salidas/' . $aux);
+                    $aux = $nombreArchivo;
+                }
+                $nombreArchivo = $num . '_' . $nombreArchivo;
+            }
+
             $this->archivo->storeAs($rutaCarpeta, $nombreArchivo);
 
             $documento = Documento::create([
@@ -96,6 +113,9 @@ class MostrarActividad extends Component
             ]);
 
             $this->open = false;
+            $this->randomID = rand();
+//            $this->reset(['propiedad1', 'propiedad2', ]);
+            session()->flash('message', "El documento '$nombreArchivo' fue enviado.");
 
         } else {
             return redirect()->route('login');
@@ -106,12 +126,10 @@ class MostrarActividad extends Component
     {
         $salida_completo = SalidaCompleto::where('documento_id', '=', $doc->id);
         $salida_completo->delete();
-//        Storage::delete('app/public/' . $doc->enlace_interno);
         Storage::disk('public')->delete($doc->enlace_interno);
-        //  salidas/mysql.pptx
-        //  storage\app\public\salidas
         $doc->delete();
         $this->open = false;
+        session()->flash('message', "El documento '$doc->nombre' fue eliminado.");
     }
 
     public function render()

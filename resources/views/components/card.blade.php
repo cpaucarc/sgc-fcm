@@ -1,4 +1,4 @@
-<div class="bg-white border border-gray-200 p-4 rounded-md shadow-sm">
+<div class="bg-white border border-gray-200 pt-6 px-8 pb-2 rounded-md shadow-sm">
 
     @if(isset($header))
         <div class="mb-4">
@@ -13,4 +13,5 @@
             {{ $footer }}
         </div>
     @endif
+
 </div>

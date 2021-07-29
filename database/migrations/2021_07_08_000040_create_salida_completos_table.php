@@ -18,7 +18,7 @@ class CreateSalidaCompletosTable extends Migration
             $table->dateTime('fecha_operacion')->useCurrent();
             $table->unsignedBigInteger('salida_id');
             $table->unsignedBigInteger('ciclo_id');
-            $table->unsignedBigInteger('documento_id')->nullable();
+            $table->unsignedBigInteger('documento_id');
 
             $table->foreign('salida_id')->references('id')->on('salidas');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');

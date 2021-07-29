@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Actividad;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        Storage::deleteDirectory('/public/salidas');
+        Storage::deleteDirectory('/public/entradas');
+
         $this->call(CicloSeeder::class);
         $this->call(FacultadSeeder::class);
         $this->call(NivelOficinaSeeder::class);
