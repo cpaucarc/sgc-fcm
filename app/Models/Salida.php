@@ -22,8 +22,16 @@ class Salida extends Model
         return $this->hasMany(SalidaCompleto::class);
     }
 
+    public function documentosCicloActual($cicloID)
+    {
+        return $this->hasMany(SalidaCompleto::class)
+            ->where('ciclo_id', '=', $cicloID)
+            ->get();
+    }
+
     public function actividad()
     {
         return $this->belongsTo(Actividad::class);
     }
+
 }

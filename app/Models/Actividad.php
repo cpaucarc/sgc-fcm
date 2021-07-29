@@ -33,9 +33,11 @@ class Actividad extends Model
         return $this->belongsTo(Proceso::class, 'proceso_id', 'id');
     }
 
-    public function estadoActual()
+    public function estadoActual($cicloID)
     {
-        return $this->hasOne(ActividadCompleto::class);
+        return $this->hasOne(ActividadCompleto::class)
+            ->where('ciclo_id', '=', $cicloID)
+            ->get();
     }
 
     public function responsable()

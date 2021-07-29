@@ -1,6 +1,6 @@
-<div class="grid grid-cols-1 gap-y-4 lg:gap-y-0 lg:grid-cols-4 lg:gap-4 ">
+<div class="grid grid-cols-1 gap-y-4 lg:gap-y-0 lg:grid-cols-4 lg:gap-4 relative">
 
-    <div class="flex flex-col items-start gap-y-4">
+    <div class="flex flex-row lg:flex-col items-start gap-y-4">
 
         <x-side-item :active="$show_mis_actividades" wire:click="cambiarVista(1)">
             {{ __('Mis actividades') }}

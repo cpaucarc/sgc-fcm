@@ -12,8 +12,7 @@ class Index extends Component
 
     public function mount()
     {
-//        $this->show_mis_actividades = true;
-        $this->show_documentos_recibidos = true;
+        $this->show_mis_actividades = true;
     }
 
     public function cambiarVista($num)

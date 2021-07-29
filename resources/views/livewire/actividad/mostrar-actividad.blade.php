@@ -20,13 +20,13 @@
                 </h3>
             </div>
 
-            @if($estado == 0)
+            @if($estado === false)
                 <button wire:click="completarActividad"
                         class="text-xs lg:text-sm flex items-center bg-gray-200 px-3 py-1 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900">
                     {{ __('Completar') }}
                 </button>
             @else
-                <div class="flex flex-row lg:flex-col items-center">
+                <div class="flex flex-row lg:flex-col items-end">
                     <button wire:click="completarActividad"
                             class="text-xs lg:text-sm flex items-center bg-green-200 px-3 py-1 text-green-800 rounded-md hover:bg-green-300 hover:text-green-900">
                         <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,8 +35,8 @@
                         {{ __('Completado') }}
                     </button>
                     <small class="text-gray-500 ml-2 lg:ml-0 text-xs lg:text-sm">
-                        @if($actividad->estadoActual)
-                            Completado {{ $actividad->estadoActual->fecha_operacion->diffForHumans() }}
+                        @if($actividad->estadoActual($ciclo->id)->count())
+                            Completado {{ $actividad->estadoActual($ciclo->id)[0]->fecha_operacion->diffForHumans() }}
                         @endif
                     </small>
                 </div>
@@ -159,18 +159,18 @@
                         @enderror
                     </div>
 
-                    @if($salida->documentos->count())
+                    @if($salida->documentosCicloActual($ciclo->id)->count())
                         <div class="flex justify-between items-center">
                             <h2 class="ml-2 mt-3 text-gray-500 text-lg">
                                 Documentos que has subido para esta actividad:
                             </h2>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $salida->documentos->count() }}
+                                {{ $salida->documentosCicloActual($ciclo->id)->count() }}
                             </span>
                         </div>
 
                         <div class="ml-2 table w-full mb-6 text-gray-700">
-                            @foreach($salida->documentos as $sldcmt)
+                            @foreach($salida->documentosCicloActual($ciclo->id) as $sldcmt)
                                 <div class="table-row-group mb-1 space-y-2">
                                     <div class="table-row">
                                         <div class="table-cell align-middle">
@@ -189,7 +189,7 @@
                                                 {{ $sldcmt->fecha_operacion->diffForHumans() }}
                                             </small>
                                         </div>
-                                        <div class="table-cell text-gray-500">
+                                        <div class="table-cell text-gray-500 px-4">
                                             <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
                                                target="_blank"
                                                class="hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded flex justify-center items-center">
@@ -281,18 +281,18 @@
                 </x-slot>
                 <x-slot name="content">
 
-                    @if($entrada_proveedor->documentos->count())
+                    @if($entrada_proveedor->documentosCicloActual($ciclo->id)->count())
                         <div class="flex justify-between items-center">
                             <h2 class="ml-2 my-3 text-gray-500 text-lg">
                                 Documentos enviados por el proveedor:
                             </h2>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $entrada_proveedor->documentos->count() }}
+                                {{ $entrada_proveedor->documentosCicloActual($ciclo->id)->count() }}
                             </span>
                         </div>
 
                         <div class="ml-2 table w-full mb-6 text-gray-700">
-                            @foreach($entrada_proveedor->documentos as $entcmt)
+                            @foreach($entrada_proveedor->documentosCicloActual($ciclo->id) as $entcmt)
                                 <div class="table-row-group mb-1 space-y-2">
                                     <div class="table-row">
                                         <div class="table-cell align-middle">
@@ -301,7 +301,7 @@
                                         <div class="table-cell align-middle text-right">
                                             {{ $entcmt->fecha_operacion->diffForHumans() }}
                                         </div>
-                                        <div class="table-cell text-gray-500">
+                                        <div class="table-cell text-gray-500 px-4">
                                             <a href="{{ route('documentos', $entcmt->documento->enlace_interno) }}"
                                                target="_blank"
                                                class="hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded flex justify-center items-center">

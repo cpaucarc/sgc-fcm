@@ -37,7 +37,7 @@ class MostrarActividad extends Component
     {
         $this->actividad = $actividad;
         $this->ciclo = $ciclo;
-        if ($this->actividad->estadoActual) {
+        if ($this->actividad->estadoActual($this->ciclo->id)->count()) {
             $this->estado = true;
         }
         $this->randomID = rand();
