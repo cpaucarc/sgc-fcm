@@ -10,5 +10,9 @@ class ActividadCompleto extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['fecha_operacion', 'actividad_responsable_id', 'ciclo_id', 'documento_id'];
+    public $fillable = ['fecha_operacion', 'actividad_id', 'ciclo_id'];
+
+    protected $dates = [
+        'fecha_operacion',
+    ];
 }

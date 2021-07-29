@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Ciclo extends Model
 {
     use HasFactory;
+
     public $fillable = ['nombre', 'fecha_inicio', 'fecha_fin'];
     public $timestamps = false;
+
+    protected $dates = [
+        'fecha_inicio',
+        'fecha_fin',
+    ];
 }

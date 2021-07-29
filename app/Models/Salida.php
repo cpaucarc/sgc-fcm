@@ -21,4 +21,9 @@ class Salida extends Model
     {
         return $this->hasMany(SalidaCompleto::class);
     }
+
+    public function actividad()
+    {
+        return $this->belongsTo(Actividad::class);
+    }
 }

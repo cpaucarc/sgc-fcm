@@ -16,13 +16,11 @@ class CreateActividadCompletosTable extends Migration
         Schema::create('actividad_completos', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_operacion')->useCurrent();
-            $table->unsignedBigInteger('actividad_responsable_id');
+            $table->unsignedBigInteger('actividad_id');
             $table->unsignedBigInteger('ciclo_id');
-            $table->unsignedBigInteger('documento_id')->nullable();
 
-            $table->foreign('actividad_responsable_id')->references('id')->on('actividad_responsables');
+            $table->foreign('actividad_id')->references('id')->on('actividades');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');
-            $table->foreign('documento_id')->references('id')->on('documentos');
         });
     }
 

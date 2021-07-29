@@ -29,11 +29,11 @@
             <x-simple-progress percent="{{ $porcentaje }}">
                 Actividades completadas:
                 <span class="font-bold">{{ $completos }}</span> de
-                <span class="font-bold">{{ $completos + $incompletos }}</span>
+                <span class="font-bold">{{ $total }}</span>
             </x-simple-progress>
         </div>
 
-        @if ($porcentaje < 100)
+        @if ($completos !== $total)
             <x-table>
                 <x-slot name="head">
                     <tr>

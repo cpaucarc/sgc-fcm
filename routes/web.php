@@ -33,7 +33,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('storage/{file}', function ($file) {
     return Storage::response($file);
 })->name('documentos');
-
-Route::get('storage/{file}', function ($file) {
-    return Storage::response($file);
-})->name('documentos');

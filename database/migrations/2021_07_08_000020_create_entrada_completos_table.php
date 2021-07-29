@@ -18,7 +18,7 @@ class CreateEntradaCompletosTable extends Migration
             $table->dateTime('fecha_operacion')->useCurrent();
             $table->unsignedBigInteger('entrada_proveedor_id');
             $table->unsignedBigInteger('ciclo_id');
-            $table->unsignedBigInteger('documento_id')->nullable();
+            $table->unsignedBigInteger('documento_id');
 
             $table->foreign('entrada_proveedor_id')->references('id')->on('entrada_proveedores');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');

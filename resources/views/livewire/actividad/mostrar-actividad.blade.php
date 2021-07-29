@@ -1,40 +1,50 @@
 @if ($actividad)
-    <div>
+    <div class="relative">
         {{-- Titulo y boton con el estado de la actividad --}}
-        <div class="flex justify-between items-start mb-6">
-            <div>
-                <h1 class="text-3xl lg:text-2xl text-red-600 font-bold flex-1 truncate flex items-center">
+        <div class="flex flex-col lg:flex-row justify-between items-start mb-6 px-4 lg:px-0">
+            <div class="flex-1 mb-3">
+                <h1 class="text-sm lg:text-2xl text-red-600 font-bold flex-1 truncate flex items-center">
                     {{ $actividad->nombre }}
-                    <small class="ml-3 px-2 text-sm bg-red-50 font-light text-red-700 rounded">
+                    <small class="ml-3 hidden lg:block px-2 text-sm bg-red-50 font-light text-red-700 rounded">
                         Etapa del Ciclo de Deming:
                         <strong class="font-bold">
                             {{ $actividad->tipoActividad->nombre }}
                         </strong>
                     </small>
                 </h1>
-                <h2 class="text-gray-600">
+                <h2 class="text-xs lg:text-sm text-gray-600">
                     Proceso: {{ $actividad->proceso->nombre }}
                 </h2>
-                <h3 class="text-gray-500">
+                <h3 class="text-xs lg:text-sm text-gray-500">
                     Correspondiente al ciclo académico {{ $ciclo->nombre }}
                 </h3>
             </div>
 
             @if($estado == 0)
                 <button wire:click="completarActividad"
-                        class="flex items-center bg-gray-200 px-3 py-1 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900">
+                        class="text-xs lg:text-sm flex items-center bg-gray-200 px-3 py-1 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900">
                     {{ __('Completar') }}
                 </button>
             @else
-                <button wire:click="completarActividad"
-                        class="flex items-center bg-green-200 px-3 py-1 text-green-800 rounded-md hover:bg-green-300 hover:text-green-900">
-                    <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                    </svg>
-                    {{ __('Completado') }}
-                </button>
+                <div class="flex flex-row lg:flex-col items-center">
+                    <button wire:click="completarActividad"
+                            class="text-xs lg:text-sm flex items-center bg-green-200 px-3 py-1 text-green-800 rounded-md hover:bg-green-300 hover:text-green-900">
+                        <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        {{ __('Completado') }}
+                    </button>
+                    <small class="text-gray-500 ml-2 lg:ml-0 text-xs lg:text-sm">
+                        @if($actividad->estadoActual)
+                            Completado {{ $actividad->estadoActual->fecha_operacion->diffForHumans() }}
+                        @endif
+                    </small>
+                </div>
             @endif
         </div>
+
+        {{-- Alerta que se mostrara cuando se agrege correctamente un archivo en Salidas --}}
+        <x-alert/>
 
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-3">
@@ -140,7 +150,8 @@
 
                     <div class="my-6">
                         <x-jet-label for="archivo">Archivo</x-jet-label>
-                        <input type="file" wire:model="archivo" id="archivo" class="input-form w-full">
+                        <input type="file" wire:model="archivo" id="{{ $randomID }}"
+                               class="input-form w-full">
                         @error('archivo')
                         <div class="text-red-500">
                             {{ $message }}
@@ -163,10 +174,20 @@
                                 <div class="table-row-group mb-1 space-y-2">
                                     <div class="table-row">
                                         <div class="table-cell align-middle">
-                                            {{ $sldcmt->documento->nombre }}
+                                            <small>
+                                                @if(strlen($sldcmt->documento->nombre) > 50)
+                                                    {{ substr($sldcmt->documento->nombre, 0, 45) }}
+                                                    ...{{ substr($sldcmt->documento->nombre, -15) }}
+                                                @else
+                                                    {{ $sldcmt->documento->nombre }}
+                                                @endif
+                                            </small>
+
                                         </div>
                                         <div class="table-cell align-middle text-right">
-                                            {{ $sldcmt->fecha_operacion->diffForHumans() }}
+                                            <small>
+                                                {{ $sldcmt->fecha_operacion->diffForHumans() }}
+                                            </small>
                                         </div>
                                         <div class="table-cell text-gray-500">
                                             <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
@@ -178,7 +199,9 @@
                                                           stroke-width="1.5"
                                                           d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                                 </svg>
-                                                Ver
+                                                <small>
+                                                    Ver
+                                                </small>
                                             </a>
                                         </div>
                                         <div class="table-cell text-gray-500">
@@ -190,7 +213,9 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                           stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
                                                 </svg>
-                                                Eliminar
+                                                <small>
+                                                    Eliminar
+                                                </small>
                                             </button>
                                         </div>
                                     </div>
@@ -215,15 +240,27 @@
 
                 </x-slot>
                 <x-slot name="footer">
+
                     <x-jet-secondary-button wire:click="$set('open', false)">
                         Cerrar
                     </x-jet-secondary-button>
 
                     <x-jet-button
                         wire:click="enviarDocumentoSalida"
+                        wire:target="enviarDocumentoSalida, archivo"
                         wire:loading.class="bg-gray-800"
                         wire:loading.attr="disabled">
-                        Guardar
+                        <svg wire:loading wire:target="enviarDocumentoSalida"
+                             class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>
+                            {{ __('Guardar') }}
+                        </span>
                     </x-jet-button>
                 </x-slot>
             </x-jet-dialog-modal>
