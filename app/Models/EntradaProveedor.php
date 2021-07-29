@@ -23,9 +23,21 @@ class EntradaProveedor extends Model
         return $this->belongsTo(Entrada::class);
     }
 
+    public function actividad()
+    {
+        return $this->belongsTo(Actividad::class);
+    }
+
     public function documentos()
     {
         return $this->hasMany(EntradaCompleto::class);
+    }
+
+    public function documentosCicloActual($cicloID)
+    {
+        return $this->hasMany(EntradaCompleto::class)
+            ->where('ciclo_id', '=', $cicloID)
+            ->get();
     }
 
 }
