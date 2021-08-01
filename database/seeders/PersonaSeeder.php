@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Persona;
 use Illuminate\Database\Seeder;
 
 class PersonaSeeder extends Seeder
@@ -13,14 +14,16 @@ class PersonaSeeder extends Seeder
      */
     public function run()
     {
-        $personas = [
-            [
-                'dni' => '12345678',
-                'nombres' => 'Frank César',
-                'apellidos' => 'Paucar Colonia',
-            ],
-        ];
+//        $personas = [
+//            [
+//                'dni' => '12345678',
+//                'nombres' => 'Frank César',
+//                'apellidos' => 'Paucar Colonia',
+//            ],
+//        ];
+//
+//        \App\Models\Persona::insert($personas);
 
-        \App\Models\Persona::insert($personas);
+        Persona::factory(101)->create();
     }
 }

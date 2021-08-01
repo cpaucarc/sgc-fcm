@@ -58,7 +58,10 @@ class MostrarActividad extends Component
     public function completarActividad()
     {
         if ($this->estado) {
-            $this->actividad->estadoActual->delete();
+            $act_com = ActividadCompleto::where('actividad_id', '=', $this->actividad->id)
+                ->where('ciclo_id', '=', $this->ciclo->id)
+                ->first();
+            $act_com->delete();
             $this->estado = false;
         } else {
             ActividadCompleto::create([

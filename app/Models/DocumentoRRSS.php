@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Persona extends Model
+class DocumentoRRSS extends Model
 {
     use HasFactory;
 
+    public $table = "documento_rrss";
     public $timestamps = false;
-    public $fillable = ['dni', 'apellidos', 'nombres'];
+    public $fillable = ['responsabilidad_social_id', 'documento_id'];
 }

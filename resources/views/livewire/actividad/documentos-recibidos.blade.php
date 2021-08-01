@@ -25,10 +25,7 @@
 
 
     <div class="mt-8 mb-4 overflow-hidden">
-        {{--            {{ $salida_completo }}--}}
-
         <div class="mb-6">
-
             @if($salidas->count())
                 <x-table>
                     <x-slot name="head">

@@ -30,8 +30,16 @@
 
 <div class="min-h-screen">
     @livewire('navigation-menu')
+    <!-- Page Heading -->
+    @if (isset($header))
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+@endif
 
-    <!-- Page Content -->
+<!-- Page Content -->
     <main class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         {{ $slot }}
     </main>

@@ -1,36 +1,49 @@
 @if ($actividad)
     <div class="relative">
-        {{-- Titulo y boton con el estado de la actividad --}}
-        <div class="flex flex-col lg:flex-row justify-between items-start mb-6 px-4 lg:px-0">
-            <div class="flex-1 mb-3">
-                <h1 class="text-sm lg:text-2xl text-red-600 font-bold flex-1 truncate flex items-center">
-                    {{ $actividad->nombre }}
-                    <small class="ml-3 hidden lg:block px-2 text-sm bg-red-50 font-light text-red-700 rounded">
-                        Etapa del Ciclo de Deming:
-                        <strong class="font-bold">
-                            {{ $actividad->tipoActividad->nombre }}
-                        </strong>
-                    </small>
-                </h1>
-                <h2 class="text-xs lg:text-sm text-gray-600">
-                    Proceso: {{ $actividad->proceso->nombre }}
-                </h2>
-                <h3 class="text-xs lg:text-sm text-gray-500">
-                    Correspondiente al ciclo académico {{ $ciclo->nombre }}
-                </h3>
-            </div>
 
+        <x-slot name="header">
+            <div class="flex flex-col lg:flex-row justify-between items-start px-4 lg:px-0">
+                <div class="flex-1 mb-3">
+                    <h1 class="lg:text-2xl text-gray-600 font-bold flex-1 truncate flex items-center">
+                        {{ $actividad->nombre }}
+                        <span class="hidden lg:block text-gray-400 mx-2 lg:text-xl">
+                            [{{ $ciclo->nombre }}]
+                        </span>
+                    </h1>
+                </div>
+            </div>
+            <div class="flex gap-x-4 mt-0">
+                <h2 class="text-xs md:text-sm text-gray-700 bg-gray-100 px-4 py-1">
+                    Proceso:
+                    <strong>
+                        {{ $actividad->proceso->nombre }}
+                    </strong>
+                </h2>
+                <h2 class="text-xs md:text-sm text-gray-700 bg-gray-100 px-4 py-1">
+                    Ciclo de Deming:
+                    <strong class="font-bold">
+                        {{ $actividad->tipoActividad->nombre }}
+                    </strong>
+                </h2>
+            </div>
+        </x-slot>
+
+        {{-- Titulo y boton con el estado de la actividad --}}
+        <div class="absolute right-0 -top-24 lg:-top-28">
             @if($estado === false)
                 <button wire:click="completarActividad"
                         class="text-xs lg:text-sm flex items-center bg-gray-200 px-3 py-1 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900">
                     {{ __('Completar') }}
                 </button>
             @else
-                <div class="flex flex-row lg:flex-col items-end">
+                <div class="flex flex-col items-end">
                     <button wire:click="completarActividad"
-                            class="text-xs lg:text-sm flex items-center bg-green-200 px-3 py-1 text-green-800 rounded-md hover:bg-green-300 hover:text-green-900">
-                        <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            class="text-xs lg:text-sm flex items-center bg-green-200 px-3 py-1 text-green-700 rounded-md hover:bg-green-300 hover:text-green-900">
+                        <svg class="h-5 w-5 mr-1" fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 13l4 4L19 7"/>
                         </svg>
                         {{ __('Completado') }}
                     </button>

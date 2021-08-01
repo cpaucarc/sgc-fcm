@@ -9,6 +9,5 @@ class Documento extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
     public $fillable = ['nombre', 'enlace_interno', 'enlace_externo'];
 }
