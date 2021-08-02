@@ -19,6 +19,8 @@ class CreateEmpresasTable extends Migration
             $table->string('ruc', 11)->unique();
             $table->string('telefono', 9)->unique()->nullable();
             $table->string('correo')->unique()->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('ubicacion')->nullable();
         });
     }
 

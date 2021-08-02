@@ -24,6 +24,6 @@ class PersonaSeeder extends Seeder
 //
 //        \App\Models\Persona::insert($personas);
 
-        Persona::factory(101)->create();
+        Persona::factory(201)->create();
     }
 }

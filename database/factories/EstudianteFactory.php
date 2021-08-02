@@ -23,7 +23,7 @@ class EstudianteFactory extends Factory
     {
         return [
             'codigo' => $this->faker->numerify('###.####.###'),
-            'persona_id' => $this->faker->unique(true)->numberBetween(51, 101),
+            'persona_id' => $this->faker->unique(true)->numberBetween(102, 201),
             'escuela_id' => $this->faker->numberBetween(1, 2),
         ];
     }

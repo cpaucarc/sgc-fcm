@@ -14,6 +14,6 @@ class EmpresaSeeder extends Seeder
      */
     public function run()
     {
-        Empresa::factory(50)->create();
+        Empresa::factory(75)->create();
     }
 }

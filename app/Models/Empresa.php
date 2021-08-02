@@ -10,5 +10,5 @@ class Empresa extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['nombre', 'ruc', 'telefono', 'correo'];
+    public $fillable = ['nombre', 'ruc', 'telefono', 'correo', 'direccion', 'ubicacion'];
 }

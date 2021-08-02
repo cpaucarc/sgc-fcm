@@ -22,9 +22,9 @@ class PersonaFactory extends Factory
     public function definition()
     {
         return [
-            'dni' => $this->faker->numerify('########'),
-            'apellidos' => $this->faker->lastName . ' '.$this->faker->lastName,
-            'nombres'=> $this->faker->firstName . ' '. $this->faker->firstName,
+            'dni' => $this->faker->dni,
+            'apellidos' => $this->faker->lastName . ' ' . $this->faker->lastName,
+            'nombres' => $this->faker->firstName . ' ' . $this->faker->firstName,
         ];
     }
 }
