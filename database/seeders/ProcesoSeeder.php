@@ -42,6 +42,46 @@ class ProcesoSeeder extends Seeder
                 'nombre' => 'Biblioteca',
                 'facultad_id' => 1
             ],
+            [
+                'nombre' => 'Biblioteca',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Investigacion',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Responsabilidad Social',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Plan de Estudios',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Gestion de la Calidad',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Grado Bachiller',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Bolsa de Trabajo',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Bienestar Universitario',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Convenios',
+                'facultad_id' => 1
+            ],
+            [
+                'nombre' => 'Convalidaciones',
+                'facultad_id' => 1
+            ],
         ];
 
         \App\Models\Proceso::insert($procesos);
