@@ -9,7 +9,7 @@
     {{ $slot }}
 
     @if(isset($footer))
-        <div class="mt-4 bg-gray-100">
+        <div class="mt-4 bg-white">
             {{ $footer }}
         </div>
     @endif
