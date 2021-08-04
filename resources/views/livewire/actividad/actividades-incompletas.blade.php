@@ -7,7 +7,7 @@
                 </h1>
                 <div>
                     <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                            class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
+                        class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
                         @foreach ($ciclos as $cl)
                             <option value="{{ $cl->id }}">
                                 {{ $cl->nombre }}
@@ -79,11 +79,11 @@
                             </td>
                             <td class="pr-4 pl-2 py-2 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('actividad.mis-actividades', [$actividad->id, $ciclo_seleccionado]) }}"
-                                   class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
+                                    class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
                                     <svg class="h-5 w-5 mr-1 block lg:hidden" fill="none" viewBox="0 0 24 24"
-                                         stroke="currentColor">
+                                        stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                     </svg>
                                     Revisar
                                 </a>
@@ -103,5 +103,13 @@
             </div>
         @endif
     </div>
-
+    @slot('footer')
+        <div>
+            @if ($completos !== $total)
+                <p class="text-sm text-gray-400">
+                    * Par culminar las actividades del semestre, tiene que revisar cada uno de ellos y complentarlas.
+                </p>
+            @endif
+        </div>
+    @endslot
 </x-card>
