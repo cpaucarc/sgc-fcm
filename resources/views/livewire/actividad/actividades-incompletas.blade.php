@@ -103,5 +103,13 @@
             </div>
         @endif
     </div>
-
+    @slot('footer')
+        <div>
+            @if ($completos !== $total)
+                <p class="text-sm text-gray-400">
+                    * Par culminar las actividades del semestre, tiene que revisar cada uno de ellos y complentarlas.
+                </p>
+            @endif
+        </div>
+    @endslot
 </x-card>

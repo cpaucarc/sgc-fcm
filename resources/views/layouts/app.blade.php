@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +26,8 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
 </head>
-<body class="font-sans antialiased bg-gray-100">
+
+<body class="font-sans antialiased bg-gray-50">
 <x-jet-banner/>
 
 <div class="min-h-screen">
@@ -40,13 +42,18 @@
 @endif
 
 <!-- Page Content -->
-    <main class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <main class="py-8 max-w-7xl mx-auto px-2 sm:px-4 min-h-screen">
         {{ $slot }}
     </main>
+
+    <footer class="border-t border-gray-200 text-center py-2 text-gray-500 text-base bg-gray-100">
+        Copyright © Sistema Gestión de Calidad - Facultad de Ciencias Médicas
+    </footer>
 </div>
 
 @stack('modals')
 
 @livewireScripts
 </body>
+
 </html>
