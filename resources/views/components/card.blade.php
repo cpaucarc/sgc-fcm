@@ -1,15 +1,17 @@
-<div class="bg-white border border-gray-200 pt-6 px-8 pb-2 rounded-md shadow-sm">
+<div class="bg-white border border-gray-200 rounded-md shadow-sm">
 
     @if(isset($header))
-        <div class="mb-4">
+        <div class="px-6 py-4 border-b border-gray-200">
             {{ $header }}
         </div>
     @endif
 
-    {{ $slot }}
+    <div class="px-6 py-4">
+        {{ $slot }}
+    </div>
 
     @if(isset($footer))
-        <div class="mt-4 bg-gray-100">
+        <div class="px-6 py-4 border-t border-gray-200 bg-gray-100">
             {{ $footer }}
         </div>
     @endif

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\ResponsabilidadSocial;
 
 class ResponsabilidadSocialController extends Controller
 {
@@ -11,8 +11,36 @@ class ResponsabilidadSocialController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($id = null)
     {
-        return view('rrss.index');
+        if (is_null($id)) {
+            return view('rrss.index');
+        }
+        $responsabilidad_social = ResponsabilidadSocial::find($id);
+        if ($responsabilidad_social) {
+            return view('rrss.ver', compact('responsabilidad_social'));
+        } else {
+            return view('rrss.index');
+        }
+    }
+
+    public function registro()
+    {
+        return view('rrss.registro');
+    }
+
+    public function editar($id)
+    {
+        $responsabilidad_social = ResponsabilidadSocial::find($id);
+        if ($responsabilidad_social) {
+            return view('rrss.editar', compact('responsabilidad_social'));
+        } else {
+            return view('rrss.index');
+        }
+    }
+
+    public function empresas()
+    {
+        return view('rrss.empresas');
     }
 }

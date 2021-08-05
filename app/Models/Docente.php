@@ -11,4 +11,9 @@ class Docente extends Model
 
     public $timestamps = false;
     public $fillable = ['codigo', 'persona_id', 'escuela_id'];
+
+    public function persona()
+    {
+        return $this->belongsTo(Persona::class);
+    }
 }

@@ -63,13 +63,23 @@
             <div class="col-span-6 lg:col-span-3">
                 {{-- Entradas --}}
                 <x-card>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h1 class="text-xl font-bold text-gray-600">Entradas</h1>
+                    <x-slot name="header">
+                        <div class="flex justify-between items-center">
+                            <div class="pr-4 flex-1">
+                                <h1 class="text-xl font-bold text-gray-800">
+                                    Entradas
+                                </h1>
+                                <p class="text-sm text-gray-400">
+                                    Son documentos e información necesaria para completar la presente actividad
+                                </p>
+                            </div>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                            {{ $actividad->entradas->count() }}
-                        </span>
+                                {{ $actividad->entradas->count() }}
+                            </span>
                         </div>
+                    </x-slot>
+
+                    <div class="space-y-2">
                         @if($actividad->entradas->count())
                             @foreach( $actividad->entradas as $ep)
                                 <div class="ml-2 py-2 flex items-start">
@@ -110,13 +120,22 @@
             <div class="col-span-6 lg:col-span-3">
                 {{-- Salidas --}}
                 <x-card>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h1 class="text-xl font-bold text-gray-600">Salidas</h1>
+                    <x-slot name="header">
+                        <div class="flex justify-between items-center">
+                            <div class="pr-4 flex-1">
+                                <h1 class="text-xl font-bold text-gray-800">
+                                    Salidas
+                                </h1>
+                                <p class="text-sm text-gray-400">
+                                    Son documentos que usted enviará para completar la presente actividad
+                                </p>
+                            </div>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
                                 {{ $actividad->salidas->count() }}
                             </span>
                         </div>
+                    </x-slot>
+                    <div class="space-y-2">
 
                         @if($actividad->salidas->count())
                             @foreach( $actividad->salidas as $sld)
@@ -155,16 +174,23 @@
         @if($salida)
             <x-jet-dialog-modal wire:model="open">
                 <x-slot name="title">
-                    <h1 class="text-gray-700 font-bold text-sm lg:text-xl">
+                    <h1 class="font-bold">
                         {{ $salida->nombre }}
                     </h1>
+                    <button wire:click="$set('open', false)" class="text-gray-400 hover:text-gray-500">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </x-slot>
+
                 <x-slot name="content">
 
                     <div class="my-6">
                         <x-jet-label for="archivo">Archivo</x-jet-label>
                         <input type="file" wire:model="archivo" id="{{ $randomID }}"
-                               class="input-form w-full">
+                               class="input-form w-full py-2">
                         @error('archivo')
                         <div class="text-red-500">
                             {{ $message }}
@@ -281,19 +307,28 @@
 
         @if($entrada_proveedor)
             <x-jet-dialog-modal wire:model="openDoc">
-                <x-slot name="title">
-                    <h1 class="text-gray-700 font-bold text-sm lg:text-xl">
-                        {{ $entrada_proveedor->entrada->nombre }}
-                    </h1>
-                    <h2 class="mb-3 text-gray-400">
-                        Proveedor:
-                        <strong>
-                            {{ $entrada_proveedor->proveedor->entidad->nombre }}
-                        </strong>
-                    </h2>
-                </x-slot>
-                <x-slot name="content">
 
+                <x-slot name="title">
+                    <div>
+                        <h1 class="font-bold">
+                            {{ $entrada_proveedor->entrada->nombre }}
+                        </h1>
+                        <p class="text-sm text-gray-500">
+                            Proveedor:
+                            <strong>
+                                {{ $entrada_proveedor->proveedor->entidad->nombre }}
+                            </strong>
+                        </p>
+                    </div>
+                    <button wire:click="$set('openDoc', false)" class="text-gray-400 hover:text-gray-500">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
                     @if($entrada_proveedor->documentosCicloActual($ciclo->id)->count())
                         <div class="flex justify-between items-center">
                             <h2 class="ml-2 my-3 text-gray-500 text-lg">

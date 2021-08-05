@@ -21,12 +21,14 @@ class CreateResponsabilidadSocialTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->unsignedBigInteger('ciclo_id');
+            $table->unsignedBigInteger('escuela_id');
             $table->unsignedBigInteger('empresa_id')->nullable();
             $table->unsignedBigInteger('docente_responsable_id')->nullable();
             $table->unsignedBigInteger('estudiante_responsable_id')->nullable();
             $table->timestamps();
 
             $table->foreign('ciclo_id')->references('id')->on('ciclos');
+            $table->foreign('escuela_id')->references('id')->on('escuelas');
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('docente_responsable_id')->references('id')->on('docentes');
             $table->foreign('estudiante_responsable_id')->references('id')->on('estudiantes');

@@ -1,26 +1,26 @@
 <x-card>
-    @slot('header')
-        <div>
-            <div class="flex items-center justify-between mb-2">
+
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <div class="pr-4 flex-1">
                 <h1 class="text-xl font-bold text-gray-800">
                     Mis actividades
                 </h1>
-                <div>
-                    <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                            class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                        @foreach ($ciclos as $cl)
-                            <option value="{{ $cl->id }}">
-                                {{ $cl->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                <p class="text-sm text-gray-400">
+                    En esta sección usted podrá ver la lista de actividades que le corresponde realizar durante el
+                    semestre.
+                </p>
             </div>
-            <p class="text-sm text-gray-400">
-                En esta sección usted podrá ver la lista de actividades que le corresponde realizar durante el semestre.
-            </p>
+            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
+                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
+                @foreach ($ciclos as $cl)
+                    <option value="{{ $cl->id }}">
+                        {{ $cl->nombre }}
+                    </option>
+                @endforeach
+            </select>
         </div>
-    @endslot
+    </x-slot>
 
 
     <div class="mt-8 mb-4 overflow-hidden">

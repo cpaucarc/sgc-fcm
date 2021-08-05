@@ -1,28 +1,27 @@
 <x-card>
-    @slot('header')
-        <div>
-            <div class="flex items-center justify-between mb-2">
+
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <div class="pr-4 flex-1">
                 <h1 class="text-xl font-bold text-gray-800">
                     Documentos recibidos
                 </h1>
-                <div>
-                    <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                            class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                        @foreach ($ciclos as $cl)
-                            <option value="{{ $cl->id }}">
-                                {{ $cl->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                <p class="text-sm text-gray-400">
+                    En esta sección usted podrá encontrar los documentos que los responsables de cada actividad envió y
+                    en
+                    los cuales usted figura como cliente.
+                </p>
             </div>
-            <p class="text-sm text-gray-400">
-                En esta sección usted podrá encontrar los documentos que los responsables de cada actividad envió y en
-                los cuales usted figura como cliente.
-            </p>
+            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
+                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
+                @foreach ($ciclos as $cl)
+                    <option value="{{ $cl->id }}">
+                        {{ $cl->nombre }}
+                    </option>
+                @endforeach
+            </select>
         </div>
-    @endslot
-
+    </x-slot>
 
     <div class="mt-8 mb-4 overflow-hidden">
         <div class="mb-6">
@@ -93,9 +92,15 @@
     @if($sld)
         <x-jet-dialog-modal wire:model="abrir">
             <x-slot name="title">
-                <h1 class="text-gray-700 font-bold text-sm lg:text-xl">
+                <h1 class="font-bold">
                     {{ $sld->nombre }}
                 </h1>
+                <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                              d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </x-slot>
             <x-slot name="content">
 

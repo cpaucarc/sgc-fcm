@@ -1,27 +1,25 @@
 <x-card>
-    @slot('header')
-        <div>
-            <div class="flex items-center justify-between mb-2">
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <div class="pr-4 flex-1">
                 <h1 class="text-xl font-bold text-gray-800">
                     Información a proveer
                 </h1>
-                <div>
-                    <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                            class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                        @foreach ($ciclos as $cl)
-                            <option value="{{ $cl->id }}">
-                                {{ $cl->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                <p class="text-sm text-gray-400">
+                    En esta sección usted podrá ver la lista de documentos con las que debe proveer a los diferentes
+                    actividades.
+                </p>
             </div>
-            <p class="text-sm text-gray-400">
-                En esta sección usted podrá ver la lista de documentos con las que debe proveer a los diferentes
-                actividades.
-            </p>
+            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
+                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
+                @foreach ($ciclos as $cl)
+                    <option value="{{ $cl->id }}">
+                        {{ $cl->nombre }}
+                    </option>
+                @endforeach
+            </select>
         </div>
-    @endslot
+    </x-slot>
 
     {{-- Alerta que se mostrara cuando se agrege correctamente un archivo en Salidas --}}
     <x-alert/>
@@ -109,7 +107,7 @@
                     <div class="my-6">
                         <x-jet-label for="archivo">Archivo</x-jet-label>
                         <input type="file" wire:model="archivo" id="{{ $randomID }}"
-                               class="input-form w-full">
+                               class="input-form w-full py-2">
                         @error('archivo')
                         <div class="text-red-500">
                             {{ $message }}

@@ -11,4 +11,9 @@ class Escuela extends Model
 
     public $timestamps = false;
     public $fillable = ['nombre', 'abrev', 'facultad_id'];
+
+    public function facultad()
+    {
+        return $this->belongsTo(Facultad::class);
+    }
 }

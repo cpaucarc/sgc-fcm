@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DocenteSeeder::class);
         $this->call(EstudianteSeeder::class);
         $this->call(IndicadorSeeder::class);
+        \App\Models\ResponsabilidadSocial::factory(50)->create();
 
     }
 }

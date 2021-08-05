@@ -12,4 +12,9 @@ class DocumentoRRSS extends Model
     public $table = "documento_rrss";
     public $timestamps = false;
     public $fillable = ['responsabilidad_social_id', 'documento_id'];
+
+    public function documento()
+    {
+        return $this->belongsTo(Documento::class);
+    }
 }

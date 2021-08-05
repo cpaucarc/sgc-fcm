@@ -27,7 +27,7 @@ class EmpresaFactory extends Factory
             'telefono' => $this->faker->numberBetween(900000000, 999999999),
             'correo' => $this->faker->companyEmail,
             'direccion' => $this->faker->streetAddress,
-            'ubicacion' => $this->faker->city . ' - ' . $this->faker->country
+            'ubicacion' => $this->faker->city . ' - ' . $this->faker->state,
         ];
     }
 }

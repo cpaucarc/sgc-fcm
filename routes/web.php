@@ -18,8 +18,23 @@ Route::get('actividades', [ActividadController::class, 'index'])
 Route::get('mis-actividades/{id}/{ciclo}', [ActividadController::class, 'show'])
     ->name('actividad.mis-actividades');
 
-Route::get('responsabilidad-social', [ResponsabilidadSocialController::class, 'index'])
-    ->name('rrss.index');
+Route::prefix('responsabilidad-social')->group(function () {
+    Route::get('crear', [ResponsabilidadSocialController::class, 'registro'])
+        ->name('rrss.registro');
+
+    Route::get('editar/{id}', [ResponsabilidadSocialController::class, 'editar'])
+        ->name('rrss.editar');
+
+    Route::get('empresas', [ResponsabilidadSocialController::class, 'empresas'])
+        ->name('rrss.empresas');
+
+    Route::get('side', function () {
+        return view('rrss.my-side');
+    })->name('rrss.side');
+
+    Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
+        ->name('rrss.index');
+});
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

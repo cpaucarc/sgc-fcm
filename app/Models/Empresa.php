@@ -11,4 +11,11 @@ class Empresa extends Model
 
     public $timestamps = false;
     public $fillable = ['nombre', 'ruc', 'telefono', 'correo', 'direccion', 'ubicacion'];
+
+
+    public function rrss()
+    {
+//        return $this->belongsToMany(ResponsabilidadSocial::class, Empresa::class, 'alliwhere');
+        return $this->hasMany(ResponsabilidadSocial::class);
+    }
 }
