@@ -18,4 +18,9 @@ class Rol extends Model
         return $this->hasOne(Entidad::class, 'id', 'entidad_id');
     }
 
+    public function oficina()
+    {
+        return $this->belongsTo(Oficina::class);
+    }
+
 }

@@ -1,10 +1,7 @@
 <x-app-layout>
-    <h1 class="text-3xl font-bold tracking-wide text-red-700 mb-4">
-        Crear nueva Responsabilidad Social
-    </h1>
 
-
-    @livewire('rrss.registrar-rrss')
-
+    <div class="w-full md:w-11/12 lg:w-10/12 mx-auto">
+        @livewire('rrss.proceso-registrar')
+    </div>
 
 </x-app-layout>

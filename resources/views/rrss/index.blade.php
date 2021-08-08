@@ -13,13 +13,15 @@
                         At, nam?
                     </p>
                 </div>
-                <x-jet-button href="{{ route('rrss.registro') }}" class="flex-shrink-0">
+
+                <a href="{{ route('rrss.registro') }}"
+                   class="flex-shrink-0 inline-flex items-center px-3 py-1 bg-blue-700 border border-transparent rounded font-semibold text-white tracking-wide hover:bg-blue-800 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
                     <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                               d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>
-                    {{__('Registrar nuevo')}}
-                </x-jet-button>
+                    {{__('Nuevo')}}
+                </a>
             </div>
         </x-slot>
 
