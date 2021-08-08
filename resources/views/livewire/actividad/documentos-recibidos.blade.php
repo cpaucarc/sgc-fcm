@@ -104,7 +104,6 @@
             </x-slot>
             <x-slot name="content">
 
-
                 @if($sld->documentosCicloActual($ciclo_seleccionado)->count())
                     <div class="flex justify-between items-center mb-2">
                         <h2 class="ml-2 mt-3 text-gray-500 text-lg">

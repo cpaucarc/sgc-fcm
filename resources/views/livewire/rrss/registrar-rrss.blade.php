@@ -1,10 +1,9 @@
 <div class="py-4">
-
     <div>
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">
+                    <h3 class="text-xl font-bold leading-6 text-gray-800">
                         Responsabilidad Social
                     </h3>
                     <p class="mt-1 text-sm text-gray-600">
@@ -12,331 +11,259 @@
                     </p>
                 </div>
             </div>
-            <div class="mt-5 md:mt-0 md:col-span-2">
+            <div class="mt-5 md:mt-0 md:col-span-2 space-y-4">
                 <x-card>
                     <div class="space-y-6">
-                        <div class="grid grid-cols-6 gap-x-4 flex-row items-center">
-                            <x-jet-label for="titulo" class="text-right">
-                                {{ __('Título') }}
-                            </x-jet-label>
-                            <div class="col-span-5">
-                                <input wire:model.defer="titulo" type="text" id="titulo"
-                                       class="input-form w-full col-span-2">
-                                @error('titulo')
-                                <x-jet-input-error for="titulo">{{ $message }}</x-jet-input-error>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-6 gap-x-4 flex-row items-center">
-                            <x-jet-label for="descripcion" class="text-right">
-                                {{ __('Descripción') }}
-                            </x-jet-label>
-                            <div class="col-span-5">
-                                <textarea wire:model.defer="descripcion" id="descripcion" cols="30" rows="2"
-                                          class="input-form w-full col-span-2"></textarea>
+                        <div>
+                            <x-jet-label for="titulo">{{ __('Título') }}</x-jet-label>
 
-                                @error('descripcion')
-                                <x-jet-input-error for="descripcion">{{ $message }}</x-jet-input-error>
+                            <input wire:model.defer="titulo" type="text" id="titulo"
+                                   class="input-form w-full col-span-2">
+                            @error('titulo')
+                            <x-jet-input-error for="titulo">{{ $message }}</x-jet-input-error>
+                            @enderror
+                        </div>
+                        <div>
+                            <x-jet-label for="descripcion">{{ __('Descripción') }}</x-jet-label>
+
+                            <textarea wire:model.defer="descripcion" id="descripcion" rows="2"
+                                      class="input-form w-full col-span-2"></textarea>
+                            @error('descripcion')
+                            <x-jet-input-error for="descripcion">{{ $message }}</x-jet-input-error>
+                            @enderror
+                        </div>
+                        <div>
+                            <x-jet-label for="lugar">{{ __('Lugar') }}</x-jet-label>
+
+                            <input wire:model.defer="lugar" type="text" id="lugar"
+                                   class="input-form w-full col-span-2">
+                            @error('lugar')
+                            <x-jet-input-error for="lugar">{{ $message }}</x-jet-input-error>
+                            @enderror
+                        </div>
+                        <div class="flex justify-between items-center gap-x-8">
+                            <div class="w-full">
+                                <x-jet-label for="fecha_inicio">{{ __('Fecha de Inicio') }}</x-jet-label>
+
+                                <input wire:model.defer="fecha_inicio" type="date" id="fecha_inicio"
+                                       class="input-form w-full col-span-2">
+                                @error('fecha_inicio')
+                                <x-jet-input-error for="fecha_inicio">{{ $message }}</x-jet-input-error>
+                                @enderror
+                            </div>
+                            <div class="w-full">
+                                <x-jet-label for="fecha_fin">{{ __('Fecha de Finalizacion') }}</x-jet-label>
+
+                                <input wire:model.defer="fecha_fin" type="date" id="fecha_fin"
+                                       class="input-form w-full col-span-2">
+                                @error('fecha_fin')
+                                <x-jet-input-error for="fecha_fin">{{ $message }}</x-jet-input-error>
                                 @enderror
                             </div>
                         </div>
-                        <div class="grid grid-cols-6 gap-x-4 flex-row items-center">
-                            <x-jet-label for="lugar" class="text-right">
-                                {{ __('Lugar') }}
-                            </x-jet-label>
-                            <div class="col-span-5">
-                                <input wire:model.defer="lugar" type="text" id="titulo"
-                                       class="input-form w-full col-span-2">
-                                @error('lugar')
-                                <x-jet-input-error for="lugar">{{ $message }}</x-jet-input-error>
-                                @enderror
-                            </div>
+                        <div>
+                            <x-jet-label for="escuela">{{ __('Programa de estudio') }}</x-jet-label>
+
+                            <select wire:model="escuela" id="escuela" class="input-form w-full col-span-2">
+                                <option value="0">Seleccione...</option>
+                                @foreach($escuelas as $escuela)
+                                    <option value="{{ $escuela->id }}">{{$escuela->nombre}}</option>
+                                @endforeach
+                            </select>
+                            @error('escuela')
+                            <x-jet-input-error for="escuela">{{ $message }}</x-jet-input-error>
+                            @enderror
                         </div>
                     </div>
-
-
-                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="col-span-3 sm:col-span-2">
-                                <label for="company-website" class="block text-sm font-medium text-gray-700">
-                                    Website
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                  <span
-                      class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                    http://
-                  </span>
-                                    <input type="text" name="company-website" id="company-website"
-                                           class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                           placeholder="www.example.com">
+                </x-card>
+                <x-card>
+                    <div>
+                        <x-jet-label>{{ __('Empresa') }}</x-jet-label>
+                        <div class="flex gap-x-2">
+                            <div class="flex items-center flex-1 relative">
+                                <div class="input-form py-2 bg-gray-50 w-full">
+                                    @if($empresa)
+                                        <span class="font-semibold tracking-wide">{{ $empresa->nombre }}</span>
+                                    @else
+                                        <span class="text-gray-400">{{__('No se ha escogido ninguno')}}</span>
+                                    @endif
                                 </div>
+
+                                @if($empresa)
+                                    <button wire:click="nullEmpresa"
+                                            class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                @endif
+
                             </div>
+                            <x-jet-secondary-button class="flex-shrink" wire:click="$set('abrirEmpresa', 'true')">
+                                <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                                </svg>
+                                {{ __('Ver empresas') }}
+                            </x-jet-secondary-button>
                         </div>
-                        <div>
-                            <label for="about" class="block text-sm font-medium text-gray-700">
-                                About
-                            </label>
-                            <div class="mt-1">
-                                    <textarea id="about" name="about" rows="3"
-                                              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                              placeholder="you@example.com"></textarea>
-                            </div>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Brief description for your profile. URLs are hyperlinked.
-                            </p>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">
-                                Photo
-                            </label>
-                            <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                  </svg>
-                </span>
-                                <button type="button"
-                                        class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Change
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">
-                                Cover photo
-                            </label>
-                            <div
-                                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                <div class="space-y-1 text-center">
-                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                         viewBox="0 0 48 48" aria-hidden="true">
-                                        <path
-                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="flex text-sm text-gray-600">
-                                        <label for="file-upload"
-                                               class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                                            <span>Upload a file</span>
-                                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                                        </label>
-                                        <p class="pl-1">or drag and drop</p>
-                                    </div>
-                                    <p class="text-xs text-gray-500">
-                                        PNG, JPG, GIF up to 10MB
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @error('empresa')
+                        <x-jet-input-error for="empresa">{{ $message }}</x-jet-input-error>
+                        @enderror
                     </div>
                     <x-slot name="footer">
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Save
-                            </button>
+                        <div class="group flex items-start gap-x-4 text-gray-500">
+                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <p class="text-sm">
+                                Un proyecto de responsabilidad social no necesariamente se desarrollará en una empresa,
+                                por lo que puede dejar este campo vacio.
+                            </p>
                         </div>
                     </x-slot>
                 </x-card>
-            </div>
-        </div>
-    </div>
+                <x-card>
+                    <div class="space-y-6">
+                        <div>
+                            <x-jet-label for="docente_responsable">{{ __('Docente Responsable') }}</x-jet-label>
+                            <div class="flex gap-x-2">
 
-    <div class="hidden sm:block" aria-hidden="true">
-        <div class="py-5">
-            <div class="border-t border-gray-200"></div>
-        </div>
-    </div>
+                                <div class="flex items-center flex-1 relative">
+                                    <div class="input-form py-2 bg-gray-50 w-full">
+                                        @if($docente)
+                                            <span class="font-semibold tracking-wide">
+                                                {{ $docente->persona->apellidos }} {{ $docente->persona->nombres }}
+                                            </span>
+                                        @else
+                                            <span class="text-gray-400">{{__('No se ha escogido ninguno')}}</span>
+                                        @endif
+                                    </div>
 
-    <div class="mt-10 sm:mt-0">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-            <div class="md:col-span-1">
-                <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
-                    <p class="mt-1 text-sm text-gray-600">
-                        Use a permanent address where you can receive mail.
-                    </p>
-                </div>
-            </div>
-            <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="#" method="POST">
-                    <div class="shadow overflow-hidden sm:rounded-md">
-                        <div class="px-4 py-5 bg-white sm:p-6">
-                            <div class="grid grid-cols-6 gap-6">
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700">First
-                                        name</label>
-                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    @if($docente)
+                                        <button wire:click="nullDocente"
+                                                class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
+                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    @endif
                                 </div>
 
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last
-                                        name</label>
-                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-4">
-                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Email
-                                        address</label>
-                                    <input type="text" name="email-address" id="email-address" autocomplete="email"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Country /
-                                        Region</label>
-                                    <select id="country" name="country" autocomplete="country"
-                                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option>United States</option>
-                                        <option>Canada</option>
-                                        <option>Mexico</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-span-6">
-                                    <label for="street-address" class="block text-sm font-medium text-gray-700">Street
-                                        address</label>
-                                    <input type="text" name="street-address" id="street-address"
-                                           autocomplete="street-address"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                                    <input type="text" name="city" id="city"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                    <label for="state" class="block text-sm font-medium text-gray-700">State /
-                                        Province</label>
-                                    <input type="text" name="state" id="state"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                    <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP /
-                                        Postal</label>
-                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
-                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                </div>
+                                <x-jet-secondary-button class="flex-shrink" wire:click="abrirModalDocente">
+                                    <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                                    </svg>
+                                    {{ __('Ver docentes') }}
+                                </x-jet-secondary-button>
                             </div>
+                            @error('docente_responsable')
+                            <x-jet-input-error for="docente_responsable">{{ $message }}</x-jet-input-error>
+                            @enderror
                         </div>
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Save
-                            </button>
+                        <div>
+                            <x-jet-label for="estudiante_responsable">{{ __('Estudiante Responsable') }}</x-jet-label>
+                            <div class="flex gap-x-2">
+                                <div class="flex items-center flex-1 relative">
+                                    <div class="input-form py-2 bg-gray-50 w-full">
+                                        @if($estudiante)
+                                            <span class="font-semibold tracking-wide">
+                                                {{ $estudiante->persona->apellidos }} {{ $estudiante->persona->nombres }}
+                                            </span>
+                                        @else
+                                            <span class="text-gray-400">{{__('No se ha escogido ninguno')}}</span>
+                                        @endif
+                                    </div>
+
+                                    @if($estudiante)
+                                        <button wire:click="nullEstudiante"
+                                                class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
+                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                                 stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    @endif
+
+                                </div>
+
+                                <x-jet-secondary-button class="flex-shrink" wire:click="abrirModalEstudiante">
+                                    <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                                    </svg>
+
+                                    {{ __('Ver estudiantes') }}
+                                </x-jet-secondary-button>
+                            </div>
+                            @error('estudiante_responsable')
+                            <x-jet-input-error for="estudiante_responsable">{{ $message }}</x-jet-input-error>
+                            @enderror
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="hidden sm:block" aria-hidden="true">
-        <div class="py-5">
-            <div class="border-t border-gray-200"></div>
-        </div>
-    </div>
-
-    <div class="mt-10 sm:mt-0">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-            <div class="md:col-span-1">
-                <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Notifications</h3>
-                    <p class="mt-1 text-sm text-gray-600">
-                        Decide which communications you'd like to receive and how.
-                    </p>
-                </div>
-            </div>
-            <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="#" method="POST">
-                    <div class="shadow overflow-hidden sm:rounded-md">
-                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                            <fieldset>
-                                <legend class="text-base font-medium text-gray-900">By Email</legend>
-                                <div class="mt-4 space-y-4">
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="comments" name="comments" type="checkbox"
-                                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="comments" class="font-medium text-gray-700">Comments</label>
-                                            <p class="text-gray-500">Get notified when someones posts a comment on a
-                                                posting.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="candidates" name="candidates" type="checkbox"
-                                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="candidates" class="font-medium text-gray-700">Candidates</label>
-                                            <p class="text-gray-500">Get notified when a candidate applies for a
-                                                job.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="offers" name="offers" type="checkbox"
-                                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="offers" class="font-medium text-gray-700">Offers</label>
-                                            <p class="text-gray-500">Get notified when a candidate accepts or rejects an
-                                                offer.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <div>
-                                    <legend class="text-base font-medium text-gray-900">Push Notifications</legend>
-                                    <p class="text-sm text-gray-500">These are delivered via SMS to your mobile
-                                        phone.</p>
-                                </div>
-                                <div class="mt-4 space-y-4">
-                                    <div class="flex items-center">
-                                        <input id="push-everything" name="push-notifications" type="radio"
-                                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                        <label for="push-everything"
-                                               class="ml-3 block text-sm font-medium text-gray-700">
-                                            Everything
-                                        </label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="push-email" name="push-notifications" type="radio"
-                                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                        <label for="push-email" class="ml-3 block text-sm font-medium text-gray-700">
-                                            Same as email
-                                        </label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="push-nothing" name="push-notifications" type="radio"
-                                               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                        <label for="push-nothing" class="ml-3 block text-sm font-medium text-gray-700">
-                                            No push notifications
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
+                    <x-slot name="footer">
+                        <div class="group flex items-start gap-x-4 text-gray-500">
+                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <p class="text-sm">
+                                Puede agregar un docente responsable, un estudiante responsable o ambos, pero es
+                                necesario que exista al menos uno de ellos.
+                            </p>
                         </div>
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit"
-                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Save
-                            </button>
-                        </div>
+                    </x-slot>
+                </x-card>
+                <x-card>
+                    <div class="flex justify-end space-x-4">
+                        <x-jet-button
+                            wire:click="registrarRRSS"
+                            wire:target="registrarRRSS"
+                            wire:loading.class="bg-gray-800"
+                            wire:loading.attr="disabled">
+                            <svg wire:loading wire:target="registrarRRSS"
+                                 class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                                 fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>
+                                {{ __('Guardar') }}
+                            </span>
+                        </x-jet-button>
                     </div>
-                </form>
+                </x-card>
             </div>
+
+
+            <x-jet-dialog-modal wire:model="abrirEmpresa">
+                <x-slot name="content">
+                    @livewire('rrss.registro.modal-empresas')
+                </x-slot>
+            </x-jet-dialog-modal>
+
+            <x-jet-dialog-modal wire:model="abrirDocente">
+                <x-slot name="content">
+                    @livewire('rrss.registro.modal-docentes')
+                </x-slot>
+            </x-jet-dialog-modal>
+
+            <x-jet-dialog-modal wire:model="abrirEstudiante">
+                <x-slot name="content">
+                    @livewire('rrss.registro.modal-estudiantes')
+                </x-slot>
+            </x-jet-dialog-modal>
+
+
         </div>
     </div>
-
 </div>

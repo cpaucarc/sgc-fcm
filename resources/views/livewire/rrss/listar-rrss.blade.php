@@ -145,7 +145,11 @@
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap hidden lg:table-cell">
                             <div class="flex items-center my-auto">
-                                {{ $rs->empresa->nombre }}
+                                @if($rs->empresa)
+                                    {{ $rs->empresa->nombre }}
+                                @else
+                                    {{ __('---') }}
+                                @endif
                             </div>
                         </td>
                         {{--                titulo, lugar, ciclo, empresa, estado, btn--}}

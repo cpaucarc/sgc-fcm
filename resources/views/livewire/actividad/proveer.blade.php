@@ -98,11 +98,19 @@
 
         @if($ent_prv_seleccionado)
             <x-jet-dialog-modal wire:model="abrir">
+
                 <x-slot name="title">
-                    <h1 class="text-gray-700 font-bold text-sm lg:text-xl">
+                    <h1 class="font-bold">
                         {{ $ent_prv_seleccionado->entrada->nombre }}
                     </h1>
+                    <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </x-slot>
+
                 <x-slot name="content">
                     <div class="my-6">
                         <x-jet-label for="archivo">Archivo</x-jet-label>
@@ -138,7 +146,6 @@
                                                     {{ $entprv->documento->nombre }}
                                                 @endif
                                             </small>
-
                                         </div>
                                         <div class="table-cell align-middle text-right">
                                             <small>

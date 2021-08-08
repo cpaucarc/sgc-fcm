@@ -27,7 +27,7 @@
 
 </head>
 
-<body class="font-sans antialiased bg-gray-50">
+<body class="font-sans antialiased bg-gray-100">
 <x-jet-banner/>
 
 <div class="min-h-screen">
@@ -46,7 +46,7 @@
         {{ $slot }}
     </main>
 
-    <footer class="border-t border-gray-200 text-center py-2 text-gray-500 text-base bg-gray-100">
+    <footer class="border-t border-gray-200 text-center py-2 text-gray-500 text-sm bg-gray-100">
         Copyright © Sistema Gestión de Calidad - Facultad de Ciencias Médicas
     </footer>
 </div>
