@@ -46,6 +46,9 @@ class DatabaseSeeder extends Seeder
 
         /* Responsabilidad Social */
         $this->call(EmpresaSeeder::class);
+        $this->call(UnidadMedidaSeeder::class);
+        $this->call(FrecuenciaSeeder::class);
+
         $this->call(DocenteSeeder::class);
         $this->call(EstudianteSeeder::class);
         $this->call(IndicadorSeeder::class);

@@ -32,6 +32,12 @@ Route::prefix('responsabilidad-social')->group(function () {
         return view('rrss.my-side');
     })->name('rrss.side');
 
+    Route::get('indicadores', [ResponsabilidadSocialController::class, 'indicadores'])
+        ->name('rrss.indicadores');
+
+    Route::get('indicador/{id}', [ResponsabilidadSocialController::class, 'indicador'])
+        ->name('rrss.indicador');
+
     Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
         ->name('rrss.index');
 });
