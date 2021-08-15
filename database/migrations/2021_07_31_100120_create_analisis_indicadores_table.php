@@ -21,20 +21,17 @@ class CreateAnalisisIndicadoresTable extends Migration
             $table->smallInteger('interes')->nullable();
             $table->smallInteger('total')->nullable();
             $table->smallInteger('resultado');
-            $table->date('periodo');
             $table->text('interpretacion')->nullable();
             $table->text('observacion')->nullable();
             $table->string('elaborado_por')->nullable();
             $table->string('revisado_por')->nullable();
             $table->string('aprobado_por')->nullable();
-            $table->unsignedBigInteger('indicador_id')->nullable();
-            $table->unsignedBigInteger('escuela_id')->nullable()->nullable();
-            $table->unsignedBigInteger('facultad_id')->nullable();
+            $table->unsignedBigInteger('indicador_id');
+            $table->unsignedBigInteger('ciclo_id')->nullable();
             $table->timestamps();
 
             $table->foreign('indicador_id')->references('id')->on('indicadores');
-            $table->foreign('escuela_id')->references('id')->on('escuelas');
-            $table->foreign('facultad_id')->references('id')->on('facultades');
+            $table->foreign('ciclo_id')->references('id')->on('ciclos');
         });
     }
 

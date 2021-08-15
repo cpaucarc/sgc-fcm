@@ -43,10 +43,6 @@ class ProcesoSeeder extends Seeder
                 'facultad_id' => 1
             ],
             [
-                'nombre' => 'Biblioteca',
-                'facultad_id' => 1
-            ],
-            [
                 'nombre' => 'Investigacion',
                 'facultad_id' => 1
             ],

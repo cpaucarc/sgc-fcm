@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Indicador;
 use App\Models\ResponsabilidadSocial;
 
 class ResponsabilidadSocialController extends Controller
@@ -42,5 +43,26 @@ class ResponsabilidadSocialController extends Controller
     public function empresas()
     {
         return view('rrss.empresas');
+    }
+
+    public function indicadores()
+    {
+        //procesos: 9 - Responsabilidad Social
+        $indicadores = Indicador::where('proceso_id', '=', 9)->get();
+        return view('rrss.indicadores', compact('indicadores'));
+    }
+
+    public function indicador($id)
+    {
+        if (!isset($id)) {
+            return view('rrss.index');
+        }
+
+        $indicador = Indicador::find($id);
+        if ($indicador) {
+            return view('rrss.indicador', compact('indicador'));
+        } else {
+            return view('rrss.index');
+        }
     }
 }

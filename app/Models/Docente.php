@@ -10,7 +10,7 @@ class Docente extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'persona_id', 'escuela_id'];
+    public $fillable = ['codigo', 'estado', 'persona_id', 'escuela_id'];
 
     public function persona()
     {
