@@ -26,7 +26,6 @@ class DocumentosRecibidos extends Component
     {
         $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
 
-
         $salidas = Salida::whereIn('id', function ($query) {
             $query->select('salida_id')
                 ->from('cliente_salidas')

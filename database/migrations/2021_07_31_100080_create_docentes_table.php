@@ -16,6 +16,7 @@ class CreateDocentesTable extends Migration
         Schema::create('docentes', function (Blueprint $table) {
             $table->id();
             $table->string('codigo', 20)->unique()->nullable();
+            $table->boolean('estado')->default(true);
             $table->unsignedBigInteger('persona_id');
             $table->unsignedBigInteger('escuela_id')->nullable();
             $table->unsignedBigInteger('facultad_id');
