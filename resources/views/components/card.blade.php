@@ -1,4 +1,5 @@
-<div class="bg-white border border-gray-200 rounded-md shadow-sm">
+<div
+    {{ $attributes->merge(['class' => "bg-white border border-gray-200 rounded-md shadow-sm"]) }}>
 
     @if(isset($header))
         <div class="px-6 py-4 border-b border-gray-200 rounded-t-md">

@@ -12,4 +12,10 @@ class Facultad extends Model
     public $table = "facultades";
     public $timestamps = false;
     public $fillable = ['nombre', 'abrev'];
+
+    public function escuelas()
+    {
+        return $this->hasMany(Escuela::class);
+    }
+
 }
