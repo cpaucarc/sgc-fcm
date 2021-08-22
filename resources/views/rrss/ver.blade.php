@@ -1,12 +1,17 @@
 <x-app-layout>
     <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-6 lg:w-9/12 mx-auto">
-        <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-xl font-bold leading-6 font-medium text-gray-900">
-                Responsabilidad Social
-            </h3>
-            <p class="mt-1 max-w-2xl text-gray-500">
-                Vista detalle
-            </p>
+        <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+            <div class="flex-1">
+                <h3 class="text-lg lg:text-2xl font-bold leading-6 font-medium text-gray-500">
+                    Responsabilidad Social
+                </h3>
+                <p class="mt-1 max-w-2xl text-gray-500">
+                    Vista detalle
+                </p>
+            </div>
+
+            @livewire('rrss.generar-encuesta', ['rsu' => $responsabilidad_social])
+
         </div>
         <div class="border-t border-gray-200">
             <dl>
@@ -48,7 +53,7 @@
                 </div>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="font-medium text-gray-500">
-                        Fechas de la Responsabilidad Social
+                        Fechas de Ejecución
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
                         <span
@@ -226,6 +231,24 @@
                         @endif
                     </dd>
                 </div>
+                @if($responsabilidad_social->encuesta)
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="font-medium text-gray-500">
+                            Link de la encuesta
+                        </dt>
+                        <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
+                            <a href="{{ $responsabilidad_social->encuesta->link }}" target="_blank"
+                               class="text-blue-700 hover:underline text-sm">
+                                {{ $responsabilidad_social->encuesta->link }}
+                            </a>
+                            <br>
+                            <span class="text-gray-600 text-sm">
+                                Esta encuesta está disponible hasta el
+                                <b>{{ $responsabilidad_social->encuesta->fecha_fin->format('d-m-Y') }}</b>
+                            </span>
+                        </dd>
+                    </div>
+                @endif
             </dl>
         </div>
     </div>

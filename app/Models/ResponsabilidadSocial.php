@@ -56,4 +56,9 @@ class ResponsabilidadSocial extends Model
         return $this->hasMany(DocumentoRRSS::class)->orderBy('id', 'desc');
     }
 
+    public function encuesta()
+    {
+        return $this->hasOne(RRSSEncuesta::class);
+    }
+
 }

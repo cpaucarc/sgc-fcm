@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
 use Illuminate\Support\Facades\Route;
@@ -50,3 +51,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('storage/{file}', function ($file) {
     return Storage::response($file);
 })->name('documentos');
+
+Route::prefix('encuestas')->group(function () {
+    Route::get('/rsu/{sha}', [EncuestaController::class, 'rrss'])
+        ->name('encuesta.rrss');
+    Route::get('/agradecimiento', [EncuestaController::class, 'agradecimiento'])
+        ->name('encuesta.agradecimiento');
+});

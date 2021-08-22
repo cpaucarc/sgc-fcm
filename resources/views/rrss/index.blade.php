@@ -1,5 +1,26 @@
 <x-app-layout>
 
+    <x-slot name="header">
+        <div class="flex justify-end gap-x-4">
+            <a href="{{ route('rrss.empresas') }}"
+               class="px-3 py-1 bg-transparent text-sm text-gray-500 hover:text-gray-800 border border-gray-300 flex items-center rounded">
+                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+                Empresas
+            </a>
+            <a href="{{ route('rrss.indicadores') }}"
+               class="px-3 py-1 bg-transparent text-sm text-gray-500 hover:text-gray-800 border border-gray-300 flex items-center rounded">
+                <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                </svg>
+                Indicadores
+            </a>
+        </div>
+    </x-slot>
+
     <x-card>
         <x-slot name="header">
             <div class="flex justify-between items-center">

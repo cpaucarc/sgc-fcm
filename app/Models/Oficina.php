@@ -11,4 +11,9 @@ class Oficina extends Model
 
     public $timestamps = false;
     public $fillable = ['nivel_oficina_id', 'escuela_id', 'facultad_id'];
+
+    public function facultad()
+    {
+        return $this->belongsTo(Facultad::class);
+    }
 }
