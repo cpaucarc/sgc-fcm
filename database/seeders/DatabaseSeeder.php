@@ -54,5 +54,7 @@ class DatabaseSeeder extends Seeder
         $this->call(IndicadorSeeder::class);
         \App\Models\ResponsabilidadSocial::factory(50)->create();
 
+        $this->call(PreguntaSeeder::class);
+
     }
 }

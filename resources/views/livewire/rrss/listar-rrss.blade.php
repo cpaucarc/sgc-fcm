@@ -1,5 +1,6 @@
 <div class="text-sm text-gray-700">
 
+
     <div class="flex justify-end items-center my-6">
         <x-jet-dropdown align="right" width="32">
             <x-slot name="trigger">
