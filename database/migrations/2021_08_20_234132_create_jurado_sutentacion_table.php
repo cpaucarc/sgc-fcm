@@ -16,9 +16,11 @@ class CreateJuradoSutentacionTable extends Migration
         Schema::create('jurado_sutentacion', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('jurado_id')->nullable();
-            $table->unsignedBigInteger('tesis_id')->nullable();
+            $table->unsignedBigInteger('sustentacion_id')->nullable();
+            $table->unsignedBigInteger('cargo_jurado_id')->nullable();
             $table->foreign('jurado_id')->references('id')->on('jurados');
-            $table->foreign('tesis_id')->references('id')->on('tesis');
+            $table->foreign('sustentacion_id')->references('id')->on('sustentaciones');
+            $table->foreign('cargo_jurado_id')->references('id')->on('cargo_jurados');
         });
     }
 
