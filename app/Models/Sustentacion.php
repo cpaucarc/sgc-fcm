@@ -15,13 +15,19 @@ class Sustentacion extends Model
 
     public $table = "sustentaciones";
     public $timestamps = false;
-    public $fillable = ['fecha', 'tesis_id', 'ciclo_id', 'declaracion_id'];
+    public $fillable = ['fecha', 'tesis_id','escuela_id', 'ciclo_id', 'declaracion_id'];
 
     //Relacion de uno a muchos (inversa)
     public function tesis()
     {
         return $this->belongsTo(Tesis::class);
     }
+
+     //Relacion de uno a muchos (inversa)
+     public function escuela()
+     {
+         return $this->belongsTo(Escuela::class);
+     }
 
     //Relacion de uno a muchos (inversa)
     public function ciclo()

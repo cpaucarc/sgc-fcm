@@ -90,7 +90,8 @@
     </div>
 
     {{-- Accesos directos --}}
-    <div class="container mx-auto my-10 grid p-5 bg-white border border-gray-300 rounded-lg shadow" x-data="{open: true}">
+    <div class="container mx-auto my-10 grid p-5 bg-white border border-gray-300 rounded-lg shadow"
+        x-data="{open: true}">
         <div class="w-100 flex items-center">
             <div class="border border-gray-300 p-1 w-7 h-7 mr-2 cursor-pointer hover:bg-gray-100"
                 x-on:click="open= !open">
@@ -135,7 +136,7 @@
                     Responsabilidad Social
                 </div>
             </a>
-            
+
             {{-- app --}}
             <a href="#" class="flex flex-col items-center">
 
@@ -168,7 +169,7 @@
                 </div>
             </a>
             {{-- app --}}
-            <a href="#" class="flex flex-col items-center">
+            <a href="{{ route('ttpp.index') }}" class="flex flex-col items-center">
 
                 <div class="flex items-center justify-center p-2 border-2 border-gray-400 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" viewBox="0 0 20 20"
@@ -185,9 +186,11 @@
             <a href="#" class="flex flex-col items-center">
 
                 <div class="flex items-center justify-center p-2 border-2 border-gray-400 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path
+                            d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                    </svg>
                 </div>
                 <div class="mt-3 text-sm font-medium text-gray-600 font-semibold">
                     Plan de estudios

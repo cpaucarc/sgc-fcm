@@ -17,9 +17,11 @@ class CreateSustentacionesTable extends Migration
             $table->id();
             $table->date('fecha');
             $table->unsignedBigInteger('tesis_id')->nullable();
+            $table->unsignedBigInteger('escuela_id')->nullable();
             $table->unsignedBigInteger('ciclo_id')->nullable();
             $table->unsignedBigInteger('declaracion_id')->nullable();
             $table->foreign('tesis_id')->references('id')->on('tesis');
+            $table->foreign('escuela_id')->references('id')->on('escuelas');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');
             $table->foreign('declaracion_id')->references('id')->on('declaraciones');
         });

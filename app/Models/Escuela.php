@@ -16,4 +16,10 @@ class Escuela extends Model
     {
         return $this->belongsTo(Facultad::class);
     }
+
+      //Relación de uno a muchos
+      public function sustentacion()
+      {
+          return $this->hasMany(Sustentacion::class);
+      }
 }

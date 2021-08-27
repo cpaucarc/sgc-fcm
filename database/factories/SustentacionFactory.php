@@ -24,6 +24,7 @@ class SustentacionFactory extends Factory
         return [
             'fecha' => $this->faker->dateTimeBetween('2001-01-01 00:00:00', 'now'),
             'tesis_id' => $this->faker->numberBetween(1, 20),
+            'escuela_id' => $this->faker->numberBetween(1, 2),
             'ciclo_id' => $this->faker->numberBetween(1, 2),
             'declaracion_id' => $this->faker->numberBetween(1, 2),
         ];

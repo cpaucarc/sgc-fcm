@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
+use App\Http\Controllers\SustentacionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,6 +41,13 @@ Route::prefix('responsabilidad-social')->group(function () {
 
     Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
         ->name('rrss.index');
+});
+
+
+//Sustentaciones de titulación
+Route::prefix('titulos-profesionales')->group(function () {
+    Route::get('/{id?}', [SustentacionController::class, 'index'])
+        ->name('ttpp.index');
 });
 
 
