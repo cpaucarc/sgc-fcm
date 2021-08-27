@@ -30,7 +30,8 @@ class Tesis extends Model
     }
 
     //Relación de uno a muchos
-    public function sustentacion(){
+    public function sustentacion()
+    {
         return $this->hasMany(Sustentacion::class);
     }
 
@@ -38,5 +39,11 @@ class Tesis extends Model
     public function bachiller()
     {
         return $this->belongsToMany(Bachiller::class);
+    }
+
+    //Relación muchos a muchos (inversa)
+    public function documento()
+    {
+        return $this->belongsToMany(Documento::class);
     }
 }

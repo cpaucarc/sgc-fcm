@@ -10,4 +10,11 @@ class Documento extends Model
     use HasFactory;
 
     public $fillable = ['nombre', 'enlace_interno', 'enlace_externo'];
+
+
+        //Relación muchos a muchos
+        public function tesis()
+        {
+            return $this->belongsToMany(Tesis::class);
+        }
 }

@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BachillerTesis extends Model
+class DocumentoTesis extends Model
 {
     use HasFactory;
 
-    public $table = "bachiller_tesis";
+    public $table = "documento_tesis";
     public $timestamps = false;
-    public $fillable = ['bachiller_id', 'tesis_id'];    
+    public $fillable = ['tesis_id', 'documento_id'];
+    
 }

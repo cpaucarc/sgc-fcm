@@ -13,13 +13,15 @@ class Bachiller extends Model
     use HasFactory;
 
     public $table = "bachilleres";
-    public $fillable = ['ciclo_id', 'estudiante_id'];
-
+    public $fillable = ['estudiante_id', 'ciclo_id'];
+    public $timestamps = false;
+    
     //Relación uno a muchos (inversa)
     public function ciclo()
     {
         return $this->belongsTo(Ciclo::class);
     }
+
     //Relación uno a uno (inversa)
     public function estudiante()
     {

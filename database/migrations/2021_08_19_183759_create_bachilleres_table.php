@@ -15,10 +15,10 @@ class CreateBachilleresTable extends Migration
     {
         Schema::create('bachilleres', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ciclo_id')->nullable();
             $table->unsignedBigInteger('estudiante_id')->nullable();
-            $table->foreign('ciclo_id')->references('id')->on('ciclos');
+            $table->unsignedBigInteger('ciclo_id')->nullable();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('ciclo_id')->references('id')->on('ciclos');
         });
     }
 

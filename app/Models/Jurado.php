@@ -11,6 +11,7 @@ class Jurado extends Model
 {
     use HasFactory;
 
+    public $table = "jurados";
     public $timestamps = false;
     public $fillable = ['cip', 'docente_id'];
 

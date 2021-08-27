@@ -54,5 +54,14 @@ class DatabaseSeeder extends Seeder
         $this->call(IndicadorSeeder::class);
         \App\Models\ResponsabilidadSocial::factory(50)->create();
 
+        //Títulos profesionales
+        $this->call(CargoJuradoSeeder::class);
+        $this->call(TipoTesisSeeder::class);
+        $this->call(DeclaracionSeeder::class);
+        $this->call(AsesorSeeder::class);
+        $this->call(JuradoSeeder::class);
+        $this->call(BachillerSeeder::class);
+        \App\Models\Tesis::factory(20)->create();
+        \App\Models\Sustentacion::factory(20)->create();
     }
 }

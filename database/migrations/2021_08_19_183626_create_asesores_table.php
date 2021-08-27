@@ -15,7 +15,7 @@ class CreateAsesoresTable extends Migration
     {
         Schema::create('asesores', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('cip');
+            $table->integer('cip');
             $table->unsignedBigInteger('docente_id')->nullable();
             $table->foreign('docente_id')->references('id')->on('docentes');
         });

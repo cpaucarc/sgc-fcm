@@ -11,6 +11,7 @@ class Asesor extends Model
 {
     use HasFactory;
 
+    public $table = "asesores";
     public $timestamps = false;
     public $fillable = ['cip', 'docente_id'];
 
