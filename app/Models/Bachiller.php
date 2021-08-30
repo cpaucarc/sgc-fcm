@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Ciclo;
 use App\Models\Estudiante;
-use App\Models\Tesis;
+use App\Models\BachillerTesis;
 
 class Bachiller extends Model
 {
@@ -15,7 +15,7 @@ class Bachiller extends Model
     public $table = "bachilleres";
     public $fillable = ['estudiante_id', 'ciclo_id'];
     public $timestamps = false;
-    
+
     //Relación uno a muchos (inversa)
     public function ciclo()
     {
@@ -28,9 +28,9 @@ class Bachiller extends Model
         return $this->belongsTo(Estudiante::class);
     }
 
-    //Relación muchos a muchos
-    public function tesis()
+    //Relación de uno a muchos
+    public function bachiller_tesis()
     {
-        return $this->belongsToMany(Tesis::class);
+        return $this->hasMany(BachillerTesis::class);
     }
 }

@@ -13,7 +13,7 @@ class CreateJuradoSutentacionTable extends Migration
      */
     public function up()
     {
-        Schema::create('jurado_sutentacion', function (Blueprint $table) {
+        Schema::create('jurado_sustentacion', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('jurado_id')->nullable();
             $table->unsignedBigInteger('sustentacion_id')->nullable();

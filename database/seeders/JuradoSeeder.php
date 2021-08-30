@@ -14,6 +14,6 @@ class JuradoSeeder extends Seeder
      */
     public function run()
     {
-        Jurado::factory(6)->create();
+        Jurado::factory(10)->create();
     }
 }

@@ -8,6 +8,8 @@ use App\Models\Asesor;
 use App\Models\TipoTesis;
 use App\Models\Sustentacion;
 use App\Models\Bachiller;
+use App\Models\BachillerTesis;
+use App\Models\DocumentoTesis;
 
 class Tesis extends Model
 {
@@ -41,9 +43,15 @@ class Tesis extends Model
         return $this->belongsToMany(Bachiller::class);
     }
 
-    //Relación muchos a muchos (inversa)
-    public function documento()
+    //Relación de uno a muchos
+    public function bachiller_tesis()
     {
-        return $this->belongsToMany(Documento::class);
+        return $this->hasMany(BachillerTesis::class);
+    }
+
+    //Relación de uno a muchos
+    public function documento_tesis()
+    {
+        return $this->hasMany(DocumentoTesis::class);
     }
 }

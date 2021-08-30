@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CargoJurado;
+use App\Models\Sustentacion;
+use App\Models\Jurado;
 
 class JuradoSustentacion extends Model
 {
@@ -19,5 +21,16 @@ class JuradoSustentacion extends Model
     public function cargo_jurado()
     {
         return $this->belongsTo(CargoJurado::class);
+    }
+
+    //Relacion de uno a muchos (inversa)
+    public function sustentacion()
+    {
+        return $this->belongsTo(Sustentacion::class);
+    }
+    //Relacion de uno a muchos (inversa)
+    public function jurado()
+    {
+        return $this->belongsTo(Jurado::class);
     }
 }

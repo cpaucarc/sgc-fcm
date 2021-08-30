@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Docente;
-use App\Models\Sustentacion;
+use App\Models\JuradoSustentacion;
 
 class Jurado extends Model
 {
@@ -21,9 +21,9 @@ class Jurado extends Model
         return $this->belongsTo(Docente::class);
     }
 
-    //Relación muchos a muchos
-    public function sutentacion()
+    //Relación de uno a muchos
+    public function jurado_sustentacion()
     {
-        return $this->belongsToMany(Sustentacion::class);
+        return $this->hasMany(JuradoSustentacion::class);
     }
 }

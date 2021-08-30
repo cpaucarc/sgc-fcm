@@ -63,5 +63,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BachillerSeeder::class);
         \App\Models\Tesis::factory(20)->create();
         \App\Models\Sustentacion::factory(20)->create();
+        \App\Models\BachillerTesis::factory(50)->create();
+        \App\Models\JuradoSustentacion::factory(50)->create();
     }
 }

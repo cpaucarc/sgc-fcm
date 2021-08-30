@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumetoTesisTable extends Migration
+class CreateDocumentoTesisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDocumetoTesisTable extends Migration
      */
     public function up()
     {
-        Schema::create('documeto_tesis', function (Blueprint $table) {
+        Schema::create('documento_tesis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('tesis_id')->nullable();
             $table->unsignedBigInteger('documento_id')->nullable();
@@ -29,6 +29,6 @@ class CreateDocumetoTesisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documeto_tesis');
+        Schema::dropIfExists('documento_tesis');
     }
 }
