@@ -23,4 +23,8 @@ class SustentacionController extends Controller
             return view('ttpp.index');
         }
     }
+    public function registro()
+    {
+        return view('ttpp.registro');
+    }
 }
