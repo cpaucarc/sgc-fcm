@@ -2,52 +2,59 @@
     <div class="relative">
 
         <x-slot name="header">
-            <div class="flex flex-col lg:flex-row justify-between items-start px-4 lg:px-0">
-                <div class="flex-1 mb-3">
-                    <h1 class="lg:text-2xl text-gray-600 font-bold flex-1 truncate flex items-center">
-                        {{ $actividad->nombre }}
-                        <span class="hidden lg:block text-gray-400 mx-2 lg:text-xl">
-                            [{{ $ciclo->nombre }}]
-                        </span>
-                    </h1>
-                </div>
+            <div class="flex flex-col lg:flex-row justify-between items-start px-6 lg:px-0">
+                <h1 class="lg:text-2xl text-gray-800 font-bold flex-1 truncate">
+                    {{ $actividad->nombre }}
+                </h1>
             </div>
-            <div class="flex gap-x-4 mt-0">
-                <h2 class="text-xs md:text-sm text-gray-700 bg-gray-100 px-4 py-1">
-                    Proceso:
-                    <strong>
-                        {{ $actividad->proceso->nombre }}
-                    </strong>
-                </h2>
-                <h2 class="text-xs md:text-sm text-gray-700 bg-gray-100 px-4 py-1">
-                    Ciclo de Deming:
-                    <strong class="font-bold">
-                        {{ $actividad->tipoActividad->nombre }}
-                    </strong>
-                </h2>
+            <div class="flex gap-x-6 mt-0">
+                <div class="mt-2 flex items-center text-sm text-gray-500">
+                    <svg class="flex-shrink-0 mr-1 h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                    </svg>
+                    {{ $actividad->proceso->nombre }}
+                </div>
+                <div class="mt-2 items-center text-sm text-gray-500 hidden sm:flex">
+                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    {{ $actividad->tipoActividad->nombre }}
+                </div>
+                <div class="mt-2 flex items-center text-sm font-bold text-indigo-500">
+                    <svg class="flex-shrink-0 mr-1 h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    {{ $ciclo->nombre }}
+                </div>
             </div>
         </x-slot>
 
         {{-- Titulo y boton con el estado de la actividad --}}
         <div class="absolute right-0 -top-24 lg:-top-28">
             @if($estado === false)
-                <button wire:click="completarActividad"
-                        class="text-xs lg:text-sm flex items-center bg-gray-200 px-3 py-1 text-gray-800 rounded-md hover:bg-gray-300 hover:text-gray-900">
+                <x-button-void wire:click="completarActividad">
                     {{ __('Completar') }}
-                </button>
+                </x-button-void>
             @else
                 <div class="flex flex-col items-end">
-                    <button wire:click="completarActividad"
-                            class="text-xs lg:text-sm flex items-center bg-green-200 px-3 py-1 text-green-700 rounded-md hover:bg-green-300 hover:text-green-900">
-                        <svg class="h-5 w-5 mr-1" fill="none"
-                             viewBox="0 0 24 24"
-                             stroke="currentColor">
+                    <x-button-soft color="green" wire:click="completarActividad">
+                        <svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M5 13l4 4L19 7"/>
                         </svg>
                         {{ __('Completado') }}
-                    </button>
-                    <small class="text-gray-500 ml-2 lg:ml-0 text-xs lg:text-sm">
+                    </x-button-soft>
+
+                    <small class="text-gray-500 ml-2 lg:ml-0 text-xs mt-1">
                         @if($actividad->estadoActual($ciclo->id)->count())
                             Completado {{ $actividad->estadoActual($ciclo->id)[0]->fecha_operacion->diffForHumans() }}
                         @endif
