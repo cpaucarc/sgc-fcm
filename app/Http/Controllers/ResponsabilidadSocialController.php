@@ -50,7 +50,7 @@ class ResponsabilidadSocialController extends Controller
     public function indicadores()
     {
         $proceso = 9;  //BD-Tabla: procesos: 9 -> Responsabilidad Social
-        $indicadores = Indicador::where('proceso_id', '=', 9)->get();
+        // $indicadores = Indicador::where('proceso_id', '=', $proceso)->get();
         $facultad = Auth::user()->roles[0]->oficina->facultad;
         $lista = array();
 
@@ -58,6 +58,7 @@ class ResponsabilidadSocialController extends Controller
             ->select('*')
             ->whereNull('escuela_id')
             ->where('facultad_id', $facultad->id)
+            ->where('proceso_id', $proceso)
             ->orderBy('cod_ind_inicial')
             ->get();
 
@@ -72,6 +73,7 @@ class ResponsabilidadSocialController extends Controller
                 "items" => DB::table('indicadores')
                     ->select('*')
                     ->where('escuela_id', $escuela->id)
+                    ->where('proceso_id', $proceso)
                     ->orderBy('cod_ind_inicial')
                     ->get()
             ));

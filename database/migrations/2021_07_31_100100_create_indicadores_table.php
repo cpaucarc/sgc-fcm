@@ -22,9 +22,9 @@ class CreateIndicadoresTable extends Migration
             $table->string('cod_ind_inicial');
             $table->string('cod_ind_final');
             $table->string('formula')->nullable();
-            $table->smallInteger('minimo');
-            $table->smallInteger('satisfactorio');
-            $table->smallInteger('sobresaliente');
+            $table->decimal('minimo', 4, 1);
+            $table->decimal('satisfactorio', 4, 1);
+            $table->decimal('sobresaliente', 4, 1);
             $table->unsignedBigInteger('proceso_id');
             $table->unsignedBigInteger('unidad_medida_id');
             $table->unsignedBigInteger('frecuencia_id');

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\EncuestaController;
+use App\Http\Controllers\InvestigacionController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +45,19 @@ Route::prefix('responsabilidad-social')->group(function () {
         ->name('rrss.index');
 });
 
+Route::prefix('investigacion')->group(function () {
+    Route::get('/', [InvestigacionController::class, 'index'])
+        ->name('investigacion.index');
+    Route::get('investigadores', [InvestigacionController::class, 'investigadores'])
+        ->name('investigacion.investigadores');
+
+    Route::get('indicadores', [InvestigacionController::class, 'indicadores'])
+        ->name('investigacion.indicadores');
+    Route::get('indicador/{id}', [InvestigacionController::class, 'indicador'])
+        ->name('investigacion.indicador');
+    Route::get('/{id}', [InvestigacionController::class, 'mostrar'])
+        ->name('investigacion.mostrar');
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

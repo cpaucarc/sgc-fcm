@@ -15,9 +15,9 @@ class CreateAnalisisIndicadoresTable extends Migration
     {
         Schema::create('analisis_indicadores', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('minimo');
-            $table->smallInteger('satisfactorio');
-            $table->smallInteger('sobresaliente');
+            $table->decimal('minimo', 4, 1);
+            $table->decimal('satisfactorio', 4, 1);
+            $table->decimal('sobresaliente', 4, 1);
             $table->smallInteger('interes')->nullable();
             $table->smallInteger('total')->nullable();
             $table->smallInteger('resultado');

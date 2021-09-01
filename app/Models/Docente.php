@@ -16,4 +16,9 @@ class Docente extends Model
     {
         return $this->belongsTo(Persona::class);
     }
+
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
+    }
 }

@@ -4,11 +4,7 @@
 
         <div>
             <h3 class="ml-1 text-gray-600 font-bold text-lg">
-                Hay
-                <span class="text-gray-800">
-                            {{ $indicador->analisis->count() }}
-                        </span>
-                instancias de este indicador
+                Hay <span class="text-gray-800">{{ $indicador->analisis->count() }}</span>instancias de este indicador
             </h3>
         </div>
 

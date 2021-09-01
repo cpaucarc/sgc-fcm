@@ -11,30 +11,9 @@
                     </x-slot>
 
                     <div class="grid grid-cols-2 gap-6">
-
-
                         @foreach($item['items'] as $it)
                             <div class="col-span-1 lg:col-span-2 flex justify-between">
-
-                                <x-card>
-
-                                    <h3 class="font-bold tracking-wide">
-                                        {{ $it->cod_ind_final }}
-                                    </h3>
-
-                                    <div class="flex items-center justify-between">
-                                        <p class="text-xs flex-1">
-                                            {{ $it->objetivo }}
-                                        </p>
-                                        <a href="{{ route('rrss.indicador', $it->id) }}"
-                                           class="bg-gray-100 hover:bg-blue-700 px-3 py-1 rounded text-sm text-gray-700 hover:text-white">
-                                            Revisar
-                                        </a>
-                                    </div>
-
-                                </x-card>
-
-
+                                <x-indicador.ind-min :indicador="$it" :route="'rrss.indicador'"/>
                             </div>
                         @endforeach
                     </div>

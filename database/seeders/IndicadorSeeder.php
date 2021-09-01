@@ -13,6 +13,7 @@ class IndicadorSeeder extends Seeder
      */
     public function run()
     {
+        // Responsabilidad Social
         $indicadoresRRSS_Facultad = [
             //IND-048
             [
@@ -330,7 +331,154 @@ class IndicadorSeeder extends Seeder
             ],
         ];
 
+        // Investigacion
+        $indicadoresInvEscuela = [
+            //IND-044
+            [
+                'objetivo' => 'Medir el grado de participación de los docentes en los proyectos de investigación.',
+                'titulo_interes' => 'N° Docentes en PI',
+                'titulo_total' => 'N° Docentes',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-044',
+                'cod_ind_final' => 'IND-044-INV-ENF',
+                'formula' => 'X = (N° de docentes que participan en PI)/(Total de docentes del programa) x 100',
+                'minimo' => 20,
+                'satisfactorio' => 30,
+                'sobresaliente' => 50,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Medir el grado de participación de los docentes en los proyectos de investigación.',
+                'titulo_interes' => 'N° Docentes en PI',
+                'titulo_total' => 'N° Docentes',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-044',
+                'cod_ind_final' => 'IND-044-INV-OBS',
+                'formula' => 'X = (N° de docentes que participan en PI)/(Total de docentes del programa) x 100',
+                'minimo' => 20,
+                'satisfactorio' => 30,
+                'sobresaliente' => 50,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+            //IND-045
+            [
+                'objetivo' => 'Medir el grado de participación de los estudiantes en los proyectos de investigación.',
+                'titulo_interes' => 'N° estudiantes en PI',
+                'titulo_total' => 'N° estudiantes',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-045',
+                'cod_ind_final' => 'IND-045-INV-ENF',
+                'formula' => 'X = (N° de estudiantes que participan en PI)/(Total de estudiantes del programa) x 100',
+                'minimo' => 0.5,
+                'satisfactorio' => 1,
+                'sobresaliente' => 2,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Medir el grado de participación de los estudiantes en los proyectos de investigación.',
+                'titulo_interes' => 'N° estudiantes en PI',
+                'titulo_total' => 'N° estudiantes',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-045',
+                'cod_ind_final' => 'IND-045-INV-OBS',
+                'formula' => 'X = (N° de estudiantes que participan en PI)/(Total de estudiantes del programa) x 100',
+                'minimo' => 0.5,
+                'satisfactorio' => 1,
+                'sobresaliente' => 2,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+            //IND-046
+            [
+                'objetivo' => 'Saber el número de trabajos de investigación publicados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'Número trabajos de investigación publicados',
+                'cod_ind_inicial' => 'IND-046',
+                'cod_ind_final' => 'IND-046-INV-ENF',
+                'formula' => 'X = N° de trabajos de investigación publicados por programa de estudios',
+                'minimo' => 2,
+                'satisfactorio' => 4,
+                'sobresaliente' => 6,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Saber el número de trabajos de investigación publicados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'Número trabajos de investigación publicados',
+                'cod_ind_inicial' => 'IND-046',
+                'cod_ind_final' => 'IND-046-INV-OBS',
+                'formula' => 'X = N° de trabajos de investigación publicados por programa de estudios',
+                'minimo' => 2,
+                'satisfactorio' => 4,
+                'sobresaliente' => 6,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+            //IND-047
+            [
+                'objetivo' => 'Conocer el número de Proyectos de investigacion presentados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'N° de proyectos de investigación',
+                'cod_ind_inicial' => 'IND-047',
+                'cod_ind_final' => 'IND-047-INV-ENF',
+                'formula' => 'X = N° de Proyectos de invetigacion presentados por programa',
+                'minimo' => 2,
+                'satisfactorio' => 4,
+                'sobresaliente' => 6,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Conocer el número de Proyectos de investigacion presentados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'N° de proyectos de investigación',
+                'cod_ind_inicial' => 'IND-047',
+                'cod_ind_final' => 'IND-047-INV-OBS',
+                'formula' => 'X = N° de Proyectos de invetigacion presentados por programa',
+                'minimo' => 2,
+                'satisfactorio' => 4,
+                'sobresaliente' => 6,
+                'proceso_id' => 8, //DB: procesos: 8:Investigacion
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+
+        ];
+
+
         \App\Models\Indicador::insert($indicadoresRRSS_Facultad);
         \App\Models\Indicador::insert($indicadoresRRSS_Escuela);
+        \App\Models\Indicador::insert($indicadoresInvEscuela);
     }
 }

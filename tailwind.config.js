@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
     mode: '',
@@ -15,78 +16,12 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'blue': {
-                    '50': '#F0F9FF',
-                    '100': '#E0F2FE',
-                    '200': '#BAE6FD',
-                    '300': '#7DD3FC',
-                    '400': '#38BDF8',
-                    '500': '#0EA5E9',
-                    '600': '#0284C7',
-                    '700': '#0369A1',
-                    '800': '#075985',
-                    '900': '#0C4A6E'
-                },
-                'red': {
-                    '50': '#FFF1F2',
-                    '100': '#FFE4E6',
-                    '200': '#FECDD3',
-                    '300': '#FDA4AF',
-                    '400': '#FB7185',
-                    '500': '#F43F5E',
-                    '600': '#E11D48',
-                    '700': '#BE123C',
-                    '800': '#9F1239',
-                    '900': '#881337'
-                },
-                'gray': {
-                    '50': '#F9FAFB',
-                    '100': '#F3F4F6',
-                    '200': '#E5E7EB',
-                    '300': '#D1D5DB',
-                    '400': '#9CA3AF',
-                    '500': '#6B7280',
-                    '600': '#4B5563',
-                    '700': '#374151',
-                    '800': '#1F2937',
-                    '900': '#111827'
-                },
-                'yellow': {
-                    '50': '#FFFBEB',
-                    '100': '#FEF3C7',
-                    '200': '#FDE68A',
-                    '300': '#FCD34D',
-                    '400': '#FBBF24',
-                    '500': '#F59E0B',
-                    '600': '#D97706',
-                    '700': '#B45309',
-                    '800': '#92400E',
-                    '900': '#78350F'
-                },
-                'lime': {
-                    '50': '#F7FEE7',
-                    '100': '#ECFCCB',
-                    '200': '#D9F99D',
-                    '300': '#BEF264',
-                    '400': '#A3E635',
-                    '500': '#84CC16',
-                    '600': '#65A30D',
-                    '700': '#4D7C0F',
-                    '800': '#3F6212',
-                    '900': '#365314'
-                },
-                'orange': {
-                    '50': '#FFF7ED',
-                    '100': '#FFEDD5',
-                    '200': '#FED7AA',
-                    '300': '#FDBA74',
-                    '400': '#FB923C',
-                    '500': '#F97316',
-                    '600': '#EA580C',
-                    '700': '#C2410C',
-                    '800': '#9A3412',
-                    '900': '#7C2D12'
-                },
+                'blue': colors.sky,
+                'red': colors.rose,
+                'gray': colors.blueGray,
+                'yellow': colors.amber,
+                'lime': colors.lime,
+                'orange': colors.orange,
             }
         },
     },
@@ -97,5 +32,10 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/line-clamp'),
+    ],
 };

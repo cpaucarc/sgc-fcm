@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Actividad;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,6 +18,9 @@ class DatabaseSeeder extends Seeder
 
         Storage::deleteDirectory('/public/salidas');
         Storage::deleteDirectory('/public/entradas');
+        Storage::deleteDirectory('/public/investigadores');
+
+        Storage::makeDirectory('/public/investigadores');
 
         $this->call(CicloSeeder::class);
         $this->call(FacultadSeeder::class);
@@ -52,9 +54,24 @@ class DatabaseSeeder extends Seeder
         $this->call(DocenteSeeder::class);
         $this->call(EstudianteSeeder::class);
         $this->call(IndicadorSeeder::class);
-        \App\Models\ResponsabilidadSocial::factory(50)->create();
+        \App\Models\ResponsabilidadSocial::factory(150)->create();
 
         $this->call(PreguntaSeeder::class);
 
+        /* Investigacion */
+        $this->call(AreaInvestigacionSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        $this->call(EstadoInvestigacionSeeder::class);
+        $this->call(FinanciadorSeeder::class);
+        $this->call(GradoAcademicoSeeder::class);
+
+        $this->call(LineaInvestigacionSeeder::class);
+
+        $this->call(SublineaInvestigacionSeeder::class);
+
+        \App\Models\Investigacion::factory(200)->create();
+        \App\Models\Investigador::factory(100)->create();
+        \App\Models\FinanciadorInvestigacion::factory(100)->create();
+        \App\Models\InvestigadorInvestigacion::factory(50)->create();
     }
 }
