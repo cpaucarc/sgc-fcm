@@ -2,7 +2,7 @@
     <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-6 lg:w-9/12 mx-auto">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-xl font-bold leading-6 font-medium text-gray-900">
-                Título profesional
+                Sustentación de tesis
             </h3>
             <p class="mt-1 max-w-2xl text-gray-500">
                 Vista detalle
@@ -49,8 +49,11 @@
                         Asesor
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $sustentaciones->tesis->asesor->docente->persona->nombres }}
                         {{ $sustentaciones->tesis->asesor->docente->persona->apellidos }}
+                        {{ $sustentaciones->tesis->asesor->docente->persona->nombres }}
+                        <span class="text-gray-600 ml-2">
+                            [ Cod. {{ $sustentaciones->tesis->asesor->docente->codigo }}]
+                        </span>
                     </dd>
                 </div>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -75,8 +78,7 @@
                         Fechas de sustentación
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <span class="block">Fecha:
-                            {{ $sustentaciones->fecha }}</span>
+                        <span class="block"> {{ $sustentaciones->fecha }}</span>
                     </dd>
                 </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -84,21 +86,19 @@
                         Jurados
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <div class="ml-6 my-2 text-gray-600" x-transition:enter.duration.500ms
-                            x-transition:leave.duration.400ms>
+                        <div class="my-2 text-gray-600">
                             <table class="table-auto text-xs md:text-sm">
                                 <tbody>
                                     @foreach ($sustentaciones->jurado_sustentacion as $i => $jsus)
                                         <tr>
                                             <td class="pr-4 py-1">{{ $i + 1 }}</td>
-                                            <td class="pr-4 py-1">{{ $jsus->jurado->docente->persona->nombres }}
+                                            <td class="pr-4 py-1">{{ $jsus->jurado->docente->persona->apellidos }}
                                                 {{ $jsus->jurado->docente->persona->nombres }}</td>
 
-                                            <td class="px-4 py-1">{{ $jsus->jurado->docente->codigo }}</td>
-                                            <td class="px-4 py-1">{{ $jsus->cargo_jurado->nombre }}</td>
+                                            <td class="px-4 py-1">Cod. {{ $jsus->jurado->docente->codigo }}</td>
+                                            <td class="px-4 py-1">Rol. {{ $jsus->cargo_jurado->nombre }}</td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -109,18 +109,18 @@
                         Tesistas
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        <div class="ml-6 my-2 text-gray-600" x-transition:enter.duration.500ms
-                            x-transition:leave.duration.400ms>
+                        <div class="my-2 text-gray-600">
                             <table class="table-auto text-xs md:text-sm">
                                 <tbody>
                                     @foreach ($sustentaciones->tesis->bachiller_tesis as $i => $btes)
                                         <tr>
                                             <td class="pr-4 py-1">{{ $i + 1 }}</td>
                                             <td class="pr-4 py-1">
-                                                {{ $btes->bachiller->estudiante->persona->nombres }}
+                                                {{ $btes->bachiller->estudiante->persona->apellidos }}
                                                 {{ $btes->bachiller->estudiante->persona->nombres }}</td>
 
-                                            <td class="px-4 py-1">{{ $btes->bachiller->estudiante->codigo }}</td>
+                                            <td class="px-4 py-1">Cod. {{ $btes->bachiller->estudiante->codigo }}
+                                            </td>
                                         </tr>
                                     @endforeach
 
@@ -130,7 +130,7 @@
                     </dd>
                 </div>
 
-              {{--   <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                {{-- <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="font-medium text-gray-500">
                         Documentos {{ $sustentaciones->tesis->documento_tesis->count() }}
                     </dt>

@@ -4,7 +4,7 @@
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
                     <h3 class="text-xl font-bold leading-6 text-gray-800">
-                        Titulo Profesional
+                        Sustentación de tesis
                     </h3>
                     <p class="mt-1 text-sm text-gray-600">
                         This information will be displayed publicly so be careful what you share.
@@ -137,6 +137,24 @@
                                 <x-jet-input-error for="asesor">{{ $message }}</x-jet-input-error>
                             @enderror
                         </div>
+
+                    </div>
+                    <x-slot name="footer">
+                        <div class="group flex items-start gap-x-4 text-gray-500">
+                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p class="text-sm">
+                                Es necesrio que agregue un docente como asesor. Para todo proyecto de investigación de
+                                tesis es necesario asignar un docente asesor.
+                            </p>
+                        </div>
+                    </x-slot>
+                </x-card>
+                <x-card>
+                    <div class="space-y-6">
                         {{-- Estudiante Bachiller --}}
                         <div>
                             <x-jet-label for="bachiller">{{ __('Estudiante Bachiller') }}</x-jet-label>
@@ -179,23 +197,6 @@
                                 <x-jet-input-error for="bachiller">{{ $message }}</x-jet-input-error>
                             @enderror
                         </div>
-                    </div>
-                    <x-slot name="footer">
-                        <div class="group flex items-start gap-x-4 text-gray-500">
-                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <p class="text-sm">
-                                Puede agregar un docente asesor, un estudiante de tesis o más, pero es
-                                necesario que exista al menos uno de ellos.
-                            </p>
-                        </div>
-                    </x-slot>
-                </x-card>
-                <x-card>
-                    <div class="space-y-6">
                         {{-- Docente Jurado --}}
                         <div>
                             <x-jet-label for="jurado">{{ __('Docente Jurado') }}</x-jet-label>
@@ -246,17 +247,19 @@
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <p class="text-sm">
-                                Puede agregar un docente jurado o más, pero es
-                                necesario que exista al menos uno.
+                                Puede agregar un estudíante como tesista, pero es
+                                necesario que exista al menos uno. También puede agregar un docente como presidente, uno
+                                como secretario y otro como vocal, es necesario que exista docentes que ocupen los tres
+                                roles.
                             </p>
                         </div>
                     </x-slot>
                 </x-card>
                 <x-card>
                     <div class="flex justify-end space-x-4">
-                        <x-jet-button wire:click="registrarRRSS" wire:target="registrarRRSS"
+                        <x-jet-button wire:click="registrarTTPP" wire:target="registrarTTPP"
                             wire:loading.class="bg-gray-800" wire:loading.attr="disabled">
-                            <svg wire:loading wire:target="registrarRRSS"
+                            <svg wire:loading wire:target="registrarTTPP"
                                 class="animate-spin -ml-1 mr-3 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                     stroke-width="4"></circle>

@@ -6,7 +6,6 @@
                 <button type="button"
                     class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Ciclo {{ $ciclo_sel->nombre }}
-
                     <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -31,7 +30,6 @@
                 <button type="button"
                     class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Mostrar {{ $cantidad }} registros
-
                     <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -84,30 +82,21 @@
             <x-slot name="head">
                 <tr>
                     <th scope="col" wire:click="sortBy('telefono')"
-                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-28">
                         <div class="flex items-center justify-between">
-                            <span>Registro</span>
-                            {{-- @if ($sort === 'telefono') --}}
-                            {{-- <x-sort-by type="number" direction="{{$direction}}"/> --}}
-                            {{-- @endif --}}
+                            <span>N° Registro</span>
                         </div>
                     </th>
                     <th scope="col" wire:click="sortBy('nombre')"
                         class="cursor-pointer px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         <div class="flex items-center justify-between">
                             <span>Tesis</span>
-                            {{-- @if ($sort === 'nombre') --}}
-                            {{-- <x-sort-by type="alpha" direction="{{$direction}}"/> --}}
-                            {{-- @endif --}}
                         </div>
                     </th>
                     <th scope="col" wire:click="sortBy('telefono')"
                         class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         <div class="flex items-center justify-between">
                             <span>Escuela</span>
-                            {{-- @if ($sort === 'telefono') --}}
-                            {{-- <x-sort-by type="number" direction="{{$direction}}"/> --}}
-                            {{-- @endif --}}
                         </div>
                     </th>
                     <th scope="col" wire:click="sortBy('ubicacion')"
@@ -115,9 +104,6 @@
 
                         <div class="flex items-center justify-between ">
                             <span>Asesor</span>
-                            {{-- @if ($sort === 'direccion') --}}
-                            {{-- <x-sort-by type="alpha" direction="{{$direction}}"/> --}}
-                            {{-- @endif --}}
                         </div>
                     </th>
                     <th scope="col"
@@ -131,31 +117,24 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($ttpp as $tp)
-                    <tr>
+                    <tr class="items-center">
                         <td class="px-4 py-4 text-sm font-medium text-gray-900 tracking-wide">
-                            {{ $tp->tesis->numero_registro }}
+                            {{ $tp->numero_registro }}
                         </td>
                         <td class="px-2 py-4">
-                            {{ $tp->tesis->titulo }}
+                            {{ $tp->titulo }}
                         </td>
                         <td class="px-2 py-4">
-                            {{-- {{ $tp->lugar }} --}}
-                            {{ $tp->escuela->nombre }}
+                            {{ $tp->nombre }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap hidden lg:table-cell">
                             <div class="flex items-center my-auto">
-                                {{-- @if ($tp->empresa)
-                                    {{ $tp->empresa->nombre }}
-                                @else
-                                    {{ __('---') }}
-                                @endif --}}
-                                {{ $tp->tesis->asesor->docente->persona->nombres }}
-                                {{ $tp->tesis->asesor->docente->persona->apellidos }}
+                                {{ $tp->apellidos }}
+                                {{ $tp->nombres }}
                             </div>
                         </td>
-                        {{-- titulo, lugar, ciclo, empresa, estado, btn --}}
                         <td class="px-2 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                            @if ($tp->declaracion->nombre === 'Aprobado')
+                            @if ($tp->nombre === 'Aprobado')
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     Aprobado
@@ -167,8 +146,7 @@
                                 </span>
                             @endif
                         </td>
-                        <td
-                            class="group px-2 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-x-2 justify-end">
+                        <td class="group px-2 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-x-2 my-4 ">
 
                             <a href="#"
                                 class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-blue-100 hover:text-blue-800">
