@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bachiller;
 
 class Estudiante extends Model
 {
@@ -17,6 +18,11 @@ class Estudiante extends Model
         return $this->belongsTo(Persona::class);
     }
 
+
+    //Relacion de uno a uno
+    public function bachiller(){
+        return $this->hasOne(Bachiller::class);
+    }
     public function escuela()
     {
         return $this->belongsTo(Escuela::class);

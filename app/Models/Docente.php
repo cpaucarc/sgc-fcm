@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Persona;
+use App\Models\Asesor;
+use App\Models\Jurado;
 
 class Docente extends Model
 {
@@ -16,9 +19,21 @@ class Docente extends Model
     {
         return $this->belongsTo(Persona::class);
     }
+    //Relación de uno a uno
+    public function asesor()
+    {
+        return $this->hasOne(Asesor::class);
+    }
+
+    //Relación de uno a uno
+    public function jurado()
+    {
+        return $this->hasOne(Jurado::class);
+    }
 
     public function escuela()
     {
         return $this->belongsTo(Escuela::class);
+
     }
 }

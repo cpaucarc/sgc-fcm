@@ -5,7 +5,10 @@ use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\InvestigacionController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
+use App\Http\Controllers\SustentacionController;
+
 use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,6 +61,18 @@ Route::prefix('investigacion')->group(function () {
     Route::get('/{id}', [InvestigacionController::class, 'mostrar'])
         ->name('investigacion.mostrar');
 });
+
+//Sustentaciones de titulación
+Route::prefix('titulos-profesionales')->group(function () {
+
+    Route::get('crear', [SustentacionController::class, 'registro'])
+        ->name('ttpp.registro');
+
+    Route::get('/{id?}', [SustentacionController::class, 'index'])
+        ->name('ttpp.index');
+
+});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
