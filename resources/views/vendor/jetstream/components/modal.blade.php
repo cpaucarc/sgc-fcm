@@ -48,14 +48,14 @@
     style="display: none;"
 >
     <div x-show="show" class="fixed inset-0 transform transition-all"
-         {{--    x-on:click="show = false"--}}
+         x-on:click="show = false"
          x-transition:enter="ease-out duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
          x-transition:leave="ease-in duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0">
-        <div class="absolute inset-0 bg-gray-500 opacity-75 blur backdrop-blur"></div>
+        <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
     </div>
 
     <div x-show="show"

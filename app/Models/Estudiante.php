@@ -18,8 +18,13 @@ class Estudiante extends Model
         return $this->belongsTo(Persona::class);
     }
 
+
     //Relacion de uno a uno
     public function bachiller(){
         return $this->hasOne(Bachiller::class);
+    }
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
     }
 }

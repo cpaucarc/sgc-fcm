@@ -4,11 +4,7 @@
 
         <div>
             <h3 class="ml-1 text-gray-600 font-bold text-lg">
-                Hay
-                <span class="text-gray-800">
-                            {{ $indicador->analisis->count() }}
-                        </span>
-                instancias de este indicador
+                Hay <span class="text-gray-800">{{ $indicador->analisis->count() }}</span>instancias de este indicador
             </h3>
         </div>
 
@@ -24,6 +20,8 @@
             @livewire('rrss.indicador.ind51', ['indicador' => $indicador->id])
         @elseif( $indicador->cod_ind_inicial === 'IND-052' )
             @livewire('rrss.indicador.ind52', ['indicador' => $indicador->id])
+        @else
+            @livewire('rrss.indicador.ind53', ['indicador' => $indicador->id])
         @endif
 
         {{-- FIN    Botones para crear nueva instancia de indicador --}}

@@ -30,4 +30,10 @@ class Docente extends Model
     {
         return $this->hasOne(Jurado::class);
     }
+
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
+
+    }
 }

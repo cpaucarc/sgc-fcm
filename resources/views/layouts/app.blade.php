@@ -36,8 +36,8 @@
     @livewire('navigation-menu')
     <!-- Page Heading -->
     @if (isset($header))
-        <header class="bg-white shadow-sm">
-            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <header class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
         </header>
@@ -48,7 +48,7 @@
         {{ $slot }}
     </main>
 
-    <footer class="border-t border-gray-200 text-center py-2 text-gray-500 text-sm bg-gray-100">
+    <footer class="border-t border-gray-300 text-center py-4 text-gray-600 text-sm bg-transparent">
         Copyright © Sistema Gestión de Calidad - Facultad de Ciencias Médicas
     </footer>
 </div>

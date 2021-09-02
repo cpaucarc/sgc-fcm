@@ -1,9 +1,14 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\EncuestaController;
+use App\Http\Controllers\InvestigacionController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
 use App\Http\Controllers\SustentacionController;
+
+use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +48,19 @@ Route::prefix('responsabilidad-social')->group(function () {
         ->name('rrss.index');
 });
 
+Route::prefix('investigacion')->group(function () {
+    Route::get('/', [InvestigacionController::class, 'index'])
+        ->name('investigacion.index');
+    Route::get('investigadores', [InvestigacionController::class, 'investigadores'])
+        ->name('investigacion.investigadores');
+
+    Route::get('indicadores', [InvestigacionController::class, 'indicadores'])
+        ->name('investigacion.indicadores');
+    Route::get('indicador/{id}', [InvestigacionController::class, 'indicador'])
+        ->name('investigacion.indicador');
+    Route::get('/{id}', [InvestigacionController::class, 'mostrar'])
+        ->name('investigacion.mostrar');
+});
 
 //Sustentaciones de titulación
 Route::prefix('titulos-profesionales')->group(function () {
@@ -63,3 +81,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('storage/{file}', function ($file) {
     return Storage::response($file);
 })->name('documentos');
+
+Route::prefix('encuestas')->group(function () {
+    Route::get('/rsu/{sha}', [EncuestaController::class, 'rrss'])
+        ->name('encuesta.rrss');
+    Route::get('/agradecimiento', [EncuestaController::class, 'agradecimiento'])
+        ->name('encuesta.agradecimiento');
+});

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Indicador;
 use App\Models\ResponsabilidadSocial;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ResponsabilidadSocialController extends Controller
 {
@@ -47,9 +49,37 @@ class ResponsabilidadSocialController extends Controller
 
     public function indicadores()
     {
-        //procesos: 9 - Responsabilidad Social
-        $indicadores = Indicador::where('proceso_id', '=', 9)->get();
-        return view('rrss.indicadores', compact('indicadores'));
+        $proceso = 9;  //BD-Tabla: procesos: 9 -> Responsabilidad Social
+        // $indicadores = Indicador::where('proceso_id', '=', $proceso)->get();
+        $facultad = Auth::user()->roles[0]->oficina->facultad;
+        $lista = array();
+
+        $lista_fac = DB::table('indicadores')
+            ->select('*')
+            ->whereNull('escuela_id')
+            ->where('facultad_id', $facultad->id)
+            ->where('proceso_id', $proceso)
+            ->orderBy('cod_ind_inicial')
+            ->get();
+
+        array_push($lista, array(
+            "nombre" => $facultad->nombre,
+            "items" => $lista_fac
+        ));
+
+        foreach ($facultad->escuelas as $escuela) {
+            array_push($lista, array(
+                "nombre" => $escuela->nombre,
+                "items" => DB::table('indicadores')
+                    ->select('*')
+                    ->where('escuela_id', $escuela->id)
+                    ->where('proceso_id', $proceso)
+                    ->orderBy('cod_ind_inicial')
+                    ->get()
+            ));
+        }
+
+        return view('rrss.indicadores', compact('lista'));
     }
 
     public function indicador($id)
