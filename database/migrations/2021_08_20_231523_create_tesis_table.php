@@ -15,7 +15,7 @@ class CreateTesisTable extends Migration
     {
         Schema::create('tesis', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_registro')->nullable()->unique();
+            $table->string('numero_registro')->unique()->nullable();
             $table->text('titulo')->nullable();
             $table->string('anio', 4)->nullable();
             $table->unsignedBigInteger('asesor_id')->nullable();

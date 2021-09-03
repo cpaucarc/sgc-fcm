@@ -22,7 +22,7 @@ class SustentacionFactory extends Factory
     public function definition()
     {
         return [
-            'fecha' => $this->faker->dateTimeBetween('2001-01-01 00:00:00', 'now'),
+            'fecha_sustentacion' => $this->faker->dateTimeBetween('2001-01-01 00:00:00', 'now')->format("Y-m-d"),
             'tesis_id' => $this->faker->numberBetween(1, 20),
             'escuela_id' => $this->faker->numberBetween(1, 2),
             'ciclo_id' => $this->faker->numberBetween(1, 2),

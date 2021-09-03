@@ -248,9 +248,7 @@
                             </svg>
                             <p class="text-sm">
                                 Puede agregar un estudíante como tesista, pero es
-                                necesario que exista al menos uno. También puede agregar un docente como presidente, uno
-                                como secretario y otro como vocal, es necesario que exista docentes que ocupen los tres
-                                roles.
+                                necesario que exista al menos uno. También puede agregar un docente como presidente Jurado.
                             </p>
                         </div>
                     </x-slot>

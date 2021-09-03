@@ -125,7 +125,7 @@
                             {{ $tp->titulo }}
                         </td>
                         <td class="px-2 py-4">
-                            {{ $tp->nombre }}
+                            {{ $tp->escuela }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap hidden lg:table-cell">
                             <div class="flex items-center my-auto">
@@ -134,7 +134,7 @@
                             </div>
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                            @if ($tp->nombre === 'Aprobado')
+                            @if ($tp->declaracion === 'Aprobado')
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     Aprobado

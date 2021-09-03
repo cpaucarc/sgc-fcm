@@ -15,7 +15,7 @@ class CreateSustentacionesTable extends Migration
     {
         Schema::create('sustentaciones', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
+            $table->date('fecha_sustentacion');
             $table->unsignedBigInteger('tesis_id')->nullable();
             $table->unsignedBigInteger('escuela_id')->nullable();
             $table->unsignedBigInteger('ciclo_id')->nullable();
