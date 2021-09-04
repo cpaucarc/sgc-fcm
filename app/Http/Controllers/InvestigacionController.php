@@ -31,38 +31,4 @@ class InvestigacionController extends Controller
         return view('investigacion.investigadores');
     }
 
-    public function indicadores()
-    {
-        $proceso = 8;  //BD-Tabla: procesos: 9 -> Proy Investigacion
-        $facultad = Auth::user()->roles[0]->oficina->facultad;
-        $lista = array();
-
-        foreach ($facultad->escuelas as $escuela) {
-            array_push($lista, array(
-                "nombre" => $escuela->nombre,
-                "items" => DB::table('indicadores')
-                    ->select('*')
-                    ->where('escuela_id', $escuela->id)
-                    ->where('proceso_id', $proceso)
-                    ->orderBy('cod_ind_inicial')
-                    ->get()
-            ));
-        }
-
-        return view('indicador.investigacion.index', compact('lista'));
-    }
-
-    public function indicador($id)
-    {
-        if (!isset($id)) {
-            return view('investigacion.index');
-        }
-
-        $indicador = Indicador::find($id);
-        if ($indicador) {
-            return view('indicador.investigacion.indicador', compact('indicador'));
-        } else {
-            return view('investigacion.index');
-        }
-    }
 }

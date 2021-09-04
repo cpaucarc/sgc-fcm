@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Rrss\Indicador;
+namespace App\Http\Livewire\Indicador\Investigacion;
 
 use App\Models\AnalisisIndicador;
 use App\Models\Ciclo;
@@ -8,7 +8,7 @@ use App\Models\Indicador;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Ind52 extends Component
+class Ind47 extends Component
 {
     public $indicador, $mostrar = false, $ciclo;
 
@@ -45,35 +45,11 @@ class Ind52 extends Component
         $today = date('Y-m-d'); //Hoy
         $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses
 
-        if ($this->indicador->escuela_id) {
-            //Datos por escuela
-            $rs = DB::table('responsabilidad_social')->select('id')
-                ->where('escuela_id', $this->indicador->escuela_id)
-                ->whereBetween('fecha_inicio', [$from, $today])
-                ->distinct()
-                ->get();
-            $this->resultado = $rs->count();
-
-        } else {
-            //Datos de la facultad
-            $rs = DB::table('responsabilidad_social')->select('id')
-                ->whereIn('escuela_id', function ($query) {
-                    $query->select('id')
-                        ->from('escuelas')
-                        ->where('facultad_id', $this->indicador->facultad_id);
-                })
-                ->whereBetween('fecha_inicio', [$from, $today])
-                ->distinct()
-                ->get();
-            $this->resultado = $rs->count();
-
-            /*
-             -- Estudiantes de FCM
-            select id from responsabilidad_social
-                and escuela_id in (select id from escuelas where facultad_id = 1)
-                and fecha_inicio between date_sub(curdate(), interval 6 month) and curdate();
-            */
-        }
+        //Datos por escuela
+        $this->resultado = DB::table('investigaciones')->select('1')
+            ->where('escuela_id', $this->indicador->escuela_id)
+            ->whereBetween('created_at', [$from, $today])
+            ->count();
     }
 
     public function enviarInformacion()
@@ -116,8 +92,7 @@ class Ind52 extends Component
             'satisfactorio' => $this->sat,
             'sobresaliente' => $this->sob,
             'resultado' => $this->resultado,
-            'indicador_id' => $this->indicador->id,
-            'ciclo_id' => 2 //ToDo: Borrar despues (la migracion se cambio a nullable())
+            'indicador_id' => $this->indicador->id
         ]);
         //, interes, total, ,
 
@@ -156,6 +131,7 @@ class Ind52 extends Component
     public function render()
     {
         $this->enviarInformacion();
-        return view('livewire.rrss.indicador.ind52');
+        return view('livewire.indicador.investigacion.ind47');
     }
+
 }
