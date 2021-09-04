@@ -69,9 +69,24 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SublineaInvestigacionSeeder::class);
 
+
+        //Títulos profesionales
+        $this->call(CargoJuradoSeeder::class);
+        $this->call(TipoTesisSeeder::class);
+        $this->call(DeclaracionSeeder::class);
+        $this->call(AsesorSeeder::class);
+        $this->call(JuradoSeeder::class);
+        $this->call(BachillerSeeder::class);
+        \App\Models\Tesis::factory(20)->create();
+        \App\Models\Sustentacion::factory(20)->create();
+        \App\Models\BachillerTesis::factory(50)->create();
+        \App\Models\JuradoSustentacion::factory(50)->create();
+
+      //Investigación
         \App\Models\Investigacion::factory(200)->create();
         \App\Models\Investigador::factory(100)->create();
         \App\Models\FinanciadorInvestigacion::factory(100)->create();
         \App\Models\InvestigadorInvestigacion::factory(50)->create();
+
     }
 }
