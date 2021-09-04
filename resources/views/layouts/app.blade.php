@@ -8,7 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
+    <link rel="mask-icon" type="image/svg+xml" href="{{ asset('icons/laravel.svg') }}" color="#E11D48">
+{{--    <link rel="mask-icon" href="{{ asset('icons/laravel.svg') }}" color="#ff8a01">--}}
+<!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     {{-- fontawsome --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"

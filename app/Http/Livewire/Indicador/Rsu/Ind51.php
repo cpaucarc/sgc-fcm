@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Rrss\Indicador;
+namespace App\Http\Livewire\Indicador\Rsu;
 
 use App\Models\AnalisisIndicador;
 use App\Models\Ciclo;
@@ -8,13 +8,13 @@ use App\Models\Indicador;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Ind48 extends Component
+class Ind51 extends Component
 {
     public $indicador, $mostrar = false, $ciclo;
 
     public $min, $sat, $sob;
 
-    public $resultado, $guardar = false;
+    public $interes, $total, $resultado, $guardar = false;
 
     public $elaborador, $revisador, $aprobador;
 
@@ -44,7 +44,7 @@ class Ind48 extends Component
     {
         if ($this->indicador->escuela_id) {
             //Datos por escuela
-            $ps = DB::table('participante_rrss')->select('estudiante_id')
+            $docentes = DB::table('participante_rrss')->select('estudiante_id')
                 ->whereNotNull('estudiante_id')
                 ->whereIn('estudiante_id', function ($query) {
                     $query->select('id')
@@ -53,18 +53,35 @@ class Ind48 extends Component
                         ->where('estado', 1);
                 })
                 ->whereIn('responsabilidad_social_id', function ($query) {
+                    $today = date('Y-m-d'); //Hoy
+                    $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses
+
                     $query->select('id')
                         ->from('responsabilidad_social')
-                        ->where('ciclo_id', $this->ciclo->id);
+                        ->whereBetween('fecha_inicio', [$from, $today]);
                 })
                 ->distinct()
                 ->get();
-            $this->resultado = $ps->count();
+            $this->interes = $docentes->count();
 
+            $docentes_fac = DB::table('estudiantes')->select('id')
+                ->where('escuela_id', $this->indicador->escuela_id)
+                ->where('estado', 1)
+                ->distinct()
+                ->get();
+            $this->total = $docentes_fac->count();
+            /*            /*
+                    # Docentes de enfermeria que participaron en RSU
+                    select distinct docente_id from participante_rrss
+                        where docente_id is not null
+                        and docente_id in (select id from docentes where escuela_id = 1 and estado = 1)
+                        and responsabilidad_social_id in (select id from responsabilidad_social where ciclo_id = 2);
+                    # Total de docentes de enfermeria
+                    select * from docentes where estado = 1 and escuela_id = 1;
+                        */
         } else {
             //Datos de la facultad
-
-            $ps = DB::table('participante_rrss')->select('estudiante_id')
+            $docentes_rsu = DB::table('participante_rrss')->select('estudiante_id')
                 ->whereNotNull('estudiante_id')
                 ->whereIn('estudiante_id', function ($query) {
                     $query->select('id')
@@ -77,22 +94,40 @@ class Ind48 extends Component
                         ->where('estado', 1);
                 })
                 ->whereIn('responsabilidad_social_id', function ($query) {
+                    $today = date('Y-m-d'); //Hoy
+                    $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses
+
                     $query->select('id')
                         ->from('responsabilidad_social')
-                        ->where('ciclo_id', $this->ciclo->id);
+                        ->whereBetween('fecha_inicio', [$from, $today]);
                 })
                 ->distinct()
                 ->get();
-            $this->resultado = $ps->count();
+            $this->interes = $docentes_rsu->count();
+
+            $docentes_fac = DB::table('estudiantes')->select('id')
+                ->whereIn('escuela_id', function ($q2) {
+                    $q2->select('id')
+                        ->from('escuelas')
+                        ->where('facultad_id', $this->indicador->facultad_id);
+                })
+                ->where('estado', 1)
+                ->distinct()
+                ->get();
+            $this->total = $docentes_fac->count();
             /*
-             -- Estudiantes de FCM
-            select distinct estudiante_id from participante_rrss where estudiante_id IS NOT NULL
-                and estudiante_id IN (select id from estudiantes
-                    where escuela_id in (select id from escuelas where facultad_id = 1)
-                        and estado = 0)
-                and responsabilidad_social_id IN (select id from responsabilidad_social where ciclo_id = 2);
+        # Docentes de FCM que participaron en RSU
+        select distinct docente_id from participante_rrss
+            where docente_id is not null
+            and docente_id in (select id from docentes where escuela_id in (select id from escuelas where facultad_id = 1) and estado = 1)
+            and responsabilidad_social_id in (select id from responsabilidad_social where ciclo_id = 2);
+        # Total de docentes de FCM
+        select * from docentes where estado = 1 and escuela_id in (select id from escuelas where facultad_id = 1);
             */
         }
+
+        $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
+
     }
 
     public function enviarInformacion()
@@ -134,11 +169,11 @@ class Ind48 extends Component
             'minimo' => $this->min,
             'satisfactorio' => $this->sat,
             'sobresaliente' => $this->sob,
+            'interes' => $this->interes,
+            'total' => $this->total,
             'resultado' => $this->resultado,
             'indicador_id' => $this->indicador->id,
-            'ciclo_id' => 2 //ToDo: Borrar despues (la migracion se cambio a nullable())
         ]);
-        //, interes, total, ,
 
         if ($this->analisis) {
             $analisis_indicador->interpretacion = $this->analisis;
@@ -175,6 +210,6 @@ class Ind48 extends Component
     public function render()
     {
         $this->enviarInformacion();
-        return view('livewire.rrss.indicador.ind48');
+        return view('livewire.indicador.rsu.ind51');
     }
 }

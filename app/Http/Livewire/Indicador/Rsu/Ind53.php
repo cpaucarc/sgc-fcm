@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Rrss\Indicador;
+namespace App\Http\Livewire\Indicador\Rsu;
 
 use App\Models\AnalisisIndicador;
 use App\Models\Ciclo;
 use App\Models\Indicador;
 use App\Models\RRSSRespuesta;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Ind53 extends Component
@@ -174,7 +173,6 @@ class Ind53 extends Component
             'total' => $this->total,
             'resultado' => $this->resultado,
             'indicador_id' => $this->indicador->id,
-            'ciclo_id' => 2 //ToDo: Borrar despues (la migracion se cambio a nullable())
         ]);
 
         if ($this->analisis) {
@@ -212,6 +210,6 @@ class Ind53 extends Component
     public function render()
     {
         $this->enviarInformacion();
-        return view('livewire.rrss.indicador.ind53');
+        return view('livewire.indicador.rsu.ind53');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\EncuestaController;
+use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\InvestigacionController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
@@ -38,9 +39,6 @@ Route::prefix('responsabilidad-social')->group(function () {
     Route::get('indicadores', [ResponsabilidadSocialController::class, 'indicadores'])
         ->name('rrss.indicadores');
 
-    Route::get('indicador/{id}', [ResponsabilidadSocialController::class, 'indicador'])
-        ->name('rrss.indicador');
-
     Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
         ->name('rrss.index');
 });
@@ -53,10 +51,17 @@ Route::prefix('investigacion')->group(function () {
 
     Route::get('indicadores', [InvestigacionController::class, 'indicadores'])
         ->name('investigacion.indicadores');
-    Route::get('indicador/{id}', [InvestigacionController::class, 'indicador'])
-        ->name('investigacion.indicador');
     Route::get('/{id}', [InvestigacionController::class, 'mostrar'])
         ->name('investigacion.mostrar');
+});
+
+Route::prefix('indicadores')->group(function () {
+    Route::get('/', [IndicadorController::class, 'index'])
+        ->name('indicadores.index');
+    Route::get('indicadores/{id}/{nombre}', [IndicadorController::class, 'indicadores'])
+        ->name('indicadores.indicadores');
+    Route::get('{id}/{nombre}', [IndicadorController::class, 'indicador'])
+        ->name('indicadores.indicador');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
