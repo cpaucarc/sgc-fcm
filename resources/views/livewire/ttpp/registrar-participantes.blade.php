@@ -2,29 +2,27 @@
     <x-card>
         <x-slot name="header">
             <h1 class="font-bold text-gray-800 text-lg">
-                Agregar participantes a la responsabilidad social
-
-                <span class="text-gray-600 ml-2">
-                    [ N° Registro {{ $sustentaciones->tesis->asesor->docente->codigo }}]
+                Agregar participantes a la Sutentación de Tesis
+                <span class="text-blue-900 italic">
+                    "{{ $ttpp->titulo }}"
                 </span>
-                <span class="text-blue-900 italic">"{{ $ttpp->titulo }}"</span>
             </h1>
         </x-slot>
 
-        <h1 class="font-bold text-gray-500 mb-2">Jurados</h1>
+        <h1 class="font-bold text-gray-500 mb-2">Responsable(s)</h1>
         <div class="flex items-center gap-x-4">
-            @if ($ttpp->docente)
+            @if ($rrss->docente)
                 <div class="px-4 py-2 text-blue-800 bg-blue-100 rounded-md flex-1">
-                    Precidente: {{ $rrss->docente->persona->apellidos }} {{ $rrss->docente->persona->nombres }}
+                    Docente: {{ $rrss->docente->persona->apellidos }} {{ $rrss->docente->persona->nombres }}
                 </div>
             @endif
-            @if ($ttpp->estudiante)
+            @if ($rrss->estudiante)
                 <div class="px-4 py-2 text-yellow-800 bg-yellow-100 rounded-md flex-1">
-                    Estudiante: {{ $rrss->estudiante->persona->apellidos }}
-                    {{ $rrss->estudiante->persona->nombres }}
+                    Estudiante: {{ $rrss->estudiante->persona->apellidos }} {{ $rrss->estudiante->persona->nombres }}
                 </div>
             @endif
         </div>
+
     </x-card>
 
     <div>

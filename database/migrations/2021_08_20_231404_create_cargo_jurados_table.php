@@ -15,7 +15,7 @@ class CreateCargoJuradosTable extends Migration
     {
         Schema::create('cargo_jurados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
+            $table->string('nombre');
         });
     }
 

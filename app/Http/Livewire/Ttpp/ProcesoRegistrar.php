@@ -6,8 +6,8 @@ use Livewire\Component;
 
 class ProcesoRegistrar extends Component
 {
-    public $paso1 = true; //Registrar RRSS
-    public $paso2 = false; //Registrar participantes RRSS
+    public $paso1 = true; //Registrar ttpp
+    public $paso2 = false; //Registrar participantes ttpp
     public $ttpp_id = 0;
 
     protected $listeners = [

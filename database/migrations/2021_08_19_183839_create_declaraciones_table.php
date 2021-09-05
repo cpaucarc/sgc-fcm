@@ -15,7 +15,7 @@ class CreateDeclaracionesTable extends Migration
     {
         Schema::create('declaraciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 15)->nullable();
+            $table->string('nombre', 15);
         });
     }
 

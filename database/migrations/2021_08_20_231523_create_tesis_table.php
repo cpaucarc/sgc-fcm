@@ -15,11 +15,11 @@ class CreateTesisTable extends Migration
     {
         Schema::create('tesis', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_registro')->unique()->nullable();
-            $table->text('titulo')->nullable();
-            $table->string('anio', 4)->nullable();
-            $table->unsignedBigInteger('asesor_id')->nullable();
-            $table->unsignedBigInteger('tipo_tesis_id')->nullable();
+            $table->string('numero_registro')->unique();
+            $table->text('titulo');
+            $table->string('anio', 4);
+            $table->unsignedBigInteger('asesor_id');
+            $table->unsignedBigInteger('tipo_tesis_id');
             $table->foreign('asesor_id')->references('id')->on('asesores');
             $table->foreign('tipo_tesis_id')->references('id')->on('tipo_tesis');
         });

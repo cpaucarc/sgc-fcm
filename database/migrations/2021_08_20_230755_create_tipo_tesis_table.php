@@ -15,7 +15,7 @@ class CreateTipoTesisTable extends Migration
     {
         Schema::create('tipo_tesis', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
+            $table->string('nombre');
         });
     }
 
