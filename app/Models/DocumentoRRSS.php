@@ -9,7 +9,7 @@ class DocumentoRRSS extends Model
 {
     use HasFactory;
 
-    public $table = "documento_rrss";
+    protected $table = "documento_rrss";
     public $timestamps = false;
     public $fillable = ['responsabilidad_social_id', 'documento_id'];
 

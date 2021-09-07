@@ -96,10 +96,7 @@
                     {{ $sld->nombre }}
                 </h1>
                 <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
                 </button>
             </x-slot>
             <x-slot name="content">

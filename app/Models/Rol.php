@@ -9,7 +9,7 @@ class Rol extends Model
 {
     use HasFactory;
 
-    public $table = "roles";
+    protected $table = "roles";
     public $timestamps = false;
     public $fillable = ['user_id', 'oficina_id', 'entidad_id'];
 

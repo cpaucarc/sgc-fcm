@@ -13,7 +13,7 @@ class Sustentacion extends Model
 {
     use HasFactory;
 
-    public $table = "sustentaciones";
+    protected $table = "sustentaciones";
     public $timestamps = false;
     public $fillable = ['fecha', 'tesis_id', 'escuela_id', 'ciclo_id', 'declaracion_id'];
 

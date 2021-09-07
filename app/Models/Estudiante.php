@@ -11,7 +11,7 @@ class Estudiante extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'estado', 'persona_id', 'escuela_id', 'facultad_id'];
+    public $fillable = ['codigo', 'estado_id', 'persona_id', 'escuela_id', 'facultad_id'];
 
     public function persona()
     {

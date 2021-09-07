@@ -9,12 +9,14 @@ use App\Models\Tesis;
 class TipoTesis extends Model
 {
     use HasFactory;
-    public $table = "tipo_tesis";
+
+    protected $table = "tipo_tesis";
     public $timestamps = false;
     public $fillable = ['nombre'];
 
     //Relacion uno a muchos
-    public function tesis(){
+    public function tesis()
+    {
         return $this->hasMany(Tesis::class);
     }
 }

@@ -10,5 +10,5 @@ class Frecuencia extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['nombre'];
+    public $fillable = ['nombre', 'tiempo_meses'];
 }

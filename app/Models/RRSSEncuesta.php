@@ -9,7 +9,7 @@ class RRSSEncuesta extends Model
 {
     use HasFactory;
 
-    public $table = "rrss_encuestas";
+    protected $table = "rrss_encuestas";
     public $timestamps = false;
     public $fillable = ['fecha_inicio', 'fecha_fin', 'link', 'responsabilidad_social_id'];
     public $dates = [

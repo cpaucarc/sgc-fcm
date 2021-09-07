@@ -21,7 +21,7 @@ class InvestigadorFactory extends Factory
      */
     public function definition()
     {
-        $esDocente = $this->faker->boolean(65);
+        $esDocente = $this->faker->boolean(65); //65% probab. de ser docente | 35% estudiante
 
         return [
             'correo' => $this->faker->email,

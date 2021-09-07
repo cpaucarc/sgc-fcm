@@ -33,12 +33,8 @@
         </div>
 
         <div class="flex items-center relative">
-            <label for="search"
-                   class="px-3 py-1 text-gray-400">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
+            <label for="search" class="px-3 py-1 text-gray-400">
+                <x-icons.search :stroke="1.75" class="h-6 w-6"/>
             </label>
             <input type="text" id="search" wire:model="search"
                    class="input-form-b py-1">
@@ -171,10 +167,7 @@
             <x-slot name="title">
                 <h1 class="font-bold">Editar datos de la empresa </h1>
                 <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
                 </button>
             </x-slot>
 

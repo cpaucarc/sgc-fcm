@@ -6,10 +6,7 @@
                 <button type="button"
                     class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Ciclo {{ $ciclo_sel->nombre }}
-                    <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                    </svg>
+                    <x-icons.dropdown :stroke="1.25" class="ml-1 -mr-0.5 h-4 w-4"/>
                 </button>
             </x-slot>
 
@@ -30,10 +27,7 @@
                 <button type="button"
                     class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Mostrar {{ $cantidad }} registros
-                    <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                    </svg>
+                    <x-icons.dropdown :stroke="1.25" class="ml-1 -mr-0.5 h-4 w-4"/>
                 </button>
             </x-slot>
 
@@ -63,10 +57,7 @@
 
         <div class="flex items-center relative">
             <label for="search" class="px-3 py-1 text-gray-400">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+                <x-icons.search :stroke="1.75" class="h-6 w-6"/>
             </label>
             <input type="text" id="search" wire:model="search" class="input-form-b py-1">
             @if ($search)

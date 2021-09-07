@@ -1,17 +1,12 @@
 <div class="text-sm text-gray-700">
 
-
     <div class="flex justify-end items-center my-6">
         <x-jet-dropdown align="right" width="32">
             <x-slot name="trigger">
                 <button type="button"
                         class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Ciclo {{$ciclo_sel->nombre}}
-
-                    <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                    </svg>
+                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"/>
                 </button>
             </x-slot>
 
@@ -32,11 +27,7 @@
                 <button type="button"
                         class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Mostrar {{$cantidad}} registros
-
-                    <svg class="ml-2 -mr-0.5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                    </svg>
+                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"/>
                 </button>
             </x-slot>
 
@@ -64,112 +55,85 @@
             </x-slot>
         </x-jet-dropdown>
 
-        <div class="flex items-center relative">
-            <label for="search"
-                   class="px-3 py-1 text-gray-400">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-            </label>
-            <input type="text" id="search" wire:model="search"
-                   class="input-form-b py-1">
-            @if($search)
-                <button wire:click="$set('search', '')"
-                        class="px-2 absolute top-1 right-0 text-lg text-gray-500 hover:text-gray-600">
-                    &times;
-                </button>
-            @endif
-        </div>
+        <x-input-search wire:model="search"/>
     </div>
+
+    <x-items-matched total="{{ $rrss->total() }}"/>
+
     @if($rrss->count())
         <x-table>
             <x-slot name="head">
                 <tr>
-                    <th scope="col" wire:click="sortBy('nombre')"
-                        class="cursor-pointer px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <x-table.heading wire:click="sortBy('nombre')" class="cursor-pointer">
                         <div class="flex items-center justify-between">
                             <span>Titulo</span>
                             {{--                            @if($sort === 'nombre')--}}
                             {{--                                <x-sort-by type="alpha" direction="{{$direction}}"/>--}}
                             {{--                            @endif--}}
                         </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('telefono')"
-                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    </x-table.heading>
+
+                    <x-table.heading wire:click="sortBy('telefono')" class="cursor-pointer">
                         <div class="flex items-center justify-between">
                             <span>Escuela</span>
                             {{--                            @if($sort === 'telefono')--}}
                             {{--                                <x-sort-by type="number" direction="{{$direction}}"/>--}}
                             {{--                            @endif--}}
                         </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('telefono')"
-                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    </x-table.heading>
+
+                    <x-table.heading wire:click="sortBy('telefono')" class="cursor-pointer">
                         <div class="flex items-center justify-between">
                             <span>Lugar</span>
                             {{--                            @if($sort === 'telefono')--}}
                             {{--                                <x-sort-by type="number" direction="{{$direction}}"/>--}}
                             {{--                            @endif--}}
                         </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('ubicacion')"
-                        class="hidden lg:table-cell px-2 cursor-pointer py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    </x-table.heading>
 
+                    <x-table.heading wire:click="sortBy('ubicacion')" class="hidden lg:table-cell">
                         <div class="flex items-center justify-between ">
                             <span>Empresa</span>
                             {{--                            @if($sort === 'direccion')--}}
                             {{--                                <x-sort-by type="alpha" direction="{{$direction}}"/>--}}
                             {{--                            @endif--}}
                         </div>
-                    </th>
-                    <th scope="col"
-                        class="px-2 py-3 text-left text-xs text-left font-medium text-gray-500 uppercase tracking-wider">
+                    </x-table.heading>
+
+                    <x-table.heading>
                         Estado
-                    </th>
-                    <th scope="col" class="relative text-center px-4 py-3">
+                    </x-table.heading>
+
+                    <x-table.heading>
                         <span class="sr-only">Edit</span>
-                    </th>
+                    </x-table.heading>
+
                 </tr>
             </x-slot>
             <x-slot name="body">
                 @foreach($rrss as $rs)
                     <tr>
-                        <td class="px-4 py-4 text-sm font-medium text-gray-900 tracking-wide">
+                        <x-table.cell>
                             {{ $rs->titulo }}
-                        </td>
-                        <td class="px-2 py-4">
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $rs->escuela->nombre }}
-                        </td>
-                        <td class="px-2 py-4">
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $rs->lugar }}
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap hidden lg:table-cell">
-                            <div class="flex items-center my-auto">
-                                @if($rs->empresa)
-                                    {{ $rs->empresa->nombre }}
-                                @else
-                                    {{ __('---') }}
-                                @endif
-                            </div>
-                        </td>
-                        {{--                titulo, lugar, ciclo, empresa, estado, btn--}}
-                        <td class="px-2 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                            @if( $rs->fecha_fin > now())
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              Falta {{ $rs->fecha_fin->diffForHumans() }}
+                        </x-table.cell>
+                        <x-table.cell class="whitespace-nowrap hidden lg:table-cell">
+                            {{ $rs->empresa ? $rs->empresa->nombre : __('---') }}
+                        </x-table.cell>
+                        <x-table.cell class="whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                                        {{ $rs->fecha_fin > today() ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">
+                              {{ $rs->fecha_fin > today() ? __('Falta') : __('Terminado') }} {{ $rs->fecha_fin->diffForHumans() }}
                             </span>
-                            @else
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                              Terminado {{ $rs->fecha_fin->diffForHumans() }}
-                            </span>
-                            @endif
-                        </td>
-                        <td class="group px-2 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-x-2 justify-end">
-
-                            @if( $rs->fecha_fin > now())
+                        </x-table.cell>
+                        <x-table.cell>
+                            @if( $rs->fecha_fin > today())
                                 <a href="{{ route('rrss.editar', $rs->id) }}"
                                    class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-blue-100 hover:text-blue-800">
                                     <svg class="h-4 w-4 mr-1 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24"
@@ -189,7 +153,7 @@
                                 </svg>
                                 Ver
                             </a>
-                        </td>
+                        </x-table.cell>
                     </tr>
                 @endforeach
             </x-slot>

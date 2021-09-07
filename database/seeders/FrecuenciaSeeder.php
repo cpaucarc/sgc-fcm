@@ -16,9 +16,11 @@ class FrecuenciaSeeder extends Seeder
         $frecuencias = [
             [
                 'nombre' => 'Mensual',
+                'tiempo_meses' => 1
             ],
             [
                 'nombre' => 'Semestral',
+                'tiempo_meses' => 6
             ],
         ];
 

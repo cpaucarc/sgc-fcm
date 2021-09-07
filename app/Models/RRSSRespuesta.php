@@ -9,7 +9,7 @@ class RRSSRespuesta extends Model
 {
     use HasFactory;
 
-    public $table = "rrss_respuestas";
+    protected $table = "rrss_respuestas";
     public $timestamps = false;
     public $fillable = ['respuesta', 'pregunta_id', 'encuestado_id'];
 

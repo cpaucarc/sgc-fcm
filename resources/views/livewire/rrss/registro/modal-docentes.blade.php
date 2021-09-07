@@ -6,12 +6,8 @@
                 <span class="text-gray-800 font-black tracking-wide uppercase">{{ $escuela->nombre }}</span>
             </h1>
             <div class="flex items-center w-1/2">
-                <label for="searchD"
-                       class="px-3 py-1 text-gray-400">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
+                <label for="searchD" class="px-3 py-1 text-gray-400">
+                    <x-icons.search :stroke="1.75" class="h-6 w-6"/>
                 </label>
                 <input type="text" id="searchD" wire:model="search" class="input-form-b flex-1 py-1">
             </div>

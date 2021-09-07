@@ -8,22 +8,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="mask-icon" type="image/svg+xml" href="{{ asset('icons/laravel.svg') }}" color="#E11D48">
-{{--    <link rel="mask-icon" href="{{ asset('icons/laravel.svg') }}" color="#ff8a01">--}}
-<!-- Fonts -->
+    <link rel="icon" href="{{ asset('icons/sgc.svg') }}" sizes="any" type="image/svg+xml">
+    <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-    {{-- fontawsome --}}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-          integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-          crossorigin="anonymous"/>
+{{-- fontawsome --}}
+{{--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"--}}
+{{--          integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">--}}
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"--}}
+{{--          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="--}}
+{{--          crossorigin="anonymous"/>--}}
 
-    <!-- Styles -->
+<!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     @livewireStyles
-
 @stack('css')
 
 <!-- Scripts -->
@@ -64,3 +62,4 @@
 </body>
 
 </html>
+

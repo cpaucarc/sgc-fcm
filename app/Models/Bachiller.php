@@ -12,7 +12,7 @@ class Bachiller extends Model
 {
     use HasFactory;
 
-    public $table = "bachilleres";
+    protected $table = "bachilleres";
     public $fillable = ['estudiante_id', 'ciclo_id'];
     public $timestamps = false;
 

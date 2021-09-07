@@ -1,9 +1,6 @@
 <div>
     <x-jet-button wire:click="$set('mostrar', true)">
-        <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-        </svg>
+        <x-icons.plus :stroke="2" class="h-6 w-6 mr-2"/>
         Crear nuevo
     </x-jet-button>
 
@@ -15,9 +12,7 @@
                 </h1>
 
                 <button wire:click="$set('mostrar', false)" class=" text-gray-600 hover:text-gray-800">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
                 </button>
             </x-slot>
             <x-slot name="content">

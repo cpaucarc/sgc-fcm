@@ -9,7 +9,7 @@ class Actividad extends Model
 {
     use HasFactory;
 
-    public $table = "actividades";
+    protected  $table = "actividades";
     public $timestamps = false;
     public $fillable = ['nombre', 'tipo_actividad_id', 'proceso_id'];
 

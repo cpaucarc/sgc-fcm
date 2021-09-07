@@ -54,6 +54,7 @@ class ListarInvestigadores extends Component
                         ->orWhere('apellidos', 'like', '%' . $this->buscar . '%');
                 })->where('escuela_id', $this->escuela);
             })
+            ->with('docente.persona', 'docente.escuela', 'categoria', 'grado')
             ->paginate($this->cantidad);
     }
 
@@ -66,6 +67,7 @@ class ListarInvestigadores extends Component
                         ->orWhere('apellidos', 'like', '%' . $this->buscar . '%');
                 })->where('escuela_id', $this->escuela);
             })
+            ->with('estudiante.persona', 'estudiante.escuela', 'categoria', 'grado')
             ->paginate($this->cantidad);
     }
 
