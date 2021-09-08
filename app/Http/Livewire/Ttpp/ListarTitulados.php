@@ -9,17 +9,16 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
-class ListarTtpp extends Component
+class ListarTitulados extends Component
 {
-
     use WithPagination;
 
     public $ciclos;
     public $ciclo_sel;
 
-    public $abrir = false;
     public $cantidad = 10;
     public $search;
+    public $dcl = 'Aprobado';
     public $sort = 'fecha_sustentacion';
     public $direction = 'desc';
 
@@ -54,24 +53,22 @@ class ListarTtpp extends Component
 
     public function render()
     {
-        /* $ttpp = Sustentacion::where('ciclo_id', $this->ciclo_sel->id)
-            ->where('tesis_id', 'like', '%' . $this->search . '%')
-            ->orderBy($this->sort, $this->direction)
-            ->paginate($this->cantidad); */
 
-        $ttpp = DB::table('sustentaciones')
-            ->select('sustentaciones.id', 'sustentaciones.fecha_sustentacion', 'tesis.numero_registro', 'tesis.titulo', 'tesis.anio', 'escuelas.nombre as escuela', 'personas.apellidos', 'personas.nombres', 'declaraciones.nombre as declaracion')
-            ->join('tesis', 'tesis.id', '=', 'sustentaciones.tesis_id')
-            ->join('asesores', 'asesores.id', '=', 'tesis.asesor_id')
-            ->join('docentes', 'docentes.id', '=', 'asesores.docente_id')
-            ->join('personas', 'personas.id', '=', 'docentes.persona_id')
-            ->join('escuelas', 'escuelas.id', '=', 'sustentaciones.escuela_id')
+        $ttds = DB::table('bachilleres')
+            ->select('bachilleres.id', 'tesis.numero_registro', 'tesis.titulo', 'sustentaciones.fecha_sustentacion', 'declaraciones.nombre as declaracion', 'sustentaciones.ciclo_id', 'escuelas.nombre as escuela', 'estudiantes.codigo', 'personas.apellidos', 'personas.nombres')
+            ->join('bachiller_tesis', 'bachiller_tesis.bachiller_id', '=', 'bachilleres.id')
+            ->join('tesis', 'tesis.id', '=', 'bachiller_tesis.tesis_id')
+            ->join('sustentaciones', 'sustentaciones.tesis_id', '=', 'tesis.id')
             ->join('declaraciones', 'declaraciones.id', '=', 'sustentaciones.declaracion_id')
+            ->join('escuelas', 'escuelas.id', '=', 'sustentaciones.escuela_id')
+            ->join('estudiantes', 'estudiantes.id', '=', 'bachilleres.estudiante_id')
+            ->join('personas', 'personas.id', '=', 'estudiantes.persona_id')
             ->where('sustentaciones.ciclo_id', $this->ciclo_sel->id)
-            ->where('tesis.numero_registro', 'like', '%' . $this->search . '%')
+            ->where('declaraciones.nombre', $this->dcl)
+            ->where('estudiantes.codigo', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->direction)
             ->paginate($this->cantidad);
 
-        return view('livewire.ttpp.listar-ttpp', compact('ttpp'));
+        return view('livewire.ttpp.listar-titulados', compact('ttds'));
     }
 }
