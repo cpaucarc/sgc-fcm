@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Ttpp;
 
+use App\Models\Asesor;
+use App\Models\Bachiller;
+use App\Models\BachillerTesis;
 use App\Models\Ciclo;
 use App\Models\Declaracion;
 use App\Models\Docente;
-use App\Models\Empresa;
 use App\Models\Escuela;
 use App\Models\Estudiante;
-use App\Models\ParticipanteRRSS;
-use App\Models\ResponsabilidadSocial;
+use App\Models\Jurado;
+use App\Models\JuradoSustentacion;
+use App\Models\Sustentacion;
+use App\Models\Tesis;
+use App\Models\TipoTesis;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -21,10 +27,11 @@ class RegistrarTtpp extends Component
     public $titulo;
     public $anio;
 
-    public $fecha;
+    public $fechaSustentacion;
     public $ciclo;
-    public $escuela;
     public $declaracion;
+    public $tipoTesis;
+    public $escuela;
 
     public $docenteAsesor = null;
     public $docenteJurado = null;
@@ -37,9 +44,14 @@ class RegistrarTtpp extends Component
 
 
     public $escuelas;
-    public $ciclos;
     public $declaraciones;
-    public $ttpp = null;
+    public $tiposTesis;
+    public $stn = null;
+    public $ts = null;
+
+
+    public $docJur = null;
+    public $tesis_save = null;
 
     protected $listeners = [
         'enviarDocenteAsesor' => 'recibirDocenteAsesor',
@@ -50,19 +62,26 @@ class RegistrarTtpp extends Component
     protected $rules = [
         'numeroRegistro' => 'required',
         'titulo' => 'required',
-        'anio' => 'required',
-        'declaracion' => 'required',
+        'tipoTesis' => 'required|gt:0',
+        'declaracion' => 'required|gt:0',
         'escuela' => 'required|gt:0',
     ];
 
     public function mount()
     {
         $facultad_id = (Auth::user()->roles)[0]->oficina->facultad_id;
+
         $this->escuelas = Escuela::where('facultad_id', $facultad_id)
             ->orderBy('nombre', 'asc')->get();
 
-        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
+        $ciclos = Ciclo::all();
+        $this->ciclo = $ciclos->filter(function ($c) {
+            return ($c->fecha_fin >= Carbon::now() and $c->fecha_inicio <= Carbon::now());
+        })->first();
+
         $this->declaraciones = Declaracion::orderBy('nombre', 'asc')->get();
+
+        $this->tiposTesis = TipoTesis::orderBy('nombre', 'asc')->get();
     }
 
     public function updatedEscuela()
@@ -98,9 +117,9 @@ class RegistrarTtpp extends Component
         $this->abrirEstudianteBachiller = true;
     }
 
-    public function recibirEstudianteBachiller(Estudiante $es)
+    public function recibirEstudianteBachiller(Bachiller $bach)
     {
-        $this->estudianteBachiller = $es;
+        $this->estudianteBachiller = $bach;
         $this->abrirEstudianteBachiller = false;
     }
 
@@ -125,6 +144,67 @@ class RegistrarTtpp extends Component
     public function nullDocenteJurado()
     {
         $this->docenteJurado = null;
+    }
+
+    public function registrarTTPP()
+    {
+        $this->validate();
+
+        //Asesor
+
+        if ($this->docenteAsesor) {
+            Asesor::create([
+                'docente_id' => $this->docenteAsesor->id,
+            ]);
+        }
+
+        //Tesis
+        $this->ts = Tesis::create([
+            'numero_registro' => strtoupper($this->numeroRegistro),
+            'titulo' => $this->titulo,
+            'anio' => $this->anio,
+            'asesor_id' => $this->docenteAsesor->asesor->id,
+            'tipo_tesis_id' => $this->tipoTesis,
+        ]);
+
+        $this->ts->save();
+
+        $this->stn =  Sustentacion::create([
+            'tesis_id' => $this->ts->id,
+            'escuela_id' => $this->escuela,
+            'ciclo_id' => $this->ciclo->id,
+            'declaracion_id' => $this->declaracion,
+        ]);
+
+        if ($this->fechaSustentacion) {
+            $this->stn->fecha_sustentacion = $this->fechaSustentacion;
+        }
+
+        if ($this->estudianteBachiller) {
+
+            BachillerTesis::create([
+                'bachiller_id' => $this->estudianteBachiller->id,
+                'tesis_id' => $this->ts->id,
+            ]);
+        }
+
+        if ($this->docenteJurado) {
+            Jurado::create([
+                'docente_id' => $this->docenteJurado->id,
+            ]);
+
+            JuradoSustentacion::create([
+                'jurado_id' => $this->docenteJurado->jurado->id,
+                'sustentacion_id' => $this->stn->id,
+                'cargo_jurado_id' => '1'
+            ]);
+        }
+
+        $this->stn->save();
+        $this->reset(['numeroRegistro', 'titulo', 'tipoTesis', 'anio', 'fechaSustentacion', 'declaracion', 'escuela', 'docenteAsesor', 'estudianteBachiller', 'docenteJurado']);
+
+        info("RegistrarTtpp: ttppId: " . $this->stn->id);
+        $this->emit('enviarTTPP', $this->stn->id);
     }
 
     public function render()

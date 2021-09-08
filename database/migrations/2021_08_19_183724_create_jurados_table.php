@@ -15,8 +15,8 @@ class CreateJuradosTable extends Migration
     {
         Schema::create('jurados', function (Blueprint $table) {
             $table->id();
-            $table->integer('cip');
-            $table->unsignedBigInteger('docente_id')->nullable();
+            $table->integer('cip')->nullable();
+            $table->unsignedBigInteger('docente_id');
             $table->foreign('docente_id')->references('id')->on('docentes');
         });
     }

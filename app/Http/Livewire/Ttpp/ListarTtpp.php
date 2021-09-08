@@ -20,7 +20,7 @@ class ListarTtpp extends Component
     public $abrir = false;
     public $cantidad = 10;
     public $search;
-    public $sort = 'fecha';
+    public $sort = 'fecha_sustentacion';
     public $direction = 'desc';
 
     public function mount()
@@ -60,7 +60,7 @@ class ListarTtpp extends Component
             ->paginate($this->cantidad); */
 
         $ttpp = DB::table('sustentaciones')
-            ->select('sustentaciones.id', 'sustentaciones.fecha', 'tesis.numero_registro', 'tesis.titulo', 'tesis.anio', 'escuelas.nombre', 'personas.apellidos', 'personas.nombres', 'declaraciones.nombre')
+            ->select('sustentaciones.id', 'sustentaciones.fecha_sustentacion', 'tesis.numero_registro', 'tesis.titulo', 'tesis.anio', 'escuelas.nombre as escuela', 'personas.apellidos', 'personas.nombres', 'declaraciones.nombre as declaracion')
             ->join('tesis', 'tesis.id', '=', 'sustentaciones.tesis_id')
             ->join('asesores', 'asesores.id', '=', 'tesis.asesor_id')
             ->join('docentes', 'docentes.id', '=', 'asesores.docente_id')

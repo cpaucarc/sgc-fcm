@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Ttpp\Registro;
 
+use App\Models\Bachiller;
 use App\Models\Escuela;
 use App\Models\Estudiante;
 use Illuminate\Support\Facades\DB;
@@ -24,15 +25,16 @@ class ModalEstudiantesBachiller extends Component
 
     public function enviarEstudianteBachiller($id)
     {
-        $this->emit('enviarEstudianteBachiller', Estudiante::find($id));
+        $this->emit('enviarEstudianteBachiller', Bachiller::find($id));
     }
 
 
     public function render()
     {
         if ($this->escuela) {
-            $estudiantes = DB::table('estudiantes')
-                ->select('estudiantes.id', 'personas.apellidos', 'personas.nombres', 'personas.dni', 'estudiantes.codigo')
+            $bachilleres = DB::table('bachilleres')
+                ->select('bachilleres.id', 'estudiantes.codigo', 'personas.apellidos', 'personas.nombres', 'personas.dni')
+                ->join('estudiantes', 'estudiantes.id', '=', 'bachilleres.estudiante_id')
                 ->join('personas', 'personas.id', '=', 'estudiantes.persona_id')
                 ->where('estudiantes.escuela_id', '=', $this->escuela->id)
                 ->where(function ($query) {
@@ -44,8 +46,8 @@ class ModalEstudiantesBachiller extends Component
                 ->orderBy('personas.apellidos')->limit(10)
                 ->get();
         } else {
-            $estudiantes = [];
+            $bachilleres = [];
         }
-        return view('livewire.ttpp.registro.modal-estudiantes-bachiller', compact('estudiantes'));
+        return view('livewire.ttpp.registro.modal-estudiantes-bachiller', compact('bachilleres'));
     }
 }

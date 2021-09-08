@@ -125,7 +125,7 @@
                             {{ $tp->titulo }}
                         </td>
                         <td class="px-2 py-4">
-                            {{ $tp->nombre }}
+                            {{ $tp->escuela }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap hidden lg:table-cell">
                             <div class="flex items-center my-auto">
@@ -134,7 +134,7 @@
                             </div>
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                            @if ($tp->nombre === 'Aprobado')
+                            @if ($tp->declaracion === 'Aprobado')
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     Aprobado
@@ -148,7 +148,7 @@
                         </td>
                         <td class="group px-2 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-x-2 my-4 ">
 
-                            <a href="#"
+                          {{--   <a href="#"
                                 class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-blue-100 hover:text-blue-800">
                                 <svg class="h-4 w-4 mr-1 group-hover:text-blue-600" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -156,7 +156,7 @@
                                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                 </svg>
                                 Editar
-                            </a>
+                            </a> --}}
                             <a href="{{ route('ttpp.index', $tp->id) }}"
                                 class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-green-100 hover:text-green-800">
                                 <svg class="h-4 w-4 mr-1 group-hover:text-green-600" fill="currentColor"

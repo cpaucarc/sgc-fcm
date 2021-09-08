@@ -16,22 +16,24 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    {{--                    @if(Auth::user()->oficina->entidad->responsable)--}}
+                    {{-- @if (Auth::user()->oficina->entidad->responsable) --}}
                     <x-jet-nav-link href="{{ route('actividad.actividades') }}"
-                                    :active="request()->routeIs('actividad.*')">
+                        :active="request()->routeIs('actividad.*')">
                         {{ __('Actividades') }}
                     </x-jet-nav-link>
-                    {{--                    @endif--}}
-                    <x-jet-nav-link href="{{ route('rrss.index') }}"
-                                    :active="request()->routeIs('rrss.*')">
+                    {{-- @endif --}}
+                    <x-jet-nav-link href="{{ route('rrss.index') }}" :active="request()->routeIs('rrss.*')">
                         {{ __('Responsabilidad Social') }}
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('investigacion.index') }}"
-                                    :active="request()->routeIs('investigacion.*')">
+                        :active="request()->routeIs('investigacion.*')">
                         {{ __('Investigación') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('ttpp.index') }}" :active="request()->routeIs('ttpp.*')">
+                        {{ __('Título Profesional') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('indicadores.index') }}"
                                     :active="request()->routeIs('indicadores.*')">
                         {{ __('Indicadores') }}
@@ -49,14 +51,14 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 20 20" fill="currentColor">
+                                            viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
-                                                  d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"/>
+                                                d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </span>
@@ -89,15 +91,15 @@
                                     </div>
 
                                     @foreach (Auth::user()->allTeams() as $team)
-                                        <x-jet-switchable-team :team="$team"/>
+                                        <x-jet-switchable-team :team="$team" />
                                     @endforeach
                                 </div>
                             </x-slot>
                         </x-jet-dropdown>
                     </div>
-            @endif
+                @endif
 
-            <!-- Settings Dropdown -->
+                <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -105,19 +107,21 @@
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover"
-                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+                                        src="{{ Auth::user()->profile_photo_url }}"
+                                        alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
-                                        {{ Auth::user()->persona->apellidos }} {{ Auth::user()->persona->nombres }}
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
+                                        {{ Auth::user()->persona->apellidos }}
+                                        {{ Auth::user()->persona->nombres }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 20 20" fill="currentColor">
+                                            viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
-                                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"/>
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </span>
@@ -146,8 +150,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
-                                                     onclick="event.preventDefault();
+                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Cerrar Sesión') }}
                                 </x-jet-dropdown-link>
@@ -160,13 +163,13 @@
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"/>
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -180,11 +183,10 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('actividad.actividades') }}"
-                                       :active="request()->routeIs('actividad.*')">
+                :active="request()->routeIs('actividad.*')">
                 {{ __('Actividades') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('rrss.index') }}"
-                                       :active="request()->routeIs('rrss.*')">
+            <x-jet-responsive-nav-link href="{{ route('rrss.index') }}" :active="request()->routeIs('rrss.*')">
                 {{ __('Responsabilidad Social') }}
             </x-jet-responsive-nav-link>
         </div>
@@ -195,7 +197,7 @@
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                             alt="{{ Auth::user()->name }}"/>
+                            alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 
@@ -208,23 +210,22 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}"
-                                           :active="request()->routeIs('profile.show')">
+                    :active="request()->routeIs('profile.show')">
                     {{ __('Mi perfíl') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}"
-                                               :active="request()->routeIs('api-tokens.index')">
+                        :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
 
-            <!-- Authentication -->
+                <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
+                    <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         {{ __('Cerrar Sesión') }}
                     </x-jet-responsive-nav-link>
@@ -240,13 +241,13 @@
 
                     <!-- Team Settings -->
                     <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
-                                               :active="request()->routeIs('teams.show')">
+                        :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
                     </x-jet-responsive-nav-link>
 
                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                         <x-jet-responsive-nav-link href="{{ route('teams.create') }}"
-                                                   :active="request()->routeIs('teams.create')">
+                            :active="request()->routeIs('teams.create')">
                             {{ __('Create New Team') }}
                         </x-jet-responsive-nav-link>
                     @endcan
@@ -259,7 +260,7 @@
                     </div>
 
                     @foreach (Auth::user()->allTeams() as $team)
-                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link"/>
+                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
                     @endforeach
                 @endif
             </div>

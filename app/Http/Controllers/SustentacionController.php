@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sustentacion;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SustentacionController extends Controller
 {
