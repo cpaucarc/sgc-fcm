@@ -160,7 +160,7 @@ class RegistrarTtpp extends Component
 
         //Tesis
         $this->ts = Tesis::create([
-            'numero_registro' => $this->numeroRegistro,
+            'numero_registro' => strtoupper($this->numeroRegistro),
             'titulo' => $this->titulo,
             'anio' => $this->anio,
             'asesor_id' => $this->docenteAsesor->asesor->id,
