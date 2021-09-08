@@ -5,7 +5,7 @@
     @endif
 
     @if ($paso2 and $ttpp_id > 0)
-        @livewire('rrss.registrar-participantes', ['ttpp_id' => $ttpp_id])
+        @livewire('ttpp.registrar-participantes', ['ttpp_id' => $ttpp_id])
     @endif
 
 </div>

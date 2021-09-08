@@ -16,7 +16,7 @@ class ProcesoRegistrar extends Component
 
     public function recibirTTPP($id)
     {
-        $this->rrss_id = $id;
+        $this->ttpp_id = $id;
         $this->paso1 = false;
         $this->paso2 = true;
     }

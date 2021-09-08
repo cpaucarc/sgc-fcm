@@ -202,6 +202,9 @@ class RegistrarTtpp extends Component
 
         $this->stn->save();
         $this->reset(['numeroRegistro', 'titulo', 'tipoTesis', 'anio', 'fechaSustentacion', 'declaracion', 'escuela', 'docenteAsesor', 'estudianteBachiller', 'docenteJurado']);
+
+        info("RegistrarTtpp: ttppId: " . $this->stn->id);
+        $this->emit('enviarTTPP', $this->stn->id);
     }
 
     public function render()

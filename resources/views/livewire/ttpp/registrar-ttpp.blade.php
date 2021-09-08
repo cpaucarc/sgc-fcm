@@ -18,7 +18,7 @@
                             <x-jet-label for="numeroRegistro">{{ __('Número de registro') }}</x-jet-label>
 
                             <input wire:model.defer="numeroRegistro" type="text" id="numeroRegistro"
-                                class="input-form w-full col-span-2" style="text-transform:uppercase;">
+                                class="input-form w-full col-span-2" >
                             @error('numeroRegistro')
                                 <x-jet-input-error for="numeroRegistro">{{ $message }}</x-jet-input-error>
                             @enderror
