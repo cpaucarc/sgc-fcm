@@ -34,6 +34,11 @@
                     <x-jet-nav-link href="{{ route('ttpp.index') }}" :active="request()->routeIs('ttpp.*')">
                         {{ __('Título Profesional') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('indicadores.index') }}"
+                                    :active="request()->routeIs('indicadores.*')">
+                        {{ __('Indicadores') }}
+                    </x-jet-nav-link>
+
 
                 </div>
             </div>

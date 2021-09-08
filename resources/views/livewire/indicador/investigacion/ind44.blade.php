@@ -29,17 +29,18 @@
                         <div class="grid grid-cols-3 gap-x-4">
                             <div class="col-span-1">
                                 <x-jet-label>{{ $indicador->titulo_interes }}</x-jet-label>
-                                <input value="{{ $interes }}" class="input-form w-full bg-gray-100" readonly>
+                                <input value="{{ round($interes, 1) }}" class="input-form w-full bg-gray-100" readonly>
                             </div>
 
                             <div class="col-span-1">
                                 <x-jet-label>{{ $indicador->titulo_total }}</x-jet-label>
-                                <input value="{{ $total }}" class="input-form w-full bg-gray-100" readonly>
+                                <input value="{{ round($total, 1) }}" class="input-form w-full bg-gray-100" readonly>
                             </div>
 
                             <div class="col-span-1">
                                 <x-jet-label>{{ $indicador->titulo_resultado }}</x-jet-label>
-                                <input value="{{ $resultado }}%" class="input-form w-full bg-gray-100" readonly>
+                                <input value="{{ round($resultado, 1) }}%" class="input-form w-full bg-gray-100"
+                                       readonly>
                             </div>
 
                             <div class="col-span-3">
@@ -48,6 +49,7 @@
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                                     </svg>
+
                                     Estos valores son calculados automaticamente, no pueden editarse manualmente.
                                 </span>
                             </div>

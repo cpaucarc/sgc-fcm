@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Investigacion\Indicador;
+namespace App\Http\Livewire\Indicador\Rsu;
 
 use App\Models\AnalisisIndicador;
 use App\Models\Ciclo;
@@ -8,13 +8,13 @@ use App\Models\Indicador;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Ind44 extends Component
+class Ind52 extends Component
 {
     public $indicador, $mostrar = false, $ciclo;
 
     public $min, $sat, $sob;
 
-    public $interes, $total, $resultado, $guardar = false;
+    public $resultado, $guardar = false;
 
     public $elaborador, $revisador, $aprobador;
 
@@ -45,23 +45,35 @@ class Ind44 extends Component
         $today = date('Y-m-d'); //Hoy
         $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses
 
-        // Docentes que participan en PI por escuela
-        $this->interes = DB::table('investigador_investigacion')->select('1')
-            ->join('investigaciones', 'investigaciones.id', '=', 'investigador_investigacion.investigacion_id')
-            ->join('investigadores', 'investigadores.id', '=', 'investigador_investigacion.investigador_id')
-            ->join('docentes', 'docentes.id', '=', 'investigadores.docente_id')
-            ->where('docentes.escuela_id', $this->indicador->escuela_id)
-            ->whereBetween('investigaciones.fecha_publicacion', [$from, $today])
-            ->count();
+        if ($this->indicador->escuela_id) {
+            //Datos por escuela
+            $rs = DB::table('responsabilidad_social')->select('id')
+                ->where('escuela_id', $this->indicador->escuela_id)
+                ->whereBetween('fecha_inicio', [$from, $today])
+                ->distinct()
+                ->get();
+            $this->resultado = $rs->count();
 
-        // Docentes activos por escuela
-        $this->total = DB::table('docentes')->select('id')
-            ->where('escuela_id', $this->indicador->escuela_id)
-            ->where('estado', 1)
-            ->count();
+        } else {
+            //Datos de la facultad
+            $rs = DB::table('responsabilidad_social')->select('id')
+                ->whereIn('escuela_id', function ($query) {
+                    $query->select('id')
+                        ->from('escuelas')
+                        ->where('facultad_id', $this->indicador->facultad_id);
+                })
+                ->whereBetween('fecha_inicio', [$from, $today])
+                ->distinct()
+                ->get();
+            $this->resultado = $rs->count();
 
-        $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
-
+            /*
+             -- Estudiantes de FCM
+            select id from responsabilidad_social
+                and escuela_id in (select id from escuelas where facultad_id = 1)
+                and fecha_inicio between date_sub(curdate(), interval 6 month) and curdate();
+            */
+        }
     }
 
     public function enviarInformacion()
@@ -103,11 +115,11 @@ class Ind44 extends Component
             'minimo' => $this->min,
             'satisfactorio' => $this->sat,
             'sobresaliente' => $this->sob,
-            'interes' => $this->interes,
-            'total' => $this->total,
             'resultado' => $this->resultado,
             'indicador_id' => $this->indicador->id,
+            'ciclo_id' => 2 //ToDo: Borrar despues (la migracion se cambio a nullable())
         ]);
+        //, interes, total, ,
 
         if ($this->analisis) {
             $analisis_indicador->interpretacion = $this->analisis;
@@ -137,14 +149,13 @@ class Ind44 extends Component
         $this->reset(['mostrar', 'guardar', 'elaborador',
             'revisador', 'aprobador', 'analisis', 'observaciones', 'verGrafico']);
 
-        $this->emit('guardado', "Se guardó con éxito un nuevo análisis para el " . date("d-m-Y"));
+        $this->emit('guardado', "Se guardo con éxito un nuevo análisis para el " . date("d-m-Y"));
         $this->emit('renderizarGrafico');
     }
 
     public function render()
     {
         $this->enviarInformacion();
-        return view('livewire.investigacion.indicador.ind44');
+        return view('livewire.indicador.rsu.ind52');
     }
-
 }
