@@ -25,7 +25,7 @@
                 <h2>{{$dcpt->apellidos}} {{$dcpt->nombres}}</h2>
                 <button wire:click="eliminar({{ $dcpt->id }})"
                         class="text-gray-400 bg-transparent rounded hover:text-red-600 hover:bg-red-300">
-                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                 </button>
             </div>
         @endforeach

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class IndicadorController extends Controller
 {
+    private $interes = 0;
+    private $total = 0;
+    private $resultado = 0;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -60,4 +64,5 @@ class IndicadorController extends Controller
         $procesos = Proceso::withCount('indicadores')->get();
         return view('indicador.indicador', compact('indicador', 'procesos'));
     }
+
 }

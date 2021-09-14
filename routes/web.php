@@ -36,7 +36,8 @@ Route::prefix('responsabilidad-social')->group(function () {
         ->name('rrss.empresas');
 
     Route::get('side', function () {
-        return view('rrss.my-side');
+        $estudiante = \App\Models\Estudiante::find(5);
+        return view('rrss.my-side', compact('estudiante'));
     })->name('rrss.side');
 
     Route::get('indicadores', [ResponsabilidadSocialController::class, 'indicadores'])

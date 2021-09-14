@@ -104,7 +104,7 @@
                         {{ $ent_prv_seleccionado->entrada->nombre }}
                     </h1>
                     <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
-                        <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                        <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                     </button>
                 </x-slot>
 
@@ -165,7 +165,7 @@
                                         <div class="table-cell text-gray-500">
                                             <button wire:click="eliminarArchivo({{ $entprv->documento }})"
                                                     class="hover:bg-red-100 hover:text-red-700 px-2 py-1 rounded flex justify-center items-center">
-                                                <x-icons.x :stroke="1.5" class="h-5 w-5 hover:text-red-800"/>
+                                                <x-icons.x :stroke="1.5" class="h-5 w-5 hover:text-red-800"></x-icons.x>
                                                 <small>Eliminar</small>
                                             </button>
                                         </div>

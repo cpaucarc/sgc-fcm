@@ -12,7 +12,7 @@
                 <button type="button" @click="visible = false"
                         class="-mr-1 flex p-2 rounded-md hover:bg-green-600 focus:outline-none sm:-mr-2">
                     <span class="sr-only">Cerrar</span>
-                    <x-icons.x :stroke="1.5" class="h-4 w-4"/>
+                    <x-icons.x :stroke="1.5" class="h-4 w-4"></x-icons.x>
                 </button>
             </div>
         </div>

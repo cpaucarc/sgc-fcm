@@ -43,3 +43,14 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
 }
+
+/* Remove icon from input date */
+.unstyled {
+    -webkit-appearance: none;
+}
+
+.unstyled::-webkit-inner-spin-button,
+.unstyled::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}

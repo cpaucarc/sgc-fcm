@@ -1,6 +1,6 @@
 <div>
     <x-jet-button wire:click="$set('mostrar', true)">
-        <x-icons.plus :stroke="2" class="h-6 w-6 mr-2"/>
+        <x-icons.plus :stroke="2" class="h-6 w-6 mr-2"></x-icons.plus>
         Crear nuevo
     </x-jet-button>
 
@@ -15,7 +15,7 @@
                 </h1>
 
                 <button wire:click="$set('mostrar', false)" class=" text-gray-600 hover:text-gray-800">
-                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                 </button>
             </x-slot>
             <x-slot name="content">

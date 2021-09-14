@@ -1,36 +1,12 @@
 <x-app-layout>
 
-    <div class="p-4 bg-white mb-8 flex items-center gap-x-4">
+    <div class="px-6 py-4 bg-white mb-8 flex items-center justify-between gap-x-4 rounded">
 
-        {{--        <input type="text"--}}
-        {{--               class="focus:ring-0 rounded shadow-md border-0 border-b-2 border-gray-300 focus:border-blue-600">--}}
+        <h1 class="font-bold text-xl tracking-wide text-gray-800">
+            Indicadores agrupados por procesos
+        </h1>
 
-        {{--        <input type="text"--}}
-        {{--               class="focus:ring-0 rounded shadow-lg border-0 border-b-2 border-gray-300 focus:border-blue-600">--}}
-
-
-        <div
-            class="rounded shadow-lg  inline-flex gap-x-2 items-center px-4 text-gray-600 hover:text-gray-800 border-b-2 border-gray-300 focus:border-blue-600 transition duration-500">
-            @php
-                $id = "id_" . rand(0, 1584);
-            @endphp
-            <label for="{{ $id }}" class="inline-flex items-center">
-                <x-icons.people :stroke="1.5" class="h-8 w-8"></x-icons.people>
-                Persona
-            </label>
-            <input id="{{ $id }}" type="text"
-                   class="focus:ring-0 border-0">
-        </div>
-
-
-        <div class="p-4 max-w-xs mx-auto bg-white rounded-xl shadow-md">
-            <label class="flex items-center space-x-3">
-                <input type="checkbox" name="checked-demo" value="1"
-                       class="focus:ring-0 form-tick appearance-none h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-600 checked:border-transparent focus:outline-none">
-                <span class="text-gray-900 font-medium">Option 1</span>
-            </label>
-        </div>
-
+        @livewire('indicador.buscador')
 
     </div>
 

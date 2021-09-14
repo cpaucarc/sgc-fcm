@@ -115,7 +115,7 @@ class MostrarActividad extends Component
                 'salida_id' => $this->salida->id
             ]);
 
-            $this->open = false;
+//            $this->open = false;
             $this->randomID = rand();
 //            $this->reset(['propiedad1', 'propiedad2', ]);
             session()->flash('message', "El documento '$nombreArchivo' fue enviado.");

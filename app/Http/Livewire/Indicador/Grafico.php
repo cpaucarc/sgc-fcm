@@ -34,7 +34,7 @@ class Grafico extends Component
             array_push($satisfactorio, $an->satisfactorio);
             array_push($minimo, $an->minimo);
             array_push($bar, $an->resultado);
-            array_push($labels, $an->created_at->format('d-m-Y'));
+            array_push($labels, $an->fecha_medicion_fin->format('d-M-Y'));
             array_push($colors, $this->asignarColor($an->sobresaliente, $an->satisfactorio, $an->minimo, $an->resultado));
         }
 

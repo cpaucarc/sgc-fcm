@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadMedidaSeeder::class);
         $this->call(FrecuenciaSeeder::class);
 
-        $this->call(EstadoEstudianteSeeder::class);
+        $this->call(GradoAcademicoSeeder::class);
 
         \App\Models\Docente::factory(100)->create();
         \App\Models\Estudiante::factory(100)->create();
@@ -65,7 +65,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaSeeder::class);
         $this->call(EstadoInvestigacionSeeder::class);
         $this->call(FinanciadorSeeder::class);
-        $this->call(GradoAcademicoSeeder::class);
 
         $this->call(LineaInvestigacionSeeder::class);
 
@@ -93,6 +92,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadoSolicitudSeeder::class);
         $this->call(RequisitoSeeder::class);
         \App\Models\SolicitudBachiller::factory(50)->create();
-
+        \App\Models\GradoEstudiante::factory(50)->create();
     }
 }

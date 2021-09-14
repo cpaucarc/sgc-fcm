@@ -25,7 +25,13 @@
 
         {{-- ToDo: Bachiller --}}
     @elseif( $codigo === 'IND-058' )
-        @livewire('indicador.bachiller.ind58', ['indicador' => $id])
+        {{--        @livewire('indicador.bachiller.ind58', ['indicador' => $id])--}}
+        @livewire('indicador.nueva-medicion', [
+        'indicador' => 28,
+        'interes' => 24,
+        'total' => 21,
+        'resultado' => 12
+        ])
     @endif
 
 </div>

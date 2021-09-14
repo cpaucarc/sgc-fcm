@@ -6,7 +6,7 @@
                 <button type="button"
                         class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Ciclo {{$ciclo_sel->nombre}}
-                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"/>
+                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
                 </button>
             </x-slot>
 
@@ -27,7 +27,7 @@
                 <button type="button"
                         class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                     Mostrar {{$cantidad}} registros
-                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"/>
+                    <x-icons.dropdown :stroke="1.5" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
                 </button>
             </x-slot>
 

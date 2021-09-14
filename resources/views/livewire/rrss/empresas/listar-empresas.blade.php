@@ -34,7 +34,7 @@
 
         <div class="flex items-center relative">
             <label for="search" class="px-3 py-1 text-gray-400">
-                <x-icons.search :stroke="1.75" class="h-6 w-6"/>
+                <x-icons.search :stroke="1.75" class="h-6 w-6"></x-icons.search>
             </label>
             <input type="text" id="search" wire:model="search"
                    class="input-form-b py-1">
@@ -167,7 +167,7 @@
             <x-slot name="title">
                 <h1 class="font-bold">Editar datos de la empresa </h1>
                 <button wire:click="$set('abrir', false)" class="text-gray-400 hover:text-gray-500">
-                    <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                 </button>
             </x-slot>
 

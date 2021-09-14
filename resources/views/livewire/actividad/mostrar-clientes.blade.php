@@ -7,7 +7,7 @@
                 Clientes asignados para la salida {{ $salida->descripcion }}
             </h1>
             <button wire:click="$set('open', false)" class="text-gray-400 hover:text-gray-500">
-                <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
             </button>
         </x-slot>
 

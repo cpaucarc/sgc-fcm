@@ -52,7 +52,7 @@
                                     <button type="button"
                                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                                         {{ strtok(Auth::user()->persona->apellidos, " ") }} {{ strtok(Auth::user()->persona->nombres, " ") }}
-                                        <x-icons.dropdown :stroke="2" class="ml-2 -mr-0.5 h-4 w-4"/>
+                                        <x-icons.dropdown :stroke="2" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
                                     </button>
                                 </span>
                             @endif

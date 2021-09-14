@@ -7,7 +7,7 @@
             </h1>
             <div class="flex items-center w-1/2">
                 <label for="searchD" class="px-3 py-1 text-gray-400">
-                    <x-icons.search :stroke="1.75" class="h-6 w-6"/>
+                    <x-icons.search :stroke="1.75" class="h-6 w-6"></x-icons.search>
                 </label>
                 <input type="text" id="searchD" wire:model="search" class="input-form-b flex-1 py-1">
             </div>

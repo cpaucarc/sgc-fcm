@@ -28,7 +28,7 @@
                     {{ $actividad->tipoActividad->nombre }}
                 </div>
                 <div class="mt-2 flex items-center text-sm font-bold text-indigo-600">
-                    <x-icons.calendar :stroke="2" class="h-5 w-5 mr-1 text-indigo-500"/>
+                    <x-icons.calendar :stroke="2" class="h-5 w-5 mr-1 text-indigo-500"></x-icons.calendar>
                     {{ $ciclo->nombre }}
                 </div>
             </div>
@@ -43,7 +43,7 @@
             @else
                 <div class="flex flex-col items-end">
                     <x-button-soft color="green" wire:click="completarActividad">
-                        <x-icons.check :stroke="2" class="h-5 w-5 mr-1"/>
+                        <x-icons.check :stroke="2" class="h-5 w-5 mr-1"></x-icons.check>
                         {{ __('Completado') }}
                     </x-button-soft>
 
@@ -99,7 +99,7 @@
                                 </div>
                                 <button wire:click="abrirModalDoc({{ $ep }})"
                                         class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-yellow-100 hover:text-yellow-800">
-                                    <x-icons.documents :stroke="1.5" class="h-5 w-5 mr-1"/>
+                                    <x-icons.documents :stroke="1.5" class="h-5 w-5 mr-1"></x-icons.documents>
                                     Documentos
                                 </button>
                             </div>
@@ -171,7 +171,7 @@
                         {{ $salida->nombre }}
                     </h1>
                     <button wire:click="$set('open', false)" class="text-gray-400 hover:text-gray-500">
-                        <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                        <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                     </button>
                 </x-slot>
 
@@ -181,6 +181,9 @@
                         <x-jet-label for="archivo">Archivo</x-jet-label>
                         <input type="file" wire:model="archivo" id="{{ $randomID }}"
                                class="input-form w-full py-2">
+                        <p wire:loading wire:target="archivo">
+                            Cargando...
+                        </p>
                         @error('archivo')
                         <div class="text-red-500">
                             {{ $message }}
@@ -236,7 +239,7 @@
                                         <div class="table-cell text-gray-500">
                                             <button wire:click="eliminarArchivo({{ $sldcmt->documento }})"
                                                     class="hover:bg-red-100 hover:text-red-700 px-2 py-1 rounded flex justify-center items-center">
-                                                <x-icons.x :stroke="1.5" class="h-5 w-5 hover:text-red-800"/>
+                                                <x-icons.x :stroke="1.5" class="h-5 w-5 hover:text-red-800"></x-icons.x>
                                                 <small>Eliminar</small>
                                             </button>
                                         </div>
@@ -304,7 +307,7 @@
                         </p>
                     </div>
                     <button wire:click="$set('openDoc', false)" class="text-gray-400 hover:text-gray-500">
-                        <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                        <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                     </button>
                 </x-slot>
 

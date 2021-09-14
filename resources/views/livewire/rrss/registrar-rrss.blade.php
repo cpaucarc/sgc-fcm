@@ -92,7 +92,7 @@
                                 @if($empresa)
                                     <button wire:click="nullEmpresa"
                                             class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                        <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                                        <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                     </button>
                                 @endif
 
@@ -143,7 +143,7 @@
                                     @if($docente)
                                         <button wire:click="nullDocente"
                                                 class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                            <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                                            <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
                                 </div>
@@ -177,7 +177,7 @@
                                     @if($estudiante)
                                         <button wire:click="nullEstudiante"
                                                 class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                            <x-icons.x :stroke="1.5" class="h-5 w-5"/>
+                                            <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
 
