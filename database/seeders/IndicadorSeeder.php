@@ -476,9 +476,48 @@ class IndicadorSeeder extends Seeder
 
         ];
 
+        // Grado Bachiller
+        $indicadoresBachEscuela = [
+            //IND-058
+            [
+                'objetivo' => 'Medir el porcentaje de egresados que obtienen el grado de bachiller.',
+                'titulo_interes' => 'N° de Bachilleres',
+                'titulo_total' => 'N° de egresados',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-058',
+                'cod_ind_final' => 'IND-058-GRA-ENF',
+                'formula' => 'X = (N° de bachilleres)/(Total de egresados del programa) x 100',
+                'minimo' => 60,
+                'satisfactorio' => 80,
+                'sobresaliente' => 90,
+                'proceso_id' => 12, //DB: procesos: 12: Bachiller
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Medir el porcentaje de egresados que obtienen el grado de bachiller.',
+                'titulo_interes' => 'N° de Bachilleres',
+                'titulo_total' => 'N° de egresados',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-058',
+                'cod_ind_final' => 'IND-058-GRA-OBS',
+                'formula' => 'X = (N° de bachilleres)/(Total de egresados del programa) x 100',
+                'minimo' => 60,
+                'satisfactorio' => 80,
+                'sobresaliente' => 90,
+                'proceso_id' => 12, //DB: procesos: 12: Bachiller
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+        ];
 
         \App\Models\Indicador::insert($indicadoresRRSS_Facultad);
         \App\Models\Indicador::insert($indicadoresRRSS_Escuela);
         \App\Models\Indicador::insert($indicadoresInvEscuela);
+        \App\Models\Indicador::insert($indicadoresBachEscuela);
     }
 }

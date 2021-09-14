@@ -11,7 +11,7 @@ class BachillerTesis extends Model
 {
     use HasFactory;
 
-    public $table = "bachiller_tesis";
+    protected $table = "bachiller_tesis";
     public $timestamps = false;
     public $fillable = ['bachiller_id', 'tesis_id'];
 

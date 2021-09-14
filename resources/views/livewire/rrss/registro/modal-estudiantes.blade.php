@@ -8,10 +8,7 @@
             <div class="flex items-center w-1/2">
                 <label for="searchE"
                        class="px-3 py-1 text-gray-400">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
+                    <x-icons.search :stroke="1.75" class="h-6 w-6"></x-icons.search>
                 </label>
                 <input type="text" id="searchE" wire:model="search" class="input-form-b flex-1 py-1">
             </div>

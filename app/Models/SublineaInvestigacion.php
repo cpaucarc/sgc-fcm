@@ -9,7 +9,7 @@ class SublineaInvestigacion extends Model
 {
     use HasFactory;
 
-    public $table = "sublinea_investigacion";
+    protected $table = "sublinea_investigacion";
     public $timestamps = false;
     public $fillable = ['nombre', 'linea_id'];
 

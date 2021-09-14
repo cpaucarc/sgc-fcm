@@ -9,7 +9,7 @@ class AreaInvestigacion extends Model
 {
     use HasFactory;
 
-    public $table = "area_investigacion";
+    protected $table = "area_investigacion";
     public $timestamps = false;
     public $fillable = ['nombre'];
 

@@ -15,16 +15,32 @@ class GradoAcademicoSeeder extends Seeder
     {
         $grado = [
             [
-                'nombre' => 'Magister',
+                'nombre' => 'Estudiante',
+                'color' => 'green'
             ],
             [
-                'nombre' => 'Doctor',
-            ],
-            [
-                'nombre' => 'PhD',
+                'nombre' => 'Egresado',
+                'color' => 'gray'
             ],
             [
                 'nombre' => 'Bachiller',
+                'color' => 'indigo'
+            ],
+            [
+                'nombre' => 'Titulado',
+                'color' => 'indigo'
+            ],
+            [
+                'nombre' => 'Magister',
+                'color' => 'gray'
+            ],
+            [
+                'nombre' => 'Doctor',
+                'color' => 'gray'
+            ],
+            [
+                'nombre' => 'PhD',
+                'color' => 'gray'
             ],
         ];
 

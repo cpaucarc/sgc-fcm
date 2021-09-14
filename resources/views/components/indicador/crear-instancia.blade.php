@@ -22,5 +22,16 @@
         @livewire('indicador.rsu.ind52', ['indicador' => $id])
     @elseif( $codigo === 'IND-053' )
         @livewire('indicador.rsu.ind53', ['indicador' => $id])
+
+        {{-- ToDo: Bachiller --}}
+    @elseif( $codigo === 'IND-058' )
+        {{--        @livewire('indicador.bachiller.ind58', ['indicador' => $id])--}}
+        @livewire('indicador.nueva-medicion', [
+        'indicador' => 28,
+        'interes' => 24,
+        'total' => 21,
+        'resultado' => 12
+        ])
     @endif
+
 </div>

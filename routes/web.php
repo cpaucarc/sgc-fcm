@@ -36,7 +36,8 @@ Route::prefix('responsabilidad-social')->group(function () {
         ->name('rrss.empresas');
 
     Route::get('side', function () {
-        return view('rrss.my-side');
+        $estudiante = \App\Models\Estudiante::find(5);
+        return view('rrss.my-side', compact('estudiante'));
     })->name('rrss.side');
 
     Route::get('indicadores', [ResponsabilidadSocialController::class, 'indicadores'])
@@ -61,7 +62,7 @@ Route::prefix('investigacion')->group(function () {
 Route::prefix('indicadores')->group(function () {
     Route::get('/', [IndicadorController::class, 'index'])
         ->name('indicadores.index');
-    Route::get('indicadores/{id}/{nombre}', [IndicadorController::class, 'indicadores'])
+    Route::get('procesos/{id}/{nombre}', [IndicadorController::class, 'indicadores'])
         ->name('indicadores.indicadores');
     Route::get('{id}/{nombre}', [IndicadorController::class, 'indicador'])
         ->name('indicadores.indicador');

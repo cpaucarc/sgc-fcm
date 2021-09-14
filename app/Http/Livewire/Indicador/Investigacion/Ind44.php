@@ -84,7 +84,7 @@ class Ind44 extends Component
         if ($valor <= $min) {
             return "#FDA4AF"; // Rojo - Tailwind: rose-300
         } elseif ($valor <= $sat) {
-            return "#FCD34D"; // Rojo - Tailwind: amber-300
+            return "#FCD34D"; // Yellow - Tailwind: amber-300
         } elseif ($valor <= $sob) {
             return "#86EFAC"; // Verde - Tailwind: green-300
         }

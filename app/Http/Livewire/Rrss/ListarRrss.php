@@ -52,10 +52,11 @@ class ListarRrss extends Component
 
     public function render()
     {
-
         $rrss = ResponsabilidadSocial::where('ciclo_id', $this->ciclo_sel->id)
             ->where('titulo', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->direction)
+            ->with('escuela')
+            ->with('empresa')
             ->paginate($this->cantidad);
 
         return view('livewire.rrss.listar-rrss')

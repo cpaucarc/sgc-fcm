@@ -27,11 +27,11 @@ class CreateAnalisisIndicadoresTable extends Migration
             $table->string('revisado_por')->nullable();
             $table->string('aprobado_por')->nullable();
             $table->unsignedBigInteger('indicador_id');
-            $table->unsignedBigInteger('ciclo_id')->nullable();
+            $table->date('fecha_medicion_inicio')->nullable();
+            $table->date('fecha_medicion_fin')->nullable();
             $table->timestamps();
 
             $table->foreign('indicador_id')->references('id')->on('indicadores');
-            $table->foreign('ciclo_id')->references('id')->on('ciclos');
         });
     }
 

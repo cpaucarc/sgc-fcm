@@ -9,7 +9,7 @@ class GradoAcademico extends Model
 {
     use HasFactory;
 
-    public $table = "grado_academico";
+    protected $table = "grado_academico";
     public $timestamps = false;
-    public $fillable = ['nombre'];
+    public $fillable = ['nombre', 'color'];
 }

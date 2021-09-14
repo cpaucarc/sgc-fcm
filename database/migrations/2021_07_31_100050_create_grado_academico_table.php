@@ -16,6 +16,7 @@ class CreateGradoAcademicoTable extends Migration
         Schema::create('grado_academico', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('color')->default('gray');
         });
     }
 

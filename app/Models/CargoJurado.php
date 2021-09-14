@@ -9,12 +9,12 @@ use App\Models\JuradoSustentacion;
 class CargoJurado extends Model
 {
     use HasFactory;
-    
-    public $table = "cargo_jurados";
+
+    protected $table = "cargo_jurados";
     public $timestamps = false;
     public $fillable = ['nombre'];
 
-    //Relacion de uno a muchos 
+    //Relacion de uno a muchos
     public function jurado_sustentacion()
     {
         return $this->hasMany(JuradoSustentacion::class);

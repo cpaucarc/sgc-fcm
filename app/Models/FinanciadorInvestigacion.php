@@ -9,7 +9,7 @@ class FinanciadorInvestigacion extends Model
 {
     use HasFactory;
 
-    public $table = "financiador_investigacion";
+    protected $table = "financiador_investigacion";
     public $timestamps = false;
     public $fillable = ['presupuesto', 'investigacion_id', 'financiador_id'];
 }

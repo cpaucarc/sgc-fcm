@@ -4,13 +4,15 @@
 
         <div>
             <h3 class="ml-1 text-gray-600 font-bold text-lg">
-                Hay<span class="text-gray-800 mx-1">{{ $indicador->analisis->count() }}</span>analisis de este
-                indicador
+                Hay
+                <span class="text-gray-800 mx-1">{{ $indicador->analisis->count() }}</span>
+                analisis de este indicador
             </h3>
         </div>
 
         {{-- INICIO Botones para crear nueva instancia de indicador --}}
-        <x-indicador.crear-instancia :codigo="$indicador->cod_ind_inicial" :id="$indicador->id"/>
+        {{--        <x-indicador.crear-instancia :codigo="$indicador->cod_ind_inicial" :id="$indicador->id"/>--}}
+        @livewire('indicador.nueva-medicion', [ 'indicador' => $indicador->id ])
         {{-- FIN    Botones para crear nueva instancia de indicador --}}
 
     </div>
@@ -36,7 +38,14 @@
         <x-slot name="body">
             @foreach($indicador->analisis as $i => $analisis)
                 <tr>
-                    <x-table.cell class="text-center">{{ $analisis->created_at->format('d-m-Y') }}</x-table.cell>
+                    <x-table.cell class="text-center">
+                        <h4 class="text-sm text-gray-500">
+                            Desde {{ $analisis->fecha_medicion_inicio->format('d-M-Y') }}
+                        </h4>
+                        <h4>
+                            Hasta {{ $analisis->fecha_medicion_fin->format('d-M-Y') }}
+                        </h4>
+                    </x-table.cell>
                     @if($analisis->interes)
                         <x-table.cell class="text-center">{{ $analisis->interes }}</x-table.cell>
                     @endif

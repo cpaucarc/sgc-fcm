@@ -48,6 +48,7 @@ class ListarInvestigaciones extends Component
                 return $query->where('nombre', 'like', '%' . $this->buscar . '%');
             })
             ->orderBy($this->sort, $this->direccion)
+            ->with('escuela', 'estado', 'presupuestos', 'responsables')
             ->paginate($this->cantidad);
 
         return view('livewire.investigacion.listar-investigaciones', compact('investigaciones'));

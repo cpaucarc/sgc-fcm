@@ -15,7 +15,7 @@ class Tesis extends Model
 {
     use HasFactory;
 
-    public $table = "tesis";
+    protected $table = "tesis";
     public $timestamps = false;
     public $fillable = ['numero_registro', 'titulo', 'anio', 'asesor_id', 'tipo_tesis_id'];
 

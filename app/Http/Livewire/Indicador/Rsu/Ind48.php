@@ -50,7 +50,7 @@ class Ind48 extends Component
                     $query->select('id')
                         ->from('estudiantes')
                         ->where('escuela_id', $this->indicador->escuela_id)
-                        ->where('estado', 1);
+                        ->where('estado_id', 1);
                 })
                 ->whereIn('responsabilidad_social_id', function ($query) {
                     $query->select('id')
@@ -74,7 +74,7 @@ class Ind48 extends Component
                                 ->from('escuelas')
                                 ->where('facultad_id', $this->indicador->facultad_id);
                         })
-                        ->where('estado', 1);
+                        ->where('estado_id', 1);
                 })
                 ->whereIn('responsabilidad_social_id', function ($query) {
                     $query->select('id')

@@ -58,7 +58,7 @@ class Ind45 extends Component
         // Docentes activos por escuela
         $this->total = DB::table('estudiantes')->select('1')
             ->where('escuela_id', $this->indicador->escuela_id)
-            ->where('estado', 1)
+            ->where('estado_id', 1)
             ->count();
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
 

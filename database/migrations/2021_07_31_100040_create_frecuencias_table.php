@@ -16,6 +16,7 @@ class CreateFrecuenciasTable extends Migration
         Schema::create('frecuencias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->integer('tiempo_meses');
         });
     }
 

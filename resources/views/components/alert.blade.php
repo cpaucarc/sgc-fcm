@@ -12,10 +12,7 @@
                 <button type="button" @click="visible = false"
                         class="-mr-1 flex p-2 rounded-md hover:bg-green-600 focus:outline-none sm:-mr-2">
                     <span class="sr-only">Cerrar</span>
-                    <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                         aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <x-icons.x :stroke="1.5" class="h-4 w-4"></x-icons.x>
                 </button>
             </div>
         </div>

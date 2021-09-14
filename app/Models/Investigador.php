@@ -9,7 +9,7 @@ class Investigador extends Model
 {
     use HasFactory;
 
-    public $table = "investigadores";
+    protected $table = "investigadores";
     public $timestamps = false;
     public $fillable = ['correo', 'sitio_web', 'foto', 'grado_academico_id', 'categoria_id', 'estudiante_id', 'docente_id'];
 

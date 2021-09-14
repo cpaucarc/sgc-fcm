@@ -9,7 +9,7 @@ class Financiador extends Model
 {
     use HasFactory;
 
-    public $table = "financiadores";
+    protected $table = "financiadores";
     public $timestamps = false;
     public $fillable = ['nombre'];
 }

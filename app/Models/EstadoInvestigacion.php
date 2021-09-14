@@ -9,7 +9,7 @@ class EstadoInvestigacion extends Model
 {
     use HasFactory;
 
-    public $table = "estado_investigacion";
+    protected $table = "estado_investigacion";
     public $timestamps = false;
     public $fillable = ['nombre', 'color'];
 }

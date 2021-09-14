@@ -9,7 +9,7 @@ use App\Models\Sustentacion;
 class Declaracion extends Model
 {
     use HasFactory;
-    public $table = "declaraciones";
+    protected $table = "declaraciones";
     public $timestamps = false;
     public $fillable = ['nombre'];
 

@@ -9,7 +9,7 @@ class EntradaProveedor extends Model
 {
     use HasFactory;
 
-    public $table = "entrada_proveedores";
+    protected $table = "entrada_proveedores";
     public $timestamps = false;
     public $fillable = ['proveedor_id', 'actividad_id', 'entrada_id'];
 

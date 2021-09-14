@@ -9,7 +9,7 @@ class Facultad extends Model
 {
     use HasFactory;
 
-    public $table = "facultades";
+    protected $table = "facultades";
     public $timestamps = false;
     public $fillable = ['nombre', 'abrev'];
 

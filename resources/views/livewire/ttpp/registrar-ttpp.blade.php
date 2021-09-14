@@ -117,11 +117,7 @@
                                     @if ($docenteAsesor)
                                         <button wire:click="nullDocenteAsesor"
                                             class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
+                                            <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
                                 </div>
@@ -176,11 +172,7 @@
                                     @if ($estudianteBachiller)
                                         <button wire:click="nullEstudianteBachiller"
                                             class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
+                                            <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
                                 </div>
@@ -218,11 +210,7 @@
                                     @if ($docenteJurado)
                                         <button wire:click="nullDocenteJurado"
                                             class="absolute right-3 mt-1 text-gray-500 hover:text-gray-700">
-                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
+                                            <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
                                 </div>

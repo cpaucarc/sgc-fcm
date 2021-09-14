@@ -51,8 +51,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadMedidaSeeder::class);
         $this->call(FrecuenciaSeeder::class);
 
-        $this->call(DocenteSeeder::class);
-        $this->call(EstudianteSeeder::class);
+        $this->call(GradoAcademicoSeeder::class);
+
+        \App\Models\Docente::factory(100)->create();
+        \App\Models\Estudiante::factory(100)->create();
         $this->call(IndicadorSeeder::class);
         \App\Models\ResponsabilidadSocial::factory(150)->create();
 
@@ -63,12 +65,15 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaSeeder::class);
         $this->call(EstadoInvestigacionSeeder::class);
         $this->call(FinanciadorSeeder::class);
-        $this->call(GradoAcademicoSeeder::class);
 
         $this->call(LineaInvestigacionSeeder::class);
 
         $this->call(SublineaInvestigacionSeeder::class);
 
+        \App\Models\Investigacion::factory(200)->create();
+        \App\Models\Investigador::factory(100)->create();
+        \App\Models\FinanciadorInvestigacion::factory(100)->create();
+        \App\Models\InvestigadorInvestigacion::factory(50)->create();
 
         //Títulos profesionales
         $this->call(CargoJuradoSeeder::class);
@@ -82,11 +87,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\BachillerTesis::factory(50)->create();
         \App\Models\JuradoSustentacion::factory(50)->create();
 
-      //Investigación
-        \App\Models\Investigacion::factory(200)->create();
-        \App\Models\Investigador::factory(100)->create();
-        \App\Models\FinanciadorInvestigacion::factory(100)->create();
-        \App\Models\InvestigadorInvestigacion::factory(50)->create();
+        //Bachiller
 
+        $this->call(EstadoSolicitudSeeder::class);
+        $this->call(RequisitoSeeder::class);
+        \App\Models\SolicitudBachiller::factory(50)->create();
+        \App\Models\GradoEstudiante::factory(50)->create();
     }
 }

@@ -9,7 +9,7 @@ class ActividadResponsable extends Model
 {
     use HasFactory;
 
-    public $table = "actividad_responsables";
+    protected  $table = "actividad_responsables";
     public $timestamps = false;
     public $fillable = ['responsable_id', 'actividad_id'];
 

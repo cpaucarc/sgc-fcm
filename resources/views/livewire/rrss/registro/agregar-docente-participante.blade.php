@@ -25,10 +25,7 @@
                 <h2>{{$dcpt->apellidos}} {{$dcpt->nombres}}</h2>
                 <button wire:click="eliminar({{ $dcpt->id }})"
                         class="text-gray-400 bg-transparent rounded hover:text-red-600 hover:bg-red-300">
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                 </button>
             </div>
         @endforeach

@@ -11,20 +11,31 @@ class Estudiante extends Model
     use HasFactory;
 
     public $timestamps = false;
-    public $fillable = ['codigo', 'estado', 'persona_id', 'escuela_id', 'facultad_id'];
+    public $fillable = ['codigo', 'persona_id', 'escuela_id', 'facultad_id'];
 
     public function persona()
     {
         return $this->belongsTo(Persona::class);
     }
 
-
     //Relacion de uno a uno
-    public function bachiller(){
+    public function bachiller()
+    {
         return $this->hasOne(Bachiller::class);
     }
+
     public function escuela()
     {
         return $this->belongsTo(Escuela::class);
+    }
+
+    public function grados()
+    {
+        return $this->hasMany(GradoEstudiante::class)->orderBy('created_at');
+    }
+
+    public function gradoReciente()
+    {
+        return $this->hasOne(GradoEstudiante::class)->latestOfMany() ?? GradoEstudiante::find(1);
     }
 }

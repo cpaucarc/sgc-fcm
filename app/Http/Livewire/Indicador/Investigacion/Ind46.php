@@ -49,7 +49,7 @@ class Ind46 extends Component
         $this->resultado = DB::table('investigaciones')->select('1')
             ->where('estado_id', 3) // Estado 3 es concluidos/publicados
             ->where('escuela_id', $this->indicador->escuela_id)
-            ->whereBetween('created_at', [$from, $today])
+            ->whereRaw('date(created_at) between ? and ?', [$from, $today])
             ->count();
     }
 
