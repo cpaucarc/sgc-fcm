@@ -15,7 +15,7 @@ class Sustentacion extends Model
 
     protected $table = "sustentaciones";
     public $timestamps = false;
-    public $fillable = ['fecha', 'tesis_id', 'escuela_id', 'ciclo_id', 'declaracion_id'];
+    public $fillable = ['fecha_sustentacion', 'tesis_id', 'escuela_id', 'ciclo_id', 'declaracion_id'];
 
     //Relacion de uno a muchos (inversa)
     public function tesis()

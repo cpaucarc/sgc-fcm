@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sustentacion;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SustentacionController extends Controller
 {
@@ -16,7 +18,7 @@ class SustentacionController extends Controller
         if (is_null($id)) {
             return view('ttpp.index');
         }
-        
+
         $sustentaciones = Sustentacion::find($id);
         if ($sustentaciones) {
             return view('ttpp.ver', compact('sustentaciones'));
@@ -27,5 +29,10 @@ class SustentacionController extends Controller
     public function registro()
     {
         return view('ttpp.registro');
+    }
+
+    public function titulados()
+    {
+        return view('ttpp.titulados');
     }
 }

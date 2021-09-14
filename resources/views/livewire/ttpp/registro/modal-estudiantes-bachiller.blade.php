@@ -14,12 +14,12 @@
         </div>
 
 
-        @if ($estudiantes->count())
+        @if ($bachilleres->count())
             <x-table>
                 <x-slot name="head">
                     <tr>
                         <th scope="col" class="p-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Estudiante
+                            Bachiller
                         </th>
                         <th scope="col"
                             class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -35,19 +35,19 @@
                     </tr>
                 </x-slot>
                 <x-slot name="body">
-                    @foreach ($estudiantes as $et)
+                    @foreach ($bachilleres as $bach)
                         <tr>
                             <td class="px-3 py-3 text-sm font-medium text-gray-800 tracking-wide">
-                                {{ $et->apellidos }} {{ $et->nombres }}
+                                {{ $bach->apellidos }} {{ $bach->nombres }}
                             </td>
                             <td class="px-2 py-3 whitespace-nowrap text-sm text-gray-500">
-                                {{ $et->dni }}
+                                {{ $bach->dni }}
                             </td>
                             <td class="px-4 py-3 text-gray-500 text-sm">
-                                {{ $et->codigo }}
+                                {{ $bach->codigo }}
                             </td>
                             <td class="px-2 py-3 whitespace-nowrap text-right text-sm font-medium">
-                                <button wire:click="enviarEstudianteBachiller({{ $et->id }})"
+                                <button wire:click="enviarEstudianteBachiller({{ $bach->id }})"
                                     class=" group py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-pink-200 hover:text-pink-800 transition duration-300 ease-in-out">
                                     <svg class="h-4 w-4 mr-1 text-transparent group-hover:text-pink-800 transition duration-300 ease-in-out"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">

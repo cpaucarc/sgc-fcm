@@ -73,7 +73,10 @@ Route::prefix('titulos-profesionales')->group(function () {
 
     Route::get('crear', [SustentacionController::class, 'registro'])
         ->name('ttpp.registro');
-
+        
+        Route::get('titulados', [SustentacionController::class, 'titulados'])
+            ->name('ttpp.titulados');
+            
     Route::get('/{id?}', [SustentacionController::class, 'index'])
         ->name('ttpp.index');
 
