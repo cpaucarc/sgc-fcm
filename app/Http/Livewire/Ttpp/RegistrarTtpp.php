@@ -15,14 +15,20 @@ use App\Models\JuradoSustentacion;
 use App\Models\Sustentacion;
 use App\Models\Tesis;
 use App\Models\TipoTesis;
+use App\Models\Documento;
+use App\Models\DocumentoTesis;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 
 class RegistrarTtpp extends Component
 {
+    use WithFileUploads;
+
     public $numeroRegistro;
     public $titulo;
     public $anio;
@@ -53,6 +59,9 @@ class RegistrarTtpp extends Component
     public $docJur = null;
     public $tesis_save = null;
 
+    public $randomID;
+    public $archivo;
+
     protected $listeners = [
         'enviarDocenteAsesor' => 'recibirDocenteAsesor',
         'enviarDocenteJurado' => 'recibirDocenteJurado',
@@ -65,6 +74,7 @@ class RegistrarTtpp extends Component
         'tipoTesis' => 'required|gt:0',
         'declaracion' => 'required|gt:0',
         'escuela' => 'required|gt:0',
+        'archivo' => 'required',
     ];
 
     public function mount()
@@ -82,6 +92,8 @@ class RegistrarTtpp extends Component
         $this->declaraciones = Declaracion::orderBy('nombre', 'asc')->get();
 
         $this->tiposTesis = TipoTesis::orderBy('nombre', 'asc')->get();
+
+        $this->randomID = rand();
     }
 
     public function updatedEscuela()
@@ -146,6 +158,51 @@ class RegistrarTtpp extends Component
         $this->docenteJurado = null;
     }
 
+    public function enviarDocumentoTesis()
+    {
+        $this->validate();
+        $rutaCarpeta = '/public/titulos';
+
+        //verificar si existe la carpeta storage/app/public/salidas, crear si no existe
+        if (!Storage::exists($rutaCarpeta)) {
+            Storage::makeDirectory($rutaCarpeta);
+        }
+
+        //copiar archivo a la carpeta storage/app/public/salidas
+        $nombreArchivo = $this->archivo->getClientOriginalName();
+        if (!$nombreArchivo) {
+            $nombreArchivo = "Archivo adjunto";
+        }
+
+        $existe = Storage::disk('public')->exists('titulos/' . $nombreArchivo);
+        $num = 0;
+        if ($existe) {
+            $aux = $nombreArchivo;
+            while ($existe) {
+                $num++;
+                $aux = $num . '_' . $aux;
+                $existe = Storage::disk('public')->exists('titulos/' . $aux);
+                $aux = $nombreArchivo;
+            }
+            $nombreArchivo = $num . '_' . $nombreArchivo;
+        }
+
+        $this->archivo->storeAs($rutaCarpeta, $nombreArchivo);
+
+        $documento = Documento::create([
+            'nombre' => $nombreArchivo,
+            'enlace_interno' => 'titulos' . '/' . $nombreArchivo
+        ]);
+
+        DocumentoTesis::create([
+            'documento_id' => $documento->id,
+            'tesis_id' =>  $this->ts->id
+        ]);
+
+        //            $this->open = false;
+        $this->randomID = rand();
+    }
+
     public function registrarTTPP()
     {
         $this->validate();
@@ -201,8 +258,9 @@ class RegistrarTtpp extends Component
         }
 
         $this->stn->save();
-        $this->reset(['numeroRegistro', 'titulo', 'tipoTesis', 'anio', 'fechaSustentacion', 'declaracion', 'escuela', 'docenteAsesor', 'estudianteBachiller', 'docenteJurado']);
+        $this->enviarDocumentoTesis();
 
+        $this->reset(['numeroRegistro', 'titulo', 'tipoTesis', 'anio', 'fechaSustentacion', 'declaracion', 'escuela', 'docenteAsesor', 'estudianteBachiller', 'docenteJurado']);
         info("RegistrarTtpp: ttppId: " . $this->stn->id);
         $this->emit('enviarTTPP', $this->stn->id);
     }

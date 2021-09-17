@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Livewire\Indicador\Bachiller;
+namespace App\Http\Livewire\Indicador\Ttpp;
 
 use App\Models\AnalisisIndicador;
 use App\Models\Grafico;
+use App\Models\Ciclo;
 use App\Models\Indicador;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Ind58 extends Component
+class Ind61 extends Component
 {
 
     public $indicador, $mostrar = false, $fecha_medicion_inicio, $fecha_medicion_fin;
@@ -37,6 +38,8 @@ class Ind58 extends Component
         $this->sat = $this->indicador->satisfactorio;
         $this->sob = $this->indicador->sobresaliente;
 
+        $this->ciclo = Ciclo::orderBy('id', 'desc')->first();
+
         $this->fecha_medicion_inicio = today()->subMonths($this->indicador->frecuencia->tiempo_meses)->format('Y-m-d');
         $this->fecha_medicion_fin = today()->format('Y-m-d');
 
@@ -45,22 +48,22 @@ class Ind58 extends Component
 
     public function calcularValor()
     {
-        $today = date('Y-m-d'); //Hoy
-        $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses
+        /*    $today = date('Y-m-d'); //Hoy
+        $from = date('Y-m-d', strtotime('-6 months', strtotime($today))); //Hace 6 meses */
 
-        // Docentes que participan en PI por escuela
-        $this->interes = DB::table('investigador_investigacion')->select('1')
-            ->join('investigaciones', 'investigaciones.id', '=', 'investigador_investigacion.investigacion_id')
-            ->join('investigadores', 'investigadores.id', '=', 'investigador_investigacion.investigador_id')
-            ->join('docentes', 'docentes.id', '=', 'investigadores.docente_id')
-            ->where('docentes.escuela_id', $this->indicador->escuela_id)
-            ->whereBetween('investigaciones.fecha_publicacion', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+        // Proyectos de investigación aprobados
+        $this->interes = DB::table('sustentaciones')->select('1')
+            ->join('declaraciones', 'declaraciones.id', '=', 'sustentaciones.declaracion_id')
+            ->where('sustentaciones.escuela_id', $this->indicador->escuela_id)
+            ->where('ciclo_id', $this->ciclo->id)
+            ->where('declaraciones.name', 'Aprobado')
             ->count();
 
-        // Docentes activos por escuela
-        $this->total = DB::table('docentes')->select('1')
-            ->where('escuela_id', $this->indicador->escuela_id)
-            ->where('estado', 1)
+        // Proyectos de investigación presentados
+        $this->total = DB::table('sustentaciones')->select('1')
+            ->join('declaraciones', 'declaraciones.id', '=', 'sustentaciones.declaracion_id')
+            ->where('sustentaciones.escuela_id', $this->indicador->escuela_id)
+            ->where('ciclo_id', $this->ciclo->id)
             ->count();
 
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
@@ -133,10 +136,11 @@ class Ind58 extends Component
         $this->emit('renderizarGrafico');
     }
 
+
     public function render()
     {
         $this->calcularValor();
         $this->enviarInformacion();
-        return view('livewire.indicador.bachiller.ind58');
+        return view('livewire.indicador.ttpp.ind61');
     }
 }

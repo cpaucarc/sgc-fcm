@@ -243,6 +243,33 @@
                     </x-slot>
                 </x-card>
                 <x-card>
+                    <div class="space-y-6">
+                        <x-jet-label for="archivo">Archivo</x-jet-label>
+                        <input type="file" wire:model="archivo" id="{{ $randomID }}"
+                            class="input-form w-full py-2">
+                        <p wire:loading wire:target="archivo">
+                            Cargando...
+                        </p>
+                        @error('archivo')
+                            <div class="text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <x-slot name="footer">
+                        <div class="group flex items-start gap-x-4 text-gray-500">
+                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p class="text-sm">
+                                Es necesrio que agregue el proyecto de sustetación de tesis.
+                            </p>
+                        </div>
+                    </x-slot>
+                </x-card>
+                <x-card>
                     <div class="flex justify-end space-x-4">
                         <x-jet-button wire:click="registrarTTPP" wire:target="registrarTTPP"
                             wire:loading.class="bg-gray-800" wire:loading.attr="disabled">
