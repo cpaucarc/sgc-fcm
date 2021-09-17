@@ -137,10 +137,10 @@
 
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="font-medium text-gray-500">
-                        Documentos {{ $sustentaciones->tesis->documento_tesis[0]->documento->count() }}
+                        Documentos {{ $sustentaciones->tesis->documento_tesis->count() }}
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        @if ($sustentaciones->tesis->documento_tesis[0]->documento->count())
+                        @if ($sustentaciones->tesis->documento_tesis->count())
                             <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
                                 @foreach ($sustentaciones->tesis->documento_tesis as $docttpp)
                                     <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
@@ -155,7 +155,6 @@
                                                     class="font-medium text-gray-600 hover:text-blue-700 hover:underline"
                                                     target="_blank">
                                                     {{ $docttpp->documento->nombre }}
-                                                    
                                                 </a>
                                             </span>
                                         </div>
