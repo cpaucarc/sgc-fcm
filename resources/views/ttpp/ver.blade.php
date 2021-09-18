@@ -165,7 +165,7 @@
                                 @endforeach
                             </ul>
                         @else
-                            <p>Aun no hay documentos asociados a esta responsabilidad social</p>
+                            <p>Aun no hay documentos asociados a esta tesis</p>
                         @endif
                     </dd>
 

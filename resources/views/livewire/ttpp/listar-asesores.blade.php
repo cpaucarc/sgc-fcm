@@ -74,7 +74,7 @@
                         class="hidden lg:table-cell px-2 cursor-pointer py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 
                         <div class="flex items-center justify-between ">
-                            <span>Asesorados</span>
+                            <span>Tesis</span>
                         </div>
                     </th>
                     <th scope="col" class="relative text-center px-4 py-3">

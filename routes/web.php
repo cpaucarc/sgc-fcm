@@ -77,7 +77,7 @@ Route::prefix('titulos-profesionales')->group(function () {
     Route::get('titulados/{id?}', [SustentacionController::class, 'titulados'])
         ->name('ttpp.titulados');
         
-    Route::get('asesores', [SustentacionController::class, 'asesores'])
+    Route::get('asesores/{id?}', [SustentacionController::class, 'asesores'])
         ->name('ttpp.asesores');
 
     Route::get('/{id?}', [SustentacionController::class, 'index'])
