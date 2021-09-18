@@ -135,14 +135,14 @@
                     </dd>
                 </div>
 
-                {{-- <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="font-medium text-gray-500">
                         Documentos {{ $sustentaciones->tesis->documento_tesis->count() }}
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        @if ($sustentaciones->documento->count())
+                        @if ($sustentaciones->tesis->documento_tesis->count())
                             <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                @foreach ($sustentaciones->tesis->documento_tesis as $docst)
+                                @foreach ($sustentaciones->tesis->documento_tesis as $docttpp)
                                     <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                                         <div class="w-0 flex-1 flex items-center">
                                             <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none"
@@ -151,24 +151,25 @@
                                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                             <span class="ml-2 flex-1 w-0 truncate">
-                                                <a href="{{ route('documentos', $docst->documento->enlace_interno) }}"
+                                                <a href="{{ route('documentos', $docttpp->documento->enlace_interno) }}"
                                                     class="font-medium text-gray-600 hover:text-blue-700 hover:underline"
                                                     target="_blank">
-                                                    {{ $docst->documento->nombre }}
+                                                    {{ $docttpp->documento->nombre }}
                                                 </a>
                                             </span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0 text-gray-600">
-                                            Enviado {{ $docst->documento->created_at->diffForHumans() }}
+                                            Enviado {{ $docttpp->documento->created_at->diffForHumans() }}
                                         </div>
                                     </li>
                                 @endforeach
                             </ul>
                         @else
-                            <p>Aun no hay documentos asociados a esta responsabilidad social</p>
+                            <p>Aun no hay documentos asociados a esta tesis</p>
                         @endif
                     </dd>
-                </div> --}}
+
+                </div>
             </dl>
         </div>
     </div>

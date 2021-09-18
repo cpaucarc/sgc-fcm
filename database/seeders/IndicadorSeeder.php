@@ -515,9 +515,120 @@ class IndicadorSeeder extends Seeder
             ],
         ];
 
+        // Titulo profesional
+        $indicadoresTitProfesional = [
+            //IND-059
+            [
+                'objetivo' => 'Medir el porcentaje de titulados por programa de estudios.',
+                'titulo_interes' => 'N° de titulados',
+                'titulo_total' => 'N° de bachilleres',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-059',
+                'cod_ind_final' => 'IND-059-TIT-ENF',
+                'formula' => 'X = (N° de egresados que logran titularse)/(Total de graduados en bachiller por  programa) x 100',
+                'minimo' => 70,
+                'satisfactorio' => 80,
+                'sobresaliente' => 98,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Medir el porcentaje de titulados por programa de estudios.',
+                'titulo_interes' => 'N° de titulados',
+                'titulo_total' => 'N° de bachilleres',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-059',
+                'cod_ind_final' => 'IND-059-TIT-ENF',
+                'formula' => 'X = (N° de egresados que logran titularse)/(Total de graduados en bachiller por  programa) x 100',
+                'minimo' => 70,
+                'satisfactorio' => 80,
+                'sobresaliente' => 98,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+            //IND-060
+            [
+                'objetivo' => 'Conocer la cantidad de titulados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'N° de titulados',
+                'cod_ind_inicial' => 'IND-060',
+                'cod_ind_final' => 'IIND-060-TIT-ENF',
+                'formula' => 'X = N° de titulados por programa de estudios',
+                'minimo' => 30,
+                'satisfactorio' => 40,
+                'sobresaliente' => 95,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Conocer la cantidad de titulados por programa de estudios.',
+                'titulo_interes' => null,
+                'titulo_total' => null,
+                'titulo_resultado' => 'N° de titulados',
+                'cod_ind_inicial' => 'IND-060',
+                'cod_ind_final' => 'IIND-060-TIT-ENF',
+                'formula' => 'X = N° de titulados por programa de estudios',
+                'minimo' => 30,
+                'satisfactorio' => 40,
+                'sobresaliente' => 95,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 1, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+            //IND-061
+            [
+                'objetivo' => 'Medir el porcentaje de proyectos de investigación aprobados por programa de estudios.',
+                'titulo_interes' => 'N° de proyectos de investigación aprobados',
+                'titulo_total' => 'N° de proyectos de investigación presentados',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-061',
+                'cod_ind_final' => 'IND-061-TIT-ENF',
+                'formula' => 'X = (N° de proyectos de investigación aprobados)/(Total de PI presentados por  programa) x 100',
+                'minimo' => 30,
+                'satisfactorio' => 50,
+                'sobresaliente' => 90,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 1 // 1:Enfermeria | 2:Obstetricia
+            ],
+            [
+                'objetivo' => 'Medir el porcentaje de proyectos de investigación aprobados por programa de estudios.',
+                'titulo_interes' => 'N° de proyectos de investigación aprobados',
+                'titulo_total' => 'N° de proyectos de investigación presentados',
+                'titulo_resultado' => 'Resultado Indicador',
+                'cod_ind_inicial' => 'IND-061',
+                'cod_ind_final' => 'IND-061-TIT-ENF',
+                'formula' => 'X = (N° de proyectos de investigación aprobados)/(Total de PI presentados por  programa) x 100',
+                'minimo' => 30,
+                'satisfactorio' => 50,
+                'sobresaliente' => 90,
+                'proceso_id' => 5, //DB: procesos: 5: Titulo Profesional
+                'unidad_medida_id' => 2, //1: Numero | 2:Porcentaje
+                'frecuencia_id' => 2, //1:Mensual | 2:Semestral
+                'facultad_id' => 1,
+                'escuela_id' => 2 // 1:Enfermeria | 2:Obstetricia
+            ],
+        ];
+
+
         \App\Models\Indicador::insert($indicadoresRRSS_Facultad);
         \App\Models\Indicador::insert($indicadoresRRSS_Escuela);
         \App\Models\Indicador::insert($indicadoresInvEscuela);
         \App\Models\Indicador::insert($indicadoresBachEscuela);
+        \App\Models\Indicador::insert($indicadoresTitProfesional);
     }
 }

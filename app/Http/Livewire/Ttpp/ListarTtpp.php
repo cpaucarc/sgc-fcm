@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Ttpp;
 
 use App\Models\Ciclo;
-use App\Models\Sustentacion;
 use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
