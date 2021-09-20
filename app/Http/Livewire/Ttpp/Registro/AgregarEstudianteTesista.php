@@ -52,7 +52,7 @@ class AgregarEstudianteTesista extends Component
     public function render()
     {
         $estudiantes_participantes = DB::table('bachiller_tesis')
-            ->select('bachiller_tesis.id', 'bachilleres.id', 'tesis.id', 'estudiantes.codigo', 'personas.dni', 'personas.apellidos', 'personas.nombres')
+            ->select('bachiller_tesis.id', 'estudiantes.codigo', 'personas.dni', 'personas.apellidos', 'personas.nombres')
             ->join('bachilleres', 'bachilleres.id', '=', 'bachiller_tesis.bachiller_id')
             ->join('estudiantes', 'estudiantes.id', '=', 'bachilleres.estudiante_id')
             ->join('personas', 'personas.id', '=', 'estudiantes.persona_id')
