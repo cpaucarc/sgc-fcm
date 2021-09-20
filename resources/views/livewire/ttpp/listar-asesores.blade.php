@@ -95,20 +95,20 @@
                             </div>
                         </td>
                         <td class="px-2 py-4">
-                            {{ $asesor->docente->escuela->nombre}}
+                            {{ $asesor->docente->escuela->nombre }}
                         </td>
                         <td class="px-2 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                             {{ $asesor->tesis->count() }}
                         </td>
                         <td class="group px-2 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-x-2 my-4 ">
-                            <a href="{{ route('ttpp.asesores', $asesor->id) }}"
-                                class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-green-100 hover:text-green-800">
+                            <a wire:click="verProyectos({{ $asesor }})"
+                                class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-green-100 hover:text-green-800 cursor-pointer">
                                 <svg class="h-4 w-4 mr-1 group-hover:text-green-600" fill="currentColor"
                                     viewBox="0 0 19 19">
                                     <path
                                         d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3z" />
                                 </svg>
-                                Ver
+                                Ver proyectos
                             </a>
                         </td>
                     </tr>
@@ -124,4 +124,73 @@
         <x-empty-search />
     @endif
 
+
+    @if ($_asesor)
+        <x-jet-dialog-modal wire:model="mostrar">
+            <x-slot name="title">
+                <h1 class="font-bold">
+                    {{ $_asesor->docente->persona->apellidos }}
+                    {{ $_asesor->docente->persona->nombres }}
+                </h1>
+                <button wire:click="$set('mostrar', false)" class="text-gray-400 hover:text-gray-500">
+                    <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
+                </button>
+            </x-slot>
+            <x-slot name="content">
+                <x-table total="{{ $_asesor->tesis->count() }}">
+                    <x-slot name="head">
+                        <tr>
+                            <x-table.heading>N° Registro</x-table.heading>
+                            <x-table.heading>Titulo</x-table.heading>
+                            <x-table.heading>año</x-table.heading>
+                            <x-table.heading>Declaración</x-table.heading>
+                            <x-table.heading><span>{{ __('') }}</span></x-table.heading>
+                        </tr>
+                    </x-slot>
+
+                    <x-slot name="body">
+                        @foreach ($_asesor->tesis as $ts)
+                            <tr>
+                                <x-table.cell class="text-xs">
+                                    {{ $ts->numero_registro }}
+                                </x-table.cell>
+                                <x-table.cell class="text-xs">
+                                    {{ $ts->titulo }}
+                                </x-table.cell>
+                                <x-table.cell class="text-xs">
+                                    {{ $ts->anio }}
+                                </x-table.cell>
+                                <x-table.cell class="text-xs">
+                                    <span>
+
+                                        @foreach ($ts->sustentacion as $sust)
+                                            @if ($sust->declaracion->nombre === 'Aprobado')
+                                                <span
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Aprobado
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    Desaprobado
+                                                </span>
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </x-table.cell>
+                                <x-table.cell class="text-xs">
+                                    @foreach ($ts->sustentacion as $sust)
+                                        <a href="{{ route('ttpp.index', $sust->id) }}"
+                                            class="text-gray-500 hover:text-blue-800">
+                                            Ver
+                                    @endforeach
+
+                                </x-table.cell>
+                            </tr>
+                        @endforeach
+                    </x-slot>
+                </x-table>
+            </x-slot>
+        </x-jet-dialog-modal>
+    @endif
 </div>
