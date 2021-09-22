@@ -1,8 +1,8 @@
 <x-app-layout>
 
-    <div class="px-6 py-4 bg-white mb-8 flex items-center justify-between gap-x-4 rounded">
+    <div class="px-6 py-4 bg-indigo-700 mb-8 flex items-center justify-between gap-x-4 rounded">
 
-        <h1 class="font-bold text-xl tracking-wide text-gray-800">
+        <h1 class="font-bold text-xl tracking-wide text-white">
             Indicadores agrupados por procesos
         </h1>
 

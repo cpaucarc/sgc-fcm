@@ -29,6 +29,12 @@
                         {{ __('Investigación') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('bachiller.index') }}"
+                                    :active="request()->routeIs('bachiller.*')">
+                        {{ __('Bachiller') }}
+                    </x-jet-nav-link>
+
+                    {{-- Todo: Debe ir al ultimo --}}
                     <x-jet-nav-link href="{{ route('indicadores.index') }}"
                                     :active="request()->routeIs('indicadores.*')">
                         {{ __('Indicadores') }}

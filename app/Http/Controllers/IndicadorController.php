@@ -27,6 +27,7 @@ class IndicadorController extends Controller
 
     public function indicadores($id, $nombre)
     {
+        $proceso = Proceso::findOrFail($id);
         $facultad = Auth::user()->roles[0]->oficina->facultad;
         $lista = array();
 
@@ -55,7 +56,7 @@ class IndicadorController extends Controller
             ));
         }
 
-        return view('indicador.indicadores', compact('lista'));
+        return view('indicador.indicadores', compact('proceso', 'lista'));
     }
 
     public function indicador($id, $nombre)

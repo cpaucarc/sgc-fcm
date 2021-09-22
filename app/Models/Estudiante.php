@@ -36,6 +36,12 @@ class Estudiante extends Model
 
     public function gradoReciente()
     {
-        return $this->hasOne(GradoEstudiante::class)->latestOfMany() ?? GradoEstudiante::find(1);
+        return $grado_est = $this->hasOne(GradoEstudiante::class)->latestOfMany()
+            ->with('grado');
+    }
+
+    public function solicitud()
+    {
+        return $this->hasOne(SolicitudBachiller::class);
     }
 }
