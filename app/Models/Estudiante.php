@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Bachiller;
+use App\Models\SolicitudTitulo;
 
 class Estudiante extends Model
 {
@@ -22,6 +23,12 @@ class Estudiante extends Model
     public function bachiller()
     {
         return $this->hasOne(Bachiller::class);
+    }
+
+    //Relación de uno a muchos
+    public function solicitud_titulo()
+    {
+        return $this->hasMany(SolicitudTitulo::class);
     }
 
     public function escuela()
