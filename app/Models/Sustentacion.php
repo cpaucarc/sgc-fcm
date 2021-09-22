@@ -8,6 +8,7 @@ use App\Models\Tesis;
 use App\Models\Ciclo;
 use App\Models\Declaracion;
 use App\Models\JuradoSustentacion;
+use App\Models\SolicitudTitulo;
 
 class Sustentacion extends Model
 {
@@ -46,4 +47,10 @@ class Sustentacion extends Model
     {
         return $this->hasMany(JuradoSustentacion::class);
     }
+
+     //Relación de uno a muchos
+     public function solicitud_titulo()
+     {
+         return $this->hasMany(SolicitudTitulo::class);
+     }
 }
