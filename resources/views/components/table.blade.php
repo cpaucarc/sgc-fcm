@@ -1,7 +1,9 @@
 <div>
 
     @if(isset($total))
-        <x-items-matched total="{{$total}}"/>
+        <div class="ml-4">
+            <x-items-matched total="{{$total}}"/>
+        </div>
     @endif
 
     <div class="flex flex-col border border-gray-200 rounded-lg">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\BachillerController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\InvestigacionController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
 use App\Http\Controllers\SustentacionController;
 
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Support\Facades\Route;
@@ -68,6 +70,13 @@ Route::prefix('indicadores')->group(function () {
         ->name('indicadores.indicador');
 });
 
+Route::prefix('bachiller')->group(function () {
+    Route::get('/', [BachillerController::class, 'index'])
+        ->name('bachiller.index');
+    Route::get('constancia/{sha}', [BachillerController::class, 'constancia'])
+        ->name('bachiller.constancia');
+});
+
 //Sustentaciones de titulación
 Route::prefix('titulos-profesionales')->group(function () {
 
@@ -84,7 +93,6 @@ Route::prefix('titulos-profesionales')->group(function () {
         ->name('ttpp.index');
 });
 
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -98,4 +106,10 @@ Route::prefix('encuestas')->group(function () {
         ->name('encuesta.rrss');
     Route::get('/agradecimiento', [EncuestaController::class, 'agradecimiento'])
         ->name('encuesta.agradecimiento');
+});
+
+Route::get('pdf', function () {
+    $pdf = PDF::loadView('pruebapdf');
+//    return $pdf->download('invoice.pdf');
+    return $pdf->stream();
 });

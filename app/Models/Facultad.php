@@ -11,7 +11,7 @@ class Facultad extends Model
 
     protected $table = "facultades";
     public $timestamps = false;
-    public $fillable = ['nombre', 'abrev'];
+    public $fillable = ['nombre', 'abrev', 'direccion'];
 
     public function escuelas()
     {

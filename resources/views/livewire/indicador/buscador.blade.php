@@ -24,7 +24,7 @@
 
                             <x-tooltip>
                                 <x-slot name="message">
-                                    {{ $indicador->objetivo }}
+                                    {{ substr($indicador->objetivo, 0, 15) . '...'. substr($indicador->objetivo, -45)}}
                                 </x-slot>
 
                                 <div class="flex items-center justify-between text-sm">

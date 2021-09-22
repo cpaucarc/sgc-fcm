@@ -12,4 +12,12 @@ class GradoAcademico extends Model
     protected $table = "grado_academico";
     public $timestamps = false;
     public $fillable = ['nombre', 'color'];
+
+    public function bachilleres()
+    {
+        return $this->belongsToMany(Estudiante::class, 'grado_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('grado_estudiante.created_at', 'desc');
+    }
+
 }

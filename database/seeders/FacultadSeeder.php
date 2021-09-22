@@ -17,6 +17,7 @@ class FacultadSeeder extends Seeder
             [
                 'nombre' => 'Facultad de Ciencias Medicas',
                 'abrev' => 'FCM',
+                'direccion' => 'Av. Agustín Gamarra 1227'
             ],
         ];
 

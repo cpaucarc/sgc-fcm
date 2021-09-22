@@ -11,4 +11,9 @@ class DocumentoSolicitudBachiller extends Model
 
     protected $table = 'documento_solicitud_bachiller';
     public $fillable = ['solicitud_bachiller_id', 'requisito_id', 'documento_id'];
+
+    public function documento()
+    {
+        return $this->belongsTo(Documento::class);
+    }
 }
