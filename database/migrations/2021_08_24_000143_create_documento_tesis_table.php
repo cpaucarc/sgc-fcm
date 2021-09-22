@@ -15,8 +15,8 @@ class CreateDocumentoTesisTable extends Migration
     {
         Schema::create('documento_tesis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tesis_id')->nullable();
-            $table->unsignedBigInteger('documento_id')->nullable();
+            $table->unsignedBigInteger('tesis_id');
+            $table->unsignedBigInteger('documento_id');
             $table->foreign('tesis_id')->references('id')->on('tesis');
             $table->foreign('documento_id')->references('id')->on('documentos');
         });

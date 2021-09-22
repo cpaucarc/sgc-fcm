@@ -4,7 +4,7 @@
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
                     <h3 class="text-xl font-bold leading-6 text-gray-800">
-                        Sustentación de tesis
+                        Sustentación de Tesis
                     </h3>
                     <p class="mt-1 text-sm text-gray-600">
                         This information will be displayed publicly so be careful what you share.
@@ -24,7 +24,7 @@
                             @enderror
                         </div>
                         <div>
-                            <x-jet-label for="titulo">{{ __('Título') }}</x-jet-label>
+                            <x-jet-label for="titulo">{{ __('Título de la Tesis') }}</x-jet-label>
 
                             <textarea wire:model.defer="titulo" id="titulo" rows="2"
                                 class="input-form w-full col-span-2"></textarea>
@@ -32,51 +32,52 @@
                                 <x-jet-input-error for="titulo">{{ $message }}</x-jet-input-error>
                             @enderror
                         </div>
-                        <div>
-                            <x-jet-label for="anio">{{ __('Año') }}</x-jet-label>
-
-                            <input wire:model.defer="anio" type="number" id="anio" class="input-form w-full col-span-2">
-                            @error('anio')
-                                <x-jet-input-error for="anio">{{ $message }}</x-jet-input-error>
-                            @enderror
-                        </div>
-                        <div>
-                            <x-jet-label for="declaracion">{{ __('Declaración del jurado') }}</x-jet-label>
-
-                            <select wire:model="declaracion" id="declaracion" class="input-form w-full col-span-2">
-                                <option value="0">Seleccione...</option>
-                                @foreach ($declaraciones as $declaracion)
-                                    <option value="{{ $declaracion->id }}">{{ $declaracion->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('declaracion')
-                                <x-jet-input-error for="declaracion">{{ $message }}</x-jet-input-error>
-                            @enderror
-                        </div>
-
                         <div class="flex justify-between items-center gap-x-8">
                             <div class="w-full">
-                                <x-jet-label for="fecha">{{ __('Fecha de sustentación') }}</x-jet-label>
+                                <x-jet-label for="tipoTesis">{{ __('Tipo de Tesis') }}</x-jet-label>
 
-                                <input wire:model.defer="fecha" type="date" id="fecha"
-                                    class="input-form w-full col-span-2">
-                                @error('fecha')
-                                    <x-jet-input-error for="fecha">{{ $message }}</x-jet-input-error>
+                                <select wire:model="tipoTesis" id="tipoTesis" class="input-form w-full col-span-2">
+                                    <option value="0">Seleccione...</option>
+                                    @foreach ($tiposTesis as $ttesis)
+                                        <option value="{{ $ttesis->id }}">{{ $ttesis->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                @error('tipoTesis')
+                                    <x-jet-input-error for="tipoTesis">{{ $message }}</x-jet-input-error>
                                 @enderror
                             </div>
                             <div class="w-full">
-                                <x-jet-label for="ciclo">{{ __('Ciclo') }}</x-jet-label>
+                                <x-jet-label for="anio">{{ __('Año de la Tesis') }}</x-jet-label>
 
-                                <select wire:model="ciclo" id="ciclo" class="input-form w-full col-span-2">
+                                <input wire:model.defer="anio" type="number" id="anio"
+                                    class="input-form w-full col-span-2">
+                                @error('anio')
+                                    <x-jet-input-error for="anio">{{ $message }}</x-jet-input-error>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center gap-x-8">
+                            <div class="w-full">
+                                <x-jet-label for="fechaSustentacion">{{ __('Fecha de sustentación') }}</x-jet-label>
+
+                                <input wire:model.defer="fechaSustentacion" type="date" id="fechaSustentacion"
+                                    class="input-form w-full col-span-2">
+                                @error('fechaSustentacion')
+                                    <x-jet-input-error for="fechaSustentacion">{{ $message }}</x-jet-input-error>
+                                @enderror
+                            </div>
+                            <div class="w-full">
+                                <x-jet-label for="declaracion">{{ __('Declaración del jurado') }}</x-jet-label>
+
+                                <select wire:model="declaracion" id="declaracion" class="input-form w-full col-span-2">
                                     <option value="0">Seleccione...</option>
-                                    @foreach ($ciclos as $ciclo)
-                                        <option value="{{ $ciclo->id }}">{{ $ciclo->nombre }}</option>
+                                    @foreach ($declaraciones as $declaracion)
+                                        <option value="{{ $declaracion->id }}">{{ $declaracion->nombre }}</option>
                                     @endforeach
                                 </select>
-                                @error('ciclo')
-                                    <x-jet-input-error for="ciclo">{{ $message }}</x-jet-input-error>
+                                @error('declaracion')
+                                    <x-jet-input-error for="declaracion">{{ $message }}</x-jet-input-error>
                                 @enderror
-
                             </div>
                         </div>
                         <div>
@@ -160,8 +161,8 @@
                                     <div class="input-form py-2 bg-gray-50 w-full">
                                         @if ($estudianteBachiller)
                                             <span class="font-semibold tracking-wide">
-                                                {{ $estudianteBachiller->persona->apellidos }}
-                                                {{ $estudianteBachiller->persona->nombres }}
+                                                {{ $estudianteBachiller->estudiante->persona->apellidos }}
+                                                {{ $estudianteBachiller->estudiante->persona->nombres }}
                                             </span>
                                         @else
                                             <span class="text-gray-400">{{ __('No se ha escogido ninguno') }}</span>
@@ -191,7 +192,7 @@
                         </div>
                         {{-- Docente Jurado --}}
                         <div>
-                            <x-jet-label for="jurado">{{ __('Docente Jurado') }}</x-jet-label>
+                            <x-jet-label for="jurado">{{ __('Jurado Presidente') }}</x-jet-label>
                             <div class="flex gap-x-2">
 
                                 <div class="flex items-center flex-1 relative">
@@ -235,10 +236,35 @@
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <p class="text-sm">
-                                Puede agregar un estudíante como tesista, pero es
-                                necesario que exista al menos uno. También puede agregar un docente como presidente, uno
-                                como secretario y otro como vocal, es necesario que exista docentes que ocupen los tres
-                                roles.
+                                Puede agregar un bachiller, pero es
+                                necesario que exista al menos uno, puede agregar un Jurado como presidente.
+                            </p>
+                        </div>
+                    </x-slot>
+                </x-card>
+                <x-card>
+                    <div class="space-y-6">
+                        <x-jet-label for="archivo">Archivo</x-jet-label>
+                        <input type="file" wire:model="archivo" id="{{ $randomID }}"
+                            class="input-form w-full py-2">
+                        <p wire:loading wire:target="archivo">
+                            Cargando...
+                        </p>
+                        @error('archivo')
+                            <div class="text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <x-slot name="footer">
+                        <div class="group flex items-start gap-x-4 text-gray-500">
+                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p class="text-sm">
+                                Es necesrio que agregue el proyecto de sustetación de tesis.
                             </p>
                         </div>
                     </x-slot>
