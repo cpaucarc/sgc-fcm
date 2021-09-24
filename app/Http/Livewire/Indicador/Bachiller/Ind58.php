@@ -64,7 +64,6 @@ class Ind58 extends Component
             ->count();
 
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
-
     }
 
     public function enviarInformacion()
@@ -125,8 +124,10 @@ class Ind58 extends Component
             $this->indicador->save();
         }
 
-        $this->reset(['mostrar', 'guardar', 'elaborador',
-            'revisador', 'aprobador', 'analisis', 'observaciones', 'verGrafico']);
+        $this->reset([
+            'mostrar', 'guardar', 'elaborador',
+            'revisador', 'aprobador', 'analisis', 'observaciones', 'verGrafico'
+        ]);
 
         $this->emit('guardado', "Se guardó con éxito un nuevo análisis para el " . date("d-m-Y"));
         $this->emit('renderizarGrafico');
@@ -138,5 +139,4 @@ class Ind58 extends Component
         $this->enviarInformacion();
         return view('livewire.indicador.bachiller.ind58');
     }
-
 }

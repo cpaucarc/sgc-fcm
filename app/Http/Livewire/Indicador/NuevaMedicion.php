@@ -41,8 +41,14 @@ class NuevaMedicion extends Component
 
     public function emitirEvento()
     {
-        $this->emitTo('indicador.grafico-unitario', 'verGrafico',
-            $this->min, $this->sat, $this->sob, $this->resultado);
+        $this->emitTo(
+            'indicador.grafico-unitario',
+            'verGrafico',
+            $this->min,
+            $this->sat,
+            $this->sob,
+            $this->resultado
+        );
     }
 
     public function guardarInstancia()
@@ -81,8 +87,10 @@ class NuevaMedicion extends Component
 
         $this->guardarNuevosRangosDeIndicador();
 
-        $this->reset(['mostrar', 'guardar', 'elaborador', 'revisador', 'aprobador',
-            'analisis', 'observaciones']);
+        $this->reset([
+            'mostrar', 'guardar', 'elaborador', 'revisador', 'aprobador',
+            'analisis', 'observaciones'
+        ]);
 
         $this->emit('guardado', "Se creó con éxito un nuevo análisis para el rango de " . $this->fecha_medicion_inicio . " y " . $this->fecha_medicion_fin);
         $this->emit('renderizarGrafico');
@@ -133,8 +141,10 @@ class NuevaMedicion extends Component
             $this->ind52();
         elseif ($codigo === 'IND-053')
             $this->ind53();
-        elseif ($codigo === 'IND-058') {
+        elseif ($codigo === 'IND-058')
             $this->ind58();
+        elseif ($codigo === 'IND-061') {
+            $this->ind61();
         }
     }
 
@@ -230,7 +240,6 @@ class NuevaMedicion extends Component
                 })
                 ->distinct()
                 ->count();
-
         } else {
             //Datos de la facultad
             $this->resultado = DB::table('participante_rrss')->select('estudiante_id')
@@ -276,7 +285,6 @@ class NuevaMedicion extends Component
                 })
                 ->distinct()
                 ->count();
-
         } else {
             //Datos de la facultad
             $this->resultado = DB::table('participante_rrss')->select('docente_id')
@@ -429,7 +437,6 @@ class NuevaMedicion extends Component
                 ->whereBetween('fecha_inicio', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
                 ->distinct()
                 ->count();
-
         } else {
             //Datos de la facultad
             $this->resultado = DB::table('responsabilidad_social')->select('id')
@@ -471,7 +478,6 @@ class NuevaMedicion extends Component
                 $suma += $respuesta->respuesta;
             }
             $this->resultado = $this->total === 0 ? 0 : round($suma / ($this->total * 5) * 100);
-
         } else {
             //Datos de la facultad
             $respuestas = RRSSRespuesta::whereIn('rrss_encuestado_id', function ($q1) {
@@ -518,6 +524,37 @@ class NuevaMedicion extends Component
 
         $this->total = ($egresados->where('grado_academico_id', 2))->count();
         $this->interes = ($egresados->where('grado_academico_id', 3))->count();
+        $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
+    }
+
+    /* Indicador de titulo profesional */
+
+    public function ind61()
+    {
+
+        if ($this->indicador->escuela_id) {
+            //Proyectos de investigación aprobados
+            $this->interes = DB::table('sustentaciones')->select('id')
+                ->where('escuela_id', $this->indicador->escuela_id)
+                ->where('declaracion_id', '1')
+                ->whereBetween('fecha_sustentacion', [
+                    $this->fecha_medicion_inicio,
+                    $this->fecha_medicion_fin
+                ])
+                ->distinct()
+                ->count();
+
+            //Proyectos de investigación aprobados
+            $this->total = DB::table('sustentaciones')->select('id')
+                ->where('escuela_id', $this->indicador->escuela_id)
+                ->whereBetween('fecha_sustentacion', [
+                    $this->fecha_medicion_inicio,
+                    $this->fecha_medicion_fin
+                ])
+                ->distinct()
+                ->count();
+        }
+
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
     }
 }
