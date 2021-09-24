@@ -35,7 +35,7 @@
             left: -35px;
             right: -67px;
             bottom: -46px;
-            border: 1.75px solid black;
+            border: 2px solid black;
         }
 
         .escudo {
@@ -44,7 +44,7 @@
 
         .foto-contenedor {
             align-items: center;
-            border: 1.5px black solid;
+            border: 2px black solid;
             height: 37mm;
             overflow: hidden;
             padding: 0 0 0 2px;
@@ -99,7 +99,7 @@
         <p style="font-size: 0.8rem; color: #C00000; font-weight: bold; width: 90%; margin: -2mm auto 0;">
             ESCUELA PROFESIONAL {{ strtoupper($estudiante->escuela->nombre) }}
         </p>
-        <p style="font-size: 0.6rem; margin-top: 1.5px;">
+        <p style="font-size: 0.6rem; margin-top: 2px;">
             {{ $estudiante->escuela->facultad->direccion }} – Teléfono (043) 640020 Anexo 1913
         </p>
         <p style="font-size: 0.6rem; margin-top: -1.75mm;">
@@ -146,6 +146,7 @@
         El Director (e) de Escuela Profesional de {{ $estudiante->escuela->nombre }}
         - {{ $estudiante->escuela->facultad->nombre }} - Universidad Nacional Santiago Antúnez de Mayolo. <br><br>
         Hace constar, que:
+
     </p>
 
     <h2 style="text-align: center; font-size: 1.175rem;">
@@ -172,26 +173,22 @@
     <div style="border-top: 1px solid black; width: 42.5%; float: left; padding: 0;">
         <div
             style="overflow: hidden; height: 5mm; margin-top: 1px; width: 80mm; margin-left: -5mm;  text-align: center;">
-            <strong style="margin: 0; font-size: 0.9rem;">
-                Mg. Henrry Ángel Garrido Angulo Garrido Angulo
-            </strong>
+            <strong style="margin: 0; font-size: 0.9rem;">{{ $decano }}</strong>
         </div>
         <div style="overflow: hidden; margin-top: -10px; width: 80mm; margin-left: -5mm;  text-align: center;">
             <p style="margin: 0; font-size: 0.75rem;">
-                Decano Facultad de Ciencias
+                Decano {{ $estudiante->escuela->facultad->nombre }}
             </p>
         </div>
     </div>
     <div style="border-top: 1px solid black; width: 42.5%; float: left; padding: 0;">
         <div
             style="overflow: hidden; height: 5mm; margin-top: 1px; width: 80mm; margin-left: -5mm;  text-align: center;">
-            <strong style="margin: 0; font-size: 0.9rem;">
-                Ing° Dr. Luis Ruperto Alvarado Cáceres
-            </strong>
+            <strong style="margin: 0; font-size: 0.9rem;">{{ $director }}</strong>
         </div>
         <div style="overflow: hidden; margin-top: -10px; width: 80mm; margin-left: -5mm;  text-align: center;">
             <p style="margin: 0; font-size: 0.75rem;">
-                Director (e) EP Ingeniería de Sistemas e Informática
+                Director(a) EP {{ $estudiante->escuela->nombre }}
             </p>
         </div>
     </div>

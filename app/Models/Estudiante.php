@@ -31,7 +31,9 @@ class Estudiante extends Model
 
     public function grados()
     {
-        return $this->hasMany(GradoEstudiante::class)->orderBy('created_at');
+        return $this->belongsToMany(GradoAcademico::class, 'grado_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('grado_estudiante.created_at', 'desc');
     }
 
     public function gradoReciente()

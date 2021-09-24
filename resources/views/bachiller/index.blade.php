@@ -55,8 +55,6 @@
                                              src="{{ asset('images/male_profile.jpg') }}"
                                              alt="{{ $bachiller->id }}">
                                     @endif
-
-
                                 </div>
                                 <div class="ml-4">
                                     <div class="font-medium text-gray-900 whitespace-nowrap">
@@ -85,9 +83,20 @@
                             {{ $bachiller->gradoReciente->grado->nombre }}
                         </x-table.cell>
                         <x-table.cell>
-                            <a href="{{ route('bachiller.constancia', [sha1($bachiller->id)]) }}"
-                               target="_blank"
-                               class="text-indigo-600 hover:text-indigo-900">Constancia</a>
+                            <div class="text-xs flex items-center space-x-2">
+                                <a href="{{ route('bachiller.estudiante', [sha1($bachiller->id)]) }}"
+                                   target="_blank"
+                                   class="inline-flex items-center hover:underline hover:text-blue-700">
+                                    <x-icons.person :stroke="1.5" class="h-4 w-4 mr-1.5"></x-icons.person>
+                                    Revisar
+                                </a>
+                                <a href="{{ route('bachiller.constancia', [sha1($bachiller->id)]) }}"
+                                   target="_blank"
+                                   class="inline-flex items-center hover:underline hover:text-blue-700">
+                                    <x-icons.documents :stroke="1.5" class="h-5 w-5 mr-1.5"></x-icons.documents>
+                                    Constancia
+                                </a>
+                            </div>
                         </x-table.cell>
                     </x-table.row>
                 @endforeach

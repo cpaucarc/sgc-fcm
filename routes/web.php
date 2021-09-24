@@ -75,6 +75,8 @@ Route::prefix('bachiller')->group(function () {
         ->name('bachiller.index');
     Route::get('constancia/{sha}', [BachillerController::class, 'constancia'])
         ->name('bachiller.constancia');
+    Route::get('estudiante/{sha}', [BachillerController::class, 'estudiante'])
+        ->name('bachiller.estudiante');
 });
 
 //Sustentaciones de titulación

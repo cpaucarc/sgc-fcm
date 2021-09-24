@@ -1,5 +1,5 @@
 <div
-    {{ $attributes->merge(['class' => "bg-white border border-gray-200 rounded-md shadow-sm"]) }}>
+    {{ $attributes->merge(['class' => "bg-white border border-gray-200 rounded-lg shadow-sm"]) }}>
 
     @if(isset($header))
         <div class="px-6 py-4 border-b border-gray-200 rounded-t-md">
@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    <div class="px-6 py-4">
+    <div class="p-6">
         {{ $slot }}
     </div>
 
