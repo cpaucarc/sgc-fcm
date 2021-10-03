@@ -35,7 +35,7 @@
                 </x-slot>
                 <x-slot name="body">
                     @foreach($salida->clientes as $cliente)
-                        <tr>
+                        <x-table.row :odd="$loop->odd">
                             <td class="py-2 whitespace-nowrap text-center">
                                 {{ $cliente->cliente->entidad->id }}
                             </td>
@@ -45,7 +45,7 @@
                             <td class="py-2 whitespace-nowrap text-left">
                                 {{ $cliente->cliente->entidad->nivel->nombre }}
                             </td>
-                        </tr>
+                            </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>

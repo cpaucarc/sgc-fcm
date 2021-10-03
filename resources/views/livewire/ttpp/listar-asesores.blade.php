@@ -84,7 +84,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($asesores as $asesor)
-                    <tr class="items-center">
+                        <x-table.row :odd="$loop->odd">
                         <td class="px-4 py-4 text-sm font-medium text-gray-900 tracking-wide">
                             {{ $asesor->docente->codigo }}
                         </td>
@@ -111,7 +111,7 @@
                                 Ver proyectos
                             </a>
                         </td>
-                    </tr>
+                            </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>

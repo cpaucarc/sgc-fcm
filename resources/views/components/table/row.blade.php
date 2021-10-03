@@ -1,3 +1,5 @@
-<tr class=" {{ $odd ? 'bg-gray-50' : 'bg-white' }} group text-sm  hover:bg-gray-100 text-gray-700 hover:text-gray-900">
+@props(['odd' => false])
+
+<tr class=" {{ $odd ? 'bg-gray-50' : 'bg-white' }} group text-sm bg-opacity-50  hover:bg-gray-100 text-gray-600 hover:text-gray-800 transition-all">
     {{ $slot }}
 </tr>

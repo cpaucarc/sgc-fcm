@@ -112,7 +112,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($ttds as $td)
-                    <tr class="items-center">
+                    <x-table.row :odd="$loop->odd">
                         <td class="px-4 py-4 text-sm font-medium text-gray-900 tracking-wide">
                             {{ $td->codigo }}
                         </td>
@@ -139,7 +139,7 @@
                                 Solicitar Título
                             </a>
                         </td>
-                    </tr>
+                        </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>
@@ -149,7 +149,7 @@
             </div>
         @endif
     @else
-        <x-empty-search />
+        <x-empty-search></x-empty-search>
     @endif
 
 </div>

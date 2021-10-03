@@ -12,15 +12,24 @@ class SolicitudBachiller extends Model
     protected $table = 'solicitud_bachiller';
     public $fillable = ['estudiante_id', 'estado_id'];
 
+
+    public function documentos()
+    {
+        return $this->hasMany(DocumentoSolicitudBachiller::class)
+            ->with('documento', 'requisito')
+            ->orderBy('created_at', 'desc');
+    }
+
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class, 'id', 'estudiante_id')
+            ->with('persona');
+    }
+
     public function foto()
     {
         return $this->hasOne(DocumentoSolicitudBachiller::class)->ofMany()
             ->where('requisito_id', 6);
-    }
-
-    public function documentos()
-    {
-        return $this->hasMany(DocumentoSolicitudBachiller::class);
     }
 
 }

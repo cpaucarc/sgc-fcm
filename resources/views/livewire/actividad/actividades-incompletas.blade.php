@@ -52,7 +52,7 @@
                 </x-slot>
                 <x-slot name="body">
                     @foreach ($actividades as $actividad)
-                        <tr>
+                        <x-table.row :odd="$loop->odd">
                             <td class="pl-4 pr-2 py-2 text-sm whitespace-nowrap">
                                 <h1 class="text-gray-800">
                                     {{ $actividad->actividad }}
@@ -88,7 +88,7 @@
                                     Revisar
                                 </a>
                             </td>
-                        </tr>
+                            </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>

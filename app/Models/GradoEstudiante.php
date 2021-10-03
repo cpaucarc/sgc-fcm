@@ -16,4 +16,10 @@ class GradoEstudiante extends Model
     {
         return $this->belongsTo(GradoAcademico::class, 'grado_academico_id', 'id');
     }
+
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class, 'id', 'estudiante_id')
+            ->with('escuela', 'gradoReciente', 'persona', 'solicitud');
+    }
 }

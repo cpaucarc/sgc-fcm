@@ -35,7 +35,7 @@
                 </x-slot>
                 <x-slot name="body">
                     @foreach ($docentes as $dc)
-                        <tr>
+                        <x-table.row :odd="$loop->odd">
                             <td class="px-3 py-3 text-sm font-medium text-gray-800 tracking-wide">
                                 {{ $dc->apellidos }} {{ $dc->nombres }}
                             </td>
@@ -56,12 +56,12 @@
                                     Escoger
                                 </button>
                             </td>
-                        </tr>
+                            </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>
         @else
-            <x-empty-search />
+            <x-empty-search></x-empty-search>
         @endif
 
         <div class="text-center w-full mt-4">

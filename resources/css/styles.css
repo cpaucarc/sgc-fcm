@@ -26,6 +26,7 @@
     @apply btn border border-gray-300 bg-white text-gray-700 leading-5 hover:bg-gray-50 focus:ring-gray-500;
 }
 
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 7px;

@@ -18,7 +18,8 @@
             <x-table>
                 <x-slot name="head">
                     <tr>
-                        <th scope="col" class="p-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col"
+                            class="p-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Bachiller
                         </th>
                         <th scope="col"
@@ -36,7 +37,7 @@
                 </x-slot>
                 <x-slot name="body">
                     @foreach ($bachilleres as $bach)
-                        <tr>
+                        <x-table.row :odd="$loop->odd">
                             <td class="px-3 py-3 text-sm font-medium text-gray-800 tracking-wide">
                                 {{ $bach->apellidos }} {{ $bach->nombres }}
                             </td>
@@ -48,21 +49,22 @@
                             </td>
                             <td class="px-2 py-3 whitespace-nowrap text-right text-sm font-medium">
                                 <button wire:click="enviarEstudianteBachiller({{ $bach->id }})"
-                                    class=" group py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-pink-200 hover:text-pink-800 transition duration-300 ease-in-out">
-                                    <svg class="h-4 w-4 mr-1 text-transparent group-hover:text-pink-800 transition duration-300 ease-in-out"
+                                        class=" group py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-pink-200 hover:text-pink-800 transition duration-300 ease-in-out">
+                                    <svg
+                                        class="h-4 w-4 mr-1 text-transparent group-hover:text-pink-800 transition duration-300 ease-in-out"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
                                     Escoger
                                 </button>
                             </td>
-                        </tr>
+                        </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>
         @else
-            <x-empty-search />
+            <x-empty-search></x-empty-search>
         @endif
 
         <div class="text-center w-full mt-4">
