@@ -108,7 +108,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach ($ttpp as $tp)
-                    <tr class="items-center">
+                    <x-table.row :odd="$loop->odd">
                         <td class="px-4 py-4 text-sm font-medium text-gray-900 tracking-wide">
                             {{ $tp->numero_registro }}
                         </td>
@@ -158,7 +158,7 @@
                                 Ver
                             </a>
                         </td>
-                    </tr>
+                        </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>

@@ -50,7 +50,7 @@
                     <x-slot name="body">
                         @foreach ($salidas as $salida)
                             @if($salida->documentosCicloActual($ciclo_seleccionado)->count() > 0)
-                                <tr class="text-gray-700">
+                                <x-table.row :odd="$loop->odd">
                                     <td class="pl-4 py-3 text-sm whitespace-nowrap">
                                         <h1 class="tracking-wide font-semibold">
                                             {{ $salida->nombre }}
@@ -76,7 +76,7 @@
                                             Revisar
                                         </button>
                                     </td>
-                                </tr>
+                                </x-table.row>
                             @endif
                         @endforeach
                     </x-slot>

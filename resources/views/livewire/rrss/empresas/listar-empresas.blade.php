@@ -102,7 +102,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach($empresas as $empresa)
-                    <tr>
+                    <x-table.row :odd="$loop->odd">
                         <td class="px-4 py-4 whitespace-nowrap">
                             <div class="flex flex-col justify-center">
                                 <div class="text-sm font-medium text-gray-900 tracking-wide">
@@ -146,7 +146,7 @@
                                 Editar
                             </button>
                         </td>
-                    </tr>
+                        </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>

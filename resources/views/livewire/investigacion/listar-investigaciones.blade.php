@@ -50,7 +50,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach($investigaciones as $investigacion)
-                    <tr>
+                    <x-table.row :odd="$loop->odd">
                         <x-table.cell class="font-medium text-sm hover:text-gray-900 line-clamp-4 lg:line-clamp-none">
                             {{ $investigacion->titulo }}
                         </x-table.cell>
@@ -107,7 +107,7 @@
                             </a>
                         </x-table.cell>
 
-                    </tr>
+                    </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>

@@ -51,6 +51,7 @@ class Estudiante extends Model
 
     public function solicitud()
     {
-        return $this->hasOne(SolicitudBachiller::class);
+        return $this->hasOne(SolicitudBachiller::class)
+            ->with('documentos');
     }
 }

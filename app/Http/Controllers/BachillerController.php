@@ -17,16 +17,11 @@ class BachillerController extends Controller
 
     public function index()
     {
-        $estudiantes = GradoAcademico::with('bachilleres')
-            ->with('bachilleres.escuela:id,nombre')
-            ->with('bachilleres.persona')
-            ->with('bachilleres.gradoReciente')
-            ->with('bachilleres.solicitud.foto.documento:id,enlace_interno')
-            ->where('id', 3)
-            ->get();
+//        Si es administrador o encargado
+        return view('bachiller.index');
 
-        $estudiantes = $estudiantes[0];
-        return view('bachiller.index', compact('estudiantes'));
+//        Si es alumno
+//        return view('bachiller.solicitud');
     }
 
     public function constancia($sha)
@@ -37,8 +32,7 @@ class BachillerController extends Controller
             ->with('persona')
             ->with('solicitud.foto.documento:id,enlace_interno')
             ->limit(1)
-            ->get();
-        $estudiante = $estudiante[0];
+            ->first();
 
         $escuela = $estudiante->escuela;
 
@@ -76,13 +70,23 @@ class BachillerController extends Controller
     public function estudiante($sha)
     {
         $estudiante = Estudiante::where(DB::raw('sha1(id)'), $sha)
-            ->with('grados')
-            ->with('persona')
-            ->with('solicitud')
-            ->get();
-        $estudiante = $estudiante[0];
+            ->with('grados', 'persona', 'solicitud')
+            ->first();
 
         return view('bachiller.estudiante', compact('estudiante'));
     }
+
+    public function solicitudes()
+    {
+        //Lo verá solo la autoridad pertinente
+        return view('bachiller.solicitudes');
+    }
+
+    public function solicitud()
+    {
+        //Lo verá solo el alumno
+        return view('bachiller.solicitud');
+    }
+
 
 }

@@ -112,7 +112,7 @@
             </x-slot>
             <x-slot name="body">
                 @foreach($rrss as $rs)
-                    <tr>
+                    <x-table.row :odd="$loop->odd">
                         <x-table.cell>
                             {{ $rs->titulo }}
                         </x-table.cell>
@@ -154,7 +154,7 @@
                                 Ver
                             </a>
                         </x-table.cell>
-                    </tr>
+                    </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>

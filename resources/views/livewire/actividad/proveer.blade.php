@@ -53,7 +53,7 @@
                 </x-slot>
                 <x-slot name="body">
                     @foreach ($ent_prov as $etpv)
-                        <tr>
+                        <x-table.row :odd="$loop->odd">
                             <td class="pl-4 pr-2 py-2 text-sm whitespace-nowrap">
                                 <h1 class="tracking-wide font-semibold text-gray-800">
                                     {{ $etpv->entrada->codigo }} - {{ $etpv->entrada->nombre }}
@@ -81,7 +81,7 @@
                                     Abrir
                                 </button>
                             </td>
-                        </tr>
+                        </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>

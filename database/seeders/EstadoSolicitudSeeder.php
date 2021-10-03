@@ -15,15 +15,15 @@ class EstadoSolicitudSeeder extends Seeder
     {
         $estados = [
             [
-                'nombre' => 'En evaluacion',
+                'nombre' => 'En Evaluacion',
                 'color' => 'indigo'
             ],
             [
-                'nombre' => 'Rechazado',
+                'nombre' => 'Denegado',
                 'color' => 'red'
             ],
             [
-                'nombre' => 'Aceptado',
+                'nombre' => 'Aprobado',
                 'color' => 'green'
             ],
         ];

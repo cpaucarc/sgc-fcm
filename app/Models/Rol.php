@@ -15,7 +15,8 @@ class Rol extends Model
 
     public function entidad()
     {
-        return $this->hasOne(Entidad::class, 'id', 'entidad_id');
+        return $this->hasOne(Entidad::class, 'id', 'entidad_id')
+            ->with('responsable');
     }
 
     public function oficina()

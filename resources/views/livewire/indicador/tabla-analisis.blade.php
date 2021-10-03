@@ -37,7 +37,7 @@
 
         <x-slot name="body">
             @foreach($indicador->analisis as $i => $analisis)
-                <tr>
+                <x-table.row :odd="$loop->odd">
                     <x-table.cell class="text-center">
                         <h4 class="text-sm text-gray-500">
                             Desde {{ $analisis->fecha_medicion_inicio->format('d-M-Y') }}
@@ -72,7 +72,7 @@
                     {{--                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">--}}
                     {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>--}}
                     {{--                    </td>--}}
-                </tr>
+                    </x-table.row>
             @endforeach
         </x-slot>
     </x-table>

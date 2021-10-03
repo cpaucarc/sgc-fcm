@@ -73,6 +73,10 @@ Route::prefix('indicadores')->group(function () {
 Route::prefix('bachiller')->group(function () {
     Route::get('/', [BachillerController::class, 'index'])
         ->name('bachiller.index');
+    Route::get('solicitudes', [BachillerController::class, 'solicitudes'])
+        ->name('bachiller.solicitudes');
+    Route::get('solicitud', [BachillerController::class, 'solicitud'])
+        ->name('bachiller.solicitud');
     Route::get('constancia/{sha}', [BachillerController::class, 'constancia'])
         ->name('bachiller.constancia');
     Route::get('estudiante/{sha}', [BachillerController::class, 'estudiante'])
@@ -87,7 +91,7 @@ Route::prefix('titulos-profesionales')->group(function () {
 
     Route::get('titulados/{id?}', [SustentacionController::class, 'titulados'])
         ->name('ttpp.titulados');
-        
+
     Route::get('asesores/{id?}', [SustentacionController::class, 'asesores'])
         ->name('ttpp.asesores');
 

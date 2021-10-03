@@ -16,4 +16,9 @@ class DocumentoSolicitudBachiller extends Model
     {
         return $this->belongsTo(Documento::class);
     }
+
+    public function requisito()
+    {
+        return $this->belongsTo(Requisito::class);
+    }
 }
