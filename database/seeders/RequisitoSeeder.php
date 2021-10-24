@@ -49,7 +49,7 @@ class RequisitoSeeder extends Seeder
                 'proceso_id' => 12 // 12: Grado Bachiller (Tabla: Procesos)
             ],
 
-            // Proceso de Titulo Profesional
+            //  Proceso de Titulo Profesional (6)
             [
                 'nombre' => 'Copia del grado de bachiller',
                 'proceso_id' => 5 // 5: Titulo Profesional (Tabla: Procesos)

@@ -529,6 +529,25 @@ class NuevaMedicion extends Component
 
     /* Indicador de titulo profesional */
 
+    public function ind60()
+    {
+        $this->interes = null;
+        $this->total = null;
+            
+        $egresados = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
+            ->whereIn('estudiante_id', function ($query) {
+                $query->select('estudiante_id')
+                    ->from('grado_estudiante')
+                    ->where('grado_academico_id', 3) //Grado Academico 3: Bachiller
+                    ->whereRaw('date(created_at) between ? and ?', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
+            })
+            ->get();
+/* 
+        $this->total = ($egresados->where('grado_academico_id', 2))->count();
+        $this->interes = ($egresados->where('grado_academico_id', 3))->count(); */
+        $this->resultado =($egresados->where('grado_academico_id', 4))->count();
+    }
+
     public function ind61()
     {
 
@@ -544,7 +563,7 @@ class NuevaMedicion extends Component
                 ->distinct()
                 ->count();
 
-            //Proyectos de investigación aprobados
+            //Proyectos de investigación
             $this->total = DB::table('sustentaciones')->select('id')
                 ->where('escuela_id', $this->indicador->escuela_id)
                 ->whereBetween('fecha_sustentacion', [

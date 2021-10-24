@@ -19,7 +19,6 @@ class SustentacionController extends Controller
         if (is_null($id)) {
             return view('ttpp.index');
         }
-
         $sustentaciones = Sustentacion::find($id);
         if ($sustentaciones) {
             return view('ttpp.ver', compact('sustentaciones'));
@@ -41,7 +40,6 @@ class SustentacionController extends Controller
         if (is_null($id)) {
             return view('ttpp.asesores');
         }
-
         $asesores = Asesor::find($id);
         if ($asesores) {
             return view('ttpp.verAsesorados', compact('asesores'));
