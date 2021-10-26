@@ -125,7 +125,7 @@
                             </p>
                         </div>
 
-                        <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
+                        <a href="{{ route('ttpp.constancia', [sha1($estudiante->id)]) }}"
                            target="_blank" class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
                             <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
                             Ver

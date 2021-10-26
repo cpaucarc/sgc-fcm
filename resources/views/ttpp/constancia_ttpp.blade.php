@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" href="{{ asset('icons/file_pdf.png') }}">
-    <title>Egresado</title>
+    <title>Titulo Profesional</title>
     <style>
         * {
             margin: 4.75mm 4mm 2.5mm 6.5mm;
@@ -139,7 +139,7 @@
 
 <div style="position: absolute; top: 70mm;">
     <h1 style="text-align: center; font-size: 1.25rem;">
-        CONSTANCIA DIGITAL DE EGRESADO
+        CONSTANCIA DIGITAL DE TÍTULO PROFESIONAL
     </h1>
 
     <p style="font-style: italic; line-height: 1.25;">

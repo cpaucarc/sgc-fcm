@@ -143,7 +143,11 @@ class NuevaMedicion extends Component
             $this->ind53();
         elseif ($codigo === 'IND-058')
             $this->ind58();
-        elseif ($codigo === 'IND-061') {
+        elseif ($codigo === 'IND-059') {
+            $this->ind59();
+        } elseif ($codigo === 'IND-060') {
+            $this->ind60();
+        } elseif ($codigo === 'IND-061') {
             $this->ind61();
         }
     }
@@ -528,29 +532,52 @@ class NuevaMedicion extends Component
     }
 
     /* Indicador de titulo profesional */
+    public function ind59()
+    {
+        if ($this->indicador->escuela_id) {
+            $bachilleres = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
+                ->whereIn('estudiante_id', function ($query) {
+                    $query->select('estudiante_id')
+                        ->from('grado_estudiante')
+                        ->where('grado_academico_id', 3) //Grado Academico 3: Bachiller
+                        ->whereRaw('date(created_at) between ? and ?', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                        ->whereIn('estudiante_id', function ($query2) {
+                            $query2->select('id')
+                                ->from('estudiantes')
+                                ->where('escuela_id', $this->indicador->escuela_id);
+                        });
+                })
+                ->get();
 
+            $this->total = ($bachilleres->where('grado_academico_id', 3))->count();
+            $this->interes = ($bachilleres->where('grado_academico_id', 4))->count();
+            $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
+        }
+    }
     public function ind60()
     {
         $this->interes = null;
         $this->total = null;
-            
-        $egresados = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
-            ->whereIn('estudiante_id', function ($query) {
-                $query->select('estudiante_id')
-                    ->from('grado_estudiante')
-                    ->where('grado_academico_id', 3) //Grado Academico 3: Bachiller
-                    ->whereRaw('date(created_at) between ? and ?', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
-            })
-            ->get();
-/* 
-        $this->total = ($egresados->where('grado_academico_id', 2))->count();
-        $this->interes = ($egresados->where('grado_academico_id', 3))->count(); */
-        $this->resultado =($egresados->where('grado_academico_id', 4))->count();
+        if ($this->indicador->escuela_id) {
+            $titulados = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
+                ->whereIn('estudiante_id', function ($query) {
+                    $query->select('estudiante_id')
+                        ->from('grado_estudiante')
+                        ->where('grado_academico_id', 4) //Grado Academico 4: Titulado
+                        ->whereRaw('date(created_at) between ? and ?', [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                        ->whereIn('estudiante_id', function ($query2) {
+                            $query2->select('id')
+                                ->from('estudiantes')
+                                ->where('escuela_id', $this->indicador->escuela_id);
+                        });
+                })
+                ->get();
+        }
+        $this->resultado = $titulados->count();
     }
 
     public function ind61()
     {
-
         if ($this->indicador->escuela_id) {
             //Proyectos de investigación aprobados
             $this->interes = DB::table('sustentaciones')->select('id')
