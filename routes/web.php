@@ -53,6 +53,8 @@ Route::prefix('responsabilidad-social')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('usuarios', [AdminController::class, 'usuarios'])
         ->name('admin.usuarios');
+    Route::get('usuarios/{id}', [AdminController::class, 'modificar_usuario'])
+        ->name('admin.usuario');
 });
 
 Route::prefix('investigacion')->group(function () {

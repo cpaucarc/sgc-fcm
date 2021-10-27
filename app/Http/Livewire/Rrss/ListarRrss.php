@@ -28,6 +28,10 @@ class ListarRrss extends Component
         $this->ciclo_sel = $this->ciclos->filter(function ($c) {
             return ($c->fecha_fin >= Carbon::now() and $c->fecha_inicio <= Carbon::now());
         })->first();
+
+        if (!$this->ciclo_sel) {
+            $this->ciclo_sel = $this->ciclos->last();
+        }
     }
 
     public function setCiclo(Ciclo $ciclo)

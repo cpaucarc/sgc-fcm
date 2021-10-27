@@ -89,6 +89,10 @@ class RegistrarTtpp extends Component
             return ($c->fecha_fin >= Carbon::now() and $c->fecha_inicio <= Carbon::now());
         })->first();
 
+        if (!$this->ciclo_sel) {
+            $this->ciclo_sel = $this->ciclos->last();
+        }
+
         $this->declaraciones = Declaracion::orderBy('nombre', 'asc')->get();
 
         $this->tiposTesis = TipoTesis::orderBy('nombre', 'asc')->get();
@@ -196,7 +200,7 @@ class RegistrarTtpp extends Component
 
         DocumentoTesis::create([
             'documento_id' => $documento->id,
-            'tesis_id' =>  $this->ts->id
+            'tesis_id' => $this->ts->id
         ]);
 
         //            $this->open = false;
@@ -226,7 +230,7 @@ class RegistrarTtpp extends Component
 
         $this->ts->save();
 
-        $this->stn =  Sustentacion::create([
+        $this->stn = Sustentacion::create([
             'tesis_id' => $this->ts->id,
             'escuela_id' => $this->escuela,
             'ciclo_id' => $this->ciclo->id,
