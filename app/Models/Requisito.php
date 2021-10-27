@@ -18,4 +18,10 @@ class Requisito extends Model
     {
         return $this->hasMany(DocumentoSolicitudTitulo::class);
     }
+
+    //Relación de uno a muchos
+    public function formato_requisito()
+    {
+        return $this->hasMany(FormatoRequisito::class);
+    }
 }
