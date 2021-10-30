@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BachillerController;
 use App\Http\Controllers\ConvalidacionController;
 use App\Http\Controllers\EncuestaController;
@@ -48,6 +49,13 @@ Route::prefix('responsabilidad-social')->group(function () {
 
     Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
         ->name('rrss.index');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('usuarios', [AdminController::class, 'usuarios'])
+        ->name('admin.usuarios');
+    Route::get('usuarios/{id}', [AdminController::class, 'modificar_usuario'])
+        ->name('admin.usuario');
 });
 
 Route::prefix('investigacion')->group(function () {

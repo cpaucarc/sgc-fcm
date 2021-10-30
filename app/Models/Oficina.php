@@ -16,4 +16,9 @@ class Oficina extends Model
     {
         return $this->belongsTo(Facultad::class);
     }
+
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
+    }
 }

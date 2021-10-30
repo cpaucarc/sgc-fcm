@@ -12,6 +12,23 @@ class ListarTitulados extends Component
 
     public $cantidad = 10;
     public $query = "";
+    public $search;
+    public $dcl = 'Aprobado';
+    public $sort = 'fecha_sustentacion';
+    public $direction = 'desc';
+
+    public function mount()
+    {
+        $this->ciclo_sel = new Ciclo();
+        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
+        $this->ciclo_sel = $this->ciclos->filter(function ($c) {
+            return ($c->fecha_fin >= Carbon::now() and $c->fecha_inicio <= Carbon::now());
+        })->first();
+
+        if (!$this->ciclo_sel) {
+            $this->ciclo_sel = $this->ciclos->last();
+        }
+    }
 
     public function updatingQuery()
     {

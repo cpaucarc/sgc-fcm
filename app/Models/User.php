@@ -66,7 +66,8 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->hasMany(Rol::class, 'user_id', 'id');
+        return $this->hasMany(Rol::class, 'user_id', 'id')
+            ->with('entidad', 'oficina');
     }
 
     public function responsables_id()
@@ -78,6 +79,8 @@ class User extends Authenticatable
         return $resp;
 
     }
+
+
 
 
     /* Determinar si pertence a una oficina */

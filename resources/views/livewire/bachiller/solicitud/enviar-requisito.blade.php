@@ -88,7 +88,7 @@
     @push('js')
         <script>
             window.addEventListener('guardado', event => {
-                alert('Listo: ' + event.detail.message);
+                alert('Mensaje del sistema: ' + event.detail.message);
             })
         </script>
     @endpush
