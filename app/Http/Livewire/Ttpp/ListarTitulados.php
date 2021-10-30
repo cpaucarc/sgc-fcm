@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Ttpp;
 
 use App\Models\GradoEstudiante;
 use Livewire\Component;
+use App\Models\Ciclo;
+use Carbon\Carbon;
 use Livewire\WithPagination;
 
 class ListarTitulados extends Component

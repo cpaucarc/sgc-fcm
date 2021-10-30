@@ -66,7 +66,7 @@ class Pendientes extends Component
         // Insertar estudiante al grado bachiller
         GradoEstudiante::create([
             'estudiante_id' => $this->solicitudSeleccionado->estudiante_id,
-            'grado_academico_id' => 3
+            'grado_academico_id' => 4
         ]);
     }
 }

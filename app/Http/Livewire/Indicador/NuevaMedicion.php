@@ -573,7 +573,7 @@ class NuevaMedicion extends Component
                 })
                 ->get();
         }
-        $this->resultado = $titulados->count();
+        $this->resultado = $titulados->where('grado_academico_id', 4)->count();;
     }
 
     public function ind61()
