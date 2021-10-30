@@ -16,12 +16,10 @@ class CreateSolicitudTituloTable extends Migration
         Schema::create('solicitud_titulo', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('estudiante_id');
-            $table->unsignedBigInteger('sustentacion_id');
             $table->unsignedBigInteger('estado_id')->default('1');
             $table->timestamps();
 
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
-            $table->foreign('sustentacion_id')->references('id')->on('sustentaciones');
             $table->foreign('estado_id')->references('id')->on('estado_solicitud');
         });
     }

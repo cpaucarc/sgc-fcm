@@ -11,19 +11,31 @@ class SolicitudTitulo extends Model
 {
     use HasFactory;
     protected $table = 'solicitud_titulo';
-    public $fillable = ['estudiante_id', 'sustentacion_id', 'estado_id'];
+    public $fillable = ['estudiante_id', 'estado_id'];
 
+    public function documentos()
+    {
+        return $this->hasMany(DocumentoSolicitudTitulo::class)
+            ->with('documento', 'requisito')
+            ->orderBy('created_at', 'desc');
+    }
     //Relacion de uno a muchos (inversa)
     public function estudiante()
     {
-        return $this->belongsTo(Estudiante::class);
+        return $this->hasOne(Estudiante::class, 'id', 'estudiante_id')
+            ->with('persona');
     }
-
-    //Relacion de uno a muchos (inversa)
-    public function sustentacion()
+    public function foto()
     {
-        return $this->belongsTo(Sustentacion::class);
+        return $this->hasOne(DocumentoSolicitudTitulo::class)->ofMany()
+            ->where('requisito_id', 6);
     }
+    //Relacion de uno a muchos (inversa)
+/*     public function sustentacion()
+    {
+        return $this->hasOne(Sustentacion::class, 'id', 'sustentacion_id')
+            ->with('tesis');
+    } */
 
     //Relacion de uno a muchos (inversa)
     public function estado_solicitud()

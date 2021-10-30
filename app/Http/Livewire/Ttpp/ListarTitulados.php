@@ -2,21 +2,16 @@
 
 namespace App\Http\Livewire\Ttpp;
 
-use App\Models\Ciclo;
-use App\Models\Sustentacion;
-use Carbon\Carbon;
+use App\Models\GradoEstudiante;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
 
 class ListarTitulados extends Component
 {
     use WithPagination;
 
-    public $ciclos;
-    public $ciclo_sel;
-
     public $cantidad = 10;
+    public $query = "";
     public $search;
     public $dcl = 'Aprobado';
     public $sort = 'fecha_sustentacion';
@@ -35,17 +30,7 @@ class ListarTitulados extends Component
         }
     }
 
-    public function setCiclo(Ciclo $ciclo)
-    {
-        $this->ciclo_sel = $ciclo;
-    }
-
-    public function setCantidad($cantidad)
-    {
-        $this->cantidad = $cantidad;
-    }
-
-    public function updatingSearch()
+    public function updatingQuery()
     {
         $this->resetPage();
     }
@@ -57,22 +42,24 @@ class ListarTitulados extends Component
 
     public function render()
     {
-
-        $ttds = DB::table('bachilleres')
-            ->select('bachilleres.id', 'tesis.numero_registro', 'tesis.titulo', 'sustentaciones.fecha_sustentacion', 'declaraciones.nombre as declaracion', 'sustentaciones.ciclo_id', 'escuelas.nombre as escuela', 'estudiantes.codigo', 'personas.apellidos', 'personas.nombres')
-            ->join('bachiller_tesis', 'bachiller_tesis.bachiller_id', '=', 'bachilleres.id')
-            ->join('tesis', 'tesis.id', '=', 'bachiller_tesis.tesis_id')
-            ->join('sustentaciones', 'sustentaciones.tesis_id', '=', 'tesis.id')
-            ->join('declaraciones', 'declaraciones.id', '=', 'sustentaciones.declaracion_id')
-            ->join('escuelas', 'escuelas.id', '=', 'sustentaciones.escuela_id')
-            ->join('estudiantes', 'estudiantes.id', '=', 'bachilleres.estudiante_id')
-            ->join('personas', 'personas.id', '=', 'estudiantes.persona_id')
-            ->where('sustentaciones.ciclo_id', $this->ciclo_sel->id)
-            ->where('declaraciones.nombre', $this->dcl)
-            ->where('estudiantes.codigo', 'like', '%' . $this->search . '%')
-            ->orderBy($this->sort, $this->direction)
+        $titulados = GradoEstudiante::query()
+            ->where('grado_academico_id', 4) //4: Titulado
+            ->with('estudiante')
+            ->whereHas('estudiante', function ($query) {
+                return $query
+                    ->whereHas('persona', function ($query2) {
+                        return $query2
+                            ->where('nombres', 'like', '%' . $this->query . '%')
+                            ->orWhere('apellidos', 'like', '%' . $this->query . '%');
+                    })
+                    ->orWhereHas('escuela', function ($query3) {
+                        return $query3
+                            ->where('nombre', 'like', '%' . $this->query . '%');
+                    });
+            })
+            ->orderBy('created_at', 'desc')
             ->paginate($this->cantidad);
 
-        return view('livewire.ttpp.listar-titulados', compact('ttds'));
+        return view('livewire.ttpp.listar-titulados', compact('titulados'));
     }
 }

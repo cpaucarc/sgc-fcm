@@ -13,11 +13,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
-                    {{-- <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                    </svg> --}}
-                    Aprobados
+                    Titulados
                 </a>
                 <a href="{{ route('ttpp.asesores') }}"
                     class="px-4 py-2 bg-transparent text-sm text-gray-500 hover:text-gray-800 border border-gray-300 flex items-center rounded">
@@ -36,17 +32,10 @@
         <x-slot name="header">
             <div class="flex justify-between items-center">
                 <div class="pr-4 flex-1">
-                    <h1 class="text-xl font-bold text-gray-800">
+                    <h1 class="text-lg font-bold text-gray-800">
                         Lista de Sustentaciones de Tesis
                     </h1>
-                    <p class="text-sm text-gray-400">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis tempora dolor adipisci eaque, ea
-                        voluptas quisquam modi ad saepe nisi. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Minima aperiam similique labore porro temporibus sed tempore laboriosam sapiente, architecto
-                        hic.
-                    </p>
                 </div>
-
                 <a href="{{ route('ttpp.registro') }}"
                     class="flex-shrink-0 inline-flex items-center px-3 py-1 bg-blue-700 border border-transparent rounded font-semibold text-white tracking-wide hover:bg-blue-800 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
                     <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,9 +46,7 @@
                 </a>
             </div>
         </x-slot>
-
         @livewire('ttpp.listar-ttpp')
-
     </x-card>
 
 </x-app-layout>

@@ -1,24 +1,22 @@
 <x-app-layout>
-
-    <x-card>
-        <x-slot name="header">
-            <div class="flex justify-between items-center">
-                <div class="pr-4 flex-1">
-                    <h1 class="text-xl font-bold text-gray-800">
-                        Lista de estudiantes con tesis aprobado
-                    </h1>
-                    <p class="text-sm text-gray-400">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis tempora dolor adipisci eaque, ea
-                        voluptas quisquam modi ad saepe nisi. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Minima aperiam similique labore porro temporibus sed tempore laboriosam sapiente, architecto
-                        hic.
-                    </p>
+    <x-slot name="header">
+        <div class="flex items-center justify-between">
+            <h1 class="font-bold text-xl text-gray-800">
+                Estudiantes con grado de titulo
+            </h1>
+            <div class="relative">
+                <div
+                    class="absolute -top-2 -right-2 bg-red-600 ring ring-white text-sm font-bold text-white rounded-full h-6 w-6 grid place-items-center">
+                    5
                 </div>
+                <x-button.ghost-link href="{{ route('ttpp.solicitudes') }}">
+                    <x-icons.people class="h-5 w-5 mr-1"></x-icons.people>
+                    Revisar solicitudes
+                </x-button.ghost-link>
             </div>
-        </x-slot>
-
+        </div>
+    </x-slot>
+    <x-card class="py-4">
         @livewire('ttpp.listar-titulados')
-
     </x-card>
-
 </x-app-layout>

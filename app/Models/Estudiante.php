@@ -45,13 +45,26 @@ class Estudiante extends Model
 
     public function gradoReciente()
     {
-        return $grado_est = $this->hasOne(GradoEstudiante::class)->latestOfMany()
+        /* return $grado_est = $this->hasOne(GradoEstudiante::class)->latestOfMany()
+            ->with('grado'); */
+        return $this->hasOne(GradoEstudiante::class)->latestOfMany()
             ->with('grado');
     }
 
     public function solicitud()
     {
         return $this->hasOne(SolicitudBachiller::class)
+            ->with('documentos');
+    }
+    public function convalidacionEstudiante()
+    {
+        return $this->belongsToMany(ConvalidacionEstudiante::class, 'convalidacion_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('convalidacion_estudiante.created_at', 'desc');
+    }
+    public function solicitudConvalidacion()
+    {
+        return $this->hasOne(SolicitudConvalidacion::class)
             ->with('documentos');
     }
 }

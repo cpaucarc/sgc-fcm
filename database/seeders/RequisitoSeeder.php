@@ -49,7 +49,7 @@ class RequisitoSeeder extends Seeder
                 'proceso_id' => 12 // 12: Grado Bachiller (Tabla: Procesos)
             ],
 
-            // Proceso de Titulo Profesional
+            //  Proceso de Titulo Profesional (6)
             [
                 'nombre' => 'Copia del grado de bachiller',
                 'proceso_id' => 5 // 5: Titulo Profesional (Tabla: Procesos)
@@ -73,6 +73,23 @@ class RequisitoSeeder extends Seeder
             [
                 'nombre' => 'Solicitud de designación de jurados',
                 'proceso_id' => 5 // 5: Titulo Profesional (Tabla: Procesos)
+            ],
+            //  Proceso de Convalidaciones (4)
+            [
+                'nombre' => 'Comprobante de Pago',
+                'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
+            ],
+            [
+                'nombre' => 'Declaración Jurada',
+                'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
+            ],
+            [
+                'nombre' => 'Certificado de Estudios',
+                'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
+            ],
+            [
+                'nombre' => 'Sílabos',
+                'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
             ],
         ];
 

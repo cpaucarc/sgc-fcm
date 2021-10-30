@@ -49,8 +49,8 @@ class Sustentacion extends Model
     }
 
      //Relación de uno a muchos
-     public function solicitud_titulo()
+    /*  public function solicitud_titulo()
      {
          return $this->hasMany(SolicitudTitulo::class);
-     }
+     } */
 }
