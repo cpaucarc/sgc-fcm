@@ -11,7 +11,7 @@ class ConvalidacionEstudiante extends Model
     protected $table = 'convalidacion_estudiante';
     public $fillable = ['convalidacion_id', 'estudiante_id'];
 
-    public function convalidacion()
+    public function convalidacionEstudiante()
     {
         return $this->belongsTo(Convalidacion::class, 'convalidacion_id', 'id');
     }
@@ -19,6 +19,6 @@ class ConvalidacionEstudiante extends Model
     public function estudiante()
     {
         return $this->hasOne(Estudiante::class, 'id', 'estudiante_id')
-            ->with('escuela', 'persona', 'solicitud');
+            ->with('escuela', 'persona', 'solicitudConvalidacion');
     }
 }

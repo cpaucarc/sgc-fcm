@@ -24,9 +24,9 @@ class EstudianteExterno extends Model
         return $this->belongsTo(Institucion::class);
     }
 
-    public function solicitud()
+    public function solicitudConvalidacion()
     {
-        return $this->hasOne(SolicitudConvalidacion::class)
+        return $this->hasOne(SolicitudConvalidacion::class, 'estado_id')
             ->with('documentos');
     }
 }

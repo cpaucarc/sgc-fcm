@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Documento;
-use App\Models\Requisito;
 
-class DocumentoSolicitudConvalidacion extends Model
+class DocumentoConvalidacion extends Model
 {
     use HasFactory;
-    protected $table = 'documento_solicitud_convalidacion';
-    public $fillable = ['solicitud_id', 'requisito_id', 'documento_id'];
+    protected $table = 'documento_convalidacion';
+    public $fillable = ['solicitud_convalidacion_id', 'requisito_id', 'documento_id'];
 
     public function documento()
     {

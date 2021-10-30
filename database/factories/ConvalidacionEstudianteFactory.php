@@ -22,7 +22,7 @@ class ConvalidacionEstudianteFactory extends Factory
     public function definition()
     {
         return [
-            'estudiante_id' => rand(1, 100),
+            'estudiante_id' => rand(1, 15),
             'convalidacion_id' => rand(1, 3),
         ];
     }

@@ -9,7 +9,7 @@
                     class="absolute -top-2 -right-2 bg-red-600 ring ring-white text-sm font-bold text-white rounded-full h-6 w-6 grid place-items-center">
                     5
                 </div>
-                <x-button.ghost-link href="{{ route('bachiller.solicitudes') }}">
+                <x-button.ghost-link href="{{ route('convalidacion.solicitudes') }}">
                     <x-icons.people class="h-5 w-5 mr-1"></x-icons.people>
                     Revisar solicitudes
                 </x-button.ghost-link>
@@ -17,6 +17,6 @@
         </div>
     </x-slot>
     <x-card class="py-4">
-        {{-- @livewire('bachiller.lista-bachilleres') --}}
+        @livewire('convalidacion.lista-convalidaciones')
     </x-card>
 </x-app-layout>

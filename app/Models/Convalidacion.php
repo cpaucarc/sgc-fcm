@@ -18,11 +18,15 @@ class Convalidacion extends Model
 
     public function estudiante_externo()
     {
-        return $this->belongsTo(EstudianteExterno::class);
+        return $this->belongsToMany(EstudianteExterno::class, 'convalidacion_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('convalidacion_estudiante.created_at', 'desc');
     }
     public function estudiante()
     {
-        return $this->belongsTo(Estudiante::class);
+        return $this->belongsToMany(Estudiante::class, 'convalidacion_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('convalidacion_estudiante.created_at', 'desc');
     }
     public function ciclo()
     {

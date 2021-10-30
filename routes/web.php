@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\BachillerController;
+use App\Http\Controllers\ConvalidacionController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\InvestigacionController;
@@ -101,6 +102,16 @@ Route::prefix('titulos-profesionales')->group(function () {
         ->name('ttpp.constancia');
     Route::get('estudiante/{sha}', [TituloProfesionalController::class, 'estudiante'])
         ->name('ttpp.estudiante');
+});
+
+// Convalidaciones
+Route::prefix('convalidacion')->group(function () {
+    Route::get('/', [ConvalidacionController::class, 'index'])
+        ->name('convalidacion.index');
+    Route::get('solicitudes', [ConvalidacionController::class, 'solicitudes'])
+        ->name('convalidacion.solicitudes');
+    Route::get('solicitud', [ConvalidacionController::class, 'solicitud'])
+        ->name('convalidacion.solicitud');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

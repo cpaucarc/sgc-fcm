@@ -22,7 +22,7 @@ class SolicitudConvalidacionFactory extends Factory
     public function definition()
     {
         return [
-            'estudiante_externo_id' => rand(1, 10),
+            'estudiante_externo_id' => null,
             'estudiante_id' => rand(1, 15),
             'estado_id' => rand(1, 3)
         ];

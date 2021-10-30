@@ -97,7 +97,9 @@ class DatabaseSeeder extends Seeder
         //Convalidación
         $this->call(TipoInstitucionSeeder::class);
         \App\Models\Institucion::factory(5)->create();
-        \App\Models\EstudianteExterno::factory(50)->create();
+        \App\Models\EstudianteExterno::factory(10)->create();
         $this->call(ConvalidacionSeeder::class);
+        \App\Models\ConvalidacionEstudiante::factory(10)->create();
+        \App\Models\SolicitudConvalidacion::factory(10)->create();
     }
 }
