@@ -29,14 +29,14 @@ class RequisitosEnviados extends Component
         $this->abrir = true;
         $this->nombreDocumento = $nombreDocumento;
         $this->nombreRequisito = $nombreRequisito;
-        $this->docSolBachID = $id;
+        $this->docSolTitID = $id;
         $this->docID = $docID;
     }
 
     public function borrarDefinitivamente()
     {
         //Eliminar fila de DocumentoSolicitudBachiller
-        $doc = DocumentoSolicitudTitulo::findOrFail($this->docSolBachID);
+        $doc = DocumentoSolicitudTitulo::findOrFail($this->docSolTitID);
         $doc->delete();
 
         //Eliminar el documento asociado
@@ -45,14 +45,14 @@ class RequisitosEnviados extends Component
 
         //Emitir evento
         $this->emit('requisitoEliminado');
-        $this->reset(['abrir', 'nombreDocumento', 'nombreRequisito', 'docSolBachID', 'docID']);
+        $this->reset(['abrir', 'nombreDocumento', 'nombreRequisito', 'docSolTitID', 'docID']);
     }
 
     public function requisitosEnviados()
     {
         $this->estudiante = Estudiante::query()
             ->where('persona_id', auth()->user()->persona_id)
-            ->with('solicitud')
+            ->with('solicitudTitulo')
             ->first();
     }
 }

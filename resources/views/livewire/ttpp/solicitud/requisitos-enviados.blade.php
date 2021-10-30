@@ -1,6 +1,6 @@
 <div>
-    @if($estudiante->solicitud)
-        @if($estudiante->solicitud->documentos->count())
+    @if($estudiante->solicitudTitulo)
+        @if($estudiante->solicitudTitulo->documentos->count())
 
             <x-table>
                 <x-slot name="head">
@@ -12,7 +12,7 @@
                     </x-table.heading>
                 </x-slot>
                 <x-slot name="body">
-                    @foreach($estudiante->solicitud->documentos as $i => $doc)
+                    @foreach($estudiante->solicitudTitulo->documentos as $i => $doc)
                         <x-table.row :odd="$loop->odd">
                             <x-table.cell>
                                 {{ ($i+1) }}

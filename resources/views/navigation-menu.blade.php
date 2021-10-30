@@ -41,11 +41,7 @@
                         :active="request()->routeIs('convalidacion.*')">
                         {{ __('convalidación') }}
                     </x-jet-nav-link>
-                    
-                    <x-jet-nav-link href="{{ route('ttpp.index') }}" :active="request()->routeIs('ttpp.*')">
-                        {{ __('Título Profesional') }}
-                    </x-jet-nav-link>
-                    
+
                     {{-- Todo: Debe ir al ultimo --}}
                     <x-jet-nav-link href="{{ route('indicadores.index') }}"
                         :active="request()->routeIs('indicadores.*')">
