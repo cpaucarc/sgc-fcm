@@ -28,7 +28,7 @@ class GradoAcademicoSeeder extends Seeder
             ],
             [
                 'nombre' => 'Titulado',
-                'color' => 'indigo'
+                'color' => 'yellow'
             ],
             [
                 'nombre' => 'Magister',

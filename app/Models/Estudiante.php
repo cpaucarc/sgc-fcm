@@ -26,9 +26,10 @@ class Estudiante extends Model
     }
 
     //Relación de uno a muchos
-    public function solicitud_titulo()
+    public function solicitudTitulo()
     {
-        return $this->hasMany(SolicitudTitulo::class);
+        return $this->hasOne(SolicitudTitulo::class)
+            ->with('documentos');
     }
 
     public function escuela()
@@ -52,6 +53,19 @@ class Estudiante extends Model
     public function solicitud()
     {
         return $this->hasOne(SolicitudBachiller::class)
+            ->with('documentos');
+    }
+
+    public function convalidacionEstudiante()
+    {
+        return $this->belongsToMany(ConvalidacionEstudiante::class, 'convalidacion_estudiante')
+            ->withPivot(['created_at'])
+            ->orderBy('convalidacion_estudiante.created_at', 'desc');
+    }
+
+    public function solicitudConvalidacion()
+    {
+        return $this->hasOne(SolicitudConvalidacion::class)
             ->with('documentos');
     }
 }

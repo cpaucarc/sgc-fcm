@@ -16,13 +16,18 @@ class CicloSeeder extends Seeder
         $ciclos = [
             [
                 'nombre' => '2020-II',
-                'fecha_inicio' => '2020-09-01',
-                'fecha_fin' => '2021-02-04',
+                'fecha_inicio' => '2020-12-01',
+                'fecha_fin' => '2021-05-04',
             ],
             [
                 'nombre' => '2021-I',
-                'fecha_inicio' => '2021-05-01',
-                'fecha_fin' => '2021-10-04',
+                'fecha_inicio' => '2021-07-01',
+                'fecha_fin' => '2021-12-04',
+            ],
+            [
+                'nombre' => '2021-II',
+                'fecha_inicio' => '2022-01-01',
+                'fecha_fin' => '2022-05-04',
             ],
         ];
 

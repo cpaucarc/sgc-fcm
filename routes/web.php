@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BachillerController;
+use App\Http\Controllers\ConvalidacionController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\InvestigacionController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\PlanEstudiosController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
 use App\Http\Controllers\SustentacionController;
-
+use App\Http\Controllers\TituloProfesionalController;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Http;
 
@@ -92,20 +93,34 @@ Route::prefix('bachiller')->group(function () {
         ->name('bachiller.estudiante');
 });
 
-//Sustentaciones de titulación
+//Titulos profesionales
 Route::prefix('titulos-profesionales')->group(function () {
-
     Route::get('crear', [SustentacionController::class, 'registro'])
         ->name('ttpp.registro');
-
     Route::get('titulados/{id?}', [SustentacionController::class, 'titulados'])
         ->name('ttpp.titulados');
-
     Route::get('asesores/{id?}', [SustentacionController::class, 'asesores'])
         ->name('ttpp.asesores');
-
+    Route::get('solicitudes', [TituloProfesionalController::class, 'solicitudes'])
+        ->name('ttpp.solicitudes');
+    Route::get('solicitud', [TituloProfesionalController::class, 'solicitud'])
+        ->name('ttpp.solicitud');
     Route::get('/{id?}', [SustentacionController::class, 'index'])
         ->name('ttpp.index');
+    Route::get('constancia/{sha}', [TituloProfesionalController::class, 'constancia'])
+        ->name('ttpp.constancia');
+    Route::get('estudiante/{sha}', [TituloProfesionalController::class, 'estudiante'])
+        ->name('ttpp.estudiante');
+});
+
+// Convalidaciones
+Route::prefix('convalidacion')->group(function () {
+    Route::get('/', [ConvalidacionController::class, 'index'])
+        ->name('convalidacion.index');
+    Route::get('solicitudes', [ConvalidacionController::class, 'solicitudes'])
+        ->name('convalidacion.solicitudes');
+    Route::get('solicitud', [ConvalidacionController::class, 'solicitud'])
+        ->name('convalidacion.solicitud');
 });
 
 Route::prefix('plan_estudios')->group(function () {
@@ -133,6 +148,6 @@ Route::prefix('encuestas')->group(function () {
 //Para mostrar PDF creados
 Route::get('pdf', function () {
     $pdf = PDF::loadView('pruebapdf');
-//    return $pdf->download('invoice.pdf');
+    //    return $pdf->download('invoice.pdf');
     return $pdf->stream();
 });
