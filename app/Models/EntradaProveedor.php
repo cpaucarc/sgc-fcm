@@ -15,7 +15,8 @@ class EntradaProveedor extends Model
 
     public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class);
+        return $this->belongsTo(Proveedor::class)
+            ->with('entidad');
     }
 
     public function entrada()
@@ -30,7 +31,8 @@ class EntradaProveedor extends Model
 
     public function documentos()
     {
-        return $this->hasMany(EntradaCompleto::class);
+        return $this->hasMany(EntradaCompleto::class)
+            ->with('documento');
     }
 
     public function documentosCicloActual($cicloID)

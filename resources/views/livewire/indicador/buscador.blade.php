@@ -4,6 +4,7 @@
         wire:model.debounce.500ms="query"
         wire:keydown.escape="resetear"
         wire:keydown.tab="resetear"
+        autocomplete="off"
     >
     </x-input-search>
 
@@ -24,7 +25,9 @@
 
                             <x-tooltip>
                                 <x-slot name="message">
-                                    {{ substr($indicador->objetivo, 0, 15) . '...'. substr($indicador->objetivo, -45)}}
+                                    <div class="w-64 whitespace-normal">
+                                        {{ $indicador->objetivo }}
+                                    </div>
                                 </x-slot>
 
                                 <div class="flex items-center justify-between text-sm">
@@ -32,12 +35,11 @@
                                         {{ $indicador->cod_ind_inicial }}
                                     </span>
 
-                                    @if($indicador->escuela)
-                                        {{ $indicador->escuela->nombre }}
-                                    @else
-                                        {{ __('Facultad') }}
-                                    @endif
+                                    {{ $indicador->escuela ? $indicador->escuela->nombre : __('Facultad') }}
 
+                                </div>
+                                <div class="text-sm text-gray-400 font-semibold">
+                                    Proceso de {{ $indicador->proceso->nombre }}
                                 </div>
 
                             </x-tooltip>

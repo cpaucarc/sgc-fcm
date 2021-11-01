@@ -1,5 +1,5 @@
 <div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
-    <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false">
+    <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false" class="py-2">
         {{ $slot }}
     </div>
     <div class="relative" x-cloak x-show.transition.origin.top="tooltip">

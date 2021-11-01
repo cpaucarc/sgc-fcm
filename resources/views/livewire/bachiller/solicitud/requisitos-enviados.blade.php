@@ -1,7 +1,6 @@
 <div>
     @if($estudiante->solicitud)
         @if($estudiante->solicitud->documentos->count())
-
             <x-table>
                 <x-slot name="head">
                     <x-table.heading>N°</x-table.heading>
@@ -35,7 +34,6 @@
                                         <x-icons.delete :stroke="1.5" class="h-5 w-5 mr-1"></x-icons.delete>
                                         Eliminar
                                     </x-button.invisible>
-
                                 </div>
 
                             </x-table.cell>
@@ -67,8 +65,6 @@
                 <img class="w-48"
                      src="{{ asset('images/ilustraciones/enviar_documento.svg') }}"
                      alt="Ilustracion de persona enviando un documento">
-
-
             </div>
         </div>
 

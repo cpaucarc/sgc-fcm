@@ -19,27 +19,21 @@
 
                             <input wire:model.defer="titulo" type="text" id="titulo"
                                    class="input-form w-full col-span-2">
-                            @error('titulo')
-                            <x-jet-input-error for="titulo">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="titulo"></x-jet-input-error>
                         </div>
                         <div>
                             <x-jet-label for="descripcion">{{ __('Descripción') }}</x-jet-label>
 
                             <textarea wire:model.defer="descripcion" id="descripcion" rows="2"
                                       class="input-form w-full col-span-2"></textarea>
-                            @error('descripcion')
-                            <x-jet-input-error for="descripcion">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="descripcion"></x-jet-input-error>
                         </div>
                         <div>
                             <x-jet-label for="lugar">{{ __('Lugar') }}</x-jet-label>
 
                             <input wire:model.defer="lugar" type="text" id="lugar"
                                    class="input-form w-full col-span-2">
-                            @error('lugar')
-                            <x-jet-input-error for="lugar">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="lugar"></x-jet-input-error>
                         </div>
                         <div class="flex justify-between items-center gap-x-8">
                             <div class="w-full">
@@ -47,18 +41,14 @@
 
                                 <input wire:model.defer="fecha_inicio" type="date" id="fecha_inicio"
                                        class="input-form w-full col-span-2">
-                                @error('fecha_inicio')
-                                <x-jet-input-error for="fecha_inicio">{{ $message }}</x-jet-input-error>
-                                @enderror
+                                <x-jet-input-error for="fecha_inicio"></x-jet-input-error>
                             </div>
                             <div class="w-full">
                                 <x-jet-label for="fecha_fin">{{ __('Fecha de Finalizacion') }}</x-jet-label>
 
                                 <input wire:model.defer="fecha_fin" type="date" id="fecha_fin"
                                        class="input-form w-full col-span-2">
-                                @error('fecha_fin')
-                                <x-jet-input-error for="fecha_fin">{{ $message }}</x-jet-input-error>
-                                @enderror
+                                <x-jet-input-error for="fecha_fin"></x-jet-input-error>
                             </div>
                         </div>
                         <div>
@@ -70,9 +60,7 @@
                                     <option value="{{ $escuela->id }}">{{$escuela->nombre}}</option>
                                 @endforeach
                             </select>
-                            @error('escuela')
-                            <x-jet-input-error for="escuela">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="escuela"></x-jet-input-error>
                         </div>
                     </div>
                 </x-card>
@@ -105,9 +93,7 @@
                                 {{ __('Ver empresas') }}
                             </x-jet-secondary-button>
                         </div>
-                        @error('empresa')
-                        <x-jet-input-error for="empresa">{{ $message }}</x-jet-input-error>
-                        @enderror
+                        <x-jet-input-error for="empresa"></x-jet-input-error>
                     </div>
                     <x-slot name="footer">
                         <div class="group flex items-start gap-x-4 text-gray-500">
@@ -156,9 +142,7 @@
                                     {{ __('Ver docentes') }}
                                 </x-jet-secondary-button>
                             </div>
-                            @error('docente_responsable')
-                            <x-jet-input-error for="docente_responsable">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="docente_responsable"></x-jet-input-error>
                         </div>
                         <div>
                             <x-jet-label for="estudiante_responsable">{{ __('Estudiante Responsable') }}</x-jet-label>
@@ -192,10 +176,8 @@
                                     {{ __('Ver estudiantes') }}
                                 </x-jet-secondary-button>
                             </div>
-                            @error('estudiante_responsable')
-                            <x-jet-input-error for="estudiante_responsable">{{ $message }}</x-jet-input-error>
-                            @enderror
-                        </div>
+                            <x-jet-input-error for="estudiante_responsable"></x-jet-input-error>
+                         </div>
                     </div>
                     <x-slot name="footer">
                         <div class="group flex items-start gap-x-4 text-gray-500">

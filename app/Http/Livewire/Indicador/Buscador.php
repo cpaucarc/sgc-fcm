@@ -27,7 +27,7 @@ class Buscador extends Component
             ->where('objetivo', 'like', '%' . $this->query . '%')
             ->orWhere('cod_ind_inicial', 'like', '%' . $this->query . '%')
             ->orderBy('cod_ind_inicial')
-            ->with('escuela')
+            ->with('escuela', 'proceso')
             ->limit(5)
             ->get();
     }

@@ -69,11 +69,14 @@ class ListarEmpresas extends Component
 
     public function render()
     {
-        $empresas = Empresa::where('nombre', 'like', '%' . $this->search . '%')
+        $empresas = Empresa::query()
+            ->with('rrss')
+            ->where('nombre', 'like', '%' . $this->search . '%')
             ->orWhere('ruc', 'like', '%' . $this->search . '%')
             ->orWhere('correo', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->direction)
             ->paginate($this->cantidad);
+
         return view('livewire.rrss.empresas.listar-empresas')
             ->with(compact('empresas'));
     }

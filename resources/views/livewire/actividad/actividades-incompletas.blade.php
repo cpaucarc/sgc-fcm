@@ -36,24 +36,14 @@
         @if ($completos !== $total)
             <x-table>
                 <x-slot name="head">
-                    <tr>
-                        <th scope="col"
-                            class="pl-4 pr-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Actividad
-                        </th>
-                        <th scope="col"
-                            class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Estado
-                        </th>
-                        <th scope="col" class="relative pr-4 pl-2 py-3">
-                            <span class="sr-only">Completar</span>
-                        </th>
-                    </tr>
+                    <x-table.heading>Actividad</x-table.heading>
+                    <x-table.heading>Estado</x-table.heading>
+                    <x-table.heading class="flex-shrink-0 w-16"><span class="sr-only">Ver</span></x-table.heading>
                 </x-slot>
                 <x-slot name="body">
                     @foreach ($actividades as $actividad)
                         <x-table.row :odd="$loop->odd">
-                            <td class="pl-4 pr-2 py-2 text-sm whitespace-nowrap">
+                            <x-table.cell>
                                 <h1 class="text-gray-800">
                                     {{ $actividad->actividad }}
                                 </h1>
@@ -63,32 +53,27 @@
                                         {{ $actividad->proceso }}
                                     </span>
                                 </small>
-                            </td>
-                            <td class="px-1 py-2 whitespace-nowrap">
+                            </x-table.cell>
+                            <x-table.cell class="text-xs leading-5 font-semibold whitespace-nowrap">
                                 @if ($actividad->status === 1)
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        class="px-2 inline-flex rounded-full bg-green-100 text-green-800">
                                         {{ __('Completado') }}
                                     </span>
                                 @else
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        class="px-2 inline-flex rounded-full bg-red-100 text-red-800">
                                         {{ __('Sin completar') }}
                                     </span>
                                 @endif
-                            </td>
-                            <td class="pr-4 pl-2 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('actividad.mis-actividades', [$actividad->id, $ciclo_seleccionado]) }}"
-                                   class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
-                                    <svg class="h-5 w-5 mr-1 block lg:hidden" fill="none" viewBox="0 0 24 24"
-                                         stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                    Revisar
-                                </a>
-                            </td>
-                            </x-table.row>
+                            </x-table.cell>
+                            <x-table.cell class="flex-shrink-0 w-16">
+                                <x-button.invisible-link color="blue"
+                                                         href="{{ route('actividad.mis-actividades', [$actividad->id, $ciclo_seleccionado]) }}">
+                                    <x-icons.go-to class="h-5 w-5" stroke="1.75"></x-icons.go-to>
+                                </x-button.invisible-link>
+                            </x-table.cell>
+                        </x-table.row>
                     @endforeach
                 </x-slot>
             </x-table>
@@ -107,7 +92,7 @@
         <div>
             @if ($completos !== $total)
                 <p class="text-sm text-gray-400">
-                    * Par culminar las actividades del semestre, tiene que revisar cada uno de ellos y complentarlas.
+                    * Para culminar las actividades del semestre, tiene que revisar cada uno de ellos y complentarlas.
                 </p>
             @endif
         </div>

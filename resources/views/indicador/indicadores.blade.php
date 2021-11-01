@@ -18,11 +18,15 @@
                     </x-slot>
 
                     <div class="grid grid-cols-2 gap-6">
-                        @foreach($item['items'] as $it)
+                        @forelse($item['items'] as $it)
                             <div class="col-span-1 lg:col-span-2 flex justify-between">
-                                <x-indicador.ind-min :indicador="$it" :route="'rrss.indicador'"/>
+                                <x-indicador.ind-min :indicador="$it" :route="'rrss.indicador'"></x-indicador.ind-min>
                             </div>
-                        @endforeach
+                        @empty
+                            <x-message-image image="{{ asset('images/ilustraciones/sin_indicadores.svg') }}"
+                                             title="" description="No existen indicadores de este nivel">
+                            </x-message-image>
+                        @endforelse
                     </div>
                 </x-card>
             </div>

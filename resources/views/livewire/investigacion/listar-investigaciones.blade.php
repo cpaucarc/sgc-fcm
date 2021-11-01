@@ -2,8 +2,8 @@
     <div class="space-y-8 my-4 overflow-hidden">
 
         <div class="flex justify-between items-center">
-            <x-input-dropdown wire:model="cantidad"/>
-            <x-input-search wire:model.debounce.500ms="buscar"/>
+            <x-input-dropdown wire:model="cantidad"></x-input-dropdown>
+            <x-input-search wire:model.debounce.500ms="buscar"></x-input-search>
         </div>
 
         <x-table total="{{ $investigaciones->total() }}">
@@ -13,7 +13,7 @@
                         <div class="flex items-center justify-between">
                             <span>Título</span>
                             @if($sort === 'titulo')
-                                <x-sort-by type="alpha" direction="{{$direccion}}"/>
+                                <x-sort-by type="alpha" direction="{{$direccion}}"></x-sort-by>
                             @endif
                         </div>
                     </x-table.heading>
@@ -30,7 +30,7 @@
                         <div class="flex items-center justify-between">
                             <span>Año</span>
                             @if($sort === 'fecha_publicacion')
-                                <x-sort-by type="number" direction="{{$direccion}}"/>
+                                <x-sort-by type="number" direction="{{$direccion}}"></x-sort-by>
                             @endif
                         </div>
                     </x-table.heading>

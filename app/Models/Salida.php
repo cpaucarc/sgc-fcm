@@ -19,7 +19,8 @@ class Salida extends Model
 
     public function documentos()
     {
-        return $this->hasMany(SalidaCompleto::class);
+        return $this->hasMany(SalidaCompleto::class)
+            ->with('documento');
     }
 
     public function documentosCicloActual($cicloID)
@@ -31,7 +32,8 @@ class Salida extends Model
 
     public function actividad()
     {
-        return $this->belongsTo(Actividad::class);
+        return $this->belongsTo(Actividad::class)
+            ->with('responsable');
     }
 
 }

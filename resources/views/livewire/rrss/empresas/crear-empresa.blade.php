@@ -34,9 +34,8 @@
                         <div class="col-span-2">
                             <input wire:model.defer="nombre" type="text" id="nombre" class="input-form w-full"
                                    autofocus>
-                            @error('nombre')
-                            <x-jet-input-error for="nombre">{{ $message }}</x-jet-input-error>
-                            @enderror
+
+                            <x-jet-input-error for="nombre"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -50,9 +49,7 @@
                         </x-jet-label>
                         <div class="col-span-2">
                             <input wire:model.defer="ruc" type="text" id="ruc" class="input-form w-full col-span-2">
-                            @error('ruc')
-                            <x-jet-input-error for="ruc">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="ruc"></x-jet-input-error>
                         </div>
 
                     </div>
@@ -69,9 +66,8 @@
                         <div class="col-span-2">
                             <input wire:model.defer="telefono" type="text" id="telefono"
                                    class="input-form w-full col-span-2">
-                            @error('telefono')
-                            <x-jet-input-error for="telefono">{{ $message }}</x-jet-input-error>
-                            @enderror
+
+                            <x-jet-input-error for="telefono"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -87,9 +83,8 @@
                         <div class="col-span-2">
                             <input wire:model.defer="correo" type="email" id="correo"
                                    class="input-form w-full col-span-2">
-                            @error('correo')
-                            <x-jet-input-error for="correo">{{ $message }}</x-jet-input-error>
-                            @enderror
+
+                            <x-jet-input-error for="correo"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -106,9 +101,7 @@
                             <input wire:model.defer="direccion" type="text" id="direccion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Av. Centenario N° 123">
-                            @error('direccion')
-                            <x-jet-input-error for="direccion">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="direccion"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -125,9 +118,7 @@
                             <input wire:model.defer="ubicacion" type="text" id="ubicacion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Huaraz - Ancash - Peru">
-                            @error('ubicacion')
-                            <x-jet-input-error for="ubicacion">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="ubicacion"></x-jet-input-error>
                         </div>
                     </div>
                 </div>

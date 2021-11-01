@@ -37,21 +37,32 @@ class MostrarActividad extends Component
     {
         $this->actividad = $actividad;
         $this->ciclo = $ciclo;
-        if ($this->actividad->estadoActual($this->ciclo->id)->count()) {
+        if ($this->actividad->estado) {
             $this->estado = true;
         }
         $this->randomID = rand();
     }
 
-    public function abrirModal(Salida $salida)
+    public function abrirModal($salida_id)
     {
-        $this->salida = $salida;
+        $this->salida = Salida::query()
+            ->where('id', $salida_id)
+            ->with(['documentos' => function ($query) {
+                $query->where('ciclo_id', $this->ciclo->id);
+            }])
+            ->first();
         $this->open = true;
     }
 
-    public function abrirModalDoc(EntradaProveedor $entrada_proveedor)
+    public function abrirModalDoc($entrada_proveedor_id)
     {
-        $this->entrada_proveedor = $entrada_proveedor;
+        $this->entrada_proveedor = EntradaProveedor::query()
+            ->with('entrada', 'proveedor')
+            ->with(['documentos' => function ($query) {
+                $query->where('ciclo_id', $this->ciclo->id);
+            }])
+            ->where('id', $entrada_proveedor_id)
+            ->first();
         $this->openDoc = true;
     }
 

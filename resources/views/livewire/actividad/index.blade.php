@@ -1,15 +1,6 @@
 <div class="grid grid-cols-1 gap-y-4 lg:gap-y-0 lg:grid-cols-4 lg:gap-4 relative">
 
     <div class="flex flex-row lg:flex-col items-start gap-y-4">
-        <form method="POST" action="#" class="w-10/12 mb-4">
-            @csrf
-            <div>
-
-                <x-jet-input id="search" class="block mt-1 w-full" type="search" name="search" required/>
-                <x-jet-label for="search" class="text-xs text-right text-gray-300"
-                             value="{{ __('Búsqueda avanzada') }}"/>
-            </div>
-        </form>
         <x-side-item :active="$show_mis_actividades" wire:click="cambiarVista(1)">
             @slot('icon')
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,6 +50,5 @@
         @endif
 
     </div>
-
 
 </div>

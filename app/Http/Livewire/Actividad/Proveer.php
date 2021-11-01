@@ -9,6 +9,7 @@ use App\Models\EntradaCompleto;
 use App\Models\EntradaProveedor;
 use App\Models\SalidaCompleto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -31,11 +32,18 @@ class Proveer extends Component
     public function mount()
     {
         $this->randomID = rand();
+        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
     }
 
-    public function abrirModal(EntradaProveedor $ent_prv)
+    public function abrirModal($ent_prv_id)
     {
-        $this->ent_prv_seleccionado = $ent_prv;
+        $this->ent_prv_seleccionado = EntradaProveedor::query()
+            ->with('entrada', 'actividad')
+            ->with(['documentos' => function ($query) {
+                $query->where('ciclo_id', $this->ciclo_seleccionado);
+            }])
+            ->where('id', $ent_prv_id)
+            ->first();
         $this->abrir = true;
     }
 
@@ -99,34 +107,26 @@ class Proveer extends Component
 
     public function render()
     {
-        $proveedor = array();
-        foreach (Auth::user()->roles as $rol) {
-            array_push($proveedor, $rol->entidad->proveedor->id);
-        }
-
-        $ent_prov = EntradaProveedor::whereIn('proveedor_id', function ($query) {
-            $entID = array();
-            foreach (Auth::user()->roles as $rol) {
-                array_push($entID, $rol->entidad->id);
-            }
-
-            $query->select('id')
-                ->from('proveedores')
-                ->whereIn('entidad_id', $entID);
-        })
+        $ent_prov = EntradaProveedor::query()
+            ->addSelect(['cantidad' => EntradaCompleto::select(DB::raw('count(1)'))
+                ->whereColumn('entrada_proveedor_id', 'entrada_proveedores.id')
+                ->where('ciclo_id', $this->ciclo_seleccionado)
+                ->limit(1)
+            ])
+            ->with('entrada', 'actividad')
+            ->whereIn('proveedor_id', function ($query) {
+                $entID = Auth::user()->roles->pluck('entidad_id');
+                $query->select('id')
+                    ->from('proveedores')
+                    ->whereIn('entidad_id', $entID);
+            })
             ->get();
 
-        $completos = 0;
+        $completos = count($ent_prov->where('cantidad', '>', 0));
         $total = $ent_prov->count();
-        foreach ($ent_prov as $ep) {
-            if ($ep->documentosCicloActual($this->ciclo_seleccionado)->count()) {
-                $completos++;
-            }
-        }
         $porcentaje = $total === 0 ? 0 : ($completos / $total * 100);
 
-        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
         return view('livewire.actividad.proveer')
-            ->with(compact('proveedor', 'ent_prov', 'completos', 'total', 'porcentaje'));
+            ->with(compact('ent_prov', 'completos', 'total', 'porcentaje'));
     }
 }

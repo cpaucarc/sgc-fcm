@@ -9,13 +9,14 @@ class ActividadResponsable extends Model
 {
     use HasFactory;
 
-    protected  $table = "actividad_responsables";
+    protected $table = "actividad_responsables";
     public $timestamps = false;
     public $fillable = ['responsable_id', 'actividad_id'];
 
     public function responsable()
     {
-        return $this->belongsTo(Responsable::class);
+        return $this->belongsTo(Responsable::class)
+            ->with('entidad');
     }
 
 }

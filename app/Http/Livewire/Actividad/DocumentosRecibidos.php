@@ -6,6 +6,7 @@ use App\Models\Ciclo;
 use App\Models\Salida;
 use App\Models\SalidaCompleto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class DocumentosRecibidos extends Component
@@ -15,42 +16,56 @@ class DocumentosRecibidos extends Component
     public $sld = null; //Salida seleccionda para mostrar en modal
     public $abrir = false;
 
-
-    public function abrirModal(Salida $sld)
+    public function mount()
     {
-        $this->sld = $sld;
+        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
+    }
+
+    public function abrirModal($sld_id)
+    {
+        $this->sld = Salida::query()
+            ->with(['documentos' => function ($query) {
+                $query->where('ciclo_id', $this->ciclo_seleccionado);
+            }])
+            ->where('id', $sld_id)
+            ->first();
+        /*
+        $this->ent_prv_seleccionado = EntradaProveedor::query()
+            ->with('entrada', 'actividad')
+            ->with(['documentos' => function ($query) {
+                $query->where('ciclo_id', $this->ciclo_seleccionado);
+            }])
+            ->where('id', $ent_prv_id)
+            ->first();
+         * */
         $this->abrir = true;
     }
 
     public function render()
     {
-        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
-
-        $salidas = Salida::whereIn('id', function ($query) {
-            $query->select('salida_id')
-                ->from('cliente_salidas')
-                ->whereIn('cliente_id', function ($query) {
-                    $entID = array();
-                    foreach (Auth::user()->roles as $rol) {
-                        array_push($entID, $rol->entidad->id);
-                    }
-                    $query->select('id')
-                        ->from('clientes')
-                        ->whereIn('entidad_id', $entID);
-                });
-        })
+        $salidas = Salida::query()
+            ->addSelect(['cantidad' => SalidaCompleto::select(DB::raw('count(1)'))
+                ->whereColumn('salida_id', 'salidas.id')
+                ->where('ciclo_id', $this->ciclo_seleccionado)
+                ->limit(1)
+            ])
+            ->with('actividad')
+            ->whereIn('id', function ($query) {
+                $query->select('salida_id')
+                    ->from('cliente_salidas')
+                    ->whereIn('cliente_id', function ($query) {
+                        $entID = Auth::user()->roles->pluck('entidad_id');
+                        $query->select('id')
+                            ->from('clientes')
+                            ->whereIn('entidad_id', $entID);
+                    });
+            })
+            ->whereIn('id', function ($query) {
+                $query->select('salida_id')
+                    ->from('salida_completos')
+                    ->where('ciclo_id', $this->ciclo_seleccionado);
+            })
             ->get();
-
-        /*
-select
-	*,
-    (select count(*) from salida_completos where ciclo_id = 1 and salida_id = salidas.id) as conteo
-from salidas
-where id in (select salida_id from cliente_salidas where cliente_id in (1, 3))
-and (select count(*) from salida_completos where ciclo_id = 1 and salida_id = salidas.id) > 0
-;
-         * */
-
 
         return view('livewire.actividad.documentos-recibidos')
             ->with(compact('salidas'));

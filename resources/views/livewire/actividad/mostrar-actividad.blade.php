@@ -48,8 +48,8 @@
                     </x-button-soft>
 
                     <small class="text-gray-500 ml-2 lg:ml-0 text-xs mt-1">
-                        @if($actividad->estadoActual($ciclo->id)->count())
-                            Completado {{ $actividad->estadoActual($ciclo->id)[0]->fecha_operacion->diffForHumans() }}
+                        @if($actividad->estado)
+                            Completado el {{ $actividad->estado }}
                         @endif
                     </small>
                 </div>
@@ -57,7 +57,7 @@
         </div>
 
         {{-- Alerta que se mostrara cuando se agrege correctamente un archivo en Salidas --}}
-        <x-alert/>
+        <x-alert></x-alert>
 
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-3">
@@ -84,7 +84,7 @@
                             <div class="ml-2 py-2 flex items-start">
                                 <div
                                     class="w-10 h-10 rounded-full bg-yellow-100 flex justify-center items-center mr-2">
-                                    <small class="text-yellow-800">
+                                    <small class="text-yellow-800 font-semibold">
                                         {{ $ep->entrada->codigo }}
                                     </small>
                                 </div>
@@ -97,11 +97,10 @@
                                         {{ $ep->proveedor->entidad->nombre }}
                                     </p>
                                 </div>
-                                <button wire:click="abrirModalDoc({{ $ep }})"
-                                        class="py-1 px-2 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-yellow-100 hover:text-yellow-800">
-                                    <x-icons.documents :stroke="1.5" class="h-5 w-5 mr-1"></x-icons.documents>
+                                <x-button.invisible color="yellow" wire:click="abrirModalDoc({{ $ep->id }})">
+                                    <x-icons.open-modal class="h-6 w-6 mr-1" stroke="1.25"></x-icons.open-modal>
                                     Documentos
-                                </button>
+                                </x-button.invisible>
                             </div>
                         @empty
                             <p>
@@ -112,6 +111,7 @@
                 </x-card>
 
             </div>
+
             <div class="col-span-6 lg:col-span-3">
                 {{-- Salidas --}}
                 <x-card>
@@ -136,7 +136,7 @@
                             <div class="ml-2 py-2 flex items-center">
                                 <div
                                     class="w-10 h-10 rounded-full bg-blue-100 flex justify-center items-center mr-2">
-                                    <small class="text-blue-800">
+                                    <small class="text-blue-800 font-semibold">
                                         {{ $sld->codigo }}
                                     </small>
                                 </div>
@@ -145,14 +145,10 @@
                                     {{ $sld->nombre }}
                                 </h2>
 
-                                <button wire:click="abrirModal({{ $sld }})"
-                                        class="py-1 px-3 flex items-center rounded bg-transparent text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-800">
-                                    <svg class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 16 16">
-                                        <path stroke-width="1.5"
-                                              d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-                                    </svg>
+                                <x-button.invisible color="blue" wire:click="abrirModal({{ $sld->id }})">
+                                    <x-icons.open-modal class="h-6 w-6 mr-1" stroke="1.25"></x-icons.open-modal>
                                     Clientes
-                                </button>
+                                </x-button.invisible>
                             </div>
                         @empty
                             <p>
@@ -177,91 +173,95 @@
 
                 <x-slot name="content">
 
-                    <div class="my-6">
-                        <x-jet-label for="archivo">Archivo</x-jet-label>
-                        <input type="file" wire:model="archivo" id="{{ $randomID }}"
-                               class="input-form w-full py-2">
-                        <p wire:loading wire:target="archivo">
-                            Cargando...
-                        </p>
-                        @error('archivo')
-                        <div class="text-red-500">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    @if($salida->documentosCicloActual($ciclo->id)->count())
-                        <div class="flex justify-between items-center">
-                            <h2 class="ml-2 mt-3 text-gray-500 text-lg">
-                                Documentos que has subido para esta actividad:
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 rounded p-4">
+                            <h2 class="mb-3 text-gray-600 font-semibold">
+                                Subir archivo:
                             </h2>
-                            <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $salida->documentosCicloActual($ciclo->id)->count() }}
-                            </span>
+                            <input type="file" wire:model="archivo" class="input-form w-full py-2">
+                            <x-loading-file wire:loading wire:target="archivo"></x-loading-file>
+
+                            <x-jet-input-error for="archivo"></x-jet-input-error>
                         </div>
 
-                        <div class="ml-2 table w-full mb-6 text-gray-700">
-                            @foreach($salida->documentosCicloActual($ciclo->id) as $sldcmt)
-                                <div class="table-row-group mb-1 space-y-2">
-                                    <div class="table-row">
-                                        <div class="table-cell align-middle">
-                                            <small>
-                                                @if(strlen($sldcmt->documento->nombre) > 50)
-                                                    {{ substr($sldcmt->documento->nombre, 0, 45) }}
-                                                    ...{{ substr($sldcmt->documento->nombre, -15) }}
-                                                @else
-                                                    {{ $sldcmt->documento->nombre }}
-                                                @endif
-                                            </small>
+                        <div class="bg-gray-50 rounded p-4">
+                            @if($salida->documentos->count())
+                                <div class="mb-3 flex justify-between items-center">
+                                    <h2 class="text-gray-600 font-semibold">
+                                        Documentos que has subido para esta actividad:
+                                    </h2>
+                                    <span class="bg-blue-200 px-3 py-1 text-blue-900 rounded-full text-xs">
+                                        {{ $salida->documentos->count() }} documento(s)
+                                    </span>
+                                </div>
 
+                                <div class="table w-full text-gray-700">
+                                    @foreach($salida->documentos as $sldcmt)
+                                        <div class="table-row-group py-2 space-y-2">
+                                            <div class="table-row">
+                                                <div class="table-cell align-middle">
+                                                    <small>
+                                                        @if(strlen($sldcmt->documento->nombre) > 60)
+                                                            {{ substr($sldcmt->documento->nombre, 0, 45) }}
+                                                            ...{{ substr($sldcmt->documento->nombre, -15) }}
+                                                        @else
+                                                            {{ $sldcmt->documento->nombre }}
+                                                        @endif
+                                                    </small>
+
+                                                </div>
+                                                <div class="table-cell align-middle text-right whitespace-nowrap">
+                                                    <small>
+                                                        {{ $sldcmt->fecha_operacion->diffForHumans() }}
+                                                    </small>
+                                                </div>
+                                                <div class="table-cell text-gray-500 px-4 text-right">
+                                                    <div class="gap-2 whitespace-nowrap">
+                                                        <x-button.invisible-link color="green" target="_blank"
+                                                                                 href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}">
+                                                            <x-icons.documents class="h-5 w-5"
+                                                                               stroke="1.5"></x-icons.documents>
+                                                            Ver
+                                                        </x-button.invisible-link>
+                                                        <x-button.invisible color="red"
+                                                                            wire:click="eliminarArchivo({{ $sldcmt->documento }})">
+                                                            <x-icons.delete :stroke="1.5"
+                                                                            class="h-5 w-5 hover:text-red-800"></x-icons.delete>
+                                                        </x-button.invisible>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="table-cell align-middle text-right">
-                                            <small>
-                                                {{ $sldcmt->fecha_operacion->diffForHumans() }}
-                                            </small>
-                                        </div>
-                                        <div class="table-cell text-gray-500 px-4">
-                                            <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
-                                               target="_blank"
-                                               class="hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded flex justify-center items-center">
-                                                <svg class="h-5 w-5 hover:text-green-800" fill="none"
-                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          stroke-width="1.5"
-                                                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                                </svg>
-                                                <small>
-                                                    Ver
-                                                </small>
-                                            </a>
-                                        </div>
-                                        <div class="table-cell text-gray-500">
-                                            <button wire:click="eliminarArchivo({{ $sldcmt->documento }})"
-                                                    class="hover:bg-red-100 hover:text-red-700 px-2 py-1 rounded flex justify-center items-center">
-                                                <x-icons.x :stroke="1.5" class="h-5 w-5 hover:text-red-800"></x-icons.x>
-                                                <small>Eliminar</small>
-                                            </button>
-                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="grid place-items-center">
+                                    <div class="flex items-center">
+                                        <img src="{{ asset('images/ilustraciones/sin_documentos.svg') }}" class="w-24"
+                                             alt="Grafico">
+                                        <p class="font-bold text-gray-600">
+                                            Aún no has enviado ningun documento
+                                        </p>
                                     </div>
                                 </div>
-                            @endforeach
+                            @endif
                         </div>
-                    @endif
 
-                    <h2 class="ml-2 my-3 text-gray-500 text-lg">
-                        Esta información será visto por los siguientes clientes:
-                    </h2>
-                    <ul class="mt-1 flex flex-wrap gap-2">
-                        @foreach($salida->clientes as $clt_sld)
-                            <li class="bg-gray-200 rounded-full text-gray-900 font-medium px-4 py-1">
-                                <small>
-                                    {{ $clt_sld->cliente->entidad->nombre }}
-                                </small>
-                            </li>
-                        @endforeach
-                    </ul>
-
+                        <div class="bg-gray-50 rounded p-4">
+                            <h2 class="mb-3 text-gray-600 font-semibold">
+                                Esta información será visto por los siguientes clientes:
+                            </h2>
+                            <ul class="mt-1 flex flex-wrap gap-2">
+                                @foreach($salida->clientes as $clt_sld)
+                                    <li class="bg-gray-200 rounded-full text-gray-900 font-medium px-4 py-1">
+                                        <small>
+                                            {{ $clt_sld->cliente->entidad->nombre }}
+                                        </small>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
 
                 </x-slot>
                 <x-slot name="footer">
@@ -275,14 +275,7 @@
                         wire:target="enviarDocumentoSalida, archivo"
                         wire:loading.class="bg-gray-800"
                         wire:loading.attr="disabled">
-                        <svg wire:loading wire:target="enviarDocumentoSalida"
-                             class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
-                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
+                        <x-icons.load class="h-4 w-4" wire:loading wire:target="enviarDocumentoSalida"></x-icons.load>
                         <span>
                             {{ __('Guardar') }}
                         </span>
@@ -292,7 +285,7 @@
         @endif
 
         @if($entrada_proveedor)
-            <x-jet-dialog-modal wire:model="openDoc">
+            <x-jet-dialog-modal wire:model="openDoc" maxWidth="3xl">
 
                 <x-slot name="title">
                     <div>
@@ -312,55 +305,54 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    @if($entrada_proveedor->documentosCicloActual($ciclo->id)->count())
-                        <div class="flex justify-between items-center">
-                            <h2 class="ml-2 my-3 text-gray-500 text-lg">
-                                Documentos enviados por el proveedor:
-                            </h2>
-                            <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $entrada_proveedor->documentosCicloActual($ciclo->id)->count() }}
-                            </span>
-                        </div>
 
-                        <div class="ml-2 table w-full mb-6 text-gray-700">
-                            @foreach($entrada_proveedor->documentosCicloActual($ciclo->id) as $entcmt)
-                                <div class="table-row-group mb-1 space-y-2">
-                                    <div class="table-row">
-                                        <div class="table-cell align-middle">
-                                            {{ $entcmt->documento->nombre }}
-                                        </div>
-                                        <div class="table-cell align-middle text-right">
-                                            {{ $entcmt->fecha_operacion->diffForHumans() }}
-                                        </div>
-                                        <div class="table-cell text-gray-500 px-4">
-                                            <a href="{{ route('documentos', $entcmt->documento->enlace_interno) }}"
-                                               target="_blank"
-                                               class="hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded flex justify-center items-center">
-                                                <svg class="h-5 w-5 hover:text-green-800" fill="none"
-                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          stroke-width="1.5"
-                                                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                                </svg>
-                                                Ver
-                                            </a>
+                    <div class="bg-gray-50 rounded p-4">
+                        @if($entrada_proveedor->documentos->count())
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-gray-600 font-semibold">
+                                    Documentos enviados por el proveedor:
+                                </h2>
+                                <span class="bg-blue-200 px-3 py-1 text-blue-900 rounded-full text-xs">
+                                    {{ $entrada_proveedor->documentos->count() }} documento(s)
+                                </span>
+                            </div>
+
+                            <div class="ml-2 table w-full mb-6 text-gray-700">
+                                @foreach($entrada_proveedor->documentos as $entcmt)
+                                    <div class="table-row-group py-2 space-y-2">
+                                        <div class="table-row">
+                                            <div class="table-cell align-middle text-sm flex-1">
+                                                @if(strlen($entcmt->documento->nombre) < 60)
+                                                    {{ $entcmt->documento->nombre }}
+                                                @else
+                                                    {{ substr($entcmt->documento->nombre, 0, 45) .'...'. substr($entcmt->documento->nombre, -15) }}
+                                                @endif
+                                            </div>
+                                            <div
+                                                class="table-cell align-middle text-right whitespace-nowrap text-sm text-gray-600">
+                                                {{ $entcmt->fecha_operacion->diffForHumans() }}
+                                            </div>
+                                            <div class="table-cell text-gray-500 text-right px-4 flex-shrink-0 w-min">
+                                                <x-button.invisible-link color="green" target="_blank"
+                                                                         href="{{ route('documentos', $entcmt->documento->enlace_interno) }}">
+                                                    <x-icons.documents class="h-5 w-5 mr-1"
+                                                                       stroke="1.5"></x-icons.documents>
+                                                    Ver
+                                                </x-button.invisible-link>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <h2 class="text-lg text-red-500">
-                            El proveedor aun no ha enviado ningun documento
-                        </h2>
-                    @endif
+                                @endforeach
+                            </div>
+                        @else
+                            <x-message-image image="{{ asset('images/ilustraciones/sin_documentos.svg') }}"
+                                             title="El proveedor aun no ha enviado ningun documento."
+                                             description="">
+                            </x-message-image>
+                        @endif
+                    </div>
+                </x-slot>
 
-                </x-slot>
-                <x-slot name="footer">
-                    <x-jet-secondary-button wire:click="$set('openDoc', false)">
-                        Cerrar
-                    </x-jet-secondary-button>
-                </x-slot>
             </x-jet-dialog-modal>
         @endif
     </div>

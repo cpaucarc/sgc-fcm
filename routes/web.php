@@ -6,6 +6,7 @@ use App\Http\Controllers\BachillerController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\IndicadorController;
 use App\Http\Controllers\InvestigacionController;
+use App\Http\Controllers\PlanEstudiosController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\ResponsabilidadSocialController;
 use App\Http\Controllers\SustentacionController;
@@ -107,14 +108,21 @@ Route::prefix('titulos-profesionales')->group(function () {
         ->name('ttpp.index');
 });
 
+Route::prefix('plan_estudios')->group(function () {
+    Route::get('/', [PlanEstudiosController::class, 'index'])
+        ->name('plan_estudios.index');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+// Para mostrar archivos subidos al servidor
 Route::get('storage/{file}', function ($file) {
     return Storage::response($file);
 })->name('documentos');
 
+//Para mostrar encuestas de RSU
 Route::prefix('encuestas')->group(function () {
     Route::get('/rsu/{sha}', [EncuestaController::class, 'rrss'])
         ->name('encuesta.rrss');
@@ -122,6 +130,7 @@ Route::prefix('encuestas')->group(function () {
         ->name('encuesta.agradecimiento');
 });
 
+//Para mostrar PDF creados
 Route::get('pdf', function () {
     $pdf = PDF::loadView('pruebapdf');
 //    return $pdf->download('invoice.pdf');

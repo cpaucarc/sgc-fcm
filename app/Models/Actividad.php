@@ -9,13 +9,14 @@ class Actividad extends Model
 {
     use HasFactory;
 
-    protected  $table = "actividades";
+    protected $table = "actividades";
     public $timestamps = false;
     public $fillable = ['nombre', 'tipo_actividad_id', 'proceso_id'];
 
     public function entradas()
     {
-        return $this->hasMany(EntradaProveedor::class, 'actividad_id', 'id');
+        return $this->hasMany(EntradaProveedor::class, 'actividad_id', 'id')
+            ->with('entrada', 'proveedor');
     }
 
     public function salidas()
@@ -33,16 +34,10 @@ class Actividad extends Model
         return $this->belongsTo(Proceso::class, 'proceso_id', 'id');
     }
 
-    public function estadoActual($cicloID)
-    {
-        return $this->hasOne(ActividadCompleto::class)
-            ->where('ciclo_id', '=', $cicloID)
-            ->get();
-    }
-
     public function responsable()
     {
-        return $this->hasOne(ActividadResponsable::class);
+        return $this->hasOne(ActividadResponsable::class)
+            ->with('responsable');
     }
 
 }

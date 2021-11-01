@@ -27,30 +27,21 @@
                         <input type="number" wire:model.defer="dni" id="dni"
                                class="input-form w-full placeholder-gray-300"
                                placeholder="########">
-                        <br>
-                        @error('dni')
-                        <div class="text-red-500 text-xs">
-                            {{ $message }}
-                        </div>
+
+                        <x-jet-input-error for="dni"></x-jet-input-error>
                         @enderror
                     </div>
                     <div class="flex-1">
                         <x-jet-label for="apellidos">Apellidos</x-jet-label>
                         <input type="text" wire:model.defer="apellidos" id="apellidos" class="input-form w-full">
-                        @error('apellidos')
-                        <div class="text-red-500 text-xs">
-                            {{ $message }}
-                        </div>
-                        @enderror
+
+                        <x-jet-input-error for="apellidos"></x-jet-input-error>
                     </div>
                     <div class="flex-1">
                         <x-jet-label for="nombres">Nombres</x-jet-label>
                         <input type="text" wire:model.defer="nombres" id="nombres" class="input-form w-full">
-                        @error('nombres')
-                        <div class="text-red-500 text-xs">
-                            {{ $message }}
-                        </div>
-                        @enderror
+
+                        <x-jet-input-error for="nombres"></x-jet-input-error>
                     </div>
                 </div>
             </div>
@@ -63,21 +54,16 @@
                     <div class="flex-1">
                         <x-jet-label for="correo">Correo Electrónico/Usuario</x-jet-label>
                         <input type="email" wire:model.defer="correo" id="correo" class="input-form w-full">
-                        @error('correo')
-                        <div class="text-red-500 text-xs">
-                            {{ $message }}
-                        </div>
-                        @enderror
+
+                        <x-jet-input-error for="correo"></x-jet-input-error>
                     </div>
                     <div class="flex-1">
                         <x-jet-label for="password">Contraseña</x-jet-label>
                         <input type="text" wire:model.defer="password" id="password"
                                {{ $toggle ? 'readonly' : '' }} class="input-form w-full">
-                        @error('password')
-                        <div class="text-red-500 text-xs">
-                            {{ $message }}
-                        </div>
-                        @enderror
+
+                        <x-jet-input-error for="password"></x-jet-input-error>
+
                         <label class="text-gray-600 text-xs px-1 mt-3 cursor-pointer">
                             <input type="checkbox" wire:model="toggle" class="rounded ring-0">
                             Usar <strong>DNI</strong> como contraseña

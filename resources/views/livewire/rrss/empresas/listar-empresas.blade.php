@@ -5,11 +5,6 @@
                 <h1 class="text-xl font-bold text-gray-800">
                     Lista de Empresas
                 </h1>
-                <p class="text-sm text-gray-400">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci alias aliquam at beatae
-                    facilis fugit harum ipsam, iste itaque laborum libero numquam quis quos saepe soluta veritatis.
-                    At, nam?
-                </p>
             </div>
             @livewire('rrss.empresas.crear-empresa')
         </div>
@@ -20,90 +15,57 @@
 
     {{--Buscador--}}
     <div class="flex justify-between items-center mb-4 text-gray-700">
-        <div class="flex items-center">
-            <span class="hidden lg:block">{{ __('Mostrar') }}</span>
-            <select wire:model="cantidad" class="cursor-pointer input-form-none py-0">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="hidden lg:block">{{ __('empresas') }}</span>
-        </div>
-
-        <div class="flex items-center relative">
-            <label for="search" class="px-3 py-1 text-gray-400">
-                <x-icons.search :stroke="1.75" class="h-6 w-6"></x-icons.search>
-            </label>
-            <input type="text" id="search" wire:model="search"
-                   class="input-form-b py-1">
-            @if($search)
-                <button wire:click="$set('search', '')"
-                        class="px-2 absolute top-1 right-0 text-lg text-gray-500 hover:text-gray-600">
-                    &times;
-                </button>
-            @endif
-        </div>
-
+        <x-input-dropdown wire:model="cantidad"></x-input-dropdown>
+        <x-input-search wire:model="search"></x-input-search>
     </div>
 
     @if($empresas->count())
         {{--Tabla--}}
         <x-table>
             <x-slot name="head">
-                <tr>
-                    <th scope="col" wire:click="sortBy('nombre')"
-                        class="cursor-pointer px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        <div class="flex items-center justify-between">
-                            <span>Empresa</span>
-                            @if($sort === 'nombre')
-                                <x-sort-by type="alpha" direction="{{$direction}}"/>
-                            @endif
-                        </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('telefono')"
-                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        <div class="flex items-center justify-between">
-                            <span> Telefono</span>
-                            @if($sort === 'telefono')
-                                <x-sort-by type="number" direction="{{$direction}}"/>
-                            @endif
-                        </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('correo')"
-                        class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-
-                        <div class="flex items-center justify-between ">
-                            <span>Correo</span>
-                            @if($sort === 'correo')
-                                <x-sort-by type="alpha" direction="{{$direction}}"/>
-                            @endif
-                        </div>
-                    </th>
-                    <th scope="col" wire:click="sortBy('ubicacion')"
-                        class="hidden lg:block px-2 cursor-pointer py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-
-                        <div class="flex items-center justify-between ">
-                            <span>Direccion</span>
-                            @if($sort === 'direccion')
-                                <x-sort-by type="alpha" direction="{{$direction}}"/>
-                            @endif
-                        </div>
-                    </th>
-                    <th scope="col"
-                        class="px-2 py-3 text-left text-xs text-center font-medium text-gray-500 uppercase tracking-wider">
-                        RRSS
-                    </th>
-                    <th scope="col" class="relative text-center px-4 py-3">
-                        <span class="sr-only">Edit</span>
-                    </th>
-                </tr>
+                <x-table.heading class="cursor-pointer" wire:click="sortBy('nombre')">
+                    <div class="flex items-center justify-between">
+                        <span>Empresa</span>
+                        @if($sort === 'nombre')
+                            <x-sort-by type="alpha" direction="{{$direction}}"></x-sort-by>
+                        @endif
+                    </div>
+                </x-table.heading>
+                <x-table.heading class="cursor-pointer" wire:click="sortBy('telefono')">
+                    <div class="flex items-center justify-between">
+                        <span> Telefono</span>
+                        @if($sort === 'telefono')
+                            <x-sort-by type="number" direction="{{$direction}}"></x-sort-by>
+                        @endif
+                    </div>
+                </x-table.heading>
+                <x-table.heading class="cursor-pointer" wire:click="sortBy('correo')">
+                    <div class="flex items-center justify-between ">
+                        <span>Correo</span>
+                        @if($sort === 'correo')
+                            <x-sort-by type="alpha" direction="{{$direction}}"></x-sort-by>
+                        @endif
+                    </div>
+                </x-table.heading>
+                <x-table.heading class="cursor-pointer" wire:click="sortBy('ubicacion')">
+                    <div class="flex items-center justify-between ">
+                        <span>Direccion</span>
+                        @if($sort === 'direccion')
+                            <x-sort-by type="alpha" direction="{{$direction}}"/>
+                        @endif
+                    </div>
+                </x-table.heading>
+                <x-table.heading>
+                    RRSS
+                </x-table.heading>
+                <x-table.heading>
+                    <span class="sr-only">Edit</span>
+                </x-table.heading>
             </x-slot>
             <x-slot name="body">
                 @foreach($empresas as $empresa)
                     <x-table.row :odd="$loop->odd">
-                        <td class="px-4 py-4 whitespace-nowrap">
+                        <x-table.cell>
                             <div class="flex flex-col justify-center">
                                 <div class="text-sm font-medium text-gray-900 tracking-wide">
                                     {{ $empresa->nombre }}
@@ -112,18 +74,18 @@
                                     RUC: {{ $empresa->ruc }}
                                 </div>
                             </div>
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
+                        </x-table.cell>
+                        <x-table.cell>
                             <div class="text-sm text-gray-700">
                                 {{ $empresa->telefono }}
                             </div>
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap">
+                        </x-table.cell>
+                        <x-table.cell>
                             <div class="text-sm text-gray-700">
                                 {{ $empresa->correo }}
                             </div>
-                        </td>
-                        <td class="hidden lg:block px-2 py-4 whitespace-nowrap">
+                        </x-table.cell>
+                        <x-table.cell class="hidden lg:block">
                             <div class="text-sm text-gray-700">
                                 <div class="text-sm font-medium text-gray-900 tracking-wide">
                                     {{ $empresa->ubicacion }}
@@ -132,21 +94,17 @@
                                     {{ $empresa->direccion }}
                                 </div>
                             </div>
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                        </x-table.cell>
+                        <x-table.cell>
                             {{ $empresa->rrss->count() }}
-                        </td>
-                        <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <button wire:click="abrirModal({{ $empresa }})"
-                                    class="py-2 px-3 flex items-center rounded bg-transparent text-sm text-gray-500 hover:bg-blue-100 hover:text-blue-800">
-                                <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-                                </svg>
+                        </x-table.cell>
+                        <x-table.cell>
+                            <x-button.invisible color="blue" wire:click="abrirModal({{ $empresa }})">
+                                <x-icons.edit class="h-4 w-4 mr-1"></x-icons.edit>
                                 Editar
-                            </button>
-                        </td>
-                        </x-table.row>
+                            </x-button.invisible>
+                        </x-table.cell>
+                    </x-table.row>
                 @endforeach
             </x-slot>
         </x-table>
@@ -157,7 +115,7 @@
             </div>
         @endif
     @else
-        <x-empty-search/>
+        <x-empty-search></x-empty-search>
     @endif
 
     {{--Modal--}}
@@ -185,9 +143,7 @@
                         <div class="col-span-2">
                             <input type="text" id="nombre" wire:model="empresa_seleccionada.nombre"
                                    class="input-form w-full col-span-2" autofocus>
-                            @error('empresa_seleccionada.nombre')
-                            <x-jet-input-error for="empresa_seleccionada.nombre">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.nombre"></x-jet-input-error>
                         </div>
 
                     </div>
@@ -204,9 +160,7 @@
                         <div class="col-span-2">
                             <input type="text" id="ruc" wire:model="empresa_seleccionada.ruc"
                                    class="input-form w-full col-span-2">
-                            @error('empresa_seleccionada.ruc')
-                            <x-jet-input-error for="empresa_seleccionada.ruc">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.ruc"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -222,9 +176,7 @@
                         <div class="col-span-2">
                             <input type="text" id="telefono" wire:model="empresa_seleccionada.telefono"
                                    class="input-form w-full col-span-2">
-                            @error('empresa_seleccionada.telefono')
-                            <x-jet-input-error for="empresa_seleccionada.telefono">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.telefono"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -240,9 +192,7 @@
                         <div class="col-span-2">
                             <input type="email" id="correo" wire:model="empresa_seleccionada.correo"
                                    class="input-form w-full col-span-2">
-                            @error('empresa_seleccionada.correo')
-                            <x-jet-input-error for="empresa_seleccionada.correo">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.correo"></x-jet-input-error>
                         </div>
 
                     </div>
@@ -260,9 +210,7 @@
                             <input type="text" id="direccion" wire:model="empresa_seleccionada.direccion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Av. Centenario N° 123">
-                            @error('empresa_seleccionada.direccion')
-                            <x-jet-input-error for="empresa_seleccionada.direccion">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.direccion"></x-jet-input-error>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 flex-row items-center">
@@ -280,9 +228,7 @@
                             <input type="text" id="ubicacion" wire:model="empresa_seleccionada.ubicacion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Huaraz - Ancash - Peru">
-                            @error('empresa_seleccionada.ubicacion')
-                            <x-jet-input-error for="empresa_seleccionada.ubicacion">{{ $message }}</x-jet-input-error>
-                            @enderror
+                            <x-jet-input-error for="empresa_seleccionada.ubicacion"></x-jet-input-error>
                         </div>
                     </div>
                 </div>

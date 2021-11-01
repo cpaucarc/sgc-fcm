@@ -8,8 +8,7 @@
                 </h1>
                 <p class="text-sm text-gray-400">
                     En esta sección usted podrá encontrar los documentos que los responsables de cada actividad envió y
-                    en
-                    los cuales usted figura como cliente.
+                    en los cuales usted figura como cliente.
                 </p>
             </div>
             <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
@@ -28,69 +27,51 @@
             @if($salidas->count())
                 <x-table>
                     <x-slot name="head">
-                        <tr>
-                            <th scope="col"
-                                class="pl-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Salida
-                            </th>
-                            <th scope="col"
-                                class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Responsable
-                            </th>
-                            <th scope="col"
-                                class="px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Cantidad
-                            </th>
-                            <th scope="col"
-                                class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Documento
-                            </th>
-                        </tr>
+                        <x-table.heading>Salida</x-table.heading>
+                        <x-table.heading>Responsable</x-table.heading>
+                        <x-table.heading>Cantidad</x-table.heading>
+                        <x-table.heading><span class="sr-only">Documentos</span></x-table.heading>
                     </x-slot>
                     <x-slot name="body">
                         @foreach ($salidas as $salida)
-                            @if($salida->documentosCicloActual($ciclo_seleccionado)->count() > 0)
-                                <x-table.row :odd="$loop->odd">
-                                    <td class="pl-4 py-3 text-sm whitespace-nowrap">
-                                        <h1 class="tracking-wide font-semibold">
-                                            {{ $salida->nombre }}
-                                        </h1>
-                                        <small class="text-gray-500 text-xs">
-                                            {{ $salida->actividad->nombre }}
-                                        </small>
-                                    </td>
-                                    <td class="px-1 py-3 whitespace-nowrap text-sm">
-                                        {{ $salida->actividad->responsable->responsable->entidad->nombre }}
-                                    </td>
-                                    <td class="px-1 py-3 whitespace-nowrap text-sm">
-                                        {{ $salida->documentosCicloActual($ciclo_seleccionado)->count() }}
-                                        <span class="text-gray-500">
-                                            documento(s)
-                                        </span>
-                                    </td>
-                                    <td class="px-2 py-3 whitespace-nowrap text-sm font-medium">
-
-
-                                        <button wire:click="abrirModal({{ $salida }})"
-                                                class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
-                                            Revisar
-                                        </button>
-                                    </td>
-                                </x-table.row>
-                            @endif
+                            <x-table.row :odd="$loop->odd">
+                                <x-table.cell>
+                                    <h1 class="tracking-wide font-semibold">
+                                        {{ $salida->nombre }}
+                                    </h1>
+                                    <small class="text-gray-500 text-xs">
+                                        {{ $salida->actividad->nombre }}
+                                    </small>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    {{ $salida->actividad->responsable->responsable->entidad->nombre }}
+                                </x-table.cell>
+                                <x-table.cell>
+                                    {{ $salida->cantidad }}
+                                    <span class="text-gray-500">
+                                        documento(s)
+                                    </span>
+                                </x-table.cell>
+                                <x-table.cell>
+                                    <x-button.invisible color="blue" wire:click="abrirModal({{ $salida->id }})">
+                                        <x-icons.open-modal class="w-5 h-5" stroke="1.5"></x-icons.open-modal>
+                                    </x-button.invisible>
+                                </x-table.cell>
+                            </x-table.row>
                         @endforeach
                     </x-slot>
                 </x-table>
             @else
-                <h1 class="text-lg text-red-600 text-center">
-                    Aun no hay ningún documento enviado por los responsables.
-                </h1>
+                <x-message-image image="{{ asset('images/ilustraciones/sin_documentos.svg') }}"
+                                 title="Aún no hay ningún documento enviado por los responsables."
+                                 description="">
+                </x-message-image>
             @endif
         </div>
     </div>
 
     @if($sld)
-        <x-jet-dialog-modal wire:model="abrir">
+        <x-jet-dialog-modal wire:model="abrir" maxWidth="3xl">
             <x-slot name="title">
                 <h1 class="font-bold">
                     {{ $sld->nombre }}
@@ -99,67 +80,51 @@
                     <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                 </button>
             </x-slot>
-            <x-slot name="content">
 
-                @if($sld->documentosCicloActual($ciclo_seleccionado)->count())
-                    <div class="flex justify-between items-center mb-2">
-                        <h2 class="ml-2 mt-3 text-gray-500 text-lg">
+            <x-slot name="content">
+                <div class="bg-gray-50 rounded p-4">
+                    <div class="mb-3 flex justify-between items-center">
+                        <h2 class="text-gray-700 font-semibold">
                             Documentos recibidos para esta actividad:
                         </h2>
-                        <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                            {{ $sld->documentosCicloActual($ciclo_seleccionado)->count() }}
+                        <span class="bg-blue-200 px-2 py-1 text-xs text-blue-900 rounded-full">
+                            {{ $sld->documentos->count() }} documento(s)
                         </span>
                     </div>
-
-                    <div class="ml-2 table w-full mb-6 text-gray-700">
-
-                        @foreach($sld->documentosCicloActual($ciclo_seleccionado) as $sldcmt)
-                            <div class="table-row-group mb-1 space-y-2">
-                                <div class="table-row">
-                                    <div class="table-cell align-middle">
-                                        <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
-                                           target="_blank"
-                                           class="hover:underline hover:text-blue-700 pr-2 py-1 flex items-center">
-                                            @if(strlen($sldcmt->documento->nombre) > 50)
-                                                {{ substr($sldcmt->documento->nombre, 0, 37) }}
-                                                ...{{ substr($sldcmt->documento->nombre, -13) }}
-                                            @else
-                                                {{ $sldcmt->documento->nombre }}
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="table-cell align-middle text-left">
-                                        {{ $sldcmt->fecha_operacion->diffForHumans() }}
-                                    </div>
-                                    <div class="table-cell text-right">
-
-                                        <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
-                                           target="_blank"
-                                           class="flex items-center justify-center bg-transparent py-2 px-3 rounded text-gray-600 hover:bg-blue-50 hover:text-blue-700">
-                                            <svg class="h-5 w-5 hover:text-blue-800 mr-1" fill="none"
-                                                 viewBox="0 0 24 24"
-                                                 stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                            </svg>
-                                            Ver
-                                        </a>
-
+                    @if($sld->documentos->count())
+                        <div class="ml-2 table w-full mb-6 text-gray-700">
+                            @foreach($sld->documentos as $sldcmt)
+                                <div class="table-row-group mb-1 space-y-2">
+                                    <div class="table-row">
+                                        <div class="table-cell align-middle">
+                                            <a href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}"
+                                               target="_blank"
+                                               class="hover:underline hover:text-blue-700 pr-2 py-1 flex items-center">
+                                                @if(strlen($sldcmt->documento->nombre) > 50)
+                                                    {{ substr($sldcmt->documento->nombre, 0, 37) }}
+                                                    ...{{ substr($sldcmt->documento->nombre, -13) }}
+                                                @else
+                                                    {{ $sldcmt->documento->nombre }}
+                                                @endif
+                                            </a>
+                                        </div>
+                                        <div class="table-cell align-middle text-left">
+                                            {{ $sldcmt->fecha_operacion->diffForHumans() }}
+                                        </div>
+                                        <div class="table-cell text-center">
+                                            <x-button.invisible-link color="blue" target="_blank"
+                                                                     href="{{ route('documentos', $sldcmt->documento->enlace_interno) }}">
+                                                <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
+                                            </x-button.invisible-link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </x-slot>
 
-            </x-slot>
-            <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$set('abrir', false)">
-                    Cerrar
-                </x-jet-secondary-button>
-            </x-slot>
         </x-jet-dialog-modal>
     @endif
-
 </x-card>
-

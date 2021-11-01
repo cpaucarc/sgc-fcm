@@ -14,10 +14,12 @@
                 <div class="hidden space-x-4 md:-my-px md:ml-10 md:flex">
 
                     {{-- @if (Auth::user()->oficina->entidad->responsable) --}}
-                    <x-jet-nav-link href="{{ route('actividad.actividades') }}"
-                                    :active="request()->routeIs('actividad.*')">
-                        {{ __('Actividades') }}
-                    </x-jet-nav-link>
+                    @if(!\Illuminate\Support\Facades\Auth::user()->esEstudiante())
+                        <x-jet-nav-link href="{{ route('actividad.actividades') }}"
+                                        :active="request()->routeIs('actividad.*')">
+                            {{ __('Actividades') }}
+                        </x-jet-nav-link>
+                    @endif
                     {{-- @endif --}}
                     <x-jet-nav-link href="{{ route('rrss.index') }}" :active="request()->routeIs('rrss.*')">
                         {{ __('Responsabilidad Social') }}
@@ -37,6 +39,34 @@
                     <x-jet-nav-link href="{{ route('ttpp.index') }}" :active="request()->routeIs('ttpp.*')">
                         {{ __('Título Profesional') }}
                     </x-jet-nav-link>
+
+                    <x-jet-dropdown align="false" width="64">
+                        <x-slot name="trigger">
+                                <span class="inline-flex rounded-md">
+                                    <button type="button"
+                                            class="inline-flex h-16 mt-0.5 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
+                                        {{ __("Otros") }}
+                                        <x-icons.dropdown :stroke="2" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
+                                    </button>
+                                </span>
+                        </x-slot>
+
+                        <x-slot name="content">
+
+                            <div class="p-4 space-y-2">
+
+                                <x-jet-dropdown-link href="{{ route('plan_estudios.index') }}" class="rounded">
+                                    <div class="group flex items-center text-gray-500 hover:text-gray-700">
+                                        <x-icons.academic class="flex-shrink-0 h-6 w-6 mr-2 group-hover:text-gray-600"
+                                                          stroke="1.25"></x-icons.academic>
+                                        {{ __('Plan de estudios') }}
+                                    </div>
+                                </x-jet-dropdown-link>
+
+                            </div>
+
+                        </x-slot>
+                    </x-jet-dropdown>
 
                     {{-- Todo: Debe ir al ultimo --}}
                     <x-jet-nav-link href="{{ route('indicadores.index') }}"

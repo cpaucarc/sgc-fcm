@@ -18,14 +18,16 @@
         <div class="col-span-2 lg:col-span-1 mt-2">
             <x-jet-label for="nombre">Nombre</x-jet-label>
             <input type="text" id="nombre" wire:model="nombre" class="input-form w-full placeholder-gray-300"
-                   placeholder="Ej. Juan Alvarado Cadillo">
-            @error('nombre') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
+                   placeholder="Ej. Juan Alvarado">
+
+            <x-jet-input-error for="nombre"></x-jet-input-error>
         </div>
         <div class="col-span-2 lg:col-span-1 mt-2">
             <x-jet-label for="correo">Correo Electrónico</x-jet-label>
             <input type="email" id="correo" wire:model="correo" class="input-form w-full placeholder-gray-300"
                    placeholder="Ej. juan@gmail.com">
-            @error('correo') <span class="text-red-600 text-xs">{{ $message }}</span> @enderror
+
+            <x-jet-input-error for="correo"></x-jet-input-error>
         </div>
     </div>
 
