@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Convalidacion\Solicitudes;
 
+use App\Models\Convalidacion;
 use App\Models\SolicitudConvalidacion;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Pendientes extends Component
@@ -12,6 +15,7 @@ class Pendientes extends Component
     public $abrirCompleto = false;
     public $requisitosCompleto = false;
     public $solicitudSeleccionado = null;
+    public $vacantes = null;
     public $solicitante = null;
 
     public function render()
@@ -64,10 +68,15 @@ class Pendientes extends Component
         //Cambiar estado a aprobado
         $this->solicitudSeleccionado->estado_id = $estado;
         $this->solicitudSeleccionado->save();
-        // Insertar estudiante al grado bachiller
-       /*  GradoEstudiante::create([
-            'estudiante_id' => $this->solicitudSeleccionado->estudiante_id,
-            'grado_academico_id' => 3
-        ]); */
+
+        if ($estado == 3) {
+            $this->vacante = (Convalidacion::query()
+                ->where('fecha_fin', '>=',  Carbon::now())
+                ->where('fecha_inicio', '<=',  Carbon::now())->first());
+            $this->vacante->vacantes = $this->vacante->vacantes - 1;
+            $this->vacante->save();
+        }
+
+        $this->emit('vacanteAprobado');
     }
 }

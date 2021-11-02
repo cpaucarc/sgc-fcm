@@ -64,7 +64,7 @@
                             {{ $soli->estudiante->persona->apellidos . ' '. $soli->estudiante->persona->nombres }}
                         </h2>
                         <h3 class="text-gray-400 group-hover:text-gray-500 text-sm">
-                            {{ $soli->documentos_count }} de 8 documentos enviados
+                            {{ $soli->documentos_count }} de 4 documentos enviados
                         </h3>
                     </div>
 

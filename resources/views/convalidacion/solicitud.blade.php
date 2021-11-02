@@ -4,6 +4,7 @@
             <h1 class="text-gray-800 font-bold text-xl">
                 Solicitud de convalidación
             </h1>
+            @livewire('convalidacion.vacantes-disponibles')
             @livewire('convalidacion.solicitud.estado-solicitud')
         </div>
     </x-slot>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Convalidacion\Solicitud;
 
+use App\Models\ConvalidacionEstudiante;
 use App\Models\Documento;
 use App\Models\DocumentoConvalidacion;
-use App\Models\DocumentoSolicitudBachiller;
+use Carbon\Carbon;
 use App\Models\Estudiante;
-use App\Models\SolicitudBachiller;
+use App\Models\Convalidacion;
 use App\Models\SolicitudConvalidacion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -22,6 +23,7 @@ class EnviarRequisito extends Component
     public $requisitos = null;
     public $requisitoSeleccionado = 0;
     public $solicitud = null;
+    public $convalidacionEstudiante = null;
 
     protected $rules = [
         'archivo' => 'required',
@@ -49,6 +51,13 @@ class EnviarRequisito extends Component
                 'estudiante_id' => (Estudiante::query()
                     ->where('persona_id', auth()->user()->persona_id)->first())->id,
                 'estado_id' => 1,
+            ]);
+            $this->convalidacionEstudiante = ConvalidacionEstudiante::create([
+                'estudiante_id' => (Estudiante::query()
+                    ->where('persona_id', auth()->user()->persona_id)->first())->id,
+                'convalidacion_id' => (Convalidacion::query()
+                    ->where('fecha_fin', '>=',  Carbon::now())
+                    ->where('fecha_inicio', '<=',  Carbon::now())->first())->id,
             ]);
             $this->emit('solicitudCreado');
         }

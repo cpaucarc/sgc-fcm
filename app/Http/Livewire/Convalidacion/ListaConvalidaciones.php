@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Convalidacion;
 
 use App\Models\Convalidacion;
 use App\Models\ConvalidacionEstudiante;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,7 +28,9 @@ class ListaConvalidaciones extends Component
     public function render()
     {
         $convalidaciones = $bachilleres = ConvalidacionEstudiante::query()
-            ->where('convalidacion_id', 3) //último ciclo
+            ->where('convalidacion_id', (Convalidacion::query()
+                ->where('fecha_fin', '>=',  Carbon::now())
+                ->where('fecha_inicio', '<=',  Carbon::now())->first())->id)
             ->with('estudiante')
             ->whereHas('estudiante', function ($query) {
                 return $query
