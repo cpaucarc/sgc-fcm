@@ -19,7 +19,9 @@ class CreateConvalidacionesTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->unsignedBigInteger('ciclo_id');
+            $table->unsignedBigInteger('escuela_id');
             $table->foreign('ciclo_id')->references('id')->on('ciclos');
+            $table->foreign('escuela_id')->references('id')->on('escuelas');
         });
     }
 

@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <x-button.invisible color="indigo"
-                                            wire:click="mostrarModal({{ $solc->id }}, '{{ $solc->estudiante->persona->apellidos . ' '. $solc->estudiante->persona->nombres }}', true)">
+                                            wire:click="mostrarModal({{ $solc->id }}, '{{ $solc->estudiante->persona->apellidos . ' '. $solc->estudiante->persona->nombres }}',{{$solc->estudiante->escuela_id}}, true)">
                             Revisar
                         </x-button.invisible>
                     </div>

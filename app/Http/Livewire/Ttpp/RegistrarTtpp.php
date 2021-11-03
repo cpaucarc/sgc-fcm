@@ -9,7 +9,6 @@ use App\Models\Ciclo;
 use App\Models\Declaracion;
 use App\Models\Docente;
 use App\Models\Escuela;
-use App\Models\Estudiante;
 use App\Models\Jurado;
 use App\Models\JuradoSustentacion;
 use App\Models\Sustentacion;
@@ -18,7 +17,6 @@ use App\Models\TipoTesis;
 use App\Models\Documento;
 use App\Models\DocumentoTesis;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -38,6 +36,8 @@ class RegistrarTtpp extends Component
     public $declaracion;
     public $tipoTesis;
     public $escuela;
+
+    public $ciclo_sel = null;
 
     public $docenteAsesor = null;
     public $docenteJurado = null;
@@ -90,7 +90,7 @@ class RegistrarTtpp extends Component
         })->first();
 
         if (!$this->ciclo_sel) {
-            $this->ciclo_sel = $this->ciclos->last();
+            $this->ciclo_sel = $ciclos->last();
         }
 
         $this->declaraciones = Declaracion::orderBy('nombre', 'asc')->get();
