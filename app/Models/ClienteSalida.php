@@ -20,7 +20,8 @@ class ClienteSalida extends Model
 
     public function salida()
     {
-        return $this->belongsTo(Salida::class);
+        return $this->belongsTo(Salida::class)
+            ->with('actividad');
     }
 
 }

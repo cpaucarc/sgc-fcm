@@ -2,7 +2,7 @@
     {{ $attributes->merge(['class' => "bg-white border border-gray-200 rounded-lg shadow-sm"]) }}>
 
     @if(isset($header))
-        <div class="px-6 py-3 border-b border-gray-200 rounded-t-md">
+        <div class="px-6 py-4 border-b border-gray-200 rounded-t-lg">
             {{ $header }}
         </div>
     @endif
@@ -12,7 +12,7 @@
     </div>
 
     @if(isset($footer))
-        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-md">
+        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-lg">
             {{ $footer }}
         </div>
     @endif

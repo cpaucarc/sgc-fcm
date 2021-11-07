@@ -21,7 +21,11 @@ class IndicadorController extends Controller
 
     public function index()
     {
-        $procesos = Proceso::withCount('indicadores')->get();
+        $procesos = Proceso::query()
+            ->withCount('indicadores')
+            ->having('indicadores_count', '>', 0)
+            ->orderBy('nombre')
+            ->get();
         return view('indicador.index', compact('procesos'));
     }
 

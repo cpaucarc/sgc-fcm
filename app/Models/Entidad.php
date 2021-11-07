@@ -22,4 +22,19 @@ class Entidad extends Model
     {
         return $this->belongsTo(Proveedor::class, 'id', 'entidad_id');
     }
+
+    public function salidas()
+    {
+        return $this->hasManyThrough(ClienteSalida::class, Cliente::class);
+    }
+
+    public function actividades()
+    {
+        return $this->hasManyThrough(ActividadResponsable::class, Responsable::class);
+    }
+
+    public function entradas()
+    {
+        return $this->hasManyThrough(EntradaProveedor::class, Proveedor::class);
+    }
 }

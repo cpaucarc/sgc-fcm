@@ -12,4 +12,9 @@ class Entrada extends Model
     public $timestamps = false;
     public $fillable = ['codigo', 'nombre', 'descripcion', 'proceso_id'];
 
+    public function proceso()
+    {
+        return $this->belongsTo(Proceso::class);
+    }
+
 }

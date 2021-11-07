@@ -1,11 +1,13 @@
 <x-app-layout>
 
-    <x-card class="bg-blue-700 mb-6 py-2">
-        <h1 class="text-blue-100 text-xl font-thin">
+    <div class="text-gray-800 mb-10">
+        <h3 class="text-xl font-thin">
             Indicadores del proceso de
-            <span class="text-white font-extrabold tracking-wide">{{ $proceso->nombre }}</span>
-        </h1>
-    </x-card>
+        </h3>
+        <h2 class="font-bold text-4xl">
+            {{ $proceso->nombre }}
+        </h2>
+    </div>
 
     <div class="grid grid-cols-3 gap-6">
         @foreach($lista as $item)

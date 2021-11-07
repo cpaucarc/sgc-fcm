@@ -89,8 +89,6 @@
                 El usuario <strong>{{ $nombreUsuario }}</strong> será eliminado de los registros.
                 <br>
                 Esta acción es irreversible, ¿Quiere continuar?
-                Usuario actual: {{ Auth::user()->id }}
-                Id Seleccionado: {{ $idUsuario }}
             </p>
         </x-slot>
         <x-slot name="footer">

@@ -57,6 +57,12 @@ Route::prefix('admin')->group(function () {
         ->name('admin.usuarios');
     Route::get('usuarios/{id}', [AdminController::class, 'modificar_usuario'])
         ->name('admin.usuario');
+    Route::get('entidades', [AdminController::class, 'entidades'])
+        ->name('admin.entidades');
+    Route::get('entidades/{id}', [AdminController::class, 'entidad'])
+        ->name('admin.entidad');
+    Route::get('otros', [AdminController::class, 'otros'])
+        ->name('admin.otros');
 });
 
 Route::prefix('investigacion')->group(function () {

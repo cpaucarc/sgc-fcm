@@ -13,6 +13,12 @@ class ActividadResponsable extends Model
     public $timestamps = false;
     public $fillable = ['responsable_id', 'actividad_id'];
 
+    public function actividad()
+    {
+        return $this->belongsTo(Actividad::class)
+            ->with('proceso');
+    }
+
     public function responsable()
     {
         return $this->belongsTo(Responsable::class)

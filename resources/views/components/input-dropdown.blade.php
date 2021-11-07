@@ -1,8 +1,10 @@
 @props(['disabled' => false])
-<div class="text-gray-600 bg-gray-50 rounded-lg px-4 py-1">
-    <label for="input-dropdown-component-id-3180">Mostrar: </label>
+<div class="text-gray-600 bg-gray-50 rounded-lg px-4 py-1 flex items-center">
+    <label for="input-dropdown-component-id-3180">Mostrar:</label>
     <select
-        id="input-dropdown-component-id-3180" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'input-form-none bg-transparent']) !!}>
+        id="input-dropdown-component-id-3180"
+        {{ $disabled ? 'disabled' : '' }}
+        {!! $attributes->merge(['class' => 'input-form-none bg-transparent w-24']) !!}>
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="25">25</option>

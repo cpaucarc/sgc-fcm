@@ -17,70 +17,75 @@
 
     </div>
 
-    {{--    Tabla historica--}}
-    <x-table>
-        <x-slot name="head">
-            <tr>
-                <x-table.heading class="text-center">Periodo</x-table.heading>
-                @if($indicador->titulo_interes)
-                    <x-table.heading class="text-center">{{ $indicador->titulo_interes }}</x-table.heading>
-                @endif
-                @if($indicador->titulo_total)
-                    <x-table.heading class="text-center">{{ $indicador->titulo_total }}</x-table.heading>
-                @endif
-                <x-table.heading class="text-center">{{ $indicador->titulo_resultado }}</x-table.heading>
-                <x-table.heading class="text-center">Minimo</x-table.heading>
-                <x-table.heading class="text-center">Satisfactorio</x-table.heading>
-                <x-table.heading class="text-center">Sobresaliente</x-table.heading>
-            </tr>
-        </x-slot>
-
-        <x-slot name="body">
-            @foreach($indicador->analisis as $i => $analisis)
-                <x-table.row :odd="$loop->odd">
-                    <x-table.cell class="text-center">
-                        <h4 class="text-sm text-gray-500">
-                            Desde {{ $analisis->fecha_medicion_inicio->format('d-M-Y') }}
-                        </h4>
-                        <h4>
-                            Hasta {{ $analisis->fecha_medicion_fin->format('d-M-Y') }}
-                        </h4>
-                    </x-table.cell>
-                    @if($analisis->interes)
-                        <x-table.cell class="text-center">{{ $analisis->interes }}</x-table.cell>
-                    @endif
-                    @if($analisis->total)
-                        <x-table.cell class="text-center">{{ $analisis->total }}</x-table.cell>
-                    @endif
-                    <x-table.cell class="text-center">
-                        {{ $analisis->resultado }}
-                        @if($analisis->interes){{ __('%') }}@endif
-                    </x-table.cell>
-                    <x-table.cell class="text-center">
-                        {{ round($analisis->minimo, 1) }}
-                        @if($analisis->interes){{ __('%') }}@endif
-                    </x-table.cell>
-                    <x-table.cell class="text-center">
-                        {{ round($analisis->satisfactorio, 1) }}
-                        @if($analisis->interes){{ __('%') }}@endif
-                    </x-table.cell>
-                    <x-table.cell class="text-center">
-                        {{ round($analisis->sobresaliente, 1) }}
-                        @if($analisis->interes){{ __('%') }}@endif
-                    </x-table.cell>
-
-                    {{--                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">--}}
-                    {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>--}}
-                    {{--                    </td>--}}
-                    </x-table.row>
-            @endforeach
-        </x-slot>
-    </x-table>
-
     @if($indicador->analisis->count())
+        {{--    Tabla historica--}}
+        <x-table>
+            <x-slot name="head">
+                <tr>
+                    <x-table.heading class="text-center">Periodo</x-table.heading>
+                    @if($indicador->titulo_interes)
+                        <x-table.heading class="text-center">{{ $indicador->titulo_interes }}</x-table.heading>
+                    @endif
+                    @if($indicador->titulo_total)
+                        <x-table.heading class="text-center">{{ $indicador->titulo_total }}</x-table.heading>
+                    @endif
+                    <x-table.heading class="text-center">{{ $indicador->titulo_resultado }}</x-table.heading>
+                    <x-table.heading class="text-center">Minimo</x-table.heading>
+                    <x-table.heading class="text-center">Satisfactorio</x-table.heading>
+                    <x-table.heading class="text-center">Sobresaliente</x-table.heading>
+                </tr>
+            </x-slot>
+
+            <x-slot name="body">
+                @foreach($indicador->analisis as $i => $analisis)
+                    <x-table.row :odd="$loop->odd">
+                        <x-table.cell class="text-center">
+                            <h4 class="text-sm text-gray-500">
+                                Desde {{ $analisis->fecha_medicion_inicio->format('d-M-Y') }}
+                            </h4>
+                            <h4>
+                                Hasta {{ $analisis->fecha_medicion_fin->format('d-M-Y') }}
+                            </h4>
+                        </x-table.cell>
+                        @if($analisis->interes)
+                            <x-table.cell class="text-center">{{ $analisis->interes }}</x-table.cell>
+                        @endif
+                        @if($analisis->total)
+                            <x-table.cell class="text-center">{{ $analisis->total }}</x-table.cell>
+                        @endif
+                        <x-table.cell class="text-center">
+                            {{ $analisis->resultado }}
+                            @if($analisis->interes){{ __('%') }}@endif
+                        </x-table.cell>
+                        <x-table.cell class="text-center">
+                            {{ round($analisis->minimo, 1) }}
+                            @if($analisis->interes){{ __('%') }}@endif
+                        </x-table.cell>
+                        <x-table.cell class="text-center">
+                            {{ round($analisis->satisfactorio, 1) }}
+                            @if($analisis->interes){{ __('%') }}@endif
+                        </x-table.cell>
+                        <x-table.cell class="text-center">
+                            {{ round($analisis->sobresaliente, 1) }}
+                            @if($analisis->interes){{ __('%') }}@endif
+                        </x-table.cell>
+
+                        {{--                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">--}}
+                        {{--                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>--}}
+                        {{--                    </td>--}}
+                    </x-table.row>
+                @endforeach
+            </x-slot>
+        </x-table>
+
         <div class="py-4">
             @livewire('indicador.grafico', [ 'indicador' => $indicador->id ])
         </div>
+    @else
+        <x-message-image
+            image="{{ asset('images/ilustraciones/sin_indicadores_medidos.svg') }}"
+            title="Este indicador aún no tiene ninguna medición"
+            description="Comienze a crear mediciones según la frecuencia de medición establecido."></x-message-image>
     @endif
 
 </div>

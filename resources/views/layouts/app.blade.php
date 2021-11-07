@@ -30,9 +30,9 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100">
-<x-jet-banner/>
+<x-jet-banner></x-jet-banner>
 
-<div class="min-h-screen">
+<div class="">
     @livewire('navigation-menu')
     <!-- Page Heading -->
     @if (isset($header))
@@ -41,16 +41,16 @@
                 {{ $header }}
             </div>
         </header>
-@endif
+    @endif
 
 <!-- Page Content -->
-    <main class="py-8 max-w-7xl mx-auto px-2 sm:px-4 min-h-screen">
+    <main class="my-8 max-w-7xl mx-auto px-2 sm:px-4">
         {{ $slot }}
     </main>
 
-    <footer class="border-t border-gray-300 text-center py-4 text-gray-600 text-sm bg-transparent">
-        Copyright © Sistema Gestión de Calidad - Facultad de Ciencias Médicas
-    </footer>
+    {{--    <footer class="border-t border-gray-300 text-center py-4 text-gray-600 text-sm bg-transparent">--}}
+    {{--        Copyright © Sistema Gestión de Calidad - Facultad de Ciencias Médicas--}}
+    {{--    </footer>--}}
 </div>
 
 @stack('modals')

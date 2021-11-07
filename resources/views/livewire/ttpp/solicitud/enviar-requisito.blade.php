@@ -29,12 +29,9 @@
                             <option value="{{ $rqto->id }}">{{ $rqto->nombre }}</option>
                         @endforeach
                     </select>
-                    <br>
-                    @error('requisitoSeleccionado')
-                    <div class="text-red-500">
-                        {{ $message }}
-                    </div>
-                    @enderror
+
+                    <x-jet-input-error for="requisitoSeleccionado"></x-jet-input-error>
+
                 </div>
 
                 <div class="px-2 py-4 rounded-lg">
@@ -45,11 +42,7 @@
 
                     <x-loading-file wire:loading wire:target="archivo"></x-loading-file>
 
-                    @error('archivo')
-                    <div class="text-red-500">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                    <x-jet-input-error for="archivo"></x-jet-input-error>
                 </div>
 
 

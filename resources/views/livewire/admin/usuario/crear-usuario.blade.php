@@ -29,7 +29,6 @@
                                placeholder="########">
 
                         <x-jet-input-error for="dni"></x-jet-input-error>
-                        @enderror
                     </div>
                     <div class="flex-1">
                         <x-jet-label for="apellidos">Apellidos</x-jet-label>

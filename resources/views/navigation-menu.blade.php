@@ -34,22 +34,22 @@
                     <x-jet-nav-link href="{{ route('bachiller.index') }}" :active="request()->routeIs('bachiller.*')">
                         {{ __('Bachiller') }}
                     </x-jet-nav-link>
-                    
+
                     <x-jet-nav-link href="{{ route('ttpp.index') }}" :active="request()->routeIs('ttpp.*')">
                         {{ __('Título Profesional') }}
                     </x-jet-nav-link>
-                    
+
                     <x-jet-nav-link href="{{ route('convalidacion.index') }}"
-                        :active="request()->routeIs('convalidacion.*')">
-                        {{ __('convalidación') }}
+                                    :active="request()->routeIs('convalidacion.*')">
+                        {{ __('Convalidación') }}
                     </x-jet-nav-link>
 
-                    <x-jet-dropdown align="false" width="64">
+                    <x-jet-dropdown align="false" width="32">
                         <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
                                             class="inline-flex h-16 mt-0.5 items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
-                                        {{ __("Otros") }}
+                                        {{ __("Admin") }}
                                         <x-icons.dropdown :stroke="2" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
                                     </button>
                                 </span>
@@ -57,13 +57,21 @@
 
                         <x-slot name="content">
 
-                            <div class="p-4 space-y-2">
+                            <div class="p-2 space-y-2">
 
-                                <x-jet-dropdown-link href="{{ route('plan_estudios.index') }}" class="rounded">
+                                <x-jet-dropdown-link href="{{ route('admin.usuarios') }}" class="rounded">
                                     <div class="group flex items-center text-gray-500 hover:text-gray-700">
-                                        <x-icons.academic class="flex-shrink-0 h-6 w-6 mr-2 group-hover:text-gray-600"
-                                                          stroke="1.25"></x-icons.academic>
-                                        {{ __('Plan de estudios') }}
+                                        {{ __('Usuarios') }}
+                                    </div>
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('admin.entidades') }}" class="rounded">
+                                    <div class="group flex items-center text-gray-500 hover:text-gray-700">
+                                        {{ __('Entidades') }}
+                                    </div>
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('admin.otros') }}" class="rounded">
+                                    <div class="group flex items-center text-gray-500 hover:text-gray-700">
+                                        {{ __('Otros') }}
                                     </div>
                                 </x-jet-dropdown-link>
 
@@ -74,7 +82,7 @@
 
                     {{-- Todo: Debe ir al ultimo --}}
                     <x-jet-nav-link href="{{ route('indicadores.index') }}"
-                        :active="request()->routeIs('indicadores.*')">
+                                    :active="request()->routeIs('indicadores.*')">
                         {{ __('Indicadores') }}
                     </x-jet-nav-link>
                 </div>
@@ -143,15 +151,15 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button
-                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
+                                    class="flex text-sm rounded focus:outline-none focus:border-gray-300 transition">
+                                    <img class="h-8 w-8 rounded object-cover"
                                          src="{{ Auth::user()->profile_photo_url }}"
                                          alt="{{ Auth::user()->name }}"/>
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition">
                                         {{ strtok(Auth::user()->persona->apellidos, ' ') }}
                                         {{ strtok(Auth::user()->persona->nombres, ' ') }}
                                         <x-icons.dropdown :stroke="2" class="ml-2 -mr-0.5 h-4 w-4"></x-icons.dropdown>
@@ -164,7 +172,7 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ Auth::user()->email }}
+                                {{ strtok(Auth::user()->persona->apellidos, ' ') . ' ' . strtok(Auth::user()->persona->nombres, ' ') }}
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
@@ -184,7 +192,7 @@
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     {{ __('Cerrar Sesión') }}
                                 </x-jet-dropdown-link>
                             </form>
@@ -223,13 +231,14 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="flex-shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                            alt="{{ Auth::user()->persona->nombres }}" />
-                    </div>
-                @endif
+            <div class="flex items-center px-4 text-gray-400">
+                {{--                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())--}}
+                {{--                    <div class="flex-shrink-0 mr-3">--}}
+                {{--                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"--}}
+                {{--                             alt="{{ Auth::user()->persona->nombres }}"/>--}}
+                {{--                    </div>--}}
+                {{--                @endif--}}
+                {{ strtok(Auth::user()->persona->apellidos, ' ') . ' ' . strtok(Auth::user()->persona->nombres, ' ') }}
             </div>
 
             <div class="mt-3 space-y-1">
@@ -244,7 +253,7 @@
                                                :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
-                @endif
+            @endif
 
             <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

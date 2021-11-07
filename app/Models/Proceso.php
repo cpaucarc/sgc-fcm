@@ -12,6 +12,11 @@ class Proceso extends Model
     public $timestamps = false;
     public $fillable = ['nombre', 'facultad_id'];
 
+    public function actividades()
+    {
+        return $this->hasMany(Actividad::class);
+    }
+
     public function indicadores()
     {
         return $this->hasMany(Indicador::class);

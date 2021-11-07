@@ -21,7 +21,8 @@ class EntradaProveedor extends Model
 
     public function entrada()
     {
-        return $this->belongsTo(Entrada::class);
+        return $this->belongsTo(Entrada::class)
+            ->with('proceso');
     }
 
     public function actividad()
