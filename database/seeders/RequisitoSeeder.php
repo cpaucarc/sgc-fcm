@@ -76,19 +76,19 @@ class RequisitoSeeder extends Seeder
             ],
             //  Proceso de Convalidaciones (4)
             [
-                'nombre' => 'Comprobante de Pago',
+                'nombre' => 'Ficha de matrícula',
                 'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
             ],
             [
-                'nombre' => 'Declaración Jurada',
+                'nombre' => 'Acreditación de aprobación de cursos',
                 'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
             ],
             [
-                'nombre' => 'Certificado de Estudios',
+                'nombre' => 'Comprobante de pago (S/. 200)',
                 'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
             ],
             [
-                'nombre' => 'Sílabos',
+                'nombre' => 'Constancia de Ingreso (Ptj. Min 170)',
                 'proceso_id' => 16 // 16: Convalidaciones (Tabla: Procesos)
             ],
         ];

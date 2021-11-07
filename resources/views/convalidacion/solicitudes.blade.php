@@ -5,6 +5,7 @@
             <h1 class="font-bold text-xl text-gray-800">
                 Solicitudes recibidos
             </h1>
+            @livewire('convalidacion.vacantes-disponibles')
         </div>
     </x-slot>
     @livewire('convalidacion.solicitudes.pendientes')
