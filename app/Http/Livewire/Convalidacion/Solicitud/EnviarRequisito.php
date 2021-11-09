@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire\Convalidacion\Solicitud;
 
+use App\Models\ConvalidacionEstudiante;
 use App\Models\Documento;
 use App\Models\DocumentoConvalidacion;
-use App\Models\DocumentoSolicitudBachiller;
+use Carbon\Carbon;
 use App\Models\Estudiante;
-use App\Models\SolicitudBachiller;
+use App\Models\Convalidacion;
 use App\Models\SolicitudConvalidacion;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -22,6 +24,9 @@ class EnviarRequisito extends Component
     public $requisitos = null;
     public $requisitoSeleccionado = 0;
     public $solicitud = null;
+    public $convalidacionEstudiante = null;
+    public $escuela_id;
+
 
     protected $rules = [
         'archivo' => 'required',
@@ -42,17 +47,27 @@ class EnviarRequisito extends Component
     public function guardarDocumento()
     {
         $this->validate();
+        $this->escuela_id = (Auth::user()->roles)[0]->oficina->escuela_id;
 
         //Si no hay solicitud, se crea (estado 1:en evaluacion)
-        if (is_null($this->solicitud)) {
-            $this->solicitud = SolicitudConvalidacion::create([
-                'estudiante_id' => (Estudiante::query()
-                    ->where('persona_id', auth()->user()->persona_id)->first())->id,
-                'estado_id' => 1,
-            ]);
-            $this->emit('solicitudCreado');
+        if ($this->escuela_id != null) {
+            if (is_null($this->solicitud)) {
+                $this->solicitud = SolicitudConvalidacion::create([
+                    'estudiante_id' => (Estudiante::query()
+                        ->where('persona_id', auth()->user()->persona_id)->first())->id,
+                    'estado_id' => 1,
+                ]);
+                $this->convalidacionEstudiante = ConvalidacionEstudiante::create([
+                    'estudiante_id' => (Estudiante::query()
+                        ->where('persona_id', auth()->user()->persona_id)->first())->id,
+                    'convalidacion_id' => (Convalidacion::query()
+                        ->where('fecha_fin', '>=',  Carbon::now())
+                        ->where('fecha_inicio', '<=',  Carbon::now())
+                        ->where('escuela_id', $this->escuela_id)->first())->id,
+                ]);
+                $this->emit('solicitudCreado');
+            }
         }
-
         //Guardar en Documentos
         //sgc-fcm\storage\app\public\solicitud\convalidacion\documento.pdf
         $rutaCarpeta = '/public/solicitud/convalidacion';

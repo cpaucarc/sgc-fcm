@@ -129,6 +129,10 @@ Route::prefix('convalidacion')->group(function () {
         ->name('convalidacion.solicitudes');
     Route::get('solicitud', [ConvalidacionController::class, 'solicitud'])
         ->name('convalidacion.solicitud');
+    Route::get('vacantes', [ConvalidacionController::class, 'vacantes'])
+        ->name('convalidacion.vacantes');
+    Route::get('crear', [ConvalidacionController::class, 'registro'])
+        ->name('convalidacion.registro');
 });
 
 Route::prefix('plan_estudios')->group(function () {

@@ -2,7 +2,11 @@
 
 namespace App\Http\Livewire\Convalidacion\Solicitudes;
 
+use App\Models\Convalidacion;
 use App\Models\SolicitudConvalidacion;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Pendientes extends Component
@@ -12,7 +16,9 @@ class Pendientes extends Component
     public $abrirCompleto = false;
     public $requisitosCompleto = false;
     public $solicitudSeleccionado = null;
+    public $vacantes = null;
     public $solicitante = null;
+    public $escuela_id;
 
     public function render()
     {
@@ -36,9 +42,10 @@ class Pendientes extends Component
         });
     }
 
-    public function mostrarModal($id, $solicitante, $completo)
+    public function mostrarModal($id, $solicitante, $escuela_id, $completo)
     {
         $this->solicitante = $solicitante;
+        $this->escuela_id = $escuela_id;
         $this->requisitosCompleto = $completo;
         $this->solicitudSeleccionado = SolicitudConvalidacion::query()
             ->with('documentos')
@@ -64,10 +71,16 @@ class Pendientes extends Component
         //Cambiar estado a aprobado
         $this->solicitudSeleccionado->estado_id = $estado;
         $this->solicitudSeleccionado->save();
-        // Insertar estudiante al grado bachiller
-       /*  GradoEstudiante::create([
-            'estudiante_id' => $this->solicitudSeleccionado->estudiante_id,
-            'grado_academico_id' => 3
-        ]); */
+
+        if ($estado == 3) {
+            $this->vacante = (Convalidacion::query()
+                ->where('fecha_fin', '>=',  Carbon::now())
+                ->where('fecha_inicio', '<=',  Carbon::now())
+                ->where('escuela_id', $this->escuela_id)->first());
+            $this->vacante->vacantes = $this->vacante->vacantes - 1;
+            $this->vacante->save();
+        }
+
+        $this->emit('vacanteAprobado');
     }
 }

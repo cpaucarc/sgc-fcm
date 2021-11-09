@@ -12,7 +12,7 @@ class Convalidacion extends Model
 {
     use HasFactory;
     protected $table = 'convalidaciones';
-    public $fillable = ['vacantes', 'fecha_inicio', 'fecha_fin', 'estudiante_externo_id', 'estudiante_id', 'ciclo_id'];
+    public $fillable = ['vacantes', 'fecha_inicio', 'fecha_fin', 'estudiante_externo_id', 'estudiante_id', 'ciclo_id', 'escuela_id'];
     public $timestamps = false;
 
 
@@ -31,5 +31,9 @@ class Convalidacion extends Model
     public function ciclo()
     {
         return $this->belongsTo(Ciclo::class);
+    }
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
     }
 }

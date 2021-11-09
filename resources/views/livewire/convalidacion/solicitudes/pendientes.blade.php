@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <x-button.invisible color="indigo"
-                                            wire:click="mostrarModal({{ $solc->id }}, '{{ $solc->estudiante->persona->apellidos . ' '. $solc->estudiante->persona->nombres }}', true)">
+                                            wire:click="mostrarModal({{ $solc->id }}, '{{ $solc->estudiante->persona->apellidos . ' '. $solc->estudiante->persona->nombres }}',{{$solc->estudiante->escuela_id}}, true)">
                             Revisar
                         </x-button.invisible>
                     </div>
@@ -64,7 +64,7 @@
                             {{ $soli->estudiante->persona->apellidos . ' '. $soli->estudiante->persona->nombres }}
                         </h2>
                         <h3 class="text-gray-400 group-hover:text-gray-500 text-sm">
-                            {{ $soli->documentos_count }} de 8 documentos enviados
+                            {{ $soli->documentos_count }} de 4 documentos enviados
                         </h3>
                     </div>
 

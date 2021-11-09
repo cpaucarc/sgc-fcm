@@ -26,4 +26,14 @@ class ConvalidacionController extends Controller
         //Lo verá solo el alumno
         return view('convalidacion.solicitud');
     }
+    public function vacantes()
+    {
+        //Lo verá solo el alumno
+        return view('convalidacion.vacantes');
+    }
+    public function registro()
+    {
+        //Lo verá solo el alumno
+        return view('convalidacion.registro');
+    }
 }
