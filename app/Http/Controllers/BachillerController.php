@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\GradoEstudiante;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\GradoAcademico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BachillerController extends Controller
@@ -17,11 +19,14 @@ class BachillerController extends Controller
 
     public function index()
     {
-//        Si es administrador o encargado
+        if (Auth::user()->esEstudiante()) {
+            $est = Auth::user()->persona->estudiante->id;
+//            if ($estudiante) {
+//                return view('bachiller.estudiante', compact('estudiante'));
+//            }
+            return redirect()->route('bachiller.estudiante', ['sha' => sha1($est)]);
+        }
         return view('bachiller.index');
-
-//        Si es alumno
-//        return view('bachiller.solicitud');
     }
 
     public function constancia($sha)
@@ -73,7 +78,14 @@ class BachillerController extends Controller
             ->with('grados', 'persona', 'solicitud')
             ->first();
 
-        return view('bachiller.estudiante', compact('estudiante'));
+        $grados = GradoEstudiante::toBase()
+            ->selectRaw("COUNT(CASE WHEN grado_academico_id = 2 THEN 1 END ) as egresado")
+            ->selectRaw("COUNT(CASE WHEN grado_academico_id = 3 THEN 1 END ) as bachiller")
+            ->selectRaw("COUNT(CASE WHEN grado_academico_id = 4 THEN 1 END ) as titulado")
+            ->where('estudiante_id', $estudiante->id)
+            ->first();
+
+        return view('bachiller.estudiante', compact('estudiante', 'grados'));
     }
 
     public function solicitudes()

@@ -60,10 +60,15 @@
     </x-jet-dialog-modal>
 
     @push('js')
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            window.addEventListener('guardado', event => {
-                alert('Mensaje del sistema: ' + event.detail.message);
-            })
+            Livewire.on('guardado', message => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '',
+                    text: message,
+                });
+            });
         </script>
     @endpush
 

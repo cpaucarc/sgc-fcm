@@ -11,14 +11,24 @@ use Livewire\Component;
 
 class DocumentosRecibidos extends Component
 {
-    public $ciclo_seleccionado = 1;
+    public $ciclo_seleccionado = 1, $entidad_id = null;
     public $ciclos;
     public $sld = null; //Salida seleccionda para mostrar en modal
     public $abrir = false;
 
-    public function mount()
+    public $listeners = [
+        'cicloCambiado' => 'cicloCambiado'
+    ];
+
+    public function mount($ciclo_id, $entidad_id)
     {
-        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
+        $this->ciclo_seleccionado = $ciclo_id;
+        $this->entidad_id = $entidad_id;
+    }
+
+    public function cicloCambiado($ciclo_id)
+    {
+        $this->ciclo_seleccionado = $ciclo_id;
     }
 
     public function abrirModal($sld_id)
@@ -29,15 +39,6 @@ class DocumentosRecibidos extends Component
             }])
             ->where('id', $sld_id)
             ->first();
-        /*
-        $this->ent_prv_seleccionado = EntradaProveedor::query()
-            ->with('entrada', 'actividad')
-            ->with(['documentos' => function ($query) {
-                $query->where('ciclo_id', $this->ciclo_seleccionado);
-            }])
-            ->where('id', $ent_prv_id)
-            ->first();
-         * */
         $this->abrir = true;
     }
 
@@ -54,10 +55,9 @@ class DocumentosRecibidos extends Component
                 $query->select('salida_id')
                     ->from('cliente_salidas')
                     ->whereIn('cliente_id', function ($query) {
-                        $entID = Auth::user()->roles->pluck('entidad_id');
                         $query->select('id')
                             ->from('clientes')
-                            ->whereIn('entidad_id', $entID);
+                            ->whereIn('entidad_id', $this->entidad_id);
                     });
             })
             ->whereIn('id', function ($query) {

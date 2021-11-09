@@ -10,7 +10,7 @@
                     5
                 </div>
                 <x-button.ghost-link href="{{ route('bachiller.solicitudes') }}">
-                    <x-icons.people class="h-5 w-5 mr-1"></x-icons.people>
+                    <x-icons.people class="h-5 w-5 mr-1" stroke="1.5"></x-icons.people>
                     Revisar solicitudes
                 </x-button.ghost-link>
             </div>

@@ -21,4 +21,9 @@ class Oficina extends Model
     {
         return $this->belongsTo(Escuela::class);
     }
+
+    public function nivel()
+    {
+        return $this->hasOne(NivelOficina::class, 'id', 'nivel_oficina_id');
+    }
 }

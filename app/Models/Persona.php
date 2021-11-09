@@ -11,4 +11,12 @@ class Persona extends Model
 
     public $timestamps = false;
     public $fillable = ['dni', 'apellidos', 'nombres'];
+
+    public function estudiante()
+    {
+        return $this->belongsTo(Estudiante::class, 'id', 'persona_id');
+//        return $this->belongsTo(Estudiante::class, 'persona_id', 'id');
+//        return $this->hasOne(Estudiante::class, 'id', 'persona_id');
+//        return $this->hasOne(Estudiante::class);
+    }
 }

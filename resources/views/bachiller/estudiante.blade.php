@@ -48,7 +48,7 @@
         </x-card>
 
         <div class="col-span-6">
-
+            {{ $grados->bachiller }}
         </div>
 
         <div class="col-span-3 space-y-6">
@@ -95,42 +95,71 @@
                             </p>
                         </div>
 
-                        <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
-                           target="_blank" class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
-                            <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
-                            Ver
-                        </a>
+                        @if($grados->egresado)
+                            <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
+                               target="_blank" class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
+                                Ver
+                            </a>
+                        @else
+                            <a href="{{ route('bachiller.solicitud') }}"
+                               class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                Solicitar
+                            </a>
+                        @endif
                     </div>
+
                     {{-- Constancia de bachiller --}}
-                    <div class="group flex justify-between items-center p-2 my-2">
-                        <div class="flex items-center">
-                            <div class="h-2 w-2 rounded-full mr-2 bg-gray-400 group-hover:bg-orange-500"></div>
-                            <p class="">
-                                Constancia de Bachiller
-                            </p>
-                        </div>
+                    @if($grados->egresado)
+                        <div class="group flex justify-between items-center p-2 my-2">
+                            <div class="flex items-center">
+                                <div class="h-2 w-2 rounded-full mr-2 bg-gray-400 group-hover:bg-orange-500"></div>
+                                <p class="">
+                                    Constancia de Bachiller
+                                </p>
+                            </div>
 
-                        <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
-                           target="_blank" class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
-                            <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
-                            Ver
-                        </a>
-                    </div>
+                            @if($grados->bachiller)
+                                <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
+                                   target="_blank"
+                                   class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                    <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
+                                    Ver
+                                </a>
+                            @else
+                                <a href="#"
+                                   class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                    Solicitar
+                                </a>
+                            @endif
+                        </div>
+                    @endif
+
                     {{-- Constancia de titulado --}}
-                    <div class="group flex justify-between items-center p-2 my-2">
-                        <div class="flex items-center">
-                            <div class="h-2 w-2 rounded-full mr-2 bg-gray-400 group-hover:bg-orange-500"></div>
-                            <p class="">
-                                Constancia de Título
-                            </p>
-                        </div>
+                    @if($grados->bachiller)
+                        <div class="group flex justify-between items-center p-2 my-2">
+                            <div class="flex items-center">
+                                <div class="h-2 w-2 rounded-full mr-2 bg-gray-400 group-hover:bg-orange-500"></div>
+                                <p class="">
+                                    Constancia de Título
+                                </p>
+                            </div>
 
-                        <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
-                           target="_blank" class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
-                            <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
-                            Ver
-                        </a>
-                    </div>
+                            @if($grados->titulado)
+                                <a href="{{ route('bachiller.constancia', [sha1($estudiante->id)]) }}"
+                                   target="_blank"
+                                   class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                    <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
+                                    Ver
+                                </a>
+                            @else
+                                <a href="#"
+                                   class="inline-flex items-center text-gray-400 group-hover:text-gray-900">
+                                    Solicitar
+                                </a>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </x-card>
         </div>

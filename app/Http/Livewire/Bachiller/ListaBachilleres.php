@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Bachiller;
 
-use App\Models\GradoAcademico;
+use App\Models\Escuela;
 use App\Models\GradoEstudiante;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,8 +13,19 @@ class ListaBachilleres extends Component
 
     public $cantidad = 10;
     public $query = "";
+    public $escuelas = null, $escuela_seleccionada = 1;
+
+    public function mount()
+    {
+        $this->escuelas = Escuela::query()->orderBy('nombre')->get();
+    }
 
     public function updatingQuery()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingEscuelaSeleccionada()
     {
         $this->resetPage();
     }
@@ -27,8 +38,8 @@ class ListaBachilleres extends Component
     public function render()
     {
         $bachilleres = GradoEstudiante::query()
-            ->where('grado_academico_id', 3) //3:bachiller
             ->with('estudiante')
+            ->where('grado_academico_id', 3) //3:bachiller
             ->whereHas('estudiante', function ($query) {
                 return $query
                     ->whereHas('persona', function ($query2) {
@@ -36,10 +47,7 @@ class ListaBachilleres extends Component
                             ->where('nombres', 'like', '%' . $this->query . '%')
                             ->orWhere('apellidos', 'like', '%' . $this->query . '%');
                     })
-                    ->orWhereHas('escuela', function ($query3) {
-                        return $query3
-                            ->where('nombre', 'like', '%' . $this->query . '%');
-                    });
+                    ->where('escuela_id', $this->escuela_seleccionada);
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->cantidad);

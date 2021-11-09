@@ -61,7 +61,8 @@ class User extends Authenticatable
 
     public function persona()
     {
-        return $this->hasOne(Persona::class, 'id', 'persona_id');
+        return $this->hasOne(Persona::class, 'id', 'persona_id')
+            ->with('estudiante');
     }
 
     public function roles()

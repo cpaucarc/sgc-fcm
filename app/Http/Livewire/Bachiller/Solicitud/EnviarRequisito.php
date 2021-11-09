@@ -74,11 +74,17 @@ class EnviarRequisito extends Component
             'documento_id' => $documento->id,
         ]);
 
+        if ($this->solicitud->estado_id === 2) { // Si la solicitud tiene estado 2:Denegado
+            $this->solicitud->estado_id = 1; // asignar 1:En Evaluacion
+            $this->solicitud->save();
+            $this->emit('actualizarEstado');
+        }
+
         $this->reset(['archivo', 'requisitos', 'requisitoSeleccionado']);
         $this->abrir = false;
 
         $this->emit('requisitoGuardado');
-        $this->dispatchBrowserEvent('guardado', ['message' => 'El documento fue enviado']);
+        $this->emit('guardado', 'El documento fue enviado');
 
     }
 

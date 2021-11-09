@@ -14,11 +14,21 @@ class ListarUsuarios extends Component
     use WithPagination;
 
     public $cantidad = 10, $buscar;
-    public $entidades, $entidades_seleccionados = [];
+    public $entidades, $entidades_seleccionados = [], $niveles_seleccionados = [];
     public $idUsuario = 0, $nombreUsuario, $abrirEliminar = false; //para Eliminar
     public $listeners = [
         'renderizarTabla' => 'render'
     ];
+
+    public function mount()
+    {
+        $this->entidades = Entidad::query()
+            ->whereIn('id', function ($query) {
+                $query->select('entidad_id')
+                    ->from('roles');
+            })
+            ->get();
+    }
 
     public function updatingBuscar()
     {
@@ -56,7 +66,7 @@ class ListarUsuarios extends Component
                 $this->abrirEliminar = false;
                 $this->idUsuario = 0;
             } else {
-                //si es usuario actual, ir a login
+                //si era el usuario actual, ir a login
                 return redirect()->route('login');
             }
         }
@@ -64,15 +74,6 @@ class ListarUsuarios extends Component
 
     public function render()
     {
-        $this->entidades = Entidad::query()
-            ->whereIn('id', function ($query) {
-                $query->select('entidad_id')
-                    ->from('roles');
-            })
-            ->get();
-
-        //select id, nombre from entidades where id in (select entidad_id from roles);
-
         $query = User::query()
             ->with('persona', 'roles')
             ->whereHas('persona', function ($query1) {
@@ -85,6 +86,15 @@ class ListarUsuarios extends Component
             $query->whereHas('roles', function ($q2) {
                 return $q2->whereIn('entidad_id', $this->entidades_seleccionados);
             });
+        }
+
+        if (count($this->niveles_seleccionados) > 0) {
+            $query->whereHas('roles', function ($q4) {
+                return $q4->whereHas('oficina', function ($q3) {
+                    return $q3->whereIn('nivel_oficina_id', $this->niveles_seleccionados);
+                });
+            });
+
         }
 
         $usuarios = $query->orderBy('created_at', 'desc')

@@ -32,22 +32,76 @@
         </x-side-item>
     </div>
 
-    <div class="col-span-3">
+    <div class="col-span-3 space-y-4">
+
+        <div class="border rounded-lg flex justify-between">
+
+            <div class="bg-white rounded-l-lg py-3 px-4">
+                <label
+                    class="ml-2 flex flex-col whitespace-nowrap text-gray-700 font-bold w-28 flex-shrink-0">
+                    Ciclo
+                    <select wire:model="ciclo_seleccionado"
+                            class="input-form-none text-lg font-bold text-purple-700 w-full cursor-pointer">
+                        @if(!is_null($ciclos))
+                            @foreach($ciclos as $ciclo)
+                                <option class="text-gray-700 text-base"
+                                        value="{{ $ciclo->id }}">{{ $ciclo->nombre }}</option>
+                            @endforeach
+                        @else
+                            <option class="text-gray-700 text-base" value="0">No hay ningún ciclo registrado</option>
+                        @endif
+                    </select>
+                </label>
+            </div>
+
+            <div class="block w-full px-6 py-2 bg-white rounded-r-lg">
+                <x-simple-progress
+                    percent="{{$conteo->completado === 0 ? 0 : ($conteo->completado / $conteo->total * 100)}}"
+                    color="{{$conteo->color}}">
+                    {{$conteo->msg}}:
+                    <span class="font-bold">{{ $conteo->completado }}</span> de
+                    <span class="font-bold">{{ $conteo->total }}</span>
+                </x-simple-progress>
+            </div>
+        </div>
+
         {{-- 1: Mis Actividades --}}
         @if ($show_mis_actividades)
-            @livewire('actividad.actividades-incompletas')
+            @livewire('actividad.actividades-incompletas', ['ciclo_id' => $ciclo_seleccionado, 'responsable_id' =>
+            $responsable_id])
         @endif
 
         {{-- 2: Informacion a proveer --}}
         @if ($show_proveer)
-            @livewire('actividad.proveer')
+            @livewire('actividad.proveer', ['ciclo_id' => $ciclo_seleccionado, 'entidad_id' =>
+            $entidad_id])
         @endif
 
         {{-- 3: Documentos recibidos --}}
         @if ($show_documentos_recibidos)
-            @livewire('actividad.documentos-recibidos')
+            @livewire('actividad.documentos-recibidos', ['ciclo_id' => $ciclo_seleccionado, 'entidad_id' =>
+            $entidad_id])
         @endif
-
     </div>
+
+    @push('js')
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Livewire.on('guardado', msg => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '',
+                    text: msg,
+                });
+            });
+            Livewire.on('error', msg => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '',
+                    text: msg,
+                });
+            });
+        </script>
+    @endpush
 
 </div>

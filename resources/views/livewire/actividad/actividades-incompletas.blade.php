@@ -1,7 +1,7 @@
 <x-card>
 
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center space-x-4">
             <div class="pr-4 flex-1">
                 <h1 class="text-xl font-bold text-gray-800">
                     Mis actividades
@@ -11,32 +11,34 @@
                     semestre.
                 </p>
             </div>
-            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                @foreach ($ciclos as $cl)
-                    <option value="{{ $cl->id }}">
-                        {{ $cl->nombre }}
-                    </option>
-                @endforeach
-            </select>
+            <label
+                class="flex flex-col items-center whitespace-nowrap text-gray-700 font-bold w-48 flex-shrink-0 text-sm">
+                Proceso
+                <select wire:model="proceso_seleccionado" class="input-form w-full text-sm">
+                    @foreach ($procesos as $prc)
+                        <option value="{{ $prc->id }}">{{ $prc->nombre }}</option>
+                    @endforeach
+                </select>
+            </label>
         </div>
     </x-slot>
 
-
-    <div class="mt-8 mb-4 overflow-hidden">
-
+    <div class="mb-4 overflow-hidden">
         <div class="mb-6">
-            <x-simple-progress percent="{{ $porcentaje }}">
-                Actividades completadas:
-                <span class="font-bold">{{ $completos }}</span> de
-                <span class="font-bold">{{ $total }}</span>
+            <x-simple-progress
+                percent="{{$conteo->completado === 0 ? 0 : ($conteo->completado / $conteo->total * 100) }}"
+                color="gray">
+                Actividades completadas de este proceso:
+                <span class="font-bold">{{ $conteo->completado }}</span> de
+                <span class="font-bold">{{ $conteo->total }}</span>
             </x-simple-progress>
         </div>
 
-        @if ($completos !== $total)
+        @if ($conteo->completado !== $conteo->total)
             <x-table>
                 <x-slot name="head">
                     <x-table.heading>Actividad</x-table.heading>
+                    <x-table.heading>Encargado</x-table.heading>
                     <x-table.heading>Estado</x-table.heading>
                     <x-table.heading class="flex-shrink-0 w-16"><span class="sr-only">Ver</span></x-table.heading>
                 </x-slot>
@@ -47,25 +49,18 @@
                                 <h1 class="text-gray-800">
                                     {{ $actividad->actividad }}
                                 </h1>
-                                <small class="text-gray-400">
-                                    {{ $actividad->entidad }} :
-                                    <span class="italic">
-                                        {{ $actividad->proceso }}
-                                    </span>
+                                <small class="text-gray-400 font-semibold">
+                                    Proceso: {{ $actividad->proceso }}
                                 </small>
                             </x-table.cell>
+                            <x-table.cell>
+                                {{ $actividad->entidad }}
+                            </x-table.cell>
                             <x-table.cell class="text-xs leading-5 font-semibold whitespace-nowrap">
-                                @if ($actividad->status === 1)
-                                    <span
-                                        class="px-2 inline-flex rounded-full bg-green-100 text-green-800">
-                                        {{ __('Completado') }}
-                                    </span>
-                                @else
-                                    <span
-                                        class="px-2 inline-flex rounded-full bg-red-100 text-red-800">
-                                        {{ __('Sin completar') }}
-                                    </span>
-                                @endif
+                                <span
+                                    class="px-2 inline-flex rounded-full {{$actividad->status === 1 ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'}}">
+                                    {{$actividad->status === 1 ? 'Completado':'Sin completar'}}
+                                </span>
                             </x-table.cell>
                             <x-table.cell class="flex-shrink-0 w-16">
                                 <x-button.invisible-link color="blue"
@@ -90,7 +85,7 @@
     </div>
     @slot('footer')
         <div>
-            @if ($completos !== $total)
+            @if ($conteo->completado !== $conteo->total)
                 <p class="text-sm text-gray-400">
                     * Para culminar las actividades del semestre, tiene que revisar cada uno de ellos y complentarlas.
                 </p>

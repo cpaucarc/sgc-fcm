@@ -12,6 +12,7 @@ class EstadoSolicitud extends Component
 
     protected $listeners = [
         'solicitudCreado' => 'render',
+        'actualizarEstado' => 'render',
     ];
 
     public function obtenerEstado()

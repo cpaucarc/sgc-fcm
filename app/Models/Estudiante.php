@@ -68,4 +68,5 @@ class Estudiante extends Model
         return $this->hasOne(SolicitudConvalidacion::class)
             ->with('documentos');
     }
+
 }

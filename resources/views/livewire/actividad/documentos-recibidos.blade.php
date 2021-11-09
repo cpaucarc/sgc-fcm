@@ -11,14 +11,14 @@
                     en los cuales usted figura como cliente.
                 </p>
             </div>
-            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                @foreach ($ciclos as $cl)
-                    <option value="{{ $cl->id }}">
-                        {{ $cl->nombre }}
-                    </option>
-                @endforeach
-            </select>
+            {{--            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"--}}
+            {{--                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">--}}
+            {{--                @foreach ($ciclos as $cl)--}}
+            {{--                    <option value="{{ $cl->id }}">--}}
+            {{--                        {{ $cl->nombre }}--}}
+            {{--                    </option>--}}
+            {{--                @endforeach--}}
+            {{--            </select>--}}
         </div>
     </x-slot>
 
@@ -48,9 +48,7 @@
                                 </x-table.cell>
                                 <x-table.cell>
                                     {{ $salida->cantidad }}
-                                    <span class="text-gray-500">
-                                        documento(s)
-                                    </span>
+                                    <span class="text-gray-500">documento(s)</span>
                                 </x-table.cell>
                                 <x-table.cell>
                                     <x-button.invisible color="blue" wire:click="abrirModal({{ $salida->id }})">

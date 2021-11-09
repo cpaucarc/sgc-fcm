@@ -1,36 +1,24 @@
 <div>
-
     <div class="flex justify-between items-center mb-6">
         <x-input-dropdown wire:model="cantidad"></x-input-dropdown>
+        <select class="input-form" wire:model="escuela_seleccionada">
+            @foreach($escuelas as $escuela)
+                <option value="{{ $escuela->id }}"> {{ $escuela->nombre }} </option>
+            @endforeach
+        </select>
         <x-input-search wire:model="query"></x-input-search>
     </div>
 
     @if($bachilleres->count())
-        <x-table>
-
-            <x-slot name="total">
-                {{ $bachilleres->total() }}
-            </x-slot>
+        <x-table total="{{ $bachilleres->total() }}">
 
             <x-slot name="head">
-                <x-table.heading>
-                    Alumno
-                </x-table.heading>
-                <x-table.heading>
-                    Código
-                </x-table.heading>
-                <x-table.heading>
-                    Escuela
-                </x-table.heading>
-                <x-table.heading>
-                    Bachiller
-                </x-table.heading>
-                <x-table.heading>
-                    Grado Actual
-                </x-table.heading>
-                <x-table.heading>
-                    <span class="hidden">Acciones</span>
-                </x-table.heading>
+                <x-table.heading>Alumno</x-table.heading>
+                <x-table.heading>Código</x-table.heading>
+                <x-table.heading>Escuela</x-table.heading>
+                <x-table.heading>Bachiller</x-table.heading>
+                <x-table.heading>Grado Actual</x-table.heading>
+                <x-table.heading><span class="hidden">Acciones</span></x-table.heading>
             </x-slot>
             <x-slot name="body">
                 @foreach($bachilleres as $bachiller)
@@ -58,15 +46,11 @@
                                 </div>
                             </div>
                         </x-table.cell>
-                        <x-table.cell>
-                            <div class="group-hover:text-gray-900 whitespace-nowrap">
-                                {{ $bachiller->estudiante->codigo }}
-                            </div>
+                        <x-table.cell class="whitespace-nowrap">
+                            {{ $bachiller->estudiante->codigo }}
                         </x-table.cell>
-                        <x-table.cell>
-                            <div class="group-hover:text-gray-900 whitespace-nowrap">
-                                {{ $bachiller->estudiante->escuela->nombre }}
-                            </div>
+                        <x-table.cell class="whitespace-nowrap">
+                            {{ $bachiller->estudiante->escuela->nombre }}
                         </x-table.cell>
                         <x-table.cell>
                             {{ $bachiller->created_at->diffForHumans() }}
@@ -77,17 +61,17 @@
                                 {{ $bachiller->estudiante->gradoReciente->grado->nombre }}
                             </span>
                         </x-table.cell>
-                        <x-table.cell>
-                            <div class="text-xs flex items-center justify-end space-x-2">
-                                <x-button.invisible-link target="_blank"
+                        <x-table.cell class="text-right">
+                            <x-button.group>
+                                <x-button.invisible-link size="sm" color="purple" target="_blank"
                                                          href="{{ route('bachiller.estudiante', [sha1($bachiller->estudiante_id)]) }}">
                                     <x-icons.person :stroke="1.5" class="h-5 w-5"></x-icons.person>
                                 </x-button.invisible-link>
-                                <x-button.invisible-link target="_blank"
+                                <x-button.invisible-link size="sm" color="red" target="_blank"
                                                          href="{{ route('bachiller.constancia', [sha1($bachiller->estudiante_id)]) }}">
                                     <x-icons.documents :stroke="1.5" class="h-5 w-5"></x-icons.documents>
                                 </x-button.invisible-link>
-                            </div>
+                            </x-button.group>
                         </x-table.cell>
                     </x-table.row>
                 @endforeach

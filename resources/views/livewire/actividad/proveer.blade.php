@@ -10,25 +10,23 @@
                     actividades.
                 </p>
             </div>
-            <select name="ciclo" id="ciclo" wire:model="ciclo_seleccionado"
-                    class="py-1 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-300 focus:ring-1 focus:ring-blue-300 focus:text-gray-800">
-                @foreach ($ciclos as $cl)
-                    <option value="{{ $cl->id }}">
-                        {{ $cl->nombre }}
-                    </option>
-                @endforeach
-            </select>
+            <label
+                class="flex flex-col items-center whitespace-nowrap text-gray-700 font-bold w-48 flex-shrink-0 text-sm">
+                Proceso
+                <select wire:model="proceso_seleccionado" class="input-form w-full text-sm">
+                    @foreach ($procesos as $prc)
+                        <option value="{{ $prc->id }}">{{ $prc->nombre }}</option>
+                    @endforeach
+                </select>
+            </label>
         </div>
     </x-slot>
 
-    {{-- Alerta que se mostrara cuando se agrege correctamente un archivo en Salidas --}}
-    <x-alert/>
-
-    <div class="mt-8 mb-4 overflow-hidden">
+    <div class="mb-4 overflow-hidden">
 
         <div class="mb-6">
-            <x-simple-progress percent="{{ $porcentaje }}">
-                Actividades completadas:
+            <x-simple-progress percent="{{ $porcentaje }}" color="gray">
+                Entradas completadas:
                 <span class="font-bold">{{ $completos }}</span> de
                 <span class="font-bold">{{ $total }}</span>
             </x-simple-progress>
@@ -49,21 +47,14 @@
                                     {{ $etpv->entrada->codigo }} - {{ $etpv->entrada->nombre }}
                                 </h1>
                                 <small class="text-gray-500">
-                                    Actividades: {{ $etpv->actividad->nombre  }}
+                                    Actividad: {{ $etpv->actividad->nombre  }}
                                 </small>
                             </x-table.cell>
                             <x-table.cell>
-                                @if ($etpv->cantidad)
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{ __('Completado') }}
-                                    </span>
-                                @else
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                        {{ __('Sin completar') }}
-                                    </span>
-                                @endif
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $etpv->cantidad ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800' }}">
+                                    {{ $etpv->cantidad ? 'Completado': 'Sin completar' }}
+                                </span>
                             </x-table.cell>
                             <x-table.cell>
                                 <x-button.invisible color="blue" wire:click="abrirModal({{ $etpv->id }})">

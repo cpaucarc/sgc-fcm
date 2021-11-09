@@ -22,7 +22,7 @@ class Rol extends Model
     public function oficina()
     {
         return $this->belongsTo(Oficina::class)
-            ->with('facultad', 'escuela');
+            ->with('facultad', 'escuela', 'nivel');
     }
 
 }

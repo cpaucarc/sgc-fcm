@@ -7,6 +7,7 @@ use App\Models\Ciclo;
 use App\Models\Documento;
 use App\Models\EntradaCompleto;
 use App\Models\EntradaProveedor;
+use App\Models\Proceso;
 use App\Models\SalidaCompleto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,21 +19,49 @@ class Proveer extends Component
 {
     use WithFileUploads;
 
-    public $ciclo_seleccionado = 1;
-    public $ent_prv_seleccionado = null;
+    public $ciclo_seleccionado = 1; // Este parametro viene desde index
+    public $entidad_id = null; // Este parametro viene desde index
     public $abrir = false;
-    public $ciclos;
-    public $archivo;
-    public $randomID = 0;
+    public $procesos, $proceso_seleccionado = 96;
+    public $ent_prv_seleccionado = null, $archivo, $randomID = 0;
+
+    public $listeners = [
+        'cicloCambiado' => 'cicloCambiado'
+    ];
 
     protected $rules = [
         'archivo' => 'required',
     ];
 
-    public function mount()
+    public function mount($ciclo_id, $entidad_id)
     {
+        $this->ciclo_seleccionado = $ciclo_id;
+        $this->entidad_id = $entidad_id;
         $this->randomID = rand();
-        $this->ciclos = Ciclo::orderBy('nombre', 'asc')->get();
+
+        $this->procesos = Proceso::query()
+            ->whereIn('id', function ($q1) {
+                $q1->select('proceso_id')
+                    ->from('actividades')
+                    ->whereIn('id', function ($q2) {
+                        $q2->select('actividad_id')
+                            ->distinct()
+                            ->from('entrada_proveedores')
+                            ->whereIn('proveedor_id', function ($q3) {
+                                $q3->select('id')
+                                    ->from('proveedores')
+                                    ->whereIn('entidad_id', $this->entidad_id);
+                            });
+                    });
+            })
+            ->orderBy('nombre')
+            ->get();
+        $this->proceso_seleccionado = $this->procesos->first()->id;
+    }
+
+    public function cicloCambiado($ciclo_id)
+    {
+        $this->ciclo_seleccionado = $ciclo_id;
     }
 
     public function abrirModal($ent_prv_id)
@@ -91,8 +120,7 @@ class Proveer extends Component
 
         $this->abrir = false;
         $this->randomID = rand();
-//            $this->reset(['propiedad1', 'propiedad2', ]);
-        session()->flash('message', "El documento '$nombreArchivo' fue enviado.");
+        $this->emit('guardado', "El documento '$nombreArchivo' fue enviado.");
     }
 
     public function eliminarArchivo(Documento $doc)
@@ -115,10 +143,14 @@ class Proveer extends Component
             ])
             ->with('entrada', 'actividad')
             ->whereIn('proveedor_id', function ($query) {
-                $entID = Auth::user()->roles->pluck('entidad_id');
                 $query->select('id')
                     ->from('proveedores')
-                    ->whereIn('entidad_id', $entID);
+                    ->whereIn('entidad_id', $this->entidad_id);
+            })
+            ->whereIn('actividad_id', function ($query2) {
+                $query2->select('id')
+                    ->from('actividades')
+                    ->where('proceso_id', $this->proceso_seleccionado);
             })
             ->get();
 

@@ -24,11 +24,13 @@ Route::get('/', function () {
 
 Route::get('registro', [RegistroController::class, 'index'])->name('registro');
 
-Route::get('actividades', [ActividadController::class, 'index'])
-    ->name('actividad.actividades');
+Route::prefix('actividades')->group(function () {
+    Route::get('/', [ActividadController::class, 'index'])
+        ->name('actividad.actividades');
 
-Route::get('mis-actividades/{id}/{ciclo}', [ActividadController::class, 'show'])
-    ->name('actividad.mis-actividades');
+    Route::get('{id}/{ciclo}', [ActividadController::class, 'show'])
+        ->name('actividad.mis-actividades');
+});
 
 Route::prefix('responsabilidad-social')->group(function () {
     Route::get('crear', [ResponsabilidadSocialController::class, 'registro'])

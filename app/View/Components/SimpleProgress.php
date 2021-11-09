@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class SimpleProgress extends Component
 {
     public $percent;
+    public $opacity;
     public $color;
 
     /**
@@ -14,24 +15,25 @@ class SimpleProgress extends Component
      *
      * @return void
      */
-    public function __construct($percent)
+    public function __construct($percent, $color = 'green')
     {
         $this->percent = intval($percent);
-        $this->calculateColor();
+        $this->color = $color;
+        $this->calculateOpacity();
     }
 
-    public function calculateColor()
+    public function calculateOpacity()
     {
         if ($this->percent >= 0 and $this->percent <= 25) {
-            $this->color = '400';
+            $this->opacity = '400';
         } elseif ($this->percent > 25 and $this->percent <= 50) {
-            $this->color = '500';
+            $this->opacity = '500';
         } elseif ($this->percent > 50 and $this->percent <= 54) {
-            $this->color = '500';
+            $this->opacity = '500';
         } elseif ($this->percent > 54 and $this->percent <= 75) {
-            $this->color = '600';
+            $this->opacity = '600';
         } else {
-            $this->color = '700';
+            $this->opacity = '700';
         }
     }
 
