@@ -46,6 +46,7 @@ class MostrarActividad extends Component
     public function abrirModal($salida_id)
     {
         $this->salida = Salida::query()
+            ->with('clientes')
             ->where('id', $salida_id)
             ->with(['documentos' => function ($query) {
                 $query->where('ciclo_id', $this->ciclo->id);
@@ -126,10 +127,9 @@ class MostrarActividad extends Component
                 'salida_id' => $this->salida->id
             ]);
 
-//            $this->open = false;
+            $this->open = false;
             $this->randomID = rand();
-//            $this->reset(['propiedad1', 'propiedad2', ]);
-            session()->flash('message', "El documento '$nombreArchivo' fue enviado.");
+            $this->emit('guardado', "El documento '$nombreArchivo' fue enviado.");
 
         } else {
             return redirect()->route('login');
@@ -143,7 +143,7 @@ class MostrarActividad extends Component
         Storage::disk('public')->delete($doc->enlace_interno);
         $doc->delete();
         $this->open = false;
-        session()->flash('message', "El documento '$doc->nombre' fue eliminado.");
+        $this->emit('guardado', "El documento '$doc->nombre' fue eliminado.");
     }
 
     public function render()

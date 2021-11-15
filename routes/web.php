@@ -35,21 +35,12 @@ Route::prefix('actividades')->group(function () {
 Route::prefix('responsabilidad-social')->group(function () {
     Route::get('crear', [ResponsabilidadSocialController::class, 'registro'])
         ->name('rrss.registro');
-
     Route::get('editar/{id}', [ResponsabilidadSocialController::class, 'editar'])
         ->name('rrss.editar');
-
     Route::get('empresas', [ResponsabilidadSocialController::class, 'empresas'])
         ->name('rrss.empresas');
-
-    Route::get('side', function () {
-        $estudiante = \App\Models\Estudiante::find(5);
-        return view('rrss.my-side', compact('estudiante'));
-    })->name('rrss.side');
-
     Route::get('indicadores', [ResponsabilidadSocialController::class, 'indicadores'])
         ->name('rrss.indicadores');
-
     Route::get('/{id?}', [ResponsabilidadSocialController::class, 'index'])
         ->name('rrss.index');
 });

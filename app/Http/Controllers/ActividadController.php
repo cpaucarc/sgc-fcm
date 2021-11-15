@@ -24,9 +24,10 @@ class ActividadController extends Controller
             ->addSelect(['estado' => ActividadCompleto::select('fecha_operacion')
                 ->whereColumn('actividad_id', 'actividades.id')
                 ->where('ciclo_id', $ciclo)
-                ->limit(1)
+                ->take(1)
             ])
-            ->with('entradas', 'salidas', 'proceso', 'tipoActividad')
+            ->withCount('entradas', 'salidas')
+            ->with('entradas', 'salidas', 'tipoActividad')
             ->where('id', $id)
             ->first();
 

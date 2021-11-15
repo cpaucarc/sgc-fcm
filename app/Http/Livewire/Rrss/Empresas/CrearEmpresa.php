@@ -8,20 +8,15 @@ use Livewire\Component;
 class CrearEmpresa extends Component
 {
     public $mostrar = false;
-    public $nombre;
-    public $ruc;
-    public $telefono;
-    public $correo;
-    public $direccion;
-    public $ubicacion;
+    public $nombre, $ruc, $telefono, $correo, $direccion, $ubicacion;
 
     protected $rules = [
         'nombre' => 'required',
-        'ruc' => 'required|min:11|max:11',
-        'telefono' => 'max:9|min:9',
-        'correo' => 'email',
-        'direccion' => 'max:200',
-        'ubicacion' => 'max:200',
+        'ruc' => 'required|min:11|max:11|unique:empresas,ruc',
+        'telefono' => 'nullable|max:9|min:9|unique:empresas,telefono',
+        'correo' => 'nullable|email',
+        'direccion' => 'nullable|max:200',
+        'ubicacion' => 'nullable|max:200',
     ];
 
 
@@ -49,7 +44,8 @@ class CrearEmpresa extends Component
 
         $empresa->save();
 
-        session()->flash('message', "Se agregó correctamente la empresa " . $this->nombre);
+        $this->emit('guardado', "Se agregó correctamente la empresa " . $this->nombre);
+//        session()->flash('flash.banner', 'Se agregó correctamente la empresa');
         $this->reset(['mostrar', 'nombre', 'ruc', 'telefono', 'correo', 'direccion', 'ubicacion']);
         $this->emit('renderizar');
     }

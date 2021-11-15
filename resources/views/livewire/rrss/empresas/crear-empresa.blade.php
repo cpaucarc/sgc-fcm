@@ -32,9 +32,9 @@
                             {{ __('Razón Social') }}
                         </x-jet-label>
                         <div class="col-span-2">
-                            <input wire:model.defer="nombre" type="text" id="nombre" class="input-form w-full"
+                            <input wire:model.defer="nombre" autocomplete="off" type="text" id="nombre"
+                                   class="input-form w-full"
                                    autofocus>
-
                             <x-jet-input-error for="nombre"></x-jet-input-error>
                         </div>
                     </div>
@@ -48,7 +48,8 @@
                             {{ __('RUC') }}
                         </x-jet-label>
                         <div class="col-span-2">
-                            <input wire:model.defer="ruc" type="text" id="ruc" class="input-form w-full col-span-2">
+                            <input wire:model.defer="ruc" autocomplete="off" maxlength="11" type="text" id="ruc"
+                                   class="input-form w-full col-span-2">
                             <x-jet-input-error for="ruc"></x-jet-input-error>
                         </div>
 
@@ -64,7 +65,8 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input wire:model.defer="telefono" type="text" id="telefono"
+                            <input wire:model.defer="telefono" autocomplete="off" maxlength="9" type="text"
+                                   id="telefono"
                                    class="input-form w-full col-span-2">
 
                             <x-jet-input-error for="telefono"></x-jet-input-error>
@@ -81,7 +83,7 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input wire:model.defer="correo" type="email" id="correo"
+                            <input wire:model.defer="correo" type="email" autocomplete="off" id="correo"
                                    class="input-form w-full col-span-2">
 
                             <x-jet-input-error for="correo"></x-jet-input-error>
@@ -98,7 +100,7 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input wire:model.defer="direccion" type="text" id="direccion"
+                            <input wire:model.defer="direccion" autocomplete="off" type="text" id="direccion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Av. Centenario N° 123">
                             <x-jet-input-error for="direccion"></x-jet-input-error>
@@ -115,7 +117,7 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input wire:model.defer="ubicacion" type="text" id="ubicacion"
+                            <input wire:model.defer="ubicacion" autocomplete="off" type="text" id="ubicacion"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Huaraz - Ancash - Peru">
                             <x-jet-input-error for="ubicacion"></x-jet-input-error>
@@ -135,17 +137,8 @@
                     wire:target="guardarEmpresa"
                     wire:loading.class="bg-gray-800"
                     wire:loading.attr="disabled">
-                    <svg wire:loading wire:target="guardarEmpresa"
-                         class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                         fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>
-                            {{ __('Guardar') }}
-                        </span>
+                    <x-icons.load class="h-4 w-4" wire:loading wire:target="guardarEmpresa"></x-icons.load>
+                    {{ __('Guardar') }}
                 </x-jet-button>
 
             </x-slot>

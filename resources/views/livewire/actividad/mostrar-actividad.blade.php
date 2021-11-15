@@ -47,17 +47,14 @@
                         {{ __('Completado') }}
                     </x-button-soft>
 
-                    <small class="text-gray-500 ml-2 lg:ml-0 text-xs mt-1">
-                        @if($actividad->estado)
+                    @if($actividad->estado)
+                        <small class="text-gray-500 ml-2 lg:ml-0 text-xs mt-1">
                             Completado el {{ $actividad->estado }}
-                        @endif
-                    </small>
+                        </small>
+                    @endif
                 </div>
             @endif
         </div>
-
-        {{-- Alerta que se mostrara cuando se agrege correctamente un archivo en Salidas --}}
-        <x-alert></x-alert>
 
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-3">
@@ -74,7 +71,7 @@
                                 </p>
                             </div>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $actividad->entradas->count() }}
+                                {{ $actividad->entradas_count }}
                             </span>
                         </div>
                     </x-slot>
@@ -126,7 +123,7 @@
                                 </p>
                             </div>
                             <span class="bg-gray-100 px-3 py-1 text-gray-700 rounded-full">
-                                {{ $actividad->salidas->count() }}
+                                {{ $actividad->salidas_count }}
                             </span>
                         </div>
                     </x-slot>
@@ -355,5 +352,26 @@
 
             </x-jet-dialog-modal>
         @endif
+
+        @push('js')
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Livewire.on('guardado', msg => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '',
+                        text: msg,
+                    });
+                });
+                Livewire.on('error', msg => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '',
+                        text: msg,
+                    });
+                });
+            </script>
+        @endpush
+
     </div>
 @endif

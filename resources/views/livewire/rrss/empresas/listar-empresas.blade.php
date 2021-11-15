@@ -11,7 +11,7 @@
     </x-slot>
 
 
-    <x-alert/>
+    {{--    <x-alert/>--}}
 
     {{--Buscador--}}
     <div class="flex justify-between items-center mb-4 text-gray-700">
@@ -51,16 +51,12 @@
                     <div class="flex items-center justify-between ">
                         <span>Direccion</span>
                         @if($sort === 'direccion')
-                            <x-sort-by type="alpha" direction="{{$direction}}"/>
+                            <x-sort-by type="alpha" direction="{{$direction}}"></x-sort-by>
                         @endif
                     </div>
                 </x-table.heading>
-                <x-table.heading>
-                    RRSS
-                </x-table.heading>
-                <x-table.heading>
-                    <span class="sr-only">Edit</span>
-                </x-table.heading>
+                <x-table.heading>RRSS</x-table.heading>
+                <x-table.heading><span class="sr-only">Acciones</span></x-table.heading>
             </x-slot>
             <x-slot name="body">
                 @foreach($empresas as $empresa)
@@ -96,7 +92,7 @@
                             </div>
                         </x-table.cell>
                         <x-table.cell>
-                            {{ $empresa->rrss->count() }}
+                            {{ $empresa->rrss_count }}
                         </x-table.cell>
                         <x-table.cell>
                             <x-button.invisible color="blue" wire:click="abrirModal({{ $empresa }})">
@@ -141,8 +137,8 @@
                             {{ __('Razón Social') }}
                         </x-jet-label>
                         <div class="col-span-2">
-                            <input type="text" id="nombre" wire:model="empresa_seleccionada.nombre"
-                                   class="input-form w-full col-span-2" autofocus>
+                            <input type="text" id="nombre" wire:model.defer="empresa_seleccionada.nombre"
+                                   autocomplete="off" class="input-form w-full col-span-2" autofocus>
                             <x-jet-input-error for="empresa_seleccionada.nombre"></x-jet-input-error>
                         </div>
 
@@ -158,7 +154,7 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input type="text" id="ruc" wire:model="empresa_seleccionada.ruc"
+                            <input type="text" id="ruc" wire:model.defer="empresa_seleccionada.ruc" autocomplete="off"
                                    class="input-form w-full col-span-2">
                             <x-jet-input-error for="empresa_seleccionada.ruc"></x-jet-input-error>
                         </div>
@@ -174,7 +170,8 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input type="text" id="telefono" wire:model="empresa_seleccionada.telefono"
+                            <input type="text" id="telefono" wire:model.defer="empresa_seleccionada.telefono"
+                                   autocomplete="off"
                                    class="input-form w-full col-span-2">
                             <x-jet-input-error for="empresa_seleccionada.telefono"></x-jet-input-error>
                         </div>
@@ -190,8 +187,8 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input type="email" id="correo" wire:model="empresa_seleccionada.correo"
-                                   class="input-form w-full col-span-2">
+                            <input type="email" id="correo" wire:model.defer="empresa_seleccionada.correo"
+                                   autocomplete="off" class="input-form w-full col-span-2">
                             <x-jet-input-error for="empresa_seleccionada.correo"></x-jet-input-error>
                         </div>
 
@@ -207,8 +204,8 @@
                         </x-jet-label>
 
                         <div class="col-span-2">
-                            <input type="text" id="direccion" wire:model="empresa_seleccionada.direccion"
-                                   class="input-form w-full col-span-2 placeholder-gray-300"
+                            <input type="text" id="direccion" wire:model.defer="empresa_seleccionada.direccion"
+                                   class="input-form w-full col-span-2 placeholder-gray-300" autocomplete="off"
                                    placeholder="Ejemplo: Av. Centenario N° 123">
                             <x-jet-input-error for="empresa_seleccionada.direccion"></x-jet-input-error>
                         </div>
@@ -225,7 +222,8 @@
 
 
                         <div class="col-span-2">
-                            <input type="text" id="ubicacion" wire:model="empresa_seleccionada.ubicacion"
+                            <input type="text" id="ubicacion" wire:model.defer="empresa_seleccionada.ubicacion"
+                                   autocomplete="off"
                                    class="input-form w-full col-span-2 placeholder-gray-300"
                                    placeholder="Ejemplo: Huaraz - Ancash - Peru">
                             <x-jet-input-error for="empresa_seleccionada.ubicacion"></x-jet-input-error>
@@ -245,21 +243,39 @@
                     wire:target="actualizarEmpresa"
                     wire:loading.class="bg-gray-800"
                     wire:loading.attr="disabled">
-                    <svg wire:loading wire:target="actualizarEmpresa"
-                         class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                         fill="none" viewBox="0 0 24 24">
+                    <svg
+                        fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                 stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor"
                               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span>
-                            {{ __('Actualizar') }}
-                        </span>
+                    <x-icons.load wire:loading wire:target="actualizarEmpresa" class="h-4 w-4"></x-icons.load>
+                    {{ __('Actualizar') }}
                 </x-jet-button>
 
             </x-slot>
         </x-jet-dialog-modal>
     @endif
+
+    @push('js')
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Livewire.on('guardado', msg => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '',
+                    text: msg,
+                });
+            });
+            Livewire.on('error', msg => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '',
+                    text: msg,
+                });
+            });
+        </script>
+    @endpush
 
 </x-card>

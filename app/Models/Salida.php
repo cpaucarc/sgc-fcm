@@ -14,7 +14,8 @@ class Salida extends Model
 
     public function clientes()
     {
-        return $this->hasMany(ClienteSalida::class);
+        return $this->hasMany(ClienteSalida::class)
+            ->with('cliente', 'salida');
     }
 
     public function documentos()

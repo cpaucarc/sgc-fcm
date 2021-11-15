@@ -13,7 +13,7 @@ class ListarEmpresas extends Component
     public $empresa_seleccionada = null;
     public $abrir = false;
     public $cantidad = 10;
-    public $search;
+    public $search = '';
     public $sort = 'id';
     public $direction = 'desc';
 
@@ -22,10 +22,10 @@ class ListarEmpresas extends Component
     protected $rules = [
         'empresa_seleccionada.nombre' => 'required', //whatever rules you want
         'empresa_seleccionada.ruc' => 'required',
-        'empresa_seleccionada.telefono' => 'max:9|min:9',
-        'empresa_seleccionada.correo' => 'email',
-        'empresa_seleccionada.direccion' => 'max:200',
-        'empresa_seleccionada.ubicacion' => 'max:200',
+        'empresa_seleccionada.telefono' => 'nullable|max:9|min:9',
+        'empresa_seleccionada.correo' => 'nullable|email',
+        'empresa_seleccionada.direccion' => 'nullable|max:200',
+        'empresa_seleccionada.ubicacion' => 'nullable|max:200',
     ];
 
     public function mount()
@@ -43,7 +43,7 @@ class ListarEmpresas extends Component
     {
         $this->validate();
         $this->empresa_seleccionada->save();
-        session()->flash('message', "Se actualizo los datos de la empresa " . $this->empresa_seleccionada->nombre);
+        $this->emit('guardado', "Se actualizó los datos de la empresa " . $this->empresa_seleccionada->nombre);
         $this->reset(['empresa_seleccionada', 'abrir']);
     }
 
@@ -70,7 +70,7 @@ class ListarEmpresas extends Component
     public function render()
     {
         $empresas = Empresa::query()
-            ->with('rrss')
+            ->withCount('rrss')
             ->where('nombre', 'like', '%' . $this->search . '%')
             ->orWhere('ruc', 'like', '%' . $this->search . '%')
             ->orWhere('correo', 'like', '%' . $this->search . '%')

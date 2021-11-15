@@ -24,8 +24,8 @@ class Index extends Component
 
     public function mount()
     {
-//        $this->show_mis_actividades = true;
-        $this->show_documentos_recibidos = true;
+        $this->show_mis_actividades = true;
+//        $this->show_documentos_recibidos = true;
         $this->responsable_id = Auth::user()->roles->pluck('entidad.responsable.id');
         $this->entidad_id = Auth::user()->roles->pluck('entidad_id');
         $this->ciclos = Ciclo::all();
