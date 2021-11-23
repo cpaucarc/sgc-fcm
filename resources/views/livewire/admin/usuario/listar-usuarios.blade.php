@@ -66,7 +66,7 @@
                         </x-table.cell>
                         <x-table.cell>
                             <div class="flex flex-wrap gap-2">
-                                @forelse($usuario->roles as $rol)
+                                @forelse($usuario->trabajo as $rol)
 
                                     <div
                                         class="px-4 py-2 bg-{{ $rol->oficina->nivel->id > 1 ? ($rol->oficina->nivel->id === 2 ? 'pink' : 'lime' ) : 'purple' }}-200 rounded text-gray-800">

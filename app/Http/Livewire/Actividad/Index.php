@@ -26,8 +26,8 @@ class Index extends Component
     {
         $this->show_mis_actividades = true;
 //        $this->show_documentos_recibidos = true;
-        $this->responsable_id = Auth::user()->roles->pluck('entidad.responsable.id');
-        $this->entidad_id = Auth::user()->roles->pluck('entidad_id');
+        $this->responsable_id = Auth::user()->trabajo->pluck('entidad.responsable.id');
+        $this->entidad_id = Auth::user()->trabajo->pluck('entidad_id');
         $this->ciclos = Ciclo::all();
         $this->ciclo_seleccionado = $this->ciclos->last()->id;
     }

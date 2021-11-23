@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,232 +17,183 @@ class UserSeeder extends Seeder
     {
         $password = Hash::make('12345678');
 
-        $users = [
-            [
-                'email' => 'test@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ];
-        $estudiantes = [
-            [
-                'email' => 'estudiante1@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 102,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante2@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 103,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante3@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 104,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante4@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 105,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante5@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 106,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante6@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 107,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante7@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 108,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante8@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 109,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante9@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 110,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante10@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 111,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante11@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 112,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante12@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 113,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante13@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 114,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante14@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 115,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'estudiante15@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 116,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ];
-        $docentes = [
-            [
-                'email' => 'docente1@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente2@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 3,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente3@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 4,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente4@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 5,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente5@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 6,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente6@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 7,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente7@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 8,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente8@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 9,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente9@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 10,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente10@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 11,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente11@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 12,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente12@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 13,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente13@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 14,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente14@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 15,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'email' => 'docente15@mail.com',
-                'password' => $password, //Hash de 12345678
-                'persona_id' => 16,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ];
+        /* User Administrador Persona:1 */
+        User::create([
+            'email' => 'test@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Administrador');
 
-        \App\Models\User::insert($users); // id: 1
-        \App\Models\User::insert($estudiantes); // id: 2 - 16
-        \App\Models\User::insert($docentes); // id: 17 - 31
+        /* User Docente Persona: 2-11 */
+        User::create([
+            'email' => 'docente1@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente2@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente3@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente4@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 5,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente5@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 6,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente6@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 7,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente7@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 8,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente8@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 9,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente9@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 10,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+        User::create([
+            'email' => 'docente10@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 11,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Docente');
+
+        /* User Director de Escuela y Docente Persona:12-13 */
+        User::create([
+            'email' => 'director1@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 12,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Dirección de Escuela');
+        User::create([
+            'email' => 'director2@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 13,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole(['Dirección de Escuela', 'Docente']);
+
+        /* User Estudiante Persona: 102-111 */
+        User::create([
+            'email' => 'estudiante1@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 102,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante2@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 103,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante3@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 104,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante4@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 105,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante5@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 106,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante6@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 107,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante7@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 108,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante8@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 109,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante9@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 110,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+        User::create([
+            'email' => 'estudiante10@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 111,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Estudiante');
+
+        /* User Decanatura Persona: 112 */
+        User::create([
+            'email' => 'decano1@mail.com',
+            'password' => $password, //Hash de 12345678
+            'persona_id' => 112,
+            'created_at' => now(),
+            'updated_at' => now()
+        ])->assignRole('Decanatura');
+
     }
 }

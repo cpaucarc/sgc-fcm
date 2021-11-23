@@ -33,12 +33,14 @@ class ResponsabilidadSocial extends Model
 
     public function docente()
     {
-        return $this->belongsTo(Docente::class, 'docente_responsable_id', 'id');
+        return $this->belongsTo(Docente::class, 'docente_responsable_id', 'id')
+            ->with('persona');
     }
 
     public function estudiante()
     {
-        return $this->belongsTo(Estudiante::class, 'estudiante_responsable_id', 'id');
+        return $this->belongsTo(Estudiante::class, 'estudiante_responsable_id', 'id')
+            ->with('persona');
     }
 
     public function participantes_estudiantes()

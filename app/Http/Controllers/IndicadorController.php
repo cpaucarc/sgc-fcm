@@ -32,7 +32,7 @@ class IndicadorController extends Controller
     public function indicadores($id, $nombre)
     {
         $proceso = Proceso::findOrFail($id);
-        $facultad = Auth::user()->roles[0]->oficina->facultad;
+        $facultad = Auth::user()->trabajo[0]->oficina->facultad;
         $lista = array();
 
         $lista_fac = DB::table('indicadores')

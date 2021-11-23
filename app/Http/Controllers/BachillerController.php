@@ -19,11 +19,8 @@ class BachillerController extends Controller
 
     public function index()
     {
-        if (Auth::user()->esEstudiante()) {
+        if (Auth::user()->hasRole('Estudiante')) {
             $est = Auth::user()->persona->estudiante->id;
-//            if ($estudiante) {
-//                return view('bachiller.estudiante', compact('estudiante'));
-//            }
             return redirect()->route('bachiller.estudiante', ['sha' => sha1($est)]);
         }
         return view('bachiller.index');
@@ -44,9 +41,9 @@ class BachillerController extends Controller
         $director = DB::table('personas')
             ->select('personas.id as id', 'personas.apellidos as apellidos', 'personas.nombres as nombres')
             ->join('users', 'users.persona_id', '=', 'personas.id')
-            ->join('roles', 'roles.user_id', '=', 'users.id')
-            ->join('oficinas', 'oficinas.id', '=', 'roles.oficina_id')
-            ->where('roles.entidad_id', 1) //   1: Direccion de escuela
+            ->join('user_oficinas', 'user_oficinas.user_id', '=', 'users.id')
+            ->join('oficinas', 'oficinas.id', '=', 'user_oficinas.oficina_id')
+            ->where('user_oficinas.entidad_id', 1) //   1: Direccion de escuela
             ->where('oficinas.nivel_oficina_id', 3) //3: Nivel Escuela
             ->where('oficinas.escuela_id', $escuela->id)
             ->orderBy('users.created_at', 'desc')
@@ -57,9 +54,9 @@ class BachillerController extends Controller
         $decano = DB::table('personas')
             ->select('personas.id as id', 'personas.apellidos as apellidos', 'personas.nombres as nombres')
             ->join('users', 'users.persona_id', '=', 'personas.id')
-            ->join('roles', 'roles.user_id', '=', 'users.id')
-            ->join('oficinas', 'oficinas.id', '=', 'roles.oficina_id')
-            ->where('roles.entidad_id', 5) //   5: Decano
+            ->join('user_oficinas', 'user_oficinas.user_id', '=', 'users.id')
+            ->join('oficinas', 'oficinas.id', '=', 'user_oficinas.oficina_id')
+            ->where('user_oficinas.entidad_id', 5) //   5: Decano
             ->where('oficinas.nivel_oficina_id', 2) //3: Nivel Escuela
             ->where('oficinas.facultad_id', $escuela->facultad->id)
             ->orderBy('users.created_at', 'desc')

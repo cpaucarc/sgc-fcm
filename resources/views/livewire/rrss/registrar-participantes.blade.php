@@ -46,7 +46,7 @@
                 Ver esta RRSS
             </a>
             <a href="{{ route('rrss.index') }}" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-white">
-                Finalizar y ver la lista de RRSS
+                Finalizar y ver la lista de RSU
             </a>
         </div>
 

@@ -25,7 +25,7 @@
         </div>
     </x-slot>
 
-    <x-card>
+    <x-card class="mb-8">
         <x-slot name="header">
             <div class="flex justify-between items-center">
                 <div class="pr-4 flex-1">

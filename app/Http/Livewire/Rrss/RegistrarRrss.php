@@ -15,7 +15,6 @@ use Livewire\Component;
 
 class RegistrarRrss extends Component
 {
-    //id, ciclo_id, empresa_id, docente_responsable_id, estudiante_responsable_id, created_at, updated_at
     public $titulo;
     public $descripcion;
     public $lugar;
@@ -51,18 +50,11 @@ class RegistrarRrss extends Component
 
     public function mount()
     {
-        $facultad_id = (Auth::user()->roles)[0]->oficina->facultad_id;
+        $facultad_id = (Auth::user()->trabajo)[0]->oficina->facultad_id;
         $this->escuelas = Escuela::where('facultad_id', $facultad_id)
             ->orderBy('nombre', 'asc')->get();
 
-        $ciclos = Ciclo::all();
-        $this->ciclo = $ciclos->filter(function ($c) {
-            return ($c->fecha_fin >= Carbon::now() and $c->fecha_inicio <= Carbon::now());
-        })->first();
-
-        if (!$this->ciclo_sel) {
-            $this->ciclo_sel = $this->ciclos->last();
-        }
+        $this->ciclo = Ciclo::orderBy('id', 'desc')->first()->id;
     }
 
     public function updatedEscuela()
@@ -125,7 +117,7 @@ class RegistrarRrss extends Component
             'lugar' => $this->lugar,
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
-            'ciclo_id' => $this->ciclo->id,
+            'ciclo_id' => $this->ciclo,
             'escuela_id' => $this->escuela, //id
         ]);
 

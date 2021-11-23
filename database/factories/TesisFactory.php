@@ -22,7 +22,7 @@ class TesisFactory extends Factory
     public function definition()
     {
         return [
-            'numero_registro' => $this->faker->unique(true)->numerify('T###'),
+            'numero_registro' => $this->faker->unique(true)->numerify('T#####'),
             'titulo' => $this->faker->paragraph(),
             'anio' => $this->faker->numberBetween(1995, 2021),
             'asesor_id' => $this->faker->numberBetween(1, 10),

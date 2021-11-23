@@ -79,7 +79,7 @@ class RegistrarTtpp extends Component
 
     public function mount()
     {
-        $facultad_id = (Auth::user()->roles)[0]->oficina->facultad_id;
+        $facultad_id = (Auth::user()->trabajo)[0]->oficina->facultad_id;
 
         $this->escuelas = Escuela::where('facultad_id', $facultad_id)
             ->orderBy('nombre', 'asc')->get();

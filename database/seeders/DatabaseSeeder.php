@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EntidadSeeder::class);
         $this->call(EscuelaSeeder::class);
         $this->call(ProcesoSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
         $this->call(ActividadSeeder::class);
@@ -44,7 +45,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActividadResponsableSeeder::class);
         $this->call(ClienteSalidaSeeder::class);
         $this->call(EntradaProveedorSeeder::class);
-        $this->call(RolSeeder::class);
+        $this->call(UserOficinaSeeder::class);
 
         /* Responsabilidad Social */
         $this->call(EmpresaSeeder::class);
