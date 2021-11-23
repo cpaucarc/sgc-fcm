@@ -1,7 +1,7 @@
 <x-app-layout>
 
-
-    @livewire('actividad.index')
-
+    @can('completar actividades')
+        @livewire('actividad.index')
+    @endcan
 
 </x-app-layout>

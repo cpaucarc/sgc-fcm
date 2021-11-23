@@ -25,7 +25,7 @@ class VacantesDisponibles extends Component
             ->where('fecha_fin', '>=',  Carbon::now())
             ->where('fecha_inicio', '<=',  Carbon::now())
             ->get(); */
-        $this->escuela_id = (Auth::user()->roles)[0]->oficina->escuela_id;
+        $this->escuela_id = (Auth::user()->trabajo)[0]->oficina->escuela_id;
 
         if ($this->escuela_id != null) {
             $this->vacantes = DB::table('convalidaciones')

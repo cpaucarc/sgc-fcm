@@ -4,10 +4,8 @@
     <x-card>
         <x-slot name="header">
             <div class="flex items-center justify-between">
-                <x-title>
-                    Lista de usuarios registrados
-                </x-title>
-                                @livewire('admin.usuario.crear-usuario')
+                <x-title>Lista de usuarios registrados</x-title>
+                @livewire('admin.usuario.crear-usuario')
             </div>
         </x-slot>
 

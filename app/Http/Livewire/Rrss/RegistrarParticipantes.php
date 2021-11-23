@@ -11,7 +11,10 @@ class RegistrarParticipantes extends Component
 
     public function mount($rrss_id)
     {
-        $this->rrss = ResponsabilidadSocial::find($rrss_id);
+        $this->rrss = ResponsabilidadSocial::query()
+            ->with('docente', 'estudiante')
+            ->where('id', $rrss_id)
+            ->first();
 //        $this->rrss = ResponsabilidadSocial::find(62);
     }
 

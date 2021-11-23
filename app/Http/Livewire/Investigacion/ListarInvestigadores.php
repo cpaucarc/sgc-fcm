@@ -73,7 +73,7 @@ class ListarInvestigadores extends Component
 
     public function render()
     {
-        $escuelas = Escuela::where('facultad_id', auth()->user()->roles[0]->oficina->facultad_id)->orderBy('nombre')->get();
+        $escuelas = Escuela::where('facultad_id', auth()->user()->trabajo[0]->oficina->facultad_id)->orderBy('nombre')->get();
 
         $investigadores = $this->tipo == 1 ? $this->obtenerDocentes() : $this->obtenerEstudiantes();
 

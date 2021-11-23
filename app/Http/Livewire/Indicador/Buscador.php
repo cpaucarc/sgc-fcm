@@ -24,8 +24,8 @@ class Buscador extends Component
     public function updatedQuery()
     {
         $this->indicadores = Indicador::query()
-            ->where('objetivo', 'like', '%' . $this->query . '%')
-            ->orWhere('cod_ind_inicial', 'like', '%' . $this->query . '%')
+            ->where('objetivo', 'like', '%' . str_replace(" ", "%", $this->query) . '%')
+            ->orWhere('cod_ind_inicial', 'like', '%' . str_replace(" ", "%", $this->query) . '%')
             ->orderBy('cod_ind_inicial')
             ->with('escuela', 'proceso')
             ->limit(5)

@@ -24,7 +24,7 @@
                 <div class="flex gap-4">
                     <div class="w-28">
                         <x-jet-label for="dni">DNI</x-jet-label>
-                        <input type="number" wire:model.defer="dni" id="dni" maxlength="8"
+                        <input type="text" wire:model.defer="dni" id="dni" maxlength="8"
                                class="input-form w-full placeholder-gray-300" autocomplete="off"
                                placeholder="########">
 

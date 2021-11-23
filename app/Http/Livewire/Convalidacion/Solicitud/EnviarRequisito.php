@@ -47,7 +47,7 @@ class EnviarRequisito extends Component
     public function guardarDocumento()
     {
         $this->validate();
-        $this->escuela_id = (Auth::user()->roles)[0]->oficina->escuela_id;
+        $this->escuela_id = (Auth::user()->trabajo)[0]->oficina->escuela_id;
 
         //Si no hay solicitud, se crea (estado 1:en evaluacion)
         if ($this->escuela_id != null) {

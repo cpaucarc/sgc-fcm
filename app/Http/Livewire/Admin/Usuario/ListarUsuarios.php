@@ -25,7 +25,8 @@ class ListarUsuarios extends Component
         $this->entidades = Entidad::query()
             ->whereIn('id', function ($query) {
                 $query->select('entidad_id')
-                    ->from('roles');
+                    ->distinct()
+                    ->from('user_oficinas');
             })
             ->get();
     }
@@ -41,6 +42,11 @@ class ListarUsuarios extends Component
     }
 
     public function updatingEntidadesSeleccionados()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingNivelesSeleccionados()
     {
         $this->resetPage();
     }
@@ -75,7 +81,7 @@ class ListarUsuarios extends Component
     public function render()
     {
         $query = User::query()
-            ->with('persona', 'roles')
+            ->with('persona', 'trabajo')
             ->whereHas('persona', function ($query1) {
                 return $query1->where('nombres', 'like', '%' . $this->buscar . '%')
                     ->orWhere('apellidos', 'like', '%' . $this->buscar . '%')
@@ -83,13 +89,13 @@ class ListarUsuarios extends Component
             });
 
         if (count($this->entidades_seleccionados) > 0) {
-            $query->whereHas('roles', function ($q2) {
+            $query->whereHas('trabajo', function ($q2) {
                 return $q2->whereIn('entidad_id', $this->entidades_seleccionados);
             });
         }
 
         if (count($this->niveles_seleccionados) > 0) {
-            $query->whereHas('roles', function ($q4) {
+            $query->whereHas('trabajo', function ($q4) {
                 return $q4->whereHas('oficina', function ($q3) {
                     return $q3->whereIn('nivel_oficina_id', $this->niveles_seleccionados);
                 });

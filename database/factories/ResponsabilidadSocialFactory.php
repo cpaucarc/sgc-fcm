@@ -27,7 +27,7 @@ class ResponsabilidadSocialFactory extends Factory
             'lugar' => $this->faker->city . ' - ' . $this->faker->state,
             'fecha_inicio' => $this->faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
             'fecha_fin' => $this->faker->dateTimeBetween($startDate = '+1 months', $endDate = '+7 months'),
-            'ciclo_id' => $this->faker->numberBetween(1, 2),
+            'ciclo_id' => $this->faker->numberBetween(1, 2, 3),
             'escuela_id' => $this->faker->numberBetween(1, 2),
             'empresa_id' => $this->faker->numberBetween(1, 75),
             'docente_responsable_id' => $this->faker->numberBetween(1, 100),

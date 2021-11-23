@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,9 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
+
+    protected $guard_name = 'web';
 
     protected $fillable = [
         'email',
@@ -46,18 +50,20 @@ class User extends Authenticatable
             ->with('estudiante');
     }
 
-    public function roles()
+    public function trabajo()
     {
-        return $this->hasMany(Rol::class, 'user_id', 'id')
+        return $this->hasMany(UserOficina::class, 'user_id', 'id')
             ->with('entidad', 'oficina');
     }
 
     public function responsables_id()
     {
-        return Auth::user()->roles->pluck('entidad.responsable.id');
+        return Auth::user()->trabajo->pluck('entidad.responsable.id');
     }
 
     /* Determinar si pertence a una oficina */
+
+    /*
     public function esDireccionEscuela()
     {
         return (bool)$this->roles->where('entidad_id', 1)->count();
@@ -122,4 +128,5 @@ class User extends Authenticatable
     {
         return (bool)$this->roles->where('entidad_id', 13)->count();
     }
+    */
 }

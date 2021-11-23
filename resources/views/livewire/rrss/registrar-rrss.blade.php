@@ -1,4 +1,9 @@
 <div class="py-4">
+
+    <x-dd>
+        {{ Auth::user()->trabajo }}
+    </x-dd>
+
     <div>
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -56,8 +61,8 @@
 
                             <select wire:model="escuela" id="escuela" class="input-form w-full col-span-2">
                                 <option value="0">Seleccione...</option>
-                                @foreach($escuelas as $escuela)
-                                    <option value="{{ $escuela->id }}">{{$escuela->nombre}}</option>
+                                @foreach($escuelas as $esc)
+                                    <option value="{{ $esc->id }}">{{$esc->nombre}}</option>
                                 @endforeach
                             </select>
                             <x-jet-input-error for="escuela"></x-jet-input-error>
@@ -177,7 +182,7 @@
                                 </x-jet-secondary-button>
                             </div>
                             <x-jet-input-error for="estudiante_responsable"></x-jet-input-error>
-                         </div>
+                        </div>
                     </div>
                     <x-slot name="footer">
                         <div class="group flex items-start gap-x-4 text-gray-500">
