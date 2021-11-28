@@ -1,6 +1,6 @@
 /*Inputs*/
 .input-form {
-    @apply transition duration-500 ease-in-out px-2 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:text-gray-800;
+    @apply transition duration-500 ease-in-out px-2 mt-1 rounded border border-gray-300 text-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:text-gray-800 placeholder-gray-300;
 }
 
 .input-form-none {
@@ -11,7 +11,7 @@
     @apply transition duration-500 ease-in-out border-0 border-b-2 border-gray-200 bg-transparent focus:bg-white focus:ring-0;
 }
 
-.input-form-w11{
+.input-form-w11 {
     @apply rounded border-gray-300 border-b-2;
 }
 

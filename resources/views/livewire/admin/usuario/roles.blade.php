@@ -6,10 +6,6 @@
         </x-button.primary>
     </div>
 
-    <x-dd>
-        {{ $roles_faltantes }}
-    </x-dd>
-
     <x-table>
         <x-slot name="head">
             <x-table.heading>N°</x-table.heading>
@@ -61,37 +57,40 @@
         <x-slot name="content">
 
             <div class="mb-4 bg-gray-50 p-4 rounded">
-                <x-jet-label>Entidad</x-jet-label>
-                <select class="input-form w-full" wire:model="role_seleccionada">
-                    @foreach($roles_faltantes as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                    @endforeach
-                </select>
+                <x-jet-label>Rol
+                    <select class="input-form w-full" wire:model="role_seleccionada">
+                        @foreach($roles_faltantes as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </x-jet-label>
             </div>
 
             <div class="mb-4 bg-blue-50 p-4 rounded space-y-4">
                 <div>
-                    <x-jet-label>Nivel de Oficina</x-jet-label>
-                    <select class="input-form w-full" wire:model="nivel_seleccionado">
-                        <option value="1">Nivel General</option>
-                        <option value="2">Nivel de Facultad</option>
-                        <option value="3">Nivel de Escuela</option>
-                    </select>
+                    <x-jet-label>Nivel de Oficina
+                        <select class="input-form w-full" wire:model="nivel_seleccionado">
+                            <option value="1">Nivel General</option>
+                            <option value="2">Nivel de Facultad</option>
+                            <option value="3">Nivel de Escuela</option>
+                        </select>
+                    </x-jet-label>
                 </div>
                 @if($mostrar_combo)
                     <div>
-                        <x-jet-label>Pertenencia de la Oficina</x-jet-label>
-                        <select class="input-form w-full" wire:model="oficina_seleccionado">
-                            <option value="0">Seleccione...</option>
-                            @foreach($oficinas as $oficina)
-                                <option value="{{ $oficina->id }}">
-                                    @if($oficina->escuela)
-                                        {{ $oficina->escuela->nombre }} -
-                                    @endif
-                                    {{ $oficina->facultad->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <x-jet-label>Pertenencia de la Oficina
+                            <select class="input-form w-full" wire:model="oficina_seleccionado">
+                                <option value="0">Seleccione...</option>
+                                @foreach($oficinas as $oficina)
+                                    <option value="{{ $oficina->id }}">
+                                        @if($oficina->escuela)
+                                            {{ $oficina->escuela->nombre }} -
+                                        @endif
+                                        {{ $oficina->facultad->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </x-jet-label>
                     </div>
                 @endif
             </div>
@@ -108,41 +107,32 @@
                 wire:target="asignarRol"
                 wire:loading.class="bg-gray-800"
                 wire:loading.attr="disabled">
-                <svg wire:loading wire:target="asignarRol"
-                     class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                     fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                            stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span>
-                                {{ __('Asignar rol') }}
-                            </span>
+                <x-icons.load wire:loading wire:target="asignarRol" class="mr-3 h-4 w-4"></x-icons.load>
+                {{ __('Asignar rol') }}
             </x-jet-button>
 
         </x-slot>
     </x-jet-dialog-modal>
 
-    {{--    <x-jet-confirmation-modal wire:model="abrirEliminar">--}}
-    {{--        <x-slot name="title">--}}
-    {{--            ¿Quiere quitar el rol {{ $rolEliminar }}?--}}
-    {{--        </x-slot>--}}
-    {{--        <x-slot name="content">--}}
-    {{--            <p class="text-gray-700 tracking-wide mt-4">--}}
-    {{--                <strong><i>'{{ $rolEliminar }}'</i></strong> se eliminará de los roles del usuario.--}}
-    {{--                <br>--}}
-    {{--                ¿Quiere continuar?--}}
-    {{--            </p>--}}
-    {{--        </x-slot>--}}
-    {{--        <x-slot name="footer">--}}
-    {{--            <x-jet-secondary-button wire:click="$set('abrirEliminar', false)">--}}
-    {{--                Cancelar--}}
-    {{--            </x-jet-secondary-button>--}}
-    {{--            <x-jet-danger-button wire:click="quitarRol">--}}
-    {{--                Quitar rol--}}
-    {{--            </x-jet-danger-button>--}}
-    {{--        </x-slot>--}}
-    {{--    </x-jet-confirmation-modal>--}}
+    <x-jet-confirmation-modal wire:model="abrirEliminar">
+        <x-slot name="title">
+            ¿Quiere quitar el rol {{ $rolEliminar }}?
+        </x-slot>
+        <x-slot name="content">
+            <p class="text-gray-700 tracking-wide mt-4">
+                <strong><i>'{{ $rolEliminar }}'</i></strong> se eliminará de los roles del usuario.
+                <br>
+                ¿Quiere continuar?
+            </p>
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$set('abrirEliminar', false)">
+                Cancelar
+            </x-jet-secondary-button>
+            <x-jet-danger-button wire:click="quitarRol">
+                Quitar rol
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
 
 </div>

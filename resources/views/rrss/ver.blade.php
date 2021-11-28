@@ -9,9 +9,9 @@
                     Vista detalle
                 </p>
             </div>
-
-            @livewire('rrss.generar-encuesta', ['rsu' => $responsabilidad_social])
-
+            @if(!$responsabilidad_social->encuesta)
+                @livewire('rrss.generar-encuesta', ['rsu' => $responsabilidad_social])
+            @endif
         </div>
         <div class="border-t border-gray-200">
             <dl>
@@ -138,8 +138,8 @@
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
                         <div x-data="{ ver: false}">
                             <h1>
-                                {{ $responsabilidad_social->participantes_docentes->count() }} docentes
-                                @if($responsabilidad_social->participantes_estudiantes->count())
+                                {{ $responsabilidad_social->participantes_docentes_count }} docentes
+                                @if($responsabilidad_social->participantes_estudiantes_count)
                                     <span @click="ver = !ver"
                                           class="ml-4 text-gray-500 hover:text-blue-600 hover:underline cursor-pointer">
                                     Ver docentes
@@ -167,8 +167,8 @@
                         </div>
                         <div x-data="{ ver: false}">
                             <h1>
-                                {{ $responsabilidad_social->participantes_estudiantes->count() }} estudiantes
-                                @if($responsabilidad_social->participantes_estudiantes->count())
+                                {{ $responsabilidad_social->participantes_estudiantes_count }} estudiantes
+                                @if($responsabilidad_social->participantes_estudiantes_count)
                                     <span @click="ver = !ver"
                                           class="ml-4 text-gray-500 hover:text-blue-600 hover:underline cursor-pointer">
                                     Ver estudiantes
@@ -199,10 +199,10 @@
                 </div>
                 <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="font-medium text-gray-500">
-                        Documentos {{ $responsabilidad_social->documentos->count() }}
+                        Documentos {{ $responsabilidad_social->documentos_count }}
                     </dt>
                     <dd class="mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                        @if($responsabilidad_social->documentos->count())
+                        @if($responsabilidad_social->documentos_count)
                             <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
                                 @foreach($responsabilidad_social->documentos as $docrrss)
                                     <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">

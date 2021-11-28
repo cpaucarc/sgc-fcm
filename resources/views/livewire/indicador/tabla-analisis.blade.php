@@ -87,7 +87,7 @@
         </x-table>
 
         <div class="py-4">
-            @livewire('indicador.grafico', [ 'indicador' => $indicador->id ])
+            @livewire('indicador.grafico', [ 'indicador_id' => $indicador->id ])
         </div>
     @else
         <x-message-image

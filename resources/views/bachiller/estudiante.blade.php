@@ -48,7 +48,7 @@
         </x-card>
 
         <div class="col-span-6">
-            {{ $grados->bachiller }}
+
         </div>
 
         <div class="col-span-3 space-y-6">

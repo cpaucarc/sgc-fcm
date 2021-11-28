@@ -1,11 +1,18 @@
 <div>
     <div class="flex justify-between items-center mb-6">
         <x-input-dropdown wire:model="cantidad"></x-input-dropdown>
-        <select class="input-form" wire:model="escuela_seleccionada">
-            @foreach($escuelas as $escuela)
-                <option value="{{ $escuela->id }}"> {{ $escuela->nombre }} </option>
-            @endforeach
-        </select>
+
+        <div class="bg-gray-50 px-2 py-1 rounded-lg mr-4">
+            <select wire:model="escuela_seleccionada"
+                    class="input-form-none text-gray-800 font-semibold cursor-pointer bg-transparent">
+                @forelse($escuelas as $escuela)
+                    <option value="{{ $escuela->id }}">{{ $escuela->nombre }}</option>
+                @empty
+                    <option value="0">No se encontró ninguna escuela</option>
+                @endforelse
+            </select>
+        </div>
+
         <x-input-search wire:model="query"></x-input-search>
     </div>
 
@@ -37,7 +44,7 @@
                                     @endif
                                 </div>
                                 <div class="ml-4">
-                                    <div class="font-medium text-gray-900 whitespace-nowrap">
+                                    <div class="font-semibold text-gray-800 whitespace-nowrap">
                                         {{ $bachiller->estudiante->persona->apellidos}}
                                     </div>
                                     <div class="text-gray-500 whitespace-nowrap">
@@ -53,7 +60,7 @@
                             {{ $bachiller->estudiante->escuela->nombre }}
                         </x-table.cell>
                         <x-table.cell>
-                            {{ $bachiller->created_at->diffForHumans() }}
+                            Desde {{ $bachiller->created_at->diffForHumans() }}
                         </x-table.cell>
                         <x-table.cell>
                             <span

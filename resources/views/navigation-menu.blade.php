@@ -37,7 +37,7 @@
                                 {{ __('Actividades') }}
                             </x-jet-nav-link>
                         @endif
-                        {{-- @endif --}}
+
                         <x-jet-nav-link href="{{ route('rrss.index') }}" :active="request()->routeIs('rrss.*')">
                             {{ __('Responsabilidad Social') }}
                         </x-jet-nav-link>

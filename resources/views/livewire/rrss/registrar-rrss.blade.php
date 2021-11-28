@@ -1,9 +1,5 @@
 <div class="py-4">
 
-    <x-dd>
-        {{ Auth::user()->trabajo }}
-    </x-dd>
-
     <div>
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -11,9 +7,6 @@
                     <h3 class="text-xl font-bold leading-6 text-gray-800">
                         Responsabilidad Social
                     </h3>
-                    <p class="mt-1 text-sm text-gray-600">
-                        This information will be displayed publicly so be careful what you share.
-                    </p>
                 </div>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2 space-y-4">
@@ -58,7 +51,6 @@
                         </div>
                         <div>
                             <x-jet-label for="escuela">{{ __('Programa de estudio') }}</x-jet-label>
-
                             <select wire:model="escuela" id="escuela" class="input-form w-full col-span-2">
                                 <option value="0">Seleccione...</option>
                                 @foreach($escuelas as $esc)
@@ -91,10 +83,7 @@
 
                             </div>
                             <x-jet-secondary-button class="flex-shrink" wire:click="$set('abrirEmpresa', 'true')">
-                                <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
-                                    <path
-                                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-                                </svg>
+                                <x-icons.open-modal class="h-5 w-5 mr-2"></x-icons.open-modal>
                                 {{ __('Ver empresas') }}
                             </x-jet-secondary-button>
                         </div>
@@ -102,11 +91,7 @@
                     </div>
                     <x-slot name="footer">
                         <div class="group flex items-start gap-x-4 text-gray-500">
-                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
+                            <x-icons.info class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500"></x-icons.info>
                             <p class="text-sm">
                                 Un proyecto de responsabilidad social no necesariamente se desarrollará en una empresa,
                                 por lo que puede dejar este campo vacio.
@@ -140,10 +125,7 @@
                                 </div>
 
                                 <x-jet-secondary-button class="flex-shrink" wire:click="abrirModalDocente">
-                                    <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
-                                        <path
-                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-                                    </svg>
+                                    <x-icons.open-modal class="h-5 w-5 mr-2"></x-icons.open-modal>
                                     {{ __('Ver docentes') }}
                                 </x-jet-secondary-button>
                             </div>
@@ -169,15 +151,10 @@
                                             <x-icons.x :stroke="1.5" class="h-5 w-5"></x-icons.x>
                                         </button>
                                     @endif
-
                                 </div>
 
                                 <x-jet-secondary-button class="flex-shrink" wire:click="abrirModalEstudiante">
-                                    <svg fill="currentColor" class="h-5 w-5 mr-2" viewBox="0 0 16 16">
-                                        <path
-                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-                                    </svg>
-
+                                    <x-icons.open-modal class="h-5 w-5 mr-2"></x-icons.open-modal>
                                     {{ __('Ver estudiantes') }}
                                 </x-jet-secondary-button>
                             </div>
@@ -186,11 +163,7 @@
                     </div>
                     <x-slot name="footer">
                         <div class="group flex items-start gap-x-4 text-gray-500">
-                            <svg class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
+                            <x-icons.info class="h-10 w-10 -mt-1.5 group-hover:text-yellow-500"></x-icons.info>
                             <p class="text-sm">
                                 Puede agregar un docente responsable, un estudiante responsable o ambos, pero es
                                 necesario que exista al menos uno de ellos.
@@ -205,17 +178,8 @@
                             wire:target="registrarRRSS"
                             wire:loading.class="bg-gray-800"
                             wire:loading.attr="disabled">
-                            <svg wire:loading wire:target="registrarRRSS"
-                                 class="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                                 fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                        stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor"
-                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <span>
-                                {{ __('Guardar') }}
-                            </span>
+                            <x-icons.load wire:loading wire:target="registrarRRSS" class="h-4 w-4"></x-icons.load>
+                            {{ __('Guardar') }}
                         </x-jet-button>
                     </div>
                 </x-card>
@@ -239,7 +203,6 @@
                     @livewire('rrss.registro.modal-estudiantes')
                 </x-slot>
             </x-jet-dialog-modal>
-
 
         </div>
     </div>

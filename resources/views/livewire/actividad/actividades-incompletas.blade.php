@@ -46,12 +46,13 @@
                     @foreach ($actividades as $actividad)
                         <x-table.row :odd="$loop->odd">
                             <x-table.cell>
-                                <h1 class="text-gray-800">
+                                <h1 class="font-bold">
                                     {{ $actividad->actividad }}
+                                    <span
+                                        class="ml-1 rounded-full text-xs px-2 font-semibold {{ $actividad->tipo_id === 1 ? 'text-yellow-800 bg-yellow-100' : ($actividad->tipo_id === 2 ? 'text-indigo-800 bg-indigo-100' : ($actividad->tipo_id === 3 ? 'text-lime-800 bg-lime-100' : 'text-red-800 bg-red-100')) }}">
+                                        {{ $actividad->tipo }}
+                                    </span>
                                 </h1>
-                                <small class="text-gray-400 font-semibold">
-                                    Proceso: {{ $actividad->proceso }}
-                                </small>
                             </x-table.cell>
                             <x-table.cell>
                                 {{ $actividad->entidad }}
@@ -59,7 +60,7 @@
                             <x-table.cell class="text-xs leading-5 font-semibold whitespace-nowrap">
                                 <span
                                     class="px-2 inline-flex rounded-full {{$actividad->status === 1 ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'}}">
-                                    {{$actividad->status === 1 ? 'Completado':'Sin completar'}}
+                                    {{$actividad->status === 1 ? 'Completado':'No completado'}}
                                 </span>
                             </x-table.cell>
                             <x-table.cell class="flex-shrink-0 w-16">

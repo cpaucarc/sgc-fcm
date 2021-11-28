@@ -32,11 +32,6 @@
                     <h1 class="text-xl font-bold text-gray-800">
                         Lista de Responsabilidades Sociales
                     </h1>
-                    <p class="text-sm text-gray-400">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci alias aliquam at beatae
-                        facilis fugit harum ipsam, iste itaque laborum libero numquam quis quos saepe soluta veritatis.
-                        At, nam?
-                    </p>
                 </div>
 
                 <a href="{{ route('rrss.registro') }}"

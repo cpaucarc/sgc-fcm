@@ -121,7 +121,14 @@ class NuevaMedicion extends Component
     private function calcularValoresDeMedicion()
     {
         $codigo = $this->indicador->cod_ind_inicial;
-        if ($codigo === 'IND-044')
+
+        if ($codigo === 'IND-024')
+            $this->ind24();
+        elseif ($codigo === 'IND-025')
+            $this->ind25();
+        elseif ($codigo === 'IND-026')
+            $this->ind26();
+        elseif ($codigo === 'IND-044')
             $this->ind44();
         elseif ($codigo === 'IND-045')
             $this->ind45();
@@ -160,8 +167,80 @@ class NuevaMedicion extends Component
     }
 
     //Todo: Al refactorizar, mejorar esta parte
+
+    /*Indicadores de Convalidaciones*/
+    public function ind24()
+    {
+        $this->interes = null;
+        $this->total = null;
+
+        $this->resultado = DB::table('convalidacion_estudiante')
+            ->where('convalidacion_id', function ($query) {
+                $query->select('id')
+                    ->from('convalidaciones')
+                    ->where('escuela_id', $this->indicador->escuela_id)
+                    ->where('ciclo_id', function ($q) {
+                        return $q->select('id')
+                            ->from('ciclos')
+                            ->whereBetween(DB::raw('fecha_inicio'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                            ->orWhereBetween(DB::raw('fecha_fin'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
+                    });
+            })
+            ->count();
+
+    }
+
+    public function ind25()
+    {
+        $this->interes = null;
+        $this->total = null;
+
+        $this->resultado = (DB::table('convalidaciones')->select('vacantes')
+            ->where('escuela_id', $this->indicador->escuela_id)
+            ->where('ciclo_id', function ($query) {
+                $query->select('id')
+                    ->from('ciclos')
+                    ->whereBetween(DB::raw('fecha_inicio'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                    ->orWhereBetween(DB::raw('fecha_fin'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
+            })
+            ->first())->vacantes;
+
+    }
+
+
+    public function ind26()
+    {
+        $this->interes = DB::table('convalidacion_estudiante')
+            ->where('convalidacion_id', function ($query) {
+                $query->select('id')
+                    ->from('convalidaciones')
+                    ->where('escuela_id', $this->indicador->escuela_id)
+                    ->where('ciclo_id', function ($q) {
+                        return $q->select('id')
+                            ->from('ciclos')
+                            ->whereBetween(DB::raw('fecha_inicio'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                            ->orWhereBetween(DB::raw('fecha_fin'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
+                    });
+            })
+            ->count();
+
+        $this->total = (DB::table('convalidaciones')->select('vacantes')
+            ->where('escuela_id', $this->indicador->escuela_id)
+            ->where('ciclo_id', function ($query) {
+                $query->select('id')
+                    ->from('ciclos')
+                    ->whereBetween(DB::raw('fecha_inicio'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin])
+                    ->orWhereBetween(DB::raw('fecha_fin'), [$this->fecha_medicion_inicio, $this->fecha_medicion_fin]);
+            })
+            ->first())->vacantes;;
+
+        $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
+
+    }
+
     /* Indicadores de Investigacion */
-    private function ind44()
+    private
+    function ind44()
     {
         // Docentes que participan en PI por escuela
         $this->interes = DB::table('investigador_investigacion')->select('1')
@@ -181,7 +260,8 @@ class NuevaMedicion extends Component
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
     }
 
-    public function ind45()
+    public
+    function ind45()
     {
         // Docentes que participan en PI por escuela
         $this->interes = DB::table('investigador_investigacion')->select('1')
@@ -199,7 +279,8 @@ class NuevaMedicion extends Component
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
     }
 
-    public function ind46()
+    public
+    function ind46()
     {
         //Datos por escuela
         $this->interes = null;
@@ -211,7 +292,8 @@ class NuevaMedicion extends Component
             ->count();
     }
 
-    public function ind47()
+    public
+    function ind47()
     {
         //Datos por escuela
         $this->interes = null;
@@ -223,7 +305,8 @@ class NuevaMedicion extends Component
     }
 
     /* Indicadores de RSU */
-    public function ind48()
+    public
+    function ind48()
     {
         $this->interes = null;
         $this->total = null;
@@ -267,7 +350,8 @@ class NuevaMedicion extends Component
         }
     }
 
-    public function ind49()
+    public
+    function ind49()
     {
         $this->interes = null;
         $this->total = null;
@@ -313,7 +397,8 @@ class NuevaMedicion extends Component
         }
     }
 
-    public function ind50()
+    public
+    function ind50()
     {
         if ($this->indicador->escuela_id) {
             //Datos por escuela
@@ -373,7 +458,8 @@ class NuevaMedicion extends Component
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
     }
 
-    public function ind51()
+    public
+    function ind51()
     {
         if ($this->indicador->escuela_id) {
             //Datos por escuela
@@ -429,7 +515,8 @@ class NuevaMedicion extends Component
         $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
     }
 
-    public function ind52()
+    public
+    function ind52()
     {
         $this->interes = null;
         $this->total = null;
@@ -455,7 +542,8 @@ class NuevaMedicion extends Component
         }
     }
 
-    public function ind53()
+    public
+    function ind53()
     {
         if ($this->indicador->escuela_id) {
             //Datos por escuela
@@ -515,7 +603,8 @@ class NuevaMedicion extends Component
     }
 
     /* Indicador de Bachiller */
-    public function ind58()
+    public
+    function ind58()
     {
         $egresados = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
             ->whereIn('estudiante_id', function ($query) {
@@ -532,7 +621,8 @@ class NuevaMedicion extends Component
     }
 
     /* Indicador de titulo profesional */
-    public function ind59()
+    public
+    function ind59()
     {
         if ($this->indicador->escuela_id) {
             $bachilleres = DB::table('grado_estudiante')->select('estudiante_id', 'grado_academico_id')
@@ -554,7 +644,9 @@ class NuevaMedicion extends Component
             $this->resultado = $this->total === 0 ? 0 : round($this->interes / $this->total * 100);
         }
     }
-    public function ind60()
+
+    public
+    function ind60()
     {
         $this->interes = null;
         $this->total = null;
@@ -576,7 +668,8 @@ class NuevaMedicion extends Component
         $this->resultado = $titulados->where('grado_academico_id', 4)->count();;
     }
 
-    public function ind61()
+    public
+    function ind61()
     {
         if ($this->indicador->escuela_id) {
             //Proyectos de investigación aprobados

@@ -35,6 +35,7 @@ class Investigacion extends Model
     public function responsables()
     {
         return $this->belongsToMany(Investigador::class, 'investigador_investigacion')
+            ->with('docente', 'estudiante')
             ->withPivot(['es_responsable']);
     }
 

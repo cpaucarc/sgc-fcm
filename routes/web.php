@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return redirect('/dashboard');
 })->name('index');
 
 Route::get('registro', [RegistroController::class, 'index'])->name('registro');
