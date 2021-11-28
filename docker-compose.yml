@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  laravel-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ogcu_admin_2021
+      MYSQL_DATABASE: sgc_fcm
+      MYSQL_USER: ogcu_sgc
+      MYSQL_PASSWORD: ogcu_sgc_user_2021
+    ports:
+      - 33069:3306
+    volumes:
+      - ./database/schemas/:/var/lib/mysql
+    networks:
+      laravel_prod_net:
+        ipv4_address: 161.97.112.122
+  laravel-prod:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8200:80
+    volumes:
+      - ./sgc-fcm:/var/www/
+      - ./sgc-fcm/public:/var/www/html
+    networks:
+      laravel_prod_net:
+        - ipv4_address: 161.97.112.123
+    depends_on:
+      - laravel-db
+  volumes:
+    sgc-fcm:
+    database:
+  networks:
+    laravel_prod_net:
+      driver: bridge
+      config:
+        subnet: 161.97.112.0/24
