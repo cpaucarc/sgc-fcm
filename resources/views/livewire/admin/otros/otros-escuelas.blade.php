@@ -29,7 +29,7 @@
                 @slot('body')
                     @foreach($escuelas as $escuela)
                         <x-table.row :odd="$loop->odd">
-                            <x-table.cell>{{ $escuela->nombre }}</x-table.cell>
+                            <x-table.cell class="font-bold">{{ $escuela->nombre }}</x-table.cell>
                             <x-table.cell>{{ $escuela->facultad->nombre }}</x-table.cell>
                             <x-table.cell class="text-right">
                                 <x-button.group>

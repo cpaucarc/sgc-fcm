@@ -28,7 +28,8 @@ class ResponsabilidadSocial extends Model
 
     public function escuela()
     {
-        return $this->belongsTo(Escuela::class);
+        return $this->belongsTo(Escuela::class)
+            ->with('facultad');
     }
 
     public function docente()

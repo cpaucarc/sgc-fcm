@@ -12,7 +12,7 @@ class ListarInvestigadores extends Component
 {
     use WithPagination;
 
-    public $cantidad = 10;
+    public $cantidad = 12;
     public $buscar = '';
     public $escuela = 1;
     public $tipo = 1;

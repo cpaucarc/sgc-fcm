@@ -17,6 +17,11 @@ class InvestigacionController extends Controller
 
     public function index()
     {
+        //Si tiene rol Estudiante|Docente, debe ver sus propias Investigaciones
+        if (Auth::user()->hasRole(['Estudiante', 'Docente'])) {
+            return view('investigacion.responsables');
+        }
+        //Si no tiene rol Estudiante|Docente, debe ver todas las Investigaciones
         return view('investigacion.index');
     }
 

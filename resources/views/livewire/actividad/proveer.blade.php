@@ -43,17 +43,17 @@
                     @foreach ($ent_prov as $etpv)
                         <x-table.row :odd="$loop->odd">
                             <x-table.cell>
-                                <h1 class="tracking-wide font-semibold text-gray-800">
+                                <h1 class="tracking-wide font-bold">
                                     {{ $etpv->entrada->codigo }} - {{ $etpv->entrada->nombre }}
                                 </h1>
-                                <small class="text-gray-500">
+                                <h2 class="text-gray-500">
                                     Actividad: {{ $etpv->actividad->nombre  }}
-                                </small>
+                                </h2>
                             </x-table.cell>
                             <x-table.cell>
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $etpv->cantidad ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800' }}">
-                                    {{ $etpv->cantidad ? 'Completado': 'Sin completar' }}
+                                    {{ $etpv->cantidad ? 'Completado': 'No completado' }}
                                 </span>
                             </x-table.cell>
                             <x-table.cell>

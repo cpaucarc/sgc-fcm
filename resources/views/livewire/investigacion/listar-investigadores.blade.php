@@ -1,7 +1,7 @@
 <x-card>
 
     <div class="flex justify-between items-center mt-4 mb-8">
-        <x-input-dropdown wire:model="cantidad"/>
+        <x-input-dropdown wire:model="cantidad"></x-input-dropdown>
 
         <div class="inline-flex">
             <div class="bg-gray-50 px-2 py-1 rounded-lg mr-4">
@@ -22,12 +22,13 @@
                     <option value="2">Estudiantes</option>
                 </select>
             </div>
+
         </div>
 
-        <x-input-search wire:model.debounce.500ms="buscar"/>
+        <x-input-search wire:model.debounce.500ms="buscar"></x-input-search>
     </div>
 
-    <x-items-matched total="{{$investigadores->total()}}"/>
+    <x-items-matched total="{{$investigadores->total()}}"></x-items-matched>
 
     <div class="grid grid-cols-4 gap-x-6 gap-y-8">
         @foreach($investigadores as $inv)
@@ -38,7 +39,8 @@
                     <div class="overflow-hidden">
                         <img
                             class="w-32 h-full md:h-48 md:w-48 lg:w-full lg:h-56 mx-auto object-cover bg-center rounded-none md:rounded-full lg:rounded-none"
-                            src="{{ asset($inv->foto) }}"
+                            {{--                            src="{{ asset($inv->foto) }}"--}}
+                            src="{{ $inv->foto ? asset( $inv->foto ) : asset('images/male_profile.jpg') }}"
                             alt="">
                     </div>
 

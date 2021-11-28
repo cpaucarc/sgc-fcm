@@ -36,7 +36,7 @@ class IndicadorController extends Controller
         $lista = array();
 
         $lista_fac = DB::table('indicadores')
-            ->select('*')
+            ->select('id', 'cod_ind_inicial', 'cod_ind_final', 'objetivo')
             ->whereNull('escuela_id')
             ->where('facultad_id', $facultad->id)
             ->where('proceso_id', $id)
@@ -52,7 +52,7 @@ class IndicadorController extends Controller
             array_push($lista, array(
                 "nombre" => $escuela->nombre,
                 "items" => DB::table('indicadores')
-                    ->select('*')
+                    ->select('id', 'cod_ind_inicial', 'cod_ind_final', 'objetivo')
                     ->where('escuela_id', $escuela->id)
                     ->where('proceso_id', $id)
                     ->orderBy('cod_ind_inicial')

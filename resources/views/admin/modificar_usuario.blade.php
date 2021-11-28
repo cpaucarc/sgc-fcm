@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    @role('Administrador')
     <div class="grid grid-cols-12 space-x-6 items-start justify-between">
 
         <x-card class="col-span-4">
@@ -10,17 +10,11 @@
             </x-slot>
             <div>
 
-                @if($usuario->profile_photo_path)
-                    <img class="h-16 w-16 rounded-full"
-                         src="{{ $usuario->profile_photo_path }}"
-                         alt="Foto del usuario">
-                @else
-                    <img class="h-16 w-16 rounded-full"
-                         src="{{ $usuario->profile_photo_url }}"
-                         alt="Foto autogenerado del usuario">
-                @endif
+                <img class="h-24 w-24 rounded-lg mx-auto object-cover"
+                     src="{{ $usuario->profile_photo_path ? asset('storage/'.$usuario->profile_photo_path) : asset('images/male_profile.jpg') }}"
+                     alt="Foto del usuario">
 
-                <table class="text-gray-600">
+                <table class="text-gray-600 mt-6 mx-auto">
                     <tbody>
                     <tr>
                         <td class="font-light text-gray-500">Nombres</td>
@@ -44,11 +38,8 @@
         </x-card>
 
         <x-card class="col-span-6">
-
-
             @livewire('admin.usuario.roles', ['id' => $usuario->id])
-
         </x-card>
     </div>
-
+    @endrole
 </x-app-layout>

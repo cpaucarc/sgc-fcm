@@ -15,12 +15,14 @@ class Investigador extends Model
 
     public function docente()
     {
-        return $this->belongsTo(Docente::class);
+        return $this->belongsTo(Docente::class)
+            ->with('persona');
     }
 
     public function estudiante()
     {
-        return $this->belongsTo(Estudiante::class);
+        return $this->belongsTo(Estudiante::class)
+            ->with('persona');
     }
 
     public function grado()

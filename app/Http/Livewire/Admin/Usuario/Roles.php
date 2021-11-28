@@ -104,7 +104,8 @@ class Roles extends Component
     public function quitarRol()
     {
         if ($this->idEliminar > 0) {
-            Rol::findOrFail($this->idEliminar)->delete();
+            UserOficina::query()->where('user_id', $this->usuario_actual->id)->first()->delete();
+
             $this->obtenerRolesActuales($this->usuario_actual->id);
             $this->idEliminar = 0;
             $this->rolEliminar = "";

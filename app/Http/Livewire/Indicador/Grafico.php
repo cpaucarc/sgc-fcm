@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Grafico extends Component
 {
-    public $indicador;
+    public $indicador = null, $indicador_id;
 
     public $mostrarGrafico = false;
 
@@ -15,13 +15,25 @@ class Grafico extends Component
 //        'renderizarGrafico' => 'render'
 //    ];
 
-    public function mount(Indicador $indicador)
+    public function mount($indicador_id)
     {
-        $this->indicador = $indicador;
+        $this->indicador_id = $indicador_id;
+    }
+
+    public function buscarIndicador()
+    {
+        if (is_null($this->indicador)) {
+            $this->indicador = Indicador::query()
+                ->with('analisis')
+                ->where('id', $this->indicador_id)
+                ->first();
+        }
     }
 
     public function generarDatos()
     {
+        $this->buscarIndicador();
+
         $sobresaliente = array();
         $satisfactorio = array();
         $minimo = array();

@@ -1,6 +1,6 @@
 <x-app-layout>
 
-
+    @role('Administrador')
     <x-card>
         <x-slot name="header">
             <div class="flex items-center justify-between">
@@ -12,6 +12,6 @@
         @livewire('admin.usuario.listar-usuarios')
 
     </x-card>
-
+    @endrole
 
 </x-app-layout>

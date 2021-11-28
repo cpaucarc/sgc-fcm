@@ -74,9 +74,10 @@ class ActividadesIncompletas extends Component
             ->first();
 
         $actividades = ActividadResponsable::query()
-            ->select('actividades.id', 'actividades.nombre AS actividad', 'procesos.nombre AS proceso', 'responsables.codigo as codigo', 'entidades.nombre as entidad')
+            ->select('actividades.id', 'actividades.nombre AS actividad', 'procesos.nombre AS proceso', 'responsables.codigo as codigo', 'entidades.nombre as entidad', 'tipo_actividades.nombre as tipo', 'tipo_actividades.id as tipo_id')
             ->selectRaw("IF((SELECT count(1) FROM actividad_completos WHERE ciclo_id = " . $this->ciclo_seleccionado . " and actividad_id = actividades.id), 1, 0 ) as status")
             ->join('actividades', 'actividades.id', '=', 'actividad_responsables.actividad_id')
+            ->join('tipo_actividades', 'tipo_actividades.id', '=', 'actividades.tipo_actividad_id')
             ->join('procesos', 'procesos.id', '=', 'actividades.proceso_id')
             ->join('responsables', 'responsables.id', '=', 'actividad_responsables.responsable_id')
             ->join('entidades', 'entidades.id', '=', 'responsables.entidad_id')
